@@ -1,0 +1,55 @@
+﻿<!-- BEGIN PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            Basic Datatables <small> basic datatables</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="index.html">
+                    Home
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    Datatables
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    Basic Datatables
+                </a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        Page content goes here
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+@section scripts{
+    <script>
+    $(function () {
+        $("#sidebar_menu_datatables").addClass("active");
+        $("#sidebar_menu_basictable").addClass("active");
+        App.blockUI({ boxed: true });
+        OnPageLoad();
+        window.setTimeout(function () {
+            App.unblockUI();
+        }, 1000);
+    });
+
+    function OnPageLoad() {
+
+    }
+    </script>
+}
