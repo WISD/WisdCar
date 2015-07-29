@@ -12,6 +12,8 @@ namespace Zeta.WisdCar.Online.Controllers
         // GET: /TestLayout/
         public ActionResult Index()
         {
+            Business.BusinessMocker.MockLog4Net();
+
             return View();
         }
     }

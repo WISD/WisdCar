@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,10 +45,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BusinessMocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zeta.WisdCar.Infrastructure\Zeta.WisdCar.Infrastructure.csproj">
+      <Project>{ab1e8ae2-f294-4376-b878-e4c6a9802007}</Project>
+      <Name>Zeta.WisdCar.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeta.WisdCar.Model\Zeta.WisdCar.Model.csproj">
+      <Project>{6238f7e9-2213-4eb7-8821-ac4d95cec09e}</Project>
+      <Name>Zeta.WisdCar.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeta.WisdCar.Repository\Zeta.WisdCar.Repository.csproj">
+      <Project>{3f702de4-0387-41f3-8813-342d9b781f98}</Project>
+      <Name>Zeta.WisdCar.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

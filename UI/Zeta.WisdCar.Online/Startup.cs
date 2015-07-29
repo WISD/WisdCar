@@ -1,5 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using Metrics;
+using Microsoft.Owin;
 using Owin;
+using Zeta.WisdCar.Infrastructure;
 
 [assembly: OwinStartupAttribute(typeof(Zeta.WisdCar.Online.Startup))]
 namespace Zeta.WisdCar.Online
@@ -9,6 +11,10 @@ namespace Zeta.WisdCar.Online
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
+            Metric.Config
+                .WithHttpEndpoint(AppSettings.DashboardUrl)
+                .WithAllCounters();
         }
     }
 }

@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Metrics, Version=0.2.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Metrics.NET.0.2.16\lib\net45\Metrics.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -911,6 +915,16 @@
     <Content Include="Views\UIGeneral\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Zeta.WisdCar.Business\Zeta.WisdCar.Business.csproj">
+      <Project>{94636096-0f5f-4fd7-8283-0db24b635326}</Project>
+      <Name>Zeta.WisdCar.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Zeta.WisdCar.Infrastructure\Zeta.WisdCar.Infrastructure.csproj">
+      <Project>{ab1e8ae2-f294-4376-b878-e4c6a9802007}</Project>
+      <Name>Zeta.WisdCar.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
