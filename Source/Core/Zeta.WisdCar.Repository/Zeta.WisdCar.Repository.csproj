@@ -48,6 +48,7 @@
     <Compile Include="CRUD\ConsumeLog.cs" />
     <Compile Include="CRUD\Customer.cs" />
     <Compile Include="CRUD\Employee.cs" />
+    <Compile Include="CRUD\KVCategory.cs" />
     <Compile Include="CRUD\KVLookup.cs" />
     <Compile Include="CRUD\Package.cs" />
     <Compile Include="CRUD\PackageItemMapping.cs" />

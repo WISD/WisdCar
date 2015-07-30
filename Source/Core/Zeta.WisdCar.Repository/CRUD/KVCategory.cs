@@ -6,11 +6,11 @@ using Zeta.WisdCar.Infrastructure.DBUtility;
 namespace Zeta.WisdCar.Repository.CRUD
 {
 	/// <summary>
-	/// 数据访问类:KVLookup
+    /// 数据访问类:KVCategory
 	/// </summary>
-    internal partial class KVLookup
+    internal partial class KVCategory
 	{
-		public KVLookup()
+        public KVCategory()
 		{}
         #region  BasicMethod
 
@@ -19,21 +19,21 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// </summary>
         public int GetMaxId()
         {
-            return DbHelperSQL.GetMaxID("LookupID", "KVLookup");
+            return DbHelperSQL.GetMaxID("CategoryID", "KVCategory");
         }
 
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(int LookupID)
+        public bool Exists(int CategoryID)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) from KVLookup");
-            strSql.Append(" where LookupID=@LookupID");
+            strSql.Append("select count(1) from KVCategory");
+            strSql.Append(" where CategoryID=@CategoryID");
             SqlParameter[] parameters = {
-					new SqlParameter("@LookupID", SqlDbType.Int,4)
+					new SqlParameter("@CategoryID", SqlDbType.Int,4)
 			};
-            parameters[0].Value = LookupID;
+            parameters[0].Value = CategoryID;
 
             return DbHelperSQL.Exists(strSql.ToString(), parameters);
         }
@@ -42,18 +42,16 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        public int Add(WisdCar.Model.PO.KVLookupPO model)
+        public int Add(WisdCar.Model.PO.KVCategoryPO model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("insert into KVLookup(");
-            strSql.Append("LookupKey,LookupValue,CategoryID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
+            strSql.Append("insert into KVCategory(");
+            strSql.Append("CategoryName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
             strSql.Append(" values (");
-            strSql.Append("@LookupKey,@LookupValue,@CategoryID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
+            strSql.Append("@CategoryName,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
-					new SqlParameter("@LookupKey", SqlDbType.NVarChar,50),
-					new SqlParameter("@LookupValue", SqlDbType.Char,18),
-					new SqlParameter("@CategoryID", SqlDbType.Int,4),
+					new SqlParameter("@CategoryName", SqlDbType.NVarChar,50),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
 					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
 					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
@@ -62,17 +60,15 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100)};
-            parameters[0].Value = model.LookupKey;
-            parameters[1].Value = model.LookupValue;
-            parameters[2].Value = model.CategoryID;
-            parameters[3].Value = model.LogicalStatus;
-            parameters[4].Value = model.CreatorID;
-            parameters[5].Value = model.CreatedDate;
-            parameters[6].Value = model.LastModifierID;
-            parameters[7].Value = model.LastModifiedDate;
-            parameters[8].Value = model.Reserved1;
-            parameters[9].Value = model.Reserved2;
-            parameters[10].Value = model.Reserved3;
+            parameters[0].Value = model.CategoryName;
+            parameters[1].Value = model.LogicalStatus;
+            parameters[2].Value = model.CreatorID;
+            parameters[3].Value = model.CreatedDate;
+            parameters[4].Value = model.LastModifierID;
+            parameters[5].Value = model.LastModifiedDate;
+            parameters[6].Value = model.Reserved1;
+            parameters[7].Value = model.Reserved2;
+            parameters[8].Value = model.Reserved3;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)
@@ -87,13 +83,11 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 更新一条数据
         /// </summary>
-        public bool Update(WisdCar.Model.PO.KVLookupPO model)
+        public bool Update(WisdCar.Model.PO.KVCategoryPO model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update KVLookup set ");
-            strSql.Append("LookupKey=@LookupKey,");
-            strSql.Append("LookupValue=@LookupValue,");
-            strSql.Append("CategoryID=@CategoryID,");
+            strSql.Append("update KVCategory set ");
+            strSql.Append("CategoryName=@CategoryName,");
             strSql.Append("LogicalStatus=@LogicalStatus,");
             strSql.Append("CreatorID=@CreatorID,");
             strSql.Append("CreatedDate=@CreatedDate,");
@@ -102,11 +96,9 @@ namespace Zeta.WisdCar.Repository.CRUD
             strSql.Append("Reserved1=@Reserved1,");
             strSql.Append("Reserved2=@Reserved2,");
             strSql.Append("Reserved3=@Reserved3");
-            strSql.Append(" where LookupID=@LookupID");
+            strSql.Append(" where CategoryID=@CategoryID");
             SqlParameter[] parameters = {
-					new SqlParameter("@LookupKey", SqlDbType.NVarChar,50),
-					new SqlParameter("@LookupValue", SqlDbType.Char,18),
-					new SqlParameter("@CategoryID", SqlDbType.Int,4),
+					new SqlParameter("@CategoryName", SqlDbType.NVarChar,50),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
 					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
 					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
@@ -115,19 +107,17 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100),
-					new SqlParameter("@LookupID", SqlDbType.Int,4)};
-            parameters[0].Value = model.LookupKey;
-            parameters[1].Value = model.LookupValue;
-            parameters[2].Value = model.CategoryID;
-            parameters[3].Value = model.LogicalStatus;
-            parameters[4].Value = model.CreatorID;
-            parameters[5].Value = model.CreatedDate;
-            parameters[6].Value = model.LastModifierID;
-            parameters[7].Value = model.LastModifiedDate;
-            parameters[8].Value = model.Reserved1;
-            parameters[9].Value = model.Reserved2;
-            parameters[10].Value = model.Reserved3;
-            parameters[11].Value = model.LookupID;
+					new SqlParameter("@CategoryID", SqlDbType.Int,4)};
+            parameters[0].Value = model.CategoryName;
+            parameters[1].Value = model.LogicalStatus;
+            parameters[2].Value = model.CreatorID;
+            parameters[3].Value = model.CreatedDate;
+            parameters[4].Value = model.LastModifierID;
+            parameters[5].Value = model.LastModifiedDate;
+            parameters[6].Value = model.Reserved1;
+            parameters[7].Value = model.Reserved2;
+            parameters[8].Value = model.Reserved3;
+            parameters[9].Value = model.CategoryID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -143,16 +133,16 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public bool Delete(int LookupID)
+        public bool Delete(int CategoryID)
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from KVLookup ");
-            strSql.Append(" where LookupID=@LookupID");
+            strSql.Append("delete from KVCategory ");
+            strSql.Append(" where CategoryID=@CategoryID");
             SqlParameter[] parameters = {
-					new SqlParameter("@LookupID", SqlDbType.Int,4)
+					new SqlParameter("@CategoryID", SqlDbType.Int,4)
 			};
-            parameters[0].Value = LookupID;
+            parameters[0].Value = CategoryID;
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)
@@ -167,11 +157,11 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 批量删除数据
         /// </summary>
-        public bool DeleteList(string LookupIDlist)
+        public bool DeleteList(string CategoryIDlist)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from KVLookup ");
-            strSql.Append(" where LookupID in (" + LookupIDlist + ")  ");
+            strSql.Append("delete from KVCategory ");
+            strSql.Append(" where CategoryID in (" + CategoryIDlist + ")  ");
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
             if (rows > 0)
             {
@@ -187,18 +177,18 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public WisdCar.Model.PO.KVLookupPO GetModel(int LookupID)
+        public WisdCar.Model.PO.KVCategoryPO GetModel(int CategoryID)
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select  top 1 LookupID,LookupKey,LookupValue,CategoryID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from KVLookup ");
-            strSql.Append(" where LookupID=@LookupID");
+            strSql.Append("select  top 1 CategoryID,CategoryName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from KVCategory ");
+            strSql.Append(" where CategoryID=@CategoryID");
             SqlParameter[] parameters = {
-					new SqlParameter("@LookupID", SqlDbType.Int,4)
+					new SqlParameter("@CategoryID", SqlDbType.Int,4)
 			};
-            parameters[0].Value = LookupID;
+            parameters[0].Value = CategoryID;
 
-            WisdCar.Model.PO.KVLookupPO model = new WisdCar.Model.PO.KVLookupPO();
+            WisdCar.Model.PO.KVCategoryPO model = new WisdCar.Model.PO.KVCategoryPO();
             DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
             if (ds.Tables[0].Rows.Count > 0)
             {
@@ -214,26 +204,18 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public WisdCar.Model.PO.KVLookupPO DataRowToModel(DataRow row)
+        public WisdCar.Model.PO.KVCategoryPO DataRowToModel(DataRow row)
         {
-            WisdCar.Model.PO.KVLookupPO model = new WisdCar.Model.PO.KVLookupPO();
+            WisdCar.Model.PO.KVCategoryPO model = new WisdCar.Model.PO.KVCategoryPO();
             if (row != null)
             {
-                if (row["LookupID"] != null && row["LookupID"].ToString() != "")
-                {
-                    model.LookupID = int.Parse(row["LookupID"].ToString());
-                }
-                if (row["LookupKey"] != null)
-                {
-                    model.LookupKey = row["LookupKey"].ToString();
-                }
-                if (row["LookupValue"] != null)
-                {
-                    model.LookupValue = row["LookupValue"].ToString();
-                }
                 if (row["CategoryID"] != null && row["CategoryID"].ToString() != "")
                 {
                     model.CategoryID = int.Parse(row["CategoryID"].ToString());
+                }
+                if (row["CategoryName"] != null)
+                {
+                    model.CategoryName = row["CategoryName"].ToString();
                 }
                 if (row["LogicalStatus"] != null && row["LogicalStatus"].ToString() != "")
                 {
@@ -277,8 +259,8 @@ namespace Zeta.WisdCar.Repository.CRUD
         public DataSet GetList(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select LookupID,LookupKey,LookupValue,CategoryID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
-            strSql.Append(" FROM KVLookup ");
+            strSql.Append("select CategoryID,CategoryName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+            strSql.Append(" FROM KVCategory ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -297,8 +279,8 @@ namespace Zeta.WisdCar.Repository.CRUD
             {
                 strSql.Append(" top " + Top.ToString());
             }
-            strSql.Append(" LookupID,LookupKey,LookupValue,CategoryID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
-            strSql.Append(" FROM KVLookup ");
+            strSql.Append(" CategoryID,CategoryName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+            strSql.Append(" FROM KVCategory ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -313,7 +295,7 @@ namespace Zeta.WisdCar.Repository.CRUD
         public int GetRecordCount(string strWhere)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select count(1) FROM KVLookup ");
+            strSql.Append("select count(1) FROM KVCategory ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -342,9 +324,9 @@ namespace Zeta.WisdCar.Repository.CRUD
             }
             else
             {
-                strSql.Append("order by T.LookupID desc");
+                strSql.Append("order by T.CategoryID desc");
             }
-            strSql.Append(")AS Row, T.*  from KVLookup T ");
+            strSql.Append(")AS Row, T.*  from KVCategory T ");
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
                 strSql.Append(" WHERE " + strWhere);
@@ -369,8 +351,8 @@ namespace Zeta.WisdCar.Repository.CRUD
                     new SqlParameter("@OrderType", SqlDbType.Bit),
                     new SqlParameter("@strWhere", SqlDbType.VarChar,1000),
                     };
-            parameters[0].Value = "KVLookup";
-            parameters[1].Value = "LookupID";
+            parameters[0].Value = "KVCategory";
+            parameters[1].Value = "CategoryID";
             parameters[2].Value = PageSize;
             parameters[3].Value = PageIndex;
             parameters[4].Value = 0;

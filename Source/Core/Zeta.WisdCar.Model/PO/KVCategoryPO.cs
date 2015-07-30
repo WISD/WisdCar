@@ -1,19 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace Zeta.WisdCar.Model.PO
 {
-	/// <summary>
-	/// KVLookup:实体类(属性说明自动提取数据库字段的描述信息)
-	/// </summary>
-	[Serializable]
-	public partial class KVLookupPO
-	{
-        public KVLookupPO()
-		{}
+    /// <summary>
+    /// KVCategory:实体类(属性说明自动提取数据库字段的描述信息)
+    /// </summary>
+    [Serializable]
+    public partial class KVCategoryPO
+    {
+        public KVCategoryPO()
+        { }
         #region Model
-        private int _lookupid;
-        private string _lookupkey;
-        private string _lookupvalue;
         private int _categoryid;
+        private string _categoryname;
         private int _logicalstatus = 1;
         private string _creatorid;
         private DateTime _createddate;
@@ -23,36 +26,20 @@ namespace Zeta.WisdCar.Model.PO
         private string _reserved2;
         private string _reserved3;
         /// <summary>
-        /// 数据字典表主键
-        /// </summary>
-        public int LookupID
-        {
-            set { _lookupid = value; }
-            get { return _lookupid; }
-        }
-        /// <summary>
-        /// 数据字典Key
-        /// </summary>
-        public string LookupKey
-        {
-            set { _lookupkey = value; }
-            get { return _lookupkey; }
-        }
-        /// <summary>
-        /// 数据字典Value
-        /// </summary>
-        public string LookupValue
-        {
-            set { _lookupvalue = value; }
-            get { return _lookupvalue; }
-        }
-        /// <summary>
         /// 数据类型表主键
         /// </summary>
         public int CategoryID
         {
             set { _categoryid = value; }
             get { return _categoryid; }
+        }
+        /// <summary>
+        /// 数据类型名称
+        /// </summary>
+        public string CategoryName
+        {
+            set { _categoryname = value; }
+            get { return _categoryname; }
         }
         /// <summary>
         /// 逻辑状态
@@ -120,6 +107,5 @@ namespace Zeta.WisdCar.Model.PO
         }
         #endregion Model
 
-	}
+    }
 }
-
