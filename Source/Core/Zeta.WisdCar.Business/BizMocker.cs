@@ -8,18 +8,18 @@ using Zeta.WisdCar.Infrastructure.Log;
 
 namespace Zeta.WisdCar.Business
 {
-    public class BusinessMocker
+    public class BizMocker
     {
         public static void MockLog4Net()
         {
-            new Task(() => {
+            new Task(() =>
+            {
                 while (true)
                 {
-                    LogHandler.Error("asdfasdf");
+                    LogHandler.Error("我错了。。。");
                     Thread.Sleep(1000);
                 }
             }).Start();
         }
-
     }
 }

@@ -39,8 +39,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="PO\CarPO.cs" />
+    <Compile Include="PO\ClubCardPO.cs" />
+    <Compile Include="PO\ClubCardPackagePO.cs" />
+    <Compile Include="PO\ClubCardPackageDetailPO.cs" />
+    <Compile Include="PO\ClubCardTypePO.cs" />
+    <Compile Include="PO\ConsumeItemPO.cs" />
+    <Compile Include="PO\ConsumeLogPO.cs" />
+    <Compile Include="PO\CustomerPO.cs" />
+    <Compile Include="PO\EmployeePO.cs" />
+    <Compile Include="PO\KVLookupPO.cs" />
+    <Compile Include="PO\PackagePO.cs" />
+    <Compile Include="PO\PackageItemMappingPO.cs" />
+    <Compile Include="PO\RechargeLogPO.cs" />
+    <Compile Include="PO\StorePO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entity\" />
+    <Folder Include="VO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
