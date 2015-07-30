@@ -15,7 +15,7 @@ namespace Zeta.WisdCar.Business
             new Task(() => {
                 while (true)
                 {
-                    LogHelper.Error("asdfasdf");
+                    LogHandler.Error("asdfasdf");
                     Thread.Sleep(1000);
                 }
             }).Start();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Zeta.WisdCar.Infrastructure.Log
 {
-    public class LogHelper
+    public class LogHandler
     {
         //Error Metrics
         private static readonly Meter _errorMetrics = Metric.Meter("Errors", Unit.Requests, TimeUnit.Seconds);
