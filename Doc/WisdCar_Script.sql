@@ -270,7 +270,7 @@ CREATE TABLE KVLookup
 	LookupID             int IDENTITY(1,1) NOT NULL ,
 	LookupKey            nvarchar(50)  NOT NULL ,
 	LookupValue          char(18)  NOT NULL ,
-	CategoryNo           char(18)  NOT NULL ,
+	CategoryID           int  NOT NULL ,
 	
 	LogicalStatus          int  NOT NULL DEFAULT 1,
 	CreatorID            nvarchar(50)  NOT NULL ,
@@ -286,6 +286,27 @@ go
 
 ALTER TABLE KVLookup
 	ADD CONSTRAINT XPKKVLookup PRIMARY KEY  CLUSTERED (LookupID ASC)
+go
+
+CREATE TABLE KVCategory
+(
+	CategoryID             int IDENTITY(1,1) NOT NULL ,
+	CategoryName            nvarchar(50)  NOT NULL ,
+	
+	LogicalStatus          int  NOT NULL DEFAULT 1,
+	CreatorID            nvarchar(50)  NOT NULL ,
+	CreatedDate          datetime  NOT NULL ,
+	LastModifierID       nvarchar(50)  NOT NULL ,
+	LastModifiedDate     datetime  NOT NULL ,
+	Reserved1            nvarchar(100)  NULL ,
+	Reserved2            nvarchar(100)  NULL ,
+	Reserved3            nvarchar(100)  NULL 
+)
+go
+
+
+ALTER TABLE KVCategory
+	ADD CONSTRAINT XPKKVCategory PRIMARY KEY  CLUSTERED (CategoryID ASC)
 go
 
 
@@ -456,6 +477,12 @@ go
 
 ALTER TABLE PackageItemMapping
 	ADD CONSTRAINT  R_18 FOREIGN KEY (ItemID) REFERENCES ConsumeItem(ItemID)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+go
+
+ALTER TABLE KVLookup
+	ADD CONSTRAINT  R_20 FOREIGN KEY (CategoryID) REFERENCES KVCategory(CategoryID)
 		ON DELETE NO ACTION
 		ON UPDATE NO ACTION
 go
@@ -774,13 +801,13 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段2' , @
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段3' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Employee', @level2type=N'COLUMN',@level2name=N'Reserved3'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'基础数据明细表' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'LookupID'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'数据字典表主键' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'LookupID'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'基础数据Key' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'LookupKey'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'数据字典Key' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'LookupKey'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'基础数据Value' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'LookupValue'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'数据字典Value' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'LookupValue'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'数据种类编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'CategoryNo'
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'数据类型表主键' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'CategoryID'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'逻辑状态' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'LogicalStatus'
 GO
@@ -797,6 +824,26 @@ GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段2' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'Reserved2'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段3' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVLookup', @level2type=N'COLUMN',@level2name=N'Reserved3'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'数据类型表主键' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'CategoryID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'数据类型名称' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'CategoryName'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'逻辑状态' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'LogicalStatus'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'创建人ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'CreatorID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'创建时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'CreatedDate'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'最近修改人ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'LastModifierID'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'最近修改时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'LastModifiedDate'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段1' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'Reserved1'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段2' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'Reserved2'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段3' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'KVCategory', @level2type=N'COLUMN',@level2name=N'Reserved3'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'消费套餐表ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'Package', @level2type=N'COLUMN',@level2name=N'PackageID'
 GO
