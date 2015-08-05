@@ -37,7 +37,6 @@ CREATE TABLE ClubCard
 	ClubCardID           int IDENTITY(1,1) NOT NULL ,
 	ClubCardTypeName     nvarchar(50)  NOT NULL ,
 	CustName             nvarchar(50)  NOT NULL ,
-	ClubCardType         nvarchar(50)  NOT NULL ,
 	ClubCardPwd          nvarchar(50)  NOT NULL ,
 	OpenCardStore        nvarchar(50)  NOT NULL ,
 	SalesMan             nvarchar(50)  NOT NULL ,
@@ -128,7 +127,7 @@ go
 CREATE TABLE ClubCardType
 (
 	ClubCardTypeID       int IDENTITY(1,1) NOT NULL ,
-	CardTypeName         int  NOT NULL ,
+	CardTypeName         nvarchar(50)  NOT NULL ,
 	PackageDiscount      numeric(5,2)  NOT NULL ,
 	PayDiscount          numeric(5,2)  NOT NULL ,
 	

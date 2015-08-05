@@ -1,20 +1,20 @@
 ﻿using System;
-namespace Zeta.WisdCar.Model.PO
-{
-	/// <summary>
-	/// ClubCardType:实体类(属性说明自动提取数据库字段的描述信息)
-	/// </summary>
-	[Serializable]
-	public partial class ClubCardTypePO
-	{
-        public ClubCardTypePO()
-		{}
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-        #region Model
-        private int _clubcardtypeid;
-        private string _cardtypename;
-        private decimal _packagediscount;
-        private decimal _paydiscount;
+namespace Zeta.WisdCar.Model.VO
+{
+    public partial class ConsumeItemVO
+    {
+        public ConsumeItemVO()
+        { }
+
+        private string _operation;
+        private int _itemid;
+        private string _itemname;
+        private decimal _itemprice;
         private int _logicalstatus = 1;
         private string _creatorid;
         private DateTime _createddate;
@@ -23,37 +23,38 @@ namespace Zeta.WisdCar.Model.PO
         private string _reserved1;
         private string _reserved2;
         private string _reserved3;
+
         /// <summary>
-        /// 会员卡类型表ID
+        /// 操作
         /// </summary>
-        public int ClubCardTypeID
+        public string Operation
         {
-            set { _clubcardtypeid = value; }
-            get { return _clubcardtypeid; }
+            set { _operation = value; }
+            get { return _operation; }
         }
         /// <summary>
-        /// 会员卡类型名称
+        /// 消费项目ID
         /// </summary>
-        public string CardTypeName
+        public int ItemID
         {
-            set { _cardtypename = value; }
-            get { return _cardtypename; }
+            set { _itemid = value; }
+            get { return _itemid; }
         }
         /// <summary>
-        /// 套餐折扣
+        /// 项目名称
         /// </summary>
-        public decimal PackageDiscount
+        public string ItemName
         {
-            set { _packagediscount = value; }
-            get { return _packagediscount; }
+            set { _itemname = value; }
+            get { return _itemname; }
         }
         /// <summary>
-        /// 充值折扣
+        /// 单价
         /// </summary>
-        public decimal PayDiscount
+        public decimal ItemPrice
         {
-            set { _paydiscount = value; }
-            get { return _paydiscount; }
+            set { _itemprice = value; }
+            get { return _itemprice; }
         }
         /// <summary>
         /// 逻辑状态
@@ -119,8 +120,6 @@ namespace Zeta.WisdCar.Model.PO
             set { _reserved3 = value; }
             get { return _reserved3; }
         }
-        #endregion Model
 
-	}
+    }
 }
-
