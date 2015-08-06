@@ -8,5 +8,6 @@ namespace Zeta.WisdCar.Business.SysMgmModule
 {
     public interface IPermissionMgm
     {
+        string GetCurUserName();
     }
 }

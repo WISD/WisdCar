@@ -6,17 +6,25 @@ using System.Threading.Tasks;
 
 namespace Zeta.WisdCar.Model.VO
 {
-    public class ClubCardTypeVO
+    class CarVO
     {
-        public ClubCardTypeVO()
+        public CarVO()
         { }
 
         private string _rowid;
         private string _operation;
-        private int _clubcardtypeid;
-        private string _cardtypename;
-        private decimal _packagediscount;
-        private decimal _paydiscount;
+        private int _carid;
+        private string _carno;
+        private string _brand;
+        private string _carmodel;
+        private string _capacity;
+        private string _color;
+        private string _frameno;
+        private string _engineno;
+        private string _maintainkm;
+        private DateTime _insuredate;
+        private DateTime _asdate;
+        private int _customerid;
         private int _logicalstatus = 1;
         private string _creatorid;
         private DateTime _createddate;
@@ -43,39 +51,103 @@ namespace Zeta.WisdCar.Model.VO
             get { return _operation; }
         }
         /// <summary>
-        /// 会员卡类型表ID
+        /// 汽车ID
         /// </summary>
-        public int ClubCardTypeID
+        public int CarID
         {
-            set { _clubcardtypeid = value; }
-            get { return _clubcardtypeid; }
+            set { _carid = value; }
+            get { return _carid; }
         }
         /// <summary>
-        /// 会员卡类型名称
+        /// 车牌号
         /// </summary>
-        public string CardTypeName
+        public string CarNo
         {
-            set { _cardtypename = value; }
-            get { return _cardtypename; }
+            set { _carno = value; }
+            get { return _carno; }
         }
         /// <summary>
-        /// 套餐折扣
+        /// 品牌
         /// </summary>
-        public decimal PackageDiscount
+        public string Brand
         {
-            set { _packagediscount = value; }
-            get { return _packagediscount; }
+            set { _brand = value; }
+            get { return _brand; }
         }
         /// <summary>
-        /// 充值折扣
+        /// 车型
         /// </summary>
-        public decimal PayDiscount
+        public string CarModel
         {
-            set { _paydiscount = value; }
-            get { return _paydiscount; }
+            set { _carmodel = value; }
+            get { return _carmodel; }
         }
         /// <summary>
-        /// 逻辑状态
+        /// 汽车排量
+        /// </summary>
+        public string Capacity
+        {
+            set { _capacity = value; }
+            get { return _capacity; }
+        }
+        /// <summary>
+        /// 汽车颜色
+        /// </summary>
+        public string Color
+        {
+            set { _color = value; }
+            get { return _color; }
+        }
+        /// <summary>
+        /// 车架号
+        /// </summary>
+        public string FrameNo
+        {
+            set { _frameno = value; }
+            get { return _frameno; }
+        }
+        /// <summary>
+        /// 发动机号
+        /// </summary>
+        public string EngineNo
+        {
+            set { _engineno = value; }
+            get { return _engineno; }
+        }
+        /// <summary>
+        /// 最近保养公里数
+        /// </summary>
+        public string MaintainKM
+        {
+            set { _maintainkm = value; }
+            get { return _maintainkm; }
+        }
+        /// <summary>
+        /// 保险时间
+        /// </summary>
+        public DateTime InsureDate
+        {
+            set { _insuredate = value; }
+            get { return _insuredate; }
+        }
+        /// <summary>
+        /// 年检时间
+        /// </summary>
+        public DateTime ASDate
+        {
+            set { _asdate = value; }
+            get { return _asdate; }
+        }
+        /// <summary>
+        /// 客户ID
+        /// </summary>
+        public int CustomerID
+        {
+            set { _customerid = value; }
+            get { return _customerid; }
+        }
+        /// <summary>
+        /// 汽车状态
         /// </summary>
         public int LogicalStatus
         {

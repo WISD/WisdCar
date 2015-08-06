@@ -6,17 +6,22 @@ using System.Threading.Tasks;
 
 namespace Zeta.WisdCar.Model.VO
 {
-    public class ClubCardTypeVO
+    public class CustomerVO
     {
-        public ClubCardTypeVO()
+        public CustomerVO()
         { }
 
         private string _rowid;
         private string _operation;
-        private int _clubcardtypeid;
-        private string _cardtypename;
-        private decimal _packagediscount;
-        private decimal _paydiscount;
+        private int _customerid;
+        private string _name;
+        private string _mobileno;
+        private string _sex;
+        private string _birthday;
+        private string _icno;
+        private string _weixin;
+        private string _company;
+        private int _cardflag;
         private int _logicalstatus = 1;
         private string _creatorid;
         private DateTime _createddate;
@@ -43,36 +48,76 @@ namespace Zeta.WisdCar.Model.VO
             get { return _operation; }
         }
         /// <summary>
-        /// 会员卡类型表ID
+        /// 客户ID
         /// </summary>
-        public int ClubCardTypeID
+        public int CustomerID
         {
-            set { _clubcardtypeid = value; }
-            get { return _clubcardtypeid; }
+            set { _customerid = value; }
+            get { return _customerid; }
         }
         /// <summary>
-        /// 会员卡类型名称
+        /// 客户姓名
         /// </summary>
-        public string CardTypeName
+        public string Name
         {
-            set { _cardtypename = value; }
-            get { return _cardtypename; }
+            set { _name = value; }
+            get { return _name; }
         }
         /// <summary>
-        /// 套餐折扣
+        /// 手机号码
         /// </summary>
-        public decimal PackageDiscount
+        public string MobileNO
         {
-            set { _packagediscount = value; }
-            get { return _packagediscount; }
+            set { _mobileno = value; }
+            get { return _mobileno; }
         }
         /// <summary>
-        /// 充值折扣
+        /// 性别
         /// </summary>
-        public decimal PayDiscount
+        public string Sex
         {
-            set { _paydiscount = value; }
-            get { return _paydiscount; }
+            set { _sex = value; }
+            get { return _sex; }
+        }
+        /// <summary>
+        /// 生日
+        /// </summary>
+        public string Birthday
+        {
+            set { _birthday = value; }
+            get { return _birthday; }
+        }
+        /// <summary>
+        /// 身份证号
+        /// </summary>
+        public string ICNo
+        {
+            set { _icno = value; }
+            get { return _icno; }
+        }
+        /// <summary>
+        /// 微信
+        /// </summary>
+        public string Weixin
+        {
+            set { _weixin = value; }
+            get { return _weixin; }
+        }
+        /// <summary>
+        /// 单位
+        /// </summary>
+        public string Company
+        {
+            set { _company = value; }
+            get { return _company; }
+        }
+        /// <summary>
+        /// 开卡标志
+        /// </summary>
+        public int CardFlag
+        {
+            set { _cardflag = value; }
+            get { return _cardflag; }
         }
         /// <summary>
         /// 逻辑状态
