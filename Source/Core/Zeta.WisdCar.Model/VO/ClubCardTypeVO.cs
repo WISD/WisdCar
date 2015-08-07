@@ -11,6 +11,7 @@ namespace Zeta.WisdCar.Model.VO
         public ClubCardTypeVO()
         { }
 
+        private string _rowid;
         private string _operation;
         private int _clubcardtypeid;
         private string _cardtypename;
@@ -25,6 +26,14 @@ namespace Zeta.WisdCar.Model.VO
         private string _reserved2;
         private string _reserved3;
 
+        /// <summary>
+        /// Datatables Row ID
+        /// </summary>
+        public string DT_RowId
+        {
+            set { _rowid = value; }
+            get { return _rowid; }
+        }
         /// <summary>
         /// 操作
         /// </summary>

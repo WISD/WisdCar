@@ -55,13 +55,14 @@
     <Compile Include="PO\RechargeLogPO.cs" />
     <Compile Include="PO\StorePO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VO\CarVO.cs" />
     <Compile Include="VO\ClubCardTypeVO.cs" />
     <Compile Include="VO\ConsumeItemVO.cs" />
+    <Compile Include="VO\CustomerQueryVO.cs" />
     <Compile Include="VO\CustomerVO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entity\" />
-    <Folder Include="VO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

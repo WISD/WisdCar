@@ -6,22 +6,25 @@ using System.Threading.Tasks;
 
 namespace Zeta.WisdCar.Model.VO
 {
-    public class CustomerVO
+    public class CarVO
     {
-        public CustomerVO()
+        public CarVO()
         { }
 
         private string _rowid;
         private string _operation;
+        private int _carid;
+        private string _carno;
+        private string _brand;
+        private string _carmodel;
+        private string _capacity;
+        private string _color;
+        private string _frameno;
+        private string _engineno;
+        private string _maintainkm;
+        private DateTime _insuredate;
+        private DateTime _asdate;
         private int _customerid;
-        private string _name;
-        private string _mobileno;
-        private string _sex;
-        private string _birthday;
-        private string _icno;
-        private string _weixin;
-        private string _company;
-        private int _cardflag;
         private int _logicalstatus = 1;
         private string _creatorid;
         private DateTime _createddate;
@@ -48,6 +51,94 @@ namespace Zeta.WisdCar.Model.VO
             get { return _operation; }
         }
         /// <summary>
+        /// 汽车ID
+        /// </summary>
+        public int CarID
+        {
+            set { _carid = value; }
+            get { return _carid; }
+        }
+        /// <summary>
+        /// 车牌号
+        /// </summary>
+        public string CarNo
+        {
+            set { _carno = value; }
+            get { return _carno; }
+        }
+        /// <summary>
+        /// 品牌
+        /// </summary>
+        public string Brand
+        {
+            set { _brand = value; }
+            get { return _brand; }
+        }
+        /// <summary>
+        /// 车型
+        /// </summary>
+        public string CarModel
+        {
+            set { _carmodel = value; }
+            get { return _carmodel; }
+        }
+        /// <summary>
+        /// 汽车排量
+        /// </summary>
+        public string Capacity
+        {
+            set { _capacity = value; }
+            get { return _capacity; }
+        }
+        /// <summary>
+        /// 汽车颜色
+        /// </summary>
+        public string Color
+        {
+            set { _color = value; }
+            get { return _color; }
+        }
+        /// <summary>
+        /// 车架号
+        /// </summary>
+        public string FrameNo
+        {
+            set { _frameno = value; }
+            get { return _frameno; }
+        }
+        /// <summary>
+        /// 发动机号
+        /// </summary>
+        public string EngineNo
+        {
+            set { _engineno = value; }
+            get { return _engineno; }
+        }
+        /// <summary>
+        /// 最近保养公里数
+        /// </summary>
+        public string MaintainKM
+        {
+            set { _maintainkm = value; }
+            get { return _maintainkm; }
+        }
+        /// <summary>
+        /// 保险时间
+        /// </summary>
+        public DateTime InsureDate
+        {
+            set { _insuredate = value; }
+            get { return _insuredate; }
+        }
+        /// <summary>
+        /// 年检时间
+        /// </summary>
+        public DateTime ASDate
+        {
+            set { _asdate = value; }
+            get { return _asdate; }
+        }
+        /// <summary>
         /// 客户ID
         /// </summary>
         public int CustomerID
@@ -56,71 +147,7 @@ namespace Zeta.WisdCar.Model.VO
             get { return _customerid; }
         }
         /// <summary>
-        /// 客户姓名
-        /// </summary>
-        public string Name
-        {
-            set { _name = value; }
-            get { return _name; }
-        }
-        /// <summary>
-        /// 手机号码
-        /// </summary>
-        public string MobileNO
-        {
-            set { _mobileno = value; }
-            get { return _mobileno; }
-        }
-        /// <summary>
-        /// 性别
-        /// </summary>
-        public string Sex
-        {
-            set { _sex = value; }
-            get { return _sex; }
-        }
-        /// <summary>
-        /// 生日
-        /// </summary>
-        public string Birthday
-        {
-            set { _birthday = value; }
-            get { return _birthday; }
-        }
-        /// <summary>
-        /// 身份证号
-        /// </summary>
-        public string ICNo
-        {
-            set { _icno = value; }
-            get { return _icno; }
-        }
-        /// <summary>
-        /// 微信
-        /// </summary>
-        public string Weixin
-        {
-            set { _weixin = value; }
-            get { return _weixin; }
-        }
-        /// <summary>
-        /// 单位
-        /// </summary>
-        public string Company
-        {
-            set { _company = value; }
-            get { return _company; }
-        }
-        /// <summary>
-        /// 开卡标志
-        /// </summary>
-        public int CardFlag
-        {
-            set { _cardflag = value; }
-            get { return _cardflag; }
-        }
-        /// <summary>
-        /// 逻辑状态
+        /// 汽车状态
         /// </summary>
         public int LogicalStatus
         {

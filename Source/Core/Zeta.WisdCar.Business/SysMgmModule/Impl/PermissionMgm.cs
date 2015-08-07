@@ -8,5 +8,9 @@ namespace Zeta.WisdCar.Business.SysMgmModule
 {
     public class PermissionMgm : IPermissionMgm
     {
+        public string GetCurUserName()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
