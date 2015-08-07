@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zeta.WisdCar.Model.VO;
+using Zeta.WisdCar.Model.PO;
 
-namespace Zeta.WisdCar.Business.MarktingPlanModule
+namespace Zeta.WisdCar.Repository
 {
-    public interface IConsumeItemMgm
+    public interface IConsumeItemData
     {
         /// <summary>
         /// 获取所有消费项目
         /// </summary>
         /// <returns></returns>
-        List<ConsumeItemVO> GetAllConsumeItem();
+        List<ConsumeItemPO> GetAllConsumeItem();
 
         /// <summary>
         /// 新增消费项目
         /// </summary>
         /// <param name="item"></param>
-        void AddConsumeItem(ConsumeItemVO item);
+        void AddConsumeItem(ConsumeItemPO item);
 
         /// <summary>
         /// 修改消费项目
         /// </summary>
         /// <param name="item"></param>
-        void EditConsumeItem(ConsumeItemVO item);
+        void EditConsumeItem(ConsumeItemPO item);
 
         /// <summary>
         /// 删除消费项目

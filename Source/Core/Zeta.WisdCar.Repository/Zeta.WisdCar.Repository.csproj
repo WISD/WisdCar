@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,8 +62,12 @@
     <Compile Include="CRUD\Store.cs" />
     <Compile Include="DataMocker.cs" />
     <Compile Include="ICarData.cs" />
+    <Compile Include="IClubCardTypeData.cs" />
+    <Compile Include="IConsumeItemData.cs" />
     <Compile Include="ICustomerData.cs" />
     <Compile Include="Impl\CarData.cs" />
+    <Compile Include="Impl\ClubCardTypeData.cs" />
+    <Compile Include="Impl\ConsumeItemData.cs" />
     <Compile Include="Impl\CustomerData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
