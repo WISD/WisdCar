@@ -4,26 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zeta.WisdCar.Business.CustClubCardModule
+namespace Zeta.WisdCar.Business.CustClubCardModule.Impl
 {
-    public class CustomerMgm : ICustomerMgm
+    public class CarMgm : ICarMgm
     {
-        public List<Model.VO.CustomerVO> GetCustomers(Model.VO.CustomerQueryVO filter)
+        public Model.VO.CarVO GetCarsByCustID(int custID)
         {
             throw new NotImplementedException();
         }
 
-        public void AddCustomer(Model.VO.CustomerVO cust)
+        public void AddCar(Model.VO.CarVO car)
         {
             throw new NotImplementedException();
         }
 
-        public void EditCustomer(Model.VO.CustomerVO cust)
+        public void EditCar(Model.VO.CarVO car)
         {
             throw new NotImplementedException();
         }
 
-        public void DelCustomer(int id)
+        public void DelCar(int id)
         {
             throw new NotImplementedException();
         }

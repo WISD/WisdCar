@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zeta.WisdCar.Model.VO
 {
-    class CarVO
+    public class CarVO
     {
         public CarVO()
         { }
