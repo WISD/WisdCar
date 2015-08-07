@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Metrics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Zeta.WisdCar.Infrastructure;
 using Zeta.WisdCar.Online.Models.AutoMapper;
 
 namespace Zeta.WisdCar.Online
@@ -18,7 +20,20 @@ namespace Zeta.WisdCar.Online
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            AutoMapperConfiguration.Configure();
+            RegisterMetric();
+            RegisterAutoMapper();
         }
+		
+        private void RegisterMetric()
+        {
+            Metric.Config
+                .WithHttpEndpoint(AppSettings.DashboardUrl)
+                .WithAllCounters();
+        }
+
+        private void RegisterAutoMapper()
+        {
+			AutoMapperConfiguration.Configure();
+        }				
     }
 }

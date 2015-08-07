@@ -50,8 +50,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ConTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Zeta.WisdCar.Repository\Zeta.WisdCar.Repository.csproj">
+      <Project>{3f702de4-0387-41f3-8813-342d9b781f98}</Project>
+      <Name>Zeta.WisdCar.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -42,6 +42,7 @@
       <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -58,9 +59,21 @@
   <ItemGroup>
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest2.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Zeta.WisdCar.Business\Zeta.WisdCar.Business.csproj">
+      <Project>{94636096-0f5f-4fd7-8283-0db24b635326}</Project>
+      <Name>Zeta.WisdCar.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Zeta.WisdCar.Model\Zeta.WisdCar.Model.csproj">
+      <Project>{6238f7e9-2213-4eb7-8821-ac4d95cec09e}</Project>
+      <Name>Zeta.WisdCar.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
