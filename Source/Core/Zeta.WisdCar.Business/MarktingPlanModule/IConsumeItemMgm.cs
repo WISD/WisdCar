@@ -16,16 +16,22 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
         List<ConsumeItemVO> GetAllConsumeItem();
 
         /// <summary>
+        /// 根据消费项目ID获取消费项目
+        /// </summary>
+        /// <returns></returns>
+        ConsumeItemVO GetConsumeItemByID(int consumeItemID);
+
+        /// <summary>
         /// 新增消费项目
         /// </summary>
         /// <param name="item"></param>
-        void AddConsumeItem(ConsumeItemVO item);
+        void AddConsumeItem(ConsumeItemVO consumeItem);
 
         /// <summary>
         /// 修改消费项目
         /// </summary>
         /// <param name="item"></param>
-        void EditConsumeItem(ConsumeItemVO item);
+        void EditConsumeItem(ConsumeItemVO consumeItem);
 
         /// <summary>
         /// 删除消费项目

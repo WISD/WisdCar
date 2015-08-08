@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MapperHelper.cs" />
     <Compile Include="CRUD\Car.cs" />
     <Compile Include="CRUD\ClubCard.cs" />
     <Compile Include="CRUD\ClubCardPackage.cs" />

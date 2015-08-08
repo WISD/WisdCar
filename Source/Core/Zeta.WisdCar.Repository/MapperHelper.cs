@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 using AutoMapper;
 using System.Data;
 
-namespace Zeta.WisdCar.Infrastructure.Helper
+namespace Zeta.WisdCar.Repository
 {
     /// <summary>  
     /// 实体映射帮助类  
     /// </summary>  
 
-    public static class AutoMapperHelper
+    public static class MapperHelper
     {
         #region 配置映射规则  
         /// <summary>  
         /// 确保映射配置只注册一次  
         /// </summary>  
-        static AutoMapperHelper()  
+        static MapperHelper()  
         {  
         //    Configure();  
         }  

@@ -60,6 +60,11 @@
     <Compile Include="CustClubCardModule\Impl\CarMgm.cs" />
     <Compile Include="CustClubCardModule\Impl\ClubCardMgm.cs" />
     <Compile Include="CustClubCardModule\Impl\CustomerMgm.cs" />
+    <Compile Include="AutoMapper\AutoMapperConfiguration.cs" />
+    <Compile Include="AutoMapper\MapperExtention.cs" />
+    <Compile Include="AutoMapper\Profiles\ClubCardTypeProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\ConsumeItemProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\CustomerProfile.cs" />
     <Compile Include="MarktingPlanModule\IClubCardTypeMgm.cs" />
     <Compile Include="MarktingPlanModule\IConsumeItemMgm.cs" />
     <Compile Include="MarktingPlanModule\Impl\ClubCardTypeMgm.cs" />
@@ -97,7 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Handler\" />
-    <Folder Include="Mapper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />

@@ -6,8 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Zeta.WisdCar.Business.AutoMapper;
 using Zeta.WisdCar.Infrastructure;
-using Zeta.WisdCar.Online.Models.AutoMapper;
+
 
 namespace Zeta.WisdCar.Online
 {

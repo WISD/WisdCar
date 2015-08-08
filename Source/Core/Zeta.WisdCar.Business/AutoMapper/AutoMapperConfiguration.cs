@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 
-namespace Zeta.WisdCar.Online.Models.AutoMapper
+namespace Zeta.WisdCar.Business.AutoMapper
 {
     public class AutoMapperConfiguration
     {
@@ -15,7 +15,6 @@ namespace Zeta.WisdCar.Online.Models.AutoMapper
                 cfg.AddProfile<Profiles.CustomerProfile>();
                 cfg.AddProfile<Profiles.ClubCardTypeProfile>();
                 cfg.AddProfile<Profiles.ConsumeItemProfile>();
-                //cfg.AddProfile<NavigationMenuProfile>();
             });
             Mapper.AssertConfigurationIsValid();
         }

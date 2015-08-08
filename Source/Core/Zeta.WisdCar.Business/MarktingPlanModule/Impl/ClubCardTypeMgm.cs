@@ -48,5 +48,11 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
             ClubCardTypeData cardTypeData = new ClubCardTypeData();
             cardTypeData.DelCardType(id);
         }
+
+
+        public ClubCardTypeVO GetCardTypeByID(int cardTypeID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

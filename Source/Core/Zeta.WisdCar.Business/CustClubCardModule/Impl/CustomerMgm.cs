@@ -27,5 +27,11 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         {
             throw new NotImplementedException();
         }
+
+
+        public Model.VO.CustomerVO GetCustomerByID(int custID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

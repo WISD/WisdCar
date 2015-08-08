@@ -18,6 +18,12 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         List<CustomerVO> GetCustomers(CustomerQueryVO filter);
 
         /// <summary>
+        /// 根据客户ID获取客户信息
+        /// </summary>
+        /// <returns></returns>
+        CustomerVO GetCustomerByID(int custID);
+
+        /// <summary>
         /// 新增客户
         /// </summary>
         /// <param name="cust"></param>

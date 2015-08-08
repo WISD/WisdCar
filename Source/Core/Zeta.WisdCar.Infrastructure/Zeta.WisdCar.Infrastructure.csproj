@@ -30,12 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="AutoMapper.Net4">
-      <HintPath>..\..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
-    </Reference>
     <Reference Include="COM.Excel">
       <HintPath>..\..\Lib\COM.Excel.dll</HintPath>
     </Reference>
@@ -105,7 +99,6 @@
     <Compile Include="Extension\StringExtension.cs" />
     <Compile Include="Extension\ZipExtension.cs" />
     <Compile Include="Helper\AppSettingsHelper.cs" />
-    <Compile Include="Helper\AutoMapperHelper.cs" />
     <Compile Include="Helper\CookieHelper.cs" />
     <Compile Include="Helper\ExcelHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />

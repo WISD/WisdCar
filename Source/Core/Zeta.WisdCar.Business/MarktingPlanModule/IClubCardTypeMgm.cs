@@ -16,6 +16,12 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
         List<ClubCardTypeVO> GetAllCardType();
 
         /// <summary>
+        /// 根据会员卡类型ID获取会员卡类型数据
+        /// </summary>
+        /// <returns></returns>
+        ClubCardTypeVO GetCardTypeByID(int cardTypeID);
+
+        /// <summary>
         /// 新增会员卡类型
         /// </summary>
         /// <param name="cardType"></param>

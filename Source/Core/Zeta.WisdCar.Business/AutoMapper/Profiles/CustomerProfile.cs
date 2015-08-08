@@ -6,7 +6,7 @@ using AutoMapper;
 using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Model.VO;
 
-namespace Zeta.WisdCar.Online.Models.AutoMapper.Profiles
+namespace Zeta.WisdCar.Business.AutoMapper.Profiles
 {
     public class CustomerProfile:Profile
     {

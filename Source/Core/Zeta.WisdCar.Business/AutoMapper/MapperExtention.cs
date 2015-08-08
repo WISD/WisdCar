@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using AutoMapper;
 
-namespace Zeta.WisdCar.Online.Models.AutoMapper
+namespace Zeta.WisdCar.Business.AutoMapper
 {
     public static class MapperExtention
     {

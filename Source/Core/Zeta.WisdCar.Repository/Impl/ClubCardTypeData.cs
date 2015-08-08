@@ -4,7 +4,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zeta.WisdCar.Infrastructure.Helper;
 using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Repository.CRUD;
 
@@ -17,7 +16,6 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             DataSet ds = dao_CardType.GetList("");
             List<ClubCardTypePO> cardTypePOList = ds.GetEntity<List<ClubCardTypePO>>();
-            //var cardTypeVOList = AutoMapper.Mapper.Map<List<ClubCardTypePO>, List<ClubCardTypeVO>>(cardTypePO);
             return cardTypePOList;
         }
 

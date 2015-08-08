@@ -42,5 +42,11 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
             ConsumeItemData consumeItemData = new ConsumeItemData();
             consumeItemData.DelConsumeItem(id);
         }
+
+
+        public ConsumeItemVO GetConsumeItemByID(int consumeItemID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
