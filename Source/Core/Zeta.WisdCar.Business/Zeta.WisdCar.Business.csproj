@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\AutoMapperHelper.cs" />
     <Compile Include="BasicDataModule\IEmployeeMgm.cs" />
     <Compile Include="BasicDataModule\IKVCategoryMgm.cs" />
     <Compile Include="BasicDataModule\IKVLookupMgm.cs" />

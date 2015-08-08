@@ -12,27 +12,31 @@ namespace Zeta.WisdCar.Repository.Impl
 {
     public class ConsumeItemData : IConsumeItemData
     {
-        private ConsumeItem dao_ConsumeItem = new ConsumeItem();
-        public List<Model.PO.ConsumeItemPO> GetAllConsumeItem()
+        private ConsumeItem _daoConsumeItem = new ConsumeItem();
+        public DataSet GetAllConsumeItem()
         {
-            DataSet ds = dao_ConsumeItem.GetList("");
-            List<ConsumeItemPO> consumeItemPOList = ds.GetEntity<List<ConsumeItemPO>>();
-            return consumeItemPOList;
+             return _daoConsumeItem.GetList("");
         }
 
         public void AddConsumeItem(Model.PO.ConsumeItemPO consumeItemPO)
         {
-            dao_ConsumeItem.Add(consumeItemPO);
+            _daoConsumeItem.Add(consumeItemPO);
         }
 
         public void EditConsumeItem(Model.PO.ConsumeItemPO consumeItemPO)
         {
-            dao_ConsumeItem.Update(consumeItemPO);
+            _daoConsumeItem.Update(consumeItemPO);
         }
 
         public void DelConsumeItem(int id)
         {
-            dao_ConsumeItem.Delete(id);
+            _daoConsumeItem.Delete(id);
+        }
+
+
+        public ConsumeItemPO GetConsumeItemByID(int consumeItemID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

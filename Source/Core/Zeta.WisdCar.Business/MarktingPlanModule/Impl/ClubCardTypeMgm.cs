@@ -7,6 +7,8 @@ using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Model.VO;
 using AutoMapper;
 using Zeta.WisdCar.Repository.Impl;
+using System.Data;
+using Zeta.WisdCar.Business.AutoMapper;
 
 namespace Zeta.WisdCar.Business.MarktingPlanModule
 {
@@ -16,17 +18,20 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
         {
             ClubCardTypeData cardTypeData = new ClubCardTypeData();
             List<ClubCardTypeVO> cardTypeVOList = new List<ClubCardTypeVO>();
-            List<ClubCardTypePO> cardTypePOList = cardTypeData.GetAllCardType();
 
-            foreach (var i in cardTypePOList)
-            {
-                cardTypeVOList.Add(Mapper.Map<ClubCardTypePO, ClubCardTypeVO>(i));
-            }
+            DataSet ds = cardTypeData.GetAllCardType();
 
-            //cardTypeData.GetAllCardType().ForEach(i =>
+            List<ClubCardTypePO> cardTypePOList = ds.GetEntity<List<ClubCardTypePO>>();
+
+            //foreach (var i in cardTypePOList)
             //{
             //    cardTypeVOList.Add(Mapper.Map<ClubCardTypePO, ClubCardTypeVO>(i));
-            //});
+            //}
+
+            cardTypePOList.ForEach(i =>
+            {
+                cardTypeVOList.Add(Mapper.Map<ClubCardTypePO, ClubCardTypeVO>(i));
+            });
 
             return cardTypeVOList;
         }

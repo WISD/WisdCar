@@ -7,6 +7,8 @@ using AutoMapper;
 using Zeta.WisdCar.Model.VO;
 using Zeta.WisdCar.Repository.Impl;
 using Zeta.WisdCar.Model.PO;
+using System.Data;
+using Zeta.WisdCar.Business.AutoMapper;
 
 namespace Zeta.WisdCar.Business.MarktingPlanModule
 {
@@ -17,7 +19,10 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
             ConsumeItemData consumeItemData = new ConsumeItemData();
             List<ConsumeItemVO> consumeItemVOList = new List<ConsumeItemVO>();
 
-            consumeItemData.GetAllConsumeItem().ForEach(i =>
+            DataSet ds = consumeItemData.GetAllConsumeItem();
+            List<ConsumeItemPO> consumeItemPOList = ds.GetEntity<List<ConsumeItemPO>>();
+
+            consumeItemPOList.ForEach(i =>
             {
                 consumeItemVOList.Add(Mapper.Map<ConsumeItemPO, ConsumeItemVO>(i));
             });

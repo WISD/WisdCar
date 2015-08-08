@@ -14,7 +14,7 @@ namespace Zeta.WisdCar.Business.AutoMapper.Profiles
         protected override void Configure()
         {
             //for DB record to PO
-            CreateMap<IDataReader, ConsumeItemPO>();
+            CreateMap<DataSet, ConsumeItemPO>();
             //PO to VO
             CreateMap<ConsumeItemPO, ConsumeItemVO>();
 

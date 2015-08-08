@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,13 @@ namespace Zeta.WisdCar.Repository
         /// 获取所有的会员卡类型数据
         /// </summary>
         /// <returns></returns>
-        List<ClubCardTypePO> GetAllCardType();
+        DataSet GetAllCardType();
+
+        /// <summary>
+        /// 根据会员卡类型ID获取会员卡类型数据
+        /// </summary>
+        /// <returns></returns>
+        ClubCardTypePO GetCardTypeByID(int cardTypeID);
 
         /// <summary>
         /// 新增会员卡类型

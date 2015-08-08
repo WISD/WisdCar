@@ -34,7 +34,7 @@ namespace Zeta.WisdCar.Business.Test
         public void TestMethod2()
         {
             ClubCardTypeVO clubCardTypeVO = new ClubCardTypeVO();
-            clubCardTypeVO.CardTypeName = "Gold111122222";
+            clubCardTypeVO.CardTypeName = "Gold111111117777";
             clubCardTypeVO.ClubCardTypeID = 3;
             clubCardTypeVO.CreatedDate = DateTime.Now;
             clubCardTypeVO.CreatorID = "001";

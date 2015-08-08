@@ -11,27 +11,31 @@ namespace Zeta.WisdCar.Repository.Impl
 {
     public class ClubCardTypeData  : IClubCardTypeData
     {
-        private ClubCardType dao_CardType = new ClubCardType();
-        public List<ClubCardTypePO> GetAllCardType()
+        private ClubCardType _daoCardType = new ClubCardType();
+        public DataSet GetAllCardType()
         {
-            DataSet ds = dao_CardType.GetList("");
-            List<ClubCardTypePO> cardTypePOList = ds.GetEntity<List<ClubCardTypePO>>();
-            return cardTypePOList;
+            return _daoCardType.GetList("");
         }
 
         public void AddCardType(ClubCardTypePO cardTypePO)
         {
-            dao_CardType.Add(cardTypePO);
+            _daoCardType.Add(cardTypePO);
         }
 
         public void EditCardType(ClubCardTypePO cardTypePO)
         {
-            dao_CardType.Update(cardTypePO);
+            _daoCardType.Update(cardTypePO);
         }
 
         public void DelCardType(int id)
         {
-            dao_CardType.Delete(id);
+            _daoCardType.Delete(id);
+        }
+
+
+        public ClubCardTypePO GetCardTypeByID(int cardTypeID)
+        {
+            throw new NotImplementedException();
         }
     }
 }

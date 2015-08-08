@@ -10,10 +10,29 @@ namespace Zeta.WisdCar.Repository.Impl
 {
     public class CustomerData : ICustomerData
     {
-        public void addCustomer(CustomerPO customer)
+        public System.Data.DataSet GetCustomers(Model.VO.CustomerQueryVO filter)
         {
-            Customer custDB = new Customer();
-            custDB.Add(customer);
+            throw new NotImplementedException();
+        }
+
+        public CustomerPO GetCustomerByID(int custID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddCustomer(CustomerPO cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditCustomer(CustomerPO cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DelCustomer(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
