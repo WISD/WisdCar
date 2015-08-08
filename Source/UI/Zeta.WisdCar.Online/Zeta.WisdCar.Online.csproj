@@ -162,9 +162,24 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\BlankPageController.cs" />
-    <Compile Include="Controllers\DatatablesController.cs" />
-    <Compile Include="Controllers\UIGeneralController.cs" />
+    <Compile Include="Controllers\ClubcardConsumeController.cs" />
+    <Compile Include="Controllers\ClubCardController.cs" />
+    <Compile Include="Controllers\ClubcardTypeController.cs" />
+    <Compile Include="Controllers\ConsumeItemController.cs" />
+    <Compile Include="Controllers\ConsumeLogController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\KVCategoryController.cs" />
+    <Compile Include="Controllers\KVLookupController.cs" />
+    <Compile Include="Controllers\NocardConsumeController.cs" />
+    <Compile Include="Controllers\PackageController.cs" />
+    <Compile Include="Controllers\PermissionController.cs" />
+    <Compile Include="Controllers\RechargeController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\RechargeLogController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -908,11 +923,8 @@
     <Content Include="assets\plugins\font-awesome\scss\_spinning.scss" />
     <Content Include="assets\plugins\font-awesome\scss\_stacked.scss" />
     <Content Include="assets\plugins\font-awesome\scss\_variables.scss" />
-    <Content Include="Views\BlankPage\Index.cshtml" />
-    <Content Include="Views\Datatables\BasicTable.cshtml" />
-    <Content Include="Views\Datatables\DatatablesPlugin.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\UIGeneral\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
@@ -925,6 +937,60 @@
       <Project>{ab1e8ae2-f294-4376-b878-e4c6a9802007}</Project>
       <Name>Zeta.WisdCar.Infrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Customer\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ClubCard\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Recharge\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ClubcardConsume\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\NocardConsume\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\RechargeLog\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ConsumeLog\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ClubcardType\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ConsumeItem\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Package\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\KVCategory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\KVCategory\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\KVLookup\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Employee\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Store\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Permission\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Role\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

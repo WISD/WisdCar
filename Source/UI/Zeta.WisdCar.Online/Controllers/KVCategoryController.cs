@@ -6,16 +6,13 @@ using System.Web.Mvc;
 
 namespace Zeta.WisdCar.Online.Controllers
 {
-    public class DatatablesController : Controller
+    public class KVCategoryController : Controller
     {
-        public ActionResult BasicTable()
+        //
+        // GET: /KVCategory/
+        public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult DatatablesPlugin()
-        {
-            return View();
-        }
-    }
+	}
 }

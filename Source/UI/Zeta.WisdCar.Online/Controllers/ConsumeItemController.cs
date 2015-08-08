@@ -6,13 +6,13 @@ using System.Web.Mvc;
 
 namespace Zeta.WisdCar.Online.Controllers
 {
-    public class UIGeneralController : Controller
+    public class ConsumeItemController : Controller
     {
         //
-        // GET: /UIGeneral/
+        // GET: /ConsumeItem/
         public ActionResult Index()
         {
             return View();
         }
-    }
+	}
 }

@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-            Basic Datatables <small> basic datatables</small>
+            Dashboard <small>Dashboard</small>
         </h3>
         <ul class="page-breadcrumb breadcrumb">
             <li>
@@ -15,13 +15,7 @@
             </li>
             <li>
                 <a href="#">
-                    Datatables
-                </a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <a href="#">
-                    Basic Datatables
+                    Dashboard
                 </a>
             </li>
         </ul>
@@ -36,11 +30,11 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
+
 @section scripts{
-    <script>
+<script>
     $(function () {
-        $("#sidebar_menu_datatables").addClass("active");
-        $("#sidebar_menu_basictable").addClass("active");
+        $("#sidebar_menu_blankpage").addClass("active");
         App.blockUI({ boxed: true });
         OnPageLoad();
         window.setTimeout(function () {
@@ -49,7 +43,7 @@
     });
 
     function OnPageLoad() {
-
+        
     }
-    </script>
+</script>
 }

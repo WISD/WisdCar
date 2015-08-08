@@ -10,7 +10,6 @@
     <title>Metronic | Page Layouts - Blank Page</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     @Styles.Render("~/global/css")
     <!-- END GLOBAL MANDATORY STYLES -->
@@ -530,8 +529,8 @@
                         </form>
                         <!-- END RESPONSIVE QUICK SEARCH FORM -->
                     </li>
-                    <li id="sidebar_menu_blankpage">
-                        <a href="@Url.Action("Index", "BlankPage")">
+                    <li id="sidebar_menu_dashboard">
+                        <a href="@Url.Action("Index", "Dashboard")">
                             <i class="fa fa-home"></i>
                             <span class="title">
                                 首页
@@ -539,78 +538,144 @@
                         </a>
                     </li>
 
-                    <li id="sidebar_menu_datatables">
-                        <a href="javascript:;">
-                            <i class="fa fa-th"></i>
-                            <span class="title">
-                                Data Tables
-                            </span>
-                            <span class="arrow">
-                            </span>
+                    <li id="sidebar_menu_cust_card">
+                        <a href="javascript:();">
+                            <i class="fa fa-gift"></i> <span class="title">会员管理</span>
+                            <span class="arrow "> </span>
                         </a>
                         <ul class="sub-menu">
-                            <li id="sidebar_menu_basictable">
-                                <a href="@Url.Action("BasicTable", "Datatables")">
-                                    Basic Datatables
+                            <li id="sidebar_menu_cust">
+                                <a href="@Url.Action("Index", "Customer")">
+                                    <i class="fa fa-sitemap"></i>  客户管理
                                 </a>
                             </li>
-                            <li id="sidebar_menu_datatables_plugin">
-                                <a href="@Url.Action("DatatablesPlugin", "Datatables")">
-                                    Datatables Plugin
+                            <li id="sidebar_menu_card">
+                                <a href="@Url.Action("Index", "ClubCard")">
+                                    <i class="fa fa-file-text"></i> 会员卡管理
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="javascript:();"> <i class="fa fa-gift"></i> <span class="title">会员管理</span>  <span class="arrow "> </span> </a>
+                    <li id="sidebar_menu_recharge_consume">
+                        <a href="javascript:();">
+                            <i class="fa fa-table"></i> <span class="title">充值消费</span>
+                            <span class="arrow "> </span>
+                        </a>
                         <ul class="sub-menu">
-                            <li> <a href="javascript:();"> <i class="fa fa-shopping-cart"></i>  客户管理  </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-credit-card"></i> 客户开卡  </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-pencil"></i> 会员卡管理 </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-dollar"></i> 会员套餐余额查询 </a> </li>
+                            <li id="sidebar_menu_clubcard_recharge">
+                                <a href="@Url.Action("Index", "Recharge")">
+                                    <i class="fa  fa-level-up"></i>  会员充值
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_clubcard_consume">
+                                <a href="@Url.Action("Index", "ClubcardConsume")">
+                                    <i class="fa  fa-level-down"></i> 会员消费
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_nocard_consume">
+                                <a href="@Url.Action("Index", "NocardConsume")">
+                                    <i class="fa fa-money"></i> 非会员消费
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_recharge_log">
+                                <a href="@Url.Action("Index", "RechargeLog")">
+                                    <i class="fa fa-edit "></i> 充值记录
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_consume_log">
+                                <a href="@Url.Action("Index", "ConsumeLog")">
+                                    <i class="fa fa-pencil-square"></i> 消费记录
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="javascript:();"> <i class="fa fa-table"></i> <span class="title">充值消费</span>  <span class="arrow "> </span> </a>
+                    <li id="sidebar_menu_sell_setting">
+                        <a href="javascript:();">
+                            <i class="fa fa-pencil"></i> <span class="title">行销策划</span>
+                            <span class="arrow "> </span>
+                        </a>
                         <ul class="sub-menu">
-                            <li> <a href="javascript:;"> <i class="fa fa-cloud-upload"></i>  会员充值 </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-cloud-download"></i> 会员消费  </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-exclamation-circle"></i> 非会员消费 </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-edit "></i> 充值记录 </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-pencil-square"></i> 消费记录 </a> </li>
+                            <li id="sidebar_menu_clubcard_type">
+                                <a href="@Url.Action("Index", "ClubcardType")">
+                                    <i class="fa fa-credit-card"></i>  会员卡类型设置
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_consume_item">
+                                <a href="@Url.Action("Index", "ConsumeItem")">
+                                    <i class="fa fa-gears"></i> 消费项目设置
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_package">
+                                <a href="@Url.Action("Index", "Package")">
+                                    <i class="fa fa-gift"></i> 套餐设置
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="javascript:();"> <i class="fa fa-pencil"></i> <span class="title">行销策划</span>  <span class="arrow "> </span> </a>
+                    <li id="sidebar_menu_basic_data">
+                        <a href="javascript:();">
+                            <i class="fa fa-superscript"></i> <span class="title">基础数据</span>
+                            <span class="arrow "> </span>
+                        </a>
                         <ul class="sub-menu">
-                            <li> <a href="javascript:();"> <i class="fa fa-credit-card"></i>  会员卡类型设置  </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-gears"></i> 消费项目设置  </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-gift"></i> 套餐设置 </a> </li>
+                            <li id="sidebar_menu_kv_category">
+                                <a href="@Url.Action("Index", "KVCategory")">
+                                    <i class="fa fa-pencil-square-o"></i> 数据类型管理
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_kv_lookup">
+                                <a href="@Url.Action("Index", "KVLookup")">
+                                    <i class="fa fa-th"></i> 数据字典管理
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="javascript:();"> <i class="fa fa-superscript"></i> <span class="title">基础数据</span>  <span class="arrow "> </span> </a>
+                    <li id="sidebar_menu_company">
+                        <a href="javascript:();">
+                            <i class="fa fa-superscript"></i> <span class="title">公司管理</span>
+                            <span class="arrow "> </span>
+                        </a>
                         <ul class="sub-menu">
-                            <li> <a href="javascript:();"> <i class="fa fa-thumb-tack"></i>  门店管理 </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-male"></i> 员工管理 </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-pencil-square-o"></i> 数据类型管理 </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-th"></i> 数据字典管理 </a> </li>
+                            <li id="sidebar_menu_store">
+                                <a href="@Url.Action("Index", "Store")">
+                                    <i class="fa fa-file-o"></i>  门店管理
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_employee">
+                                <a href="@Url.Action("Index", "Employee")">
+                                    <i class="fa fa-male"></i> 员工管理
+                                </a>
+                            </li>
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="javascript:();"> <i class="fa fa-volume-down"></i> <span class="title">系统管理</span>  <span class="arrow "> </span> </a>
+                    <li id="sidebar_menu_system">
+                        <a href="javascript:();">
+                            <i class="fa fa-volume-down"></i> <span class="title">系统管理</span>
+                            <span class="arrow "> </span>
+                        </a>
                         <ul class="sub-menu">
-                            <li> <a href="javascript:();"> <i class="fa fa-user"></i>  用户管理 </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-male"></i> 角色管理  </a> </li>
-                            <li> <a href="javascript:();"> <i class="fa fa-smile-o"></i> 权限管理 </a> </li>
+                            <li id="sidebar_menu_user">
+                                <a href="@Url.Action("Index", "User")">
+                                    <i class="fa fa-user"></i>  用户管理
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_role">
+                                <a href="@Url.Action("Index", "Role")">
+                                    <i class="fa fa-group"></i> 角色管理
+                                </a>
+                            </li>
+                            <li id="sidebar_menu_permission">
+                                <a href="@Url.Action("Index", "Permission")">
+                                    <i class="fa fa-gear"></i> 权限管理
+                                </a>
+                            </li>
                         </ul>
                     </li>
-
 
                 </ul>
                 <!-- END SIDEBAR MENU -->

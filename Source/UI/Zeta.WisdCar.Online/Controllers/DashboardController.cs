@@ -7,22 +7,12 @@ using Zeta.WisdCar.Infrastructure.Log;
 
 namespace Zeta.WisdCar.Online.Controllers
 {
-    public class BlankPageController : Controller
+    public class DashboardController : Controller
     {
         //
         // GET: /TestLayout/
         public ActionResult Index()
         {
-            try
-            {
-                var i = 0;
-                var result = 100 / i;
-            }
-            catch (Exception ex)
-            {
-                LogHandler.Error("asdfsadfasdfasdf");
-            }
-
             Business.BizMocker.MockLog4Net();
 
             return View();
