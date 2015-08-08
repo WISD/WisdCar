@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zeta.WisdCar.Model.VO
+namespace Zeta.WisdCar.Model.Entity
 {
-    public class CustomerQueryVO
+    public class CustomerQueryEntity
     {
-        public CustomerQueryVO()
+        public CustomerQueryEntity()
         { }
 
         private int _start;

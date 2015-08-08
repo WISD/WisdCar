@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Model.Entity;
 using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business.CustClubCardModule
@@ -15,7 +16,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        List<CustomerVO> GetCustomers(CustomerQueryVO filter);
+        List<CustomerVO> GetCustomers(CustomerQueryEntity filter);
 
         /// <summary>
         /// 根据客户ID获取客户信息

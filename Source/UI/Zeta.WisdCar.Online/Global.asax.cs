@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Zeta.WisdCar.Business.AutoMapper;
 using Zeta.WisdCar.Infrastructure;
+using Zeta.WisdCar.Infrastructure.Log;
 
 
 namespace Zeta.WisdCar.Online
@@ -24,7 +25,7 @@ namespace Zeta.WisdCar.Online
             RegisterMetric();
             RegisterAutoMapper();
         }
-		
+
         private void RegisterMetric()
         {
             Metric.Config
@@ -34,7 +35,7 @@ namespace Zeta.WisdCar.Online
 
         private void RegisterAutoMapper()
         {
-			AutoMapperConfiguration.Configure();
-        }				
+            //AutoMapperConfiguration.Configure();
+        }
     }
 }

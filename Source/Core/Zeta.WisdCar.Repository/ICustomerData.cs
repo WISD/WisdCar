@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Model.Entity;
 using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Model.VO;
 
@@ -17,7 +18,7 @@ namespace Zeta.WisdCar.Repository
         /// </summary>
         /// <param name="query"></param>
         /// <returns></returns>
-        DataSet GetCustomers(CustomerQueryVO filter);
+        DataSet GetCustomers(CustomerQueryEntity filter);
 
         /// <summary>
         /// 根据客户ID获取客户信息

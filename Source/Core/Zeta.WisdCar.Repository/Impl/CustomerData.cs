@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Model.Entity;
 using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Repository.CRUD;
 
@@ -10,7 +11,7 @@ namespace Zeta.WisdCar.Repository.Impl
 {
     public class CustomerData : ICustomerData
     {
-        public System.Data.DataSet GetCustomers(Model.VO.CustomerQueryVO filter)
+        public System.Data.DataSet GetCustomers(CustomerQueryEntity filter)
         {
             throw new NotImplementedException();
         }

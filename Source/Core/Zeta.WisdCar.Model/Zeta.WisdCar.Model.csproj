@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\CustomerQueryEntity.cs" />
     <Compile Include="PO\CarPO.cs" />
     <Compile Include="PO\ClubCardPO.cs" />
     <Compile Include="PO\ClubCardPackagePO.cs" />
@@ -58,12 +59,9 @@
     <Compile Include="VO\CarVO.cs" />
     <Compile Include="VO\ClubCardTypeVO.cs" />
     <Compile Include="VO\ConsumeItemVO.cs" />
-    <Compile Include="VO\CustomerQueryVO.cs" />
     <Compile Include="VO\CustomerVO.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entity\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

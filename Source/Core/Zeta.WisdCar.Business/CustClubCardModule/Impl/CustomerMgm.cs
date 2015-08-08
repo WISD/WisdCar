@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Model.VO;
+using Zeta.WisdCar.Model.Entity;
 
 namespace Zeta.WisdCar.Business.CustClubCardModule
 {
     public class CustomerMgm : ICustomerMgm
     {
-        public List<Model.VO.CustomerVO> GetCustomers(Model.VO.CustomerQueryVO filter)
+        public List<CustomerVO> GetCustomers(CustomerQueryEntity filter)
         {
             throw new NotImplementedException();
         }
@@ -27,7 +29,6 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         {
             throw new NotImplementedException();
         }
-
 
         public Model.VO.CustomerVO GetCustomerByID(int custID)
         {
