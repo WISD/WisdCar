@@ -13,8 +13,8 @@ namespace Zeta.WisdCar.Business.AutoMapper.Profiles
     {
         protected override void Configure()
         {
-            //for DB record to PO
-            CreateMap<DataSet, ClubCardTypePO>();
+            //DB record to PO
+            CreateMap<IDataReader, ClubCardTypePO>();
 
             //PO to VO
             CreateMap<ClubCardTypePO, ClubCardTypeVO>();

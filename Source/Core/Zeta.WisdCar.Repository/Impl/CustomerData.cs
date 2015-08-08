@@ -11,29 +11,57 @@ namespace Zeta.WisdCar.Repository.Impl
 {
     public class CustomerData : ICustomerData
     {
+        private Customer _daoCustomer = new Customer();
         public System.Data.DataSet GetCustomers(CustomerQueryEntity filter)
         {
-            throw new NotImplementedException();
+            StringBuilder strSql1 = new StringBuilder();
+            StringBuilder strSql2 = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(filter.Name.Trim()))
+            {
+                strSql1.AppendFormat(" Name like '%{0}%' ", filter.Name);
+            }
+            if (!string.IsNullOrEmpty(filter.MobileNO.Trim()))
+            {
+                strSql1.AppendFormat(" And MobileNO like '%{0}%' ", filter.MobileNO);
+            }
+            if (!string.IsNullOrEmpty(filter.ICNo.Trim()))
+            {
+                strSql1.AppendFormat(" And ICNo like '%{0}%' ", filter.ICNo);
+            }
+            strSql1.AppendFormat(" And CardFlag = {0} ", filter.CardFlag);
+
+            if (!string.IsNullOrEmpty(filter.SortName.Trim()))
+            {
+                strSql2.Append(filter.SortName);
+                strSql2.Append(" ");
+                strSql2.Append(filter.SortOrder.Trim());
+            }
+            string strWhere = strSql1.ToString();
+            string orderby = strSql2.ToString();
+            int startIndex = filter.Start;
+            int endIndex = startIndex + filter.Length;
+            return _daoCustomer.GetListByPage(strWhere, orderby, startIndex, endIndex);
         }
 
         public CustomerPO GetCustomerByID(int custID)
         {
-            throw new NotImplementedException();
+            return _daoCustomer.GetModel(custID);
         }
 
         public void AddCustomer(CustomerPO cust)
         {
-            throw new NotImplementedException();
+            _daoCustomer.Add(cust);
         }
 
         public void EditCustomer(CustomerPO cust)
         {
-            throw new NotImplementedException();
+            _daoCustomer.Update(cust);
         }
 
         public void DelCustomer(int id)
         {
-            throw new NotImplementedException();
+            _daoCustomer.Delete(id);
         }
     }
 }

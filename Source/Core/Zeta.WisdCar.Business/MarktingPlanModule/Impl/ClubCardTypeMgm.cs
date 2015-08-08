@@ -57,7 +57,12 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
 
         public ClubCardTypeVO GetCardTypeByID(int cardTypeID)
         {
-            throw new NotImplementedException();
+            ClubCardTypeData cardTypeData = new ClubCardTypeData();
+            ClubCardTypeVO cardTypeVO = new ClubCardTypeVO();
+            ClubCardTypePO cardTypePO = cardTypeData.GetCardTypeByID(cardTypeID);
+            cardTypeVO = Mapper.Map<ClubCardTypePO, ClubCardTypeVO>(cardTypePO);
+
+            return cardTypeVO;
         }
     }
 }

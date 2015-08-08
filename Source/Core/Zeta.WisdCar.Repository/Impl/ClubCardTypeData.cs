@@ -35,7 +35,7 @@ namespace Zeta.WisdCar.Repository.Impl
 
         public ClubCardTypePO GetCardTypeByID(int cardTypeID)
         {
-            throw new NotImplementedException();
+            return _daoCardType.GetModel(cardTypeID);
         }
     }
 }

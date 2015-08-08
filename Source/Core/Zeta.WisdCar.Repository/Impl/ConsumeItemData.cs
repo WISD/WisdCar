@@ -36,7 +36,7 @@ namespace Zeta.WisdCar.Repository.Impl
 
         public ConsumeItemPO GetConsumeItemByID(int consumeItemID)
         {
-            throw new NotImplementedException();
+            return _daoConsumeItem.GetModel(consumeItemID);
         }
     }
 }

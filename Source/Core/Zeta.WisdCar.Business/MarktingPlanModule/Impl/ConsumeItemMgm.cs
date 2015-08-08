@@ -51,7 +51,12 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
 
         public ConsumeItemVO GetConsumeItemByID(int consumeItemID)
         {
-            throw new NotImplementedException();
+            ConsumeItemData consumeItemData = new ConsumeItemData();
+            ConsumeItemVO consumeItemVO = new ConsumeItemVO();
+            ConsumeItemPO consumeItemPO = consumeItemData.GetConsumeItemByID(consumeItemID);
+            consumeItemVO = Mapper.Map<ConsumeItemPO, ConsumeItemVO>(consumeItemPO);
+
+            return consumeItemVO;
         }
     }
 }

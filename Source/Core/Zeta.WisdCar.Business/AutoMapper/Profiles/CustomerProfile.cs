@@ -5,6 +5,7 @@ using System.Web;
 using AutoMapper;
 using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Model.VO;
+using System.Data;
 
 namespace Zeta.WisdCar.Business.AutoMapper.Profiles
 {
@@ -12,7 +13,12 @@ namespace Zeta.WisdCar.Business.AutoMapper.Profiles
     {
         protected override void Configure()
         {
+            //DB record to PO
+            CreateMap<IDataReader, CustomerPO>();
+            //PO to VO
             CreateMap<CustomerPO, CustomerVO>();
+            //VO to PO
+            CreateMap<CustomerVO, CustomerPO>();
         }
     }
 }
