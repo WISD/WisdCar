@@ -1,8 +1,63 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿<!-- BEGIN PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            客户管理 <small>Customer Management</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index", "Dashboard")">
+                    Home
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    会员管理
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    客户管理
+                </a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        Page content goes here
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+@section scripts{
+    <script>
+        $(function () {
+            Customer.Init();
+        });
+
+        var Customer = function () {
+            var onPageLoad = function () {
+
+            }
+
+            return {
+                Init: function () {
+                    $("#sidebar_menu_cust_card").addClass("active");
+                    $("#sidebar_menu_cust").addClass("active");
+                    App.blockUI({ boxed: true });
+                    onPageLoad();
+                    window.setTimeout(function () {
+                        App.unblockUI();
+                    }, 1000);
+                }
+            };
+        }();
+    </script>
 }
-
-<h2>Index</h2>
-

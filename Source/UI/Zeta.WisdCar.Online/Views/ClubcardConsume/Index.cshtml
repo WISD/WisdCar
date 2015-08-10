@@ -1,8 +1,63 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿<!-- BEGIN PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            会员消费 <small>Clubcard Consume</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index", "Dashboard")">
+                    Home
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    充值消费
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    会员消费
+                </a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<div class="row">
+    <div class="col-md-12">
+        Page content goes here
+    </div>
+</div>
+<!-- END PAGE CONTENT-->
+@section scripts{
+    <script>
+        $(function () {
+            ClubcardConsume.Init();
+        });
+
+        var ClubcardConsume = function () {
+            var onPageLoad = function () {
+
+            }
+
+            return {
+                Init: function () {
+                    $("#sidebar_menu_recharge_consume").addClass("active");
+                    $("#sidebar_menu_clubcard_consume").addClass("active");
+                    App.blockUI({ boxed: true });
+                    onPageLoad();
+                    window.setTimeout(function () {
+                        App.unblockUI();
+                    }, 1000);
+                }
+            };
+        }();
+    </script>
 }
-
-<h2>Index</h2>
-

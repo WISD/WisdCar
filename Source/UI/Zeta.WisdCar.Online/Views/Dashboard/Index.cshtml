@@ -34,16 +34,24 @@
 @section scripts{
 <script>
     $(function () {
-        $("#sidebar_menu_blankpage").addClass("active");
-        App.blockUI({ boxed: true });
-        OnPageLoad();
-        window.setTimeout(function () {
-            App.unblockUI();
-        }, 1000);
+        Dashboard.Init();
     });
 
-    function OnPageLoad() {
-        
-    }
+    var Dashboard = function () {
+        var onPageLoad = function () {
+            
+        }
+
+        return {
+            Init: function () {
+                $("#sidebar_menu_dashboard").addClass("active");
+                App.blockUI({ boxed: true });
+                onPageLoad();
+                window.setTimeout(function () {
+                    App.unblockUI();
+                }, 1000);
+            }
+        };
+    }();
 </script>
 }
