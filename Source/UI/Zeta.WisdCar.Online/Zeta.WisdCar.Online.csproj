@@ -974,9 +974,6 @@
     <Content Include="Views\Package\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\KVCategory.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\KVCategory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

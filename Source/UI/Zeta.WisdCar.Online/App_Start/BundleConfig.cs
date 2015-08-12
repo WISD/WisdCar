@@ -17,12 +17,17 @@ namespace Zeta.WisdCar.Online
                         "~/assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js",
                         "~/assets/plugins/jquery.blockui.min.js",
                         "~/assets/plugins/jquery.cokie.min.js",
-                        "~/assets/plugins/uniform/jquery.uniform.min.js"));
+                        "~/assets/plugins/uniform/jquery.uniform.min.js",
+                        "~/assets/plugins/bootbox/bootbox.min.js",
+                        "~/assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js",
+                        "~/assets/plugins/bootstrap-modal/js/bootstrap-modal.js"));
 
             bundles.Add(new StyleBundle("~/global/css").Include(
                 "~/assets/plugins/font-awesome/css/font-awesome.min.css",
                 "~/assets/plugins/bootstrap/css/bootstrap.min.css",
-                "~/assets/plugins/uniform/css/uniform.default.css"));
+                "~/assets/plugins/uniform/css/uniform.default.css",
+                "~/assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css",
+                "~/assets/plugins/bootstrap-modal/css/bootstrap-modal.css"));
 
             bundles.Add(new StyleBundle("~/theme/css").Include(
                 "~/assets/css/style-metronic.css",
