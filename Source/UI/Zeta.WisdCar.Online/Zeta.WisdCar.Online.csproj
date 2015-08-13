@@ -838,6 +838,7 @@
     <Content Include="assets\plugins\jquery-ui\themes\vader\theme.css" />
     <Content Include="assets\plugins\jquery-validation\dist\additional-methods.min.js" />
     <Content Include="assets\plugins\jquery-validation\dist\jquery.validate.min.js" />
+    <Content Include="assets\plugins\jquery-validation\dist\message_cn.js" />
     <Content Include="assets\plugins\jquery.blockui.min.js" />
     <Content Include="assets\plugins\jquery.cokie.min.js" />
     <Content Include="assets\plugins\jquery.input-ip-address-control-1.0.min.js" />
