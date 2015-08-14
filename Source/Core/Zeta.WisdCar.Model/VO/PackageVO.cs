@@ -6,19 +6,13 @@ using System.Threading.Tasks;
 
 namespace Zeta.WisdCar.Model.VO
 {
-    public class ClubCardTypeVO
+    public class PackageVO
     {
-        public ClubCardTypeVO()
-        { }
-
         private string _rowid;
         private string _operation;
-        private string _packagediscountdesc;
-        private string _paydiscountdesc;
-        private int _clubcardtypeid;
-        private string _cardtypename;
-        private decimal _packagediscount;
-        private decimal _paydiscount;
+        private int _packageid;
+        private string _packagename;
+        private decimal _totalprice;
         private int _logicalstatus = 1;
         private string _creatorid;
         private DateTime _createddate;
@@ -45,54 +39,28 @@ namespace Zeta.WisdCar.Model.VO
             get { return _operation; }
         }
         /// <summary>
-        /// 套餐折扣
-        /// Desc
+        /// 消费套餐表ID
         /// </summary>
-        public string PackageDiscountDesc
+        public int PackageID
         {
-            set { _packagediscountdesc = value; }
-            get { return _packagediscountdesc; }
+            set { _packageid = value; }
+            get { return _packageid; }
         }
         /// <summary>
-        /// 充值折扣
-        /// Desc
+        /// 套餐名称
         /// </summary>
-        public string PayDiscountDesc
+        public string PackageName
         {
-            set { _paydiscountdesc = value; }
-            get { return _paydiscountdesc; }
+            set { _packagename = value; }
+            get { return _packagename; }
         }
         /// <summary>
-        /// 会员卡类型表ID
+        /// 套餐总价
         /// </summary>
-        public int ClubCardTypeID
+        public decimal TotalPrice
         {
-            set { _clubcardtypeid = value; }
-            get { return _clubcardtypeid; }
-        }
-        /// <summary>
-        /// 会员卡类型名称
-        /// </summary>
-        public string CardTypeName
-        {
-            set { _cardtypename = value; }
-            get { return _cardtypename; }
-        }
-        /// <summary>
-        /// 套餐折扣
-        /// </summary>
-        public decimal PackageDiscount
-        {
-            set { _packagediscount = value; }
-            get { return _packagediscount; }
-        }
-        /// <summary>
-        /// 充值折扣
-        /// </summary>
-        public decimal PayDiscount
-        {
-            set { _paydiscount = value; }
-            get { return _paydiscount; }
+            set { _totalprice = value; }
+            get { return _totalprice; }
         }
         /// <summary>
         /// 逻辑状态

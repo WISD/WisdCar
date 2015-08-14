@@ -943,6 +943,10 @@
       <Project>{ab1e8ae2-f294-4376-b878-e4c6a9802007}</Project>
       <Name>Zeta.WisdCar.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Zeta.WisdCar.Model\Zeta.WisdCar.Model.csproj">
+      <Project>{6238f7e9-2213-4eb7-8821-ac4d95cec09e}</Project>
+      <Name>Zeta.WisdCar.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Customer\Index.cshtml" />

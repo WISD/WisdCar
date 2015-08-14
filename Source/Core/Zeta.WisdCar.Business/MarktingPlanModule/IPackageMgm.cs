@@ -8,5 +8,6 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
 {
     public interface IPackageMgm
     {
+
     }
 }

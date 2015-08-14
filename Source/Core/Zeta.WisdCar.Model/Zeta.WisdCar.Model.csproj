@@ -60,6 +60,7 @@
     <Compile Include="VO\ClubCardTypeVO.cs" />
     <Compile Include="VO\ConsumeItemVO.cs" />
     <Compile Include="VO\CustomerVO.cs" />
+    <Compile Include="VO\PackageVO.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
