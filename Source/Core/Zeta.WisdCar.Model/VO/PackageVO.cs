@@ -10,6 +10,8 @@ namespace Zeta.WisdCar.Model.VO
     {
         private string _rowid;
         private string _operation;
+        private string _totalpricedesc;
+        private string _detailopt;
         private int _packageid;
         private string _packagename;
         private decimal _totalprice;
@@ -37,6 +39,20 @@ namespace Zeta.WisdCar.Model.VO
         {
             set { _operation = value; }
             get { return _operation; }
+        }
+        /// <summary>
+        /// 套餐总价
+        /// Desc
+        /// </summary>
+        public string TotalPriceDesc
+        {
+            set { _totalpricedesc = value; }
+            get { return _totalpricedesc; }
+        }
+        public string DetailOpt
+        {
+            set { _detailopt = value; }
+            get { return _detailopt; }
         }
         /// <summary>
         /// 消费套餐表ID

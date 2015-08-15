@@ -14,7 +14,7 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
 {
     public class ConsumeItemMgm : IConsumeItemMgm
     {
-        public List<Model.VO.ConsumeItemVO> GetAllConsumeItem()
+        public List<Model.VO.ConsumeItemVO> GetAllConsumeItems()
         {
             ConsumeItemData consumeItemData = new ConsumeItemData();
             List<ConsumeItemVO> consumeItemVOList = new List<ConsumeItemVO>();

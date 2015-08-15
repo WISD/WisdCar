@@ -11,7 +11,7 @@ using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business
 {
-    public class BizMocker : IPermissionMgm, IClubCardTypeMgm
+    public class BizMocker : IPermissionMgm, IClubCardTypeMgm, IConsumeItemMgm, IPackageMgm
     {
         public static void MockLog4Net()
         {
@@ -168,6 +168,193 @@ namespace Zeta.WisdCar.Business
         }
 
         public void DelCardType(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ConsumeItemVO> GetAllConsumeItems()
+        {
+            List<ConsumeItemVO> result = new List<ConsumeItemVO>();
+
+            #region Mock
+            var item1 = new ConsumeItemVO() {
+                ItemName = "整车外部彻底清洁",
+                ItemPrice = 55M
+            };
+
+            var item2 = new ConsumeItemVO()
+            {
+                ItemName = "整车的除锈、防锈、防腐蚀处理",
+                ItemPrice = 78M
+            };
+
+            var item3 = new ConsumeItemVO()
+            {
+                ItemName = "玻璃彻底保养护理",
+                ItemPrice = 52M
+            };
+
+            var item4 = new ConsumeItemVO()
+            {
+                ItemName = "发动机系统的美容护理",
+                ItemPrice = 280M
+            };
+
+            var item5 = new ConsumeItemVO()
+            {
+                ItemName = "漆面美容护理",
+                ItemPrice = 32M
+            };
+
+            var item6 = new ConsumeItemVO()
+            {
+                ItemName = "保险杠、车裙、挡泥板、车灯、底盘等保养护理",
+                ItemPrice = 295M
+            };
+
+            var item7 = new ConsumeItemVO()
+            {
+                ItemName = "车内各部件及主要配置的保养护理",
+                ItemPrice = 25M
+            };
+
+            var item8 = new ConsumeItemVO()
+            {
+                ItemName = "全车电光、镀铬表面去除氧化层抛光翻新",
+                ItemPrice = 539M
+            };
+
+            var item9 = new ConsumeItemVO()
+            {
+                ItemName = "整车美容护理后的全面检查",
+                ItemPrice = 23M
+            };
+
+            var item10 = new ConsumeItemVO()
+            {
+                ItemName = "贴防爆太阳膜",
+                ItemPrice = 55M
+            };
+
+            var item11 = new ConsumeItemVO()
+            {
+                ItemName = "安装防盗器",
+                ItemPrice = 51M
+            };
+
+            var item12 = new ConsumeItemVO()
+            {
+                ItemName = "安装静电放电器",
+                ItemPrice = 25M
+            };
+
+            result.Add(item1);
+            result.Add(item2);
+            result.Add(item3);
+            result.Add(item4);
+            result.Add(item5);
+            result.Add(item6);
+            result.Add(item7);
+            result.Add(item8);
+            result.Add(item9);
+            result.Add(item10);
+            result.Add(item11);
+            result.Add(item12);
+            #endregion
+
+            return result;
+        }
+
+        public ConsumeItemVO GetConsumeItemByID(int consumeItemID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddConsumeItem(ConsumeItemVO consumeItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditConsumeItem(ConsumeItemVO consumeItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DelConsumeItem(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PackageVO> GetAllPackages()
+        {
+            List<PackageVO> result = new List<PackageVO>();
+
+            #region Mock
+            PackageVO item1 = new PackageVO() { 
+                PackageID = 1,
+                PackageName = "车身美容套餐",
+                TotalPrice = 345               
+            };
+
+            PackageVO item2 = new PackageVO()
+            {
+                PackageID = 2,
+                PackageName = "内部美容套餐",
+                TotalPrice = 321
+            };
+
+            PackageVO item3 = new PackageVO()
+            {
+                PackageID = 3,
+                PackageName = "漆面处理套餐",
+                TotalPrice = 453
+            };
+
+            PackageVO item4 = new PackageVO()
+            {
+                PackageID = 4,
+                PackageName = "汽车防护套餐",
+                TotalPrice = 231
+            };
+
+            PackageVO item5 = new PackageVO()
+            {
+                PackageID = 5,
+                PackageName = "杀菌消毒套餐",
+                TotalPrice = 231
+            };
+
+            result.Add(item1);
+            result.Add(item2);
+            result.Add(item3);
+            result.Add(item4);
+            result.Add(item5);
+            #endregion
+
+            return result;
+        }
+
+        public PackageVO GetPackageByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddPackage(PackageVO package)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsPackageExist(string packageName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditPackage(PackageVO package)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DelPackage(int id)
         {
             throw new NotImplementedException();
         }

@@ -13,7 +13,7 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
         /// 获取所有消费项目
         /// </summary>
         /// <returns></returns>
-        List<ConsumeItemVO> GetAllConsumeItem();
+        List<ConsumeItemVO> GetAllConsumeItems();
 
         /// <summary>
         /// 根据消费项目ID获取消费项目

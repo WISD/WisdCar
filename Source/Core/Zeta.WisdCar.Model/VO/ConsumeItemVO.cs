@@ -13,6 +13,7 @@ namespace Zeta.WisdCar.Model.VO
 
         private string _rowid;
         private string _operation;
+        private string _itempricedesc;
         private int _itemid;
         private string _itemname;
         private decimal _itemprice;
@@ -40,6 +41,15 @@ namespace Zeta.WisdCar.Model.VO
         {
             set { _operation = value; }
             get { return _operation; }
+        }
+        /// <summary>
+        /// 单价
+        /// Desc
+        /// </summary>
+        public string ItemPriceDesc
+        {
+            set { _itempricedesc = value; }
+            get { return _itempricedesc; }
         }
         /// <summary>
         /// 消费项目ID
