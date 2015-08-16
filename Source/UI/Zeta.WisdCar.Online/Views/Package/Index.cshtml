@@ -137,7 +137,13 @@
                 });
 
                 $("#tblPackage tbody").on("click", "tr", function () {
-                    $(this).toggleClass("selected");
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        PackageTable.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
                 });
 
                 $("#tblPackage_filter input").addClass("form-control input-medium input-inline");
