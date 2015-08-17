@@ -1255,6 +1255,33 @@ var App = function () {
             }
         },
 
+        showMsgbox: function (content, title, fn) {
+            var d = dialog({
+                title: title == undefined ? "提示" : title,
+                content: content == undefined ? "" : content,
+                ok: function () {
+                    if (fn != undefined) fn();
+                }
+            });
+            d.showModal();
+        },
+
+        confirm: function (content, fn, title, okVal, cancelVal) {
+            var d = dialog({
+                title: title == undefined ? "提示" : title,
+                content: content == undefined ? "" : content,
+                okValue: okVal == undefined ? "确定" : okVal,
+                ok: function () {
+                    fn(true);
+                },
+                cancelValue: cancelVal == undefined ? "取消" : cancelVal,
+                cancel: function () {
+                    fn(false);
+                }
+            });
+            d.showModal();
+        },
+
         // check IE8 mode
         isIE8: function () {
             return isIE8;

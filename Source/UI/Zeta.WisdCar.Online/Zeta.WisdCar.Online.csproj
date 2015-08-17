@@ -183,6 +183,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatatablesResult.cs" />
+    <Compile Include="Models\ReturnedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -265,6 +267,11 @@
     <Content Include="assets\img\sidebar-toggler.png" />
     <Content Include="assets\img\syncfusion-icons-white.png" />
     <Content Include="assets\img\syncfusion-icons.png" />
+    <Content Include="assets\plugins\artDialog\css\ui-dialog.css" />
+    <Content Include="assets\plugins\artDialog\dist\dialog-min.js" />
+    <Content Include="assets\plugins\artDialog\dist\dialog-plus-min.js" />
+    <Content Include="assets\plugins\artDialog\dist\dialog-plus.js" />
+    <Content Include="assets\plugins\artDialog\dist\dialog.js" />
     <Content Include="assets\plugins\backstretch\jquery.backstretch.min.js" />
     <Content Include="assets\plugins\bootbox\bootbox.min.js" />
     <Content Include="assets\plugins\bootstrap-colorpicker\css\colorpicker.css" />
@@ -888,7 +895,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\css\pages\" />
     <Folder Include="assets\scripts\custom\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

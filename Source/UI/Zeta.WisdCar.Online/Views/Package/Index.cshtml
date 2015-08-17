@@ -83,7 +83,7 @@
             }
 
             var initPackageTable = function () {
-                var PackageTable = $("#tblPackage").DataTable({
+                var packageTable = $("#tblPackage").DataTable({
                     "processing": false,
                     "serverSide": false,
                     "ajax": {
@@ -141,7 +141,7 @@
                         $(this).removeClass('selected');
                     }
                     else {
-                        PackageTable.$('tr.selected').removeClass('selected');
+                        packageTable.$('tr.selected').removeClass('selected');
                         $(this).addClass('selected');
                     }
                 });

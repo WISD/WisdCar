@@ -5,7 +5,6 @@ namespace Zeta.WisdCar.Online
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/core/js").Include(
@@ -18,7 +17,7 @@ namespace Zeta.WisdCar.Online
                         "~/assets/plugins/jquery.blockui.min.js",
                         "~/assets/plugins/jquery.cokie.min.js",
                         "~/assets/plugins/uniform/jquery.uniform.min.js",
-                        "~/assets/plugins/bootbox/bootbox.min.js",
+                        "~/assets/plugins/artDialog/dist/dialog-min.js",
                         "~/assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js",
                         "~/assets/plugins/bootstrap-modal/js/bootstrap-modal.js"));
 
@@ -26,6 +25,7 @@ namespace Zeta.WisdCar.Online
                 "~/assets/plugins/font-awesome/css/font-awesome.min.css",
                 "~/assets/plugins/bootstrap/css/bootstrap.min.css",
                 "~/assets/plugins/uniform/css/uniform.default.css",
+                "~/assets/plugins/artDialog/css/ui-dialog.css",
                 "~/assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css",
                 "~/assets/plugins/bootstrap-modal/css/bootstrap-modal.css"));
 
