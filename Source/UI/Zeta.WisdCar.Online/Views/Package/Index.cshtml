@@ -40,7 +40,7 @@
                 </div>
                 <div class="tools">
                 </div>
-                <a href="#" class="btn btn-xs red" style="float:right; ">
+                <a href="#" class="btn btn-xs blue" style="float:right; ">
                     <i class="fa fa-plus"></i> 新增
                 </a>
             </div>
@@ -73,14 +73,10 @@
 @section scripts{
     <script src="@Url.Content("~/assets/plugins/datatables/js/jquery.dataTables.min.js")" type="text/javascript"></script>
     <script>
-        $(function () {
-            Package.Init();
-        });
-
         var Package = function () {
             var onPageLoad = function () {
                 initPackageTable();
-            }
+            };
 
             var initPackageTable = function () {
                 var packageTable = $("#tblPackage").DataTable({
@@ -150,10 +146,10 @@
                 $("#tblPackage_length select").addClass("form-control input-xsmall input-inline");
             };
 
-            var openDetailModal = function (id) {
-                var $modal = $('#divPackageItems');
-                $('body').modalmanager('loading');
-                $modal.load('@Url.Action("DetailItems", "Package")', '', function () {
+            var openDetailModal = function (id, pkgName) {
+                var $modal = $("#divPackageItems");
+                $("body").modalmanager("loading");
+                $modal.load("@Url.Action("DetailItems", "Package")?id=" + id + "&pkgName=" + pkgName, '', function () {
                     $modal.modal();
                 });
             };
@@ -174,10 +170,14 @@
                 Del: function (id) {
                     alert("del" + id);
                 },
-                Get: function (id) {
-                    openDetailModal(id);
+                Detail: function (id, pkgName) {
+                    openDetailModal(id, pkgName);
                 }
             };
         }();
+
+        $(function () {
+            Package.Init();
+        });
     </script>
 }

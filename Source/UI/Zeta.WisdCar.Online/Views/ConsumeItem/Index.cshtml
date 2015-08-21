@@ -40,7 +40,7 @@
                 </div>
                 <div class="tools">
                 </div>
-                <a href="#" class="btn btn-xs red" style="float:right; ">
+                <a href="#" class="btn btn-xs blue" style="float:right; ">
                     <i class="fa fa-plus"></i> 新增
                 </a>
             </div>
@@ -67,14 +67,10 @@
 @section scripts{
     <script src="@Url.Content("~/assets/plugins/datatables/js/jquery.dataTables.min.js")" type="text/javascript"></script>
     <script>
-        $(function () {
-            ConsumeItem.Init();
-        });
-
         var ConsumeItem = function () {
             var onPageLoad = function () {
                 initConsumeItemTable();
-            }
+            };
 
             var initConsumeItemTable = function () {
                 var consumeItemTable = $("#tblConsumeItem").DataTable({
@@ -126,7 +122,13 @@
                 });
 
                 $("#tblConsumeItem tbody").on("click", "tr", function () {
-                    $(this).toggleClass("selected");
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        consumeItemTable.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
                 });
 
                 $("#tblConsumeItem_filter input").addClass("form-control input-medium input-inline");
@@ -151,5 +153,9 @@
                 }
             };
         }();
+
+        $(function () {
+            ConsumeItem.Init();
+        });
     </script>
 }

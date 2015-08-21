@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Zeta.WisdCar.Business;
+using Zeta.WisdCar.Infrastructure.Helper;
 using Zeta.WisdCar.Infrastructure.Log;
 using Zeta.WisdCar.Model.VO;
 
@@ -31,8 +32,8 @@ namespace Zeta.WisdCar.Online.Controllers
                         + item.DT_RowId + ")'><i class='fa fa-pencil'></i> 编辑</a>  | <a href='javascript:void(0)' onclick='Package.Del("
                         + item.DT_RowId + ")'><i class='fa fa-times'></i> 删除</a>";
                     item.TotalPriceDesc = item.TotalPrice.ToString() + " 元";
-                    item.DetailOpt = "<a href='javascript:void(0)' onclick='Package.Get("
-                        + item.DT_RowId + ")'><i class='fa fa-search'></i> 查看</a>";
+                    item.DetailOpt = "<a href='javascript:void(0)' onclick=\"Package.Detail("
+                        + item.DT_RowId + ", '" + PageValidateHelper.FilterParams(item.PackageName) + "')\"><i class='fa fa-search'></i> 查看</a>";
                 }
             }
             catch (Exception ex)
@@ -45,7 +46,44 @@ namespace Zeta.WisdCar.Online.Controllers
 
         public ActionResult DetailItems()
         {
+            try
+            {
+                string pkgName = NullHelper.Convert<string>(Request["pkgName"], "");
+                int pkgID = NullHelper.Convert<int>(Request["id"], 0);
+                ViewBag.PkgName = pkgName;
+                ViewBag.PkgID = pkgID;
+            }
+            catch (Exception ex)
+            {
+                LogHandler.Error(ex.Message.ToString());
+            }
             return View();
         }
+
+        public JsonResult GetItemsByPkgId()
+        {
+            //List<ConsumeItemVO> result = new List<ConsumeItemVO>();
+
+            //try
+            //{
+            //    BizMocker mocker = new BizMocker();
+            //    result = mocker.GetAllConsumeItems();
+            //    foreach (var item in result)
+            //    {
+            //        item.DT_RowId = item.ItemID.ToString();
+            //        item.Operation = "<a href='javascript:void(0)' onclick='ConsumeItem.Edit("
+            //            + item.DT_RowId + ")'><i class='fa fa-pencil'></i> 编辑</a>  | <a href='javascript:void(0)' onclick='ConsumeItem.Del("
+            //            + item.DT_RowId + ")'><i class='fa fa-times'></i> 删除</a>";
+            //        item.ItemPriceDesc = item.ItemPrice.ToString() + " 元";
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    LogHandler.Error(ex.Message.ToString());
+            //}
+
+            //return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 	}
 }

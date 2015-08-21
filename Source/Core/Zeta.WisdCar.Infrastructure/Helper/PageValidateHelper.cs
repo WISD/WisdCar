@@ -284,6 +284,16 @@ namespace Zeta.WisdCar.Infrastructure.Helper
             sqlText = sqlText.Replace(" ", "");//去除空格
             return sqlText;
         }
+
+        public static string FilterParams(string s)
+        {
+            string rst = string.Empty;
+            if (!string.IsNullOrWhiteSpace(s))
+            {
+                rst = s.Replace("'", "").Replace("\"", "");
+            }
+             return rst;
+        }
 		#endregion
 
         #region 是否由特定字符组成

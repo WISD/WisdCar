@@ -336,7 +336,13 @@ namespace Zeta.WisdCar.Business
 
         public PackageVO GetPackageByID(int id)
         {
-            throw new NotImplementedException();
+            PackageVO package = new PackageVO()
+            {
+                PackageID = 1,
+                PackageName = "车身美容套餐",
+                TotalPrice = 345
+            };
+            return package;
         }
 
         public void AddPackage(PackageVO package)

@@ -65,14 +65,10 @@
 @section scripts{
     <script src="@Url.Content("~/assets/plugins/datatables/js/jquery.dataTables.min.js")" type="text/javascript"></script>
     <script>
-        $(function () {
-            ClubCardType.Init();
-        });
-
         var ClubCardType = function () {
             var onPageLoad = function () {
                 initCardTypeTable();
-            }
+            };
 
             var initCardTypeTable = function () {
                 var cardTypeTable = $("#tblClubCardType").DataTable({
@@ -125,7 +121,13 @@
                 });
 
                 $("#tblClubCardType tbody").on("click", "tr", function () {
-                    $(this).toggleClass("selected");
+                    if ($(this).hasClass('selected')) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        cardTypeTable.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
                 });
 
                 $("#tblClubCardType_filter input").addClass("form-control input-medium input-inline");
@@ -150,5 +152,9 @@
                 }
             };
         }();
+
+        $(function () {
+            ClubCardType.Init();
+        });
     </script>
 }
