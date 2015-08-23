@@ -60,8 +60,8 @@ namespace Zeta.WisdCar.Online.Controllers
             return View();
         }
 
-        public JsonResult GetItemsByPkgId()
-        {
+        //public JsonResult GetItemsByPkgId()
+        //{
             //List<ConsumeItemVO> result = new List<ConsumeItemVO>();
 
             //try
@@ -83,7 +83,7 @@ namespace Zeta.WisdCar.Online.Controllers
             //}
 
             //return Json(result, JsonRequestBehavior.AllowGet);
-        }
+        //}
 
 	}
 }

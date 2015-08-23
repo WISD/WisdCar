@@ -58,5 +58,11 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
             return customerVO;
         }
+
+
+        public bool CheckPhoneNo(string phoneNo)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
