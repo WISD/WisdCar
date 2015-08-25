@@ -71,6 +71,7 @@
     <Compile Include="MarktingPlanModule\Impl\ClubCardTypeMgm.cs" />
     <Compile Include="MarktingPlanModule\Impl\ConsumeItemMgm.cs" />
     <Compile Include="MarktingPlanModule\Impl\PackageMgm.cs" />
+    <Compile Include="MarktingPlanModule\Impl\PkgItemsMgm.cs" />
     <Compile Include="MarktingPlanModule\IPackageMgm.cs" />
     <Compile Include="MarktingPlanModule\IPkgItemsMgm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
