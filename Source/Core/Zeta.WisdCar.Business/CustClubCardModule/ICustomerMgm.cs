@@ -25,6 +25,15 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         CustomerVO GetCustomerByID(int custID);
 
         /// <summary>
+        /// 检查手机号码是否存在
+        /// true：存在
+        /// false：不存在
+        /// </summary>
+        /// <param name="phoneNo"></param>
+        /// <returns></returns>
+        bool CheckPhoneNo(string phoneNo);
+
+        /// <summary>
         /// 新增客户
         /// </summary>
         /// <param name="cust"></param>
