@@ -1008,6 +1008,9 @@
   <ItemGroup>
     <Content Include="Views\Package\DetailItems.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\WisdCar.pubxml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

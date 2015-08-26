@@ -29,7 +29,6 @@
     </div>
 </div>
 <!-- END PAGE HEADER-->
-
 <!-- BEGIN PAGE CONTENT-->
 <div class="row">
     <div class="col-md-12">
@@ -46,12 +45,53 @@
                 </a>
             </div>
             <div class="portlet-body">
-                <table id="tblPackage" class="display" cellspacing="0" width="100%">
+                <div class="portlet box" style="margin-bottom:10px; border:1px solid #bde9f1;">
+                    <div class="portlet-body">
+                        <form id="frmQy" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyName">姓名：</label>
+                                <div class="col-md-2">
+                                    <input type="text" id="txtQyName" name="Name" class="form-control" placeholder="">
+                                </div>
+                                <label class="col-md-2 control-label" for="txtQyICNo">身份证号：</label>
+                                <div class="col-md-2">
+                                    <input type="text" id="txtQyICNo" name="ICNo" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyMobileNo">手机号：</label>
+                                <div class="col-md-2">
+                                    <input type="text" id="txtQyMobileNo" name="MobileNo" class="form-control" placeholder="">
+                                </div>
+                                <label class="col-md-2 control-label" for="ddlCardFlag">是否开卡：</label>
+                                <div class="col-md-2">
+                                    <select id="ddlCardFlag" name="CardFlag" class="form-control input-md">
+                                        <option value="-1"> -请选择- </option>
+                                        <option value="1">已开卡</option>
+                                        <option value="0">未开卡</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2">
+                                    <a id="btnQy" href="javacript:void(0);" class="btn blue">
+                                        <i class="fa fa-search"></i> 查询
+                                    </a>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <table id="tblCustomer" class="display" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>套餐名称</th>
-                            <th>套餐价格</th>
-                            <th>消费项目</th>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>是否开卡</th>
+                            <th>会员卡</th>
+                            <th>汽车</th>
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -62,9 +102,6 @@
     </div>
 </div>
 <!-- END PAGE CONTENT-->
-<!-- Ajax Modal-->
-<div id="divPackageItems" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
-</div>
 
 <!-- END PAGE CONTENT-->
 @section styles{
@@ -76,37 +113,36 @@
     <script>
         var Customer = function () {
             var onPageLoad = function () {
-                initPackageTable();
+                initCustomerTable();
             };
 
-            var initPackageTable = function () {
-                var packageTable = $("#tblPackage").DataTable({
-                    "processing": false,
-                    "serverSide": false,
+            var initCustomerTable = function () {
+                var customerTable = $("#tblCustomer").DataTable({
+                    "processing": true,
+                    "serverSide": true,
                     "ajax": {
                         "type": "post",
-                        "url": "@Url.Action("GetAllPackages", "Package")",
-                        "dataSrc": "",
+                        "url": "@Url.Action("GetCustomers", "Customer")",
+                        "dataSrc": "data",
+                        "data": function (d) {
+                            var formData = $("#frmQy").serializeArray();
+                            formData.forEach(function (e) {
+                                d[e.name] = e.value;
+                            });
+                        },
                         "cache": false
                     },
                     "columns": [
-                        { "data": "PackageName" },
-                        { "data": "TotalPriceDesc" },
-                        { "data": "DetailOpt" },
+                        { "data": "Name" },
+                        { "data": "MobileNO" },
+                        { "data": "CardFlagDesc" },
+                        { "data": "ClubCardDesc" },
+                        { "data": "CarDesc" },
                         { "data": "Operation" }
                     ],
-                    "columnDefs": [
-                        {
-                            "targets": [2],
-                            "orderable": false
-                        },
-                        {
-                            "targets": [3],
-                            "orderable": false
-                        }
-                    ],
-                    "order": [[0, "asc"]],
-                    "deferRender": true,
+                    "initComplete": function (setting, json) {
+                        $("#tblCustomer_filter").html("");
+                    },
                     "scrollX": true,
                     "paging": true,
                     "ordering": true,
@@ -134,32 +170,24 @@
                     }
                 });
 
-                $("#tblPackage tbody").on("click", "tr", function () {
+                $("#tblCustomer tbody").on("click", "tr", function () {
                     if ($(this).hasClass('selected')) {
                         $(this).removeClass('selected');
                     }
                     else {
-                        packageTable.$('tr.selected').removeClass('selected');
+                        customerTable.$('tr.selected').removeClass('selected');
                         $(this).addClass('selected');
                     }
                 });
 
-                $("#tblPackage_filter input").addClass("form-control input-medium input-inline");
-                $("#tblPackage_length select").addClass("form-control input-xsmall input-inline");
-            };
-
-            var openDetailModal = function (id, pkgName) {
-                var $modal = $("#divPackageItems");
-                $("body").modalmanager("loading");
-                $modal.load("@Url.Action("DetailItems", "Package")?id=" + id + "&pkgName=" + pkgName, '', function () {
-                    $modal.modal();
-                });
+                $("#tblCustomer_filter input").addClass("form-control input-medium input-inline");
+                $("#tblCustomer_length select").addClass("form-control input-xsmall input-inline");
             };
 
             return {
                 Init: function () {
-                    $("#sidebar_menu_sell_setting").addClass("active");
-                    $("#sidebar_menu_package").addClass("active");
+                    $("#sidebar_menu_cust_card").addClass("active");
+                    $("#sidebar_menu_cust").addClass("active");
                     App.blockUI({ boxed: true });
                     onPageLoad();
                     window.setTimeout(function () {
@@ -171,9 +199,6 @@
                 },
                 Del: function (id) {
                     alert("del" + id);
-                },
-                Detail: function (id, pkgName) {
-                    openDetailModal(id, pkgName);
                 }
             };
         }();

@@ -13,6 +13,10 @@ namespace Zeta.WisdCar.Model.VO
 
         private string _rowid;
         private string _operation;
+        private string _cardflagdesc;
+        private string _clubcarddesc;
+        private string _cardesc;
+
         private int _customerid;
         private string _name;
         private string _mobileno;
@@ -46,6 +50,27 @@ namespace Zeta.WisdCar.Model.VO
         {
             set { _operation = value; }
             get { return _operation; }
+        }
+        /// <summary>
+        /// 显示是否开卡
+        /// </summary>
+        public string CardFlagDesc
+        {
+            set { _cardflagdesc = value; }
+            get { return _cardflagdesc; }
+        }
+        /// <summary>
+        /// 显示会员卡信息
+        /// </summary>
+        public string ClubCardDesc
+        {
+            set { _clubcarddesc = value; }
+            get { return _clubcarddesc; }
+        }
+        public string CarDesc
+        {
+            set { _cardesc = value; }
+            get { return _cardesc; }
         }
         /// <summary>
         /// 客户ID
@@ -113,6 +138,8 @@ namespace Zeta.WisdCar.Model.VO
         }
         /// <summary>
         /// 开卡标志
+        /// 0：未开卡
+        /// 1：已开卡
         /// </summary>
         public int CardFlag
         {

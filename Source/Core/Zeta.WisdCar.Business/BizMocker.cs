@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Business.CustClubCardModule;
 using Zeta.WisdCar.Business.MarktingPlanModule;
 using Zeta.WisdCar.Business.SysMgmModule;
 using Zeta.WisdCar.Infrastructure.Log;
+using Zeta.WisdCar.Model.Entity;
 using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business
 {
-    public class BizMocker : IPermissionMgm, IClubCardTypeMgm, IConsumeItemMgm, IPackageMgm, IPkgItemsMgm
+    public class BizMocker : IPermissionMgm, IClubCardTypeMgm, IConsumeItemMgm, IPackageMgm, IPkgItemsMgm, ICustomerMgm
     {
         #region Log
         public static void MockLog4Net()
@@ -435,5 +437,83 @@ namespace Zeta.WisdCar.Business
             return result;
         }
         #endregion
+
+        #region Customer
+
+        public List<CustomerVO> GetCustomers(CustomerQueryEntity filter)
+        {
+            List<CustomerVO> result = new List<CustomerVO>();
+
+            #region Mock
+            CustomerVO item1 = new CustomerVO(){
+                CardFlag = 1,
+                CustomerID = 1,
+                MobileNO = "15852659874",
+                Name = "田志良"
+            };
+            CustomerVO item2 = new CustomerVO()
+            {
+                CardFlag = 0,
+                CustomerID = 2,
+                MobileNO = "12687458596",
+                Name = "郭艳艳"
+            };
+            CustomerVO item3 = new CustomerVO()
+            {
+                CardFlag = 1,
+                CustomerID = 3,
+                MobileNO = "16358748965",
+                Name = "程彩琪"
+            };
+            CustomerVO item4 = new CustomerVO()
+            {
+                CardFlag = 0,
+                CustomerID = 4,
+                MobileNO = "15234951965",
+                Name = "任东东"
+            };
+            CustomerVO item5 = new CustomerVO()
+            {
+                CardFlag = 1,
+                CustomerID = 5,
+                MobileNO = "12365847596",
+                Name = "刘勇"
+            };
+            result.Add(item1);
+            result.Add(item2);
+            result.Add(item3);
+            result.Add(item4);
+            result.Add(item5);
+            #endregion
+
+            return result;
+        }
+
+        public CustomerVO GetCustomerByID(int custID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckPhoneNo(string phoneNo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddCustomer(CustomerVO cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditCustomer(CustomerVO cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DelCustomer(int id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
     }
 }
