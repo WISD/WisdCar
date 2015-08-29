@@ -21,9 +21,9 @@ namespace Zeta.WisdCar.Repository.Impl
             {
                 strSql1.AppendFormat(" Name like '%{0}%' ", filter.Name);
             }
-            if (!string.IsNullOrEmpty(filter.MobileNO.Trim()))
+            if (!string.IsNullOrEmpty(filter.MobileNo.Trim()))
             {
-                strSql1.AppendFormat(" And MobileNO like '%{0}%' ", filter.MobileNO);
+                strSql1.AppendFormat(" And MobileNO like '%{0}%' ", filter.MobileNo);
             }
             if (!string.IsNullOrEmpty(filter.ICNo.Trim()))
             {

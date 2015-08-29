@@ -155,3 +155,4 @@ $RECYCLE.BIN/
 # Mac desktop service store files
 .DS_Store
 /UI/Zeta.WisdCar.Online/log/20150729/log.txt
+/Source/UI/Zeta.WisdCar.Online/Properties/PublishProfiles/WisdCar.pubxml

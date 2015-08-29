@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Business.CustClubCardModule;
 using Zeta.WisdCar.Business.MarktingPlanModule;
 using Zeta.WisdCar.Business.SysMgmModule;
 using Zeta.WisdCar.Infrastructure.Log;
+using Zeta.WisdCar.Model.Entity;
 using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business
 {
-    public class BizMocker : IPermissionMgm, IClubCardTypeMgm, IConsumeItemMgm, IPackageMgm
+    public class BizMocker : IPermissionMgm, IClubCardTypeMgm, IConsumeItemMgm, IPackageMgm, IPkgItemsMgm, ICustomerMgm
     {
+        #region Log
         public static void MockLog4Net()
         {
             new Task(() =>
@@ -24,7 +27,9 @@ namespace Zeta.WisdCar.Business
                 }
             }).Start();
         }
-        
+        #endregion
+
+        #region Permission
         /// <summary>
         /// 获取当前登录的用户帐号
         /// </summary>
@@ -33,7 +38,9 @@ namespace Zeta.WisdCar.Business
         {
             return "zltian";
         }
+        #endregion
 
+        #region ClubCardType
         public List<ClubCardTypeVO> GetAllCardType()
         {
             List<ClubCardTypeVO> result = new List<ClubCardTypeVO>();
@@ -171,13 +178,16 @@ namespace Zeta.WisdCar.Business
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region ConsumeItems
         public List<ConsumeItemVO> GetAllConsumeItems()
         {
             List<ConsumeItemVO> result = new List<ConsumeItemVO>();
 
             #region Mock
-            var item1 = new ConsumeItemVO() {
+            var item1 = new ConsumeItemVO()
+            {
                 ItemName = "整车外部彻底清洁",
                 ItemPrice = 55M
             };
@@ -285,15 +295,19 @@ namespace Zeta.WisdCar.Business
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region Packages
         public List<PackageVO> GetAllPackages()
         {
             List<PackageVO> result = new List<PackageVO>();
 
             #region Mock
-            PackageVO item1 = new PackageVO() { 
+            PackageVO item1 = new PackageVO()
+            {
                 PackageID = 1,
                 PackageName = "车身美容套餐",
-                TotalPrice = 345               
+                TotalPrice = 345
             };
 
             PackageVO item2 = new PackageVO()
@@ -364,5 +378,142 @@ namespace Zeta.WisdCar.Business
         {
             throw new NotImplementedException();
         }
+        #endregion
+
+        #region PackageItems
+        public List<PkgItemsVO> GetItemsByPkgID(int pkgID)
+        {
+            List<PkgItemsVO> result = new List<PkgItemsVO>();
+
+            #region Mock
+            PkgItemsVO item1 = new PkgItemsVO() { 
+                PackageItemID = 1,
+                ConsumeCount = 12,
+                ItemName = "整车外部彻底清洁"
+            };
+
+            PkgItemsVO item2 = new PkgItemsVO() { 
+                PackageItemID = 2,
+                ConsumeCount = 56,
+                ItemName = "整车的除锈、防锈、防腐蚀处理"
+            };
+
+            PkgItemsVO item3 = new PkgItemsVO()
+            {
+                PackageItemID = 3,
+                ConsumeCount = 89,
+                ItemName = "玻璃彻底保养护理"
+            };
+
+            PkgItemsVO item4 = new PkgItemsVO()
+            {
+                PackageItemID = 4,
+                ConsumeCount = 45,
+                ItemName = "发动机系统的美容护理"
+            };
+
+            PkgItemsVO item5 = new PkgItemsVO()
+            {
+                PackageItemID = 5,
+                ConsumeCount = 23,
+                ItemName = "漆面美容护理"
+            };
+
+            PkgItemsVO item6 = new PkgItemsVO()
+            {
+                PackageItemID = 6,
+                ConsumeCount = 85,
+                ItemName = "保险杠、车裙、挡泥板、车灯、底盘等保养护理"
+            };
+
+            result.Add(item1);
+            result.Add(item2);
+            result.Add(item3);
+            result.Add(item4);
+            result.Add(item5);
+            result.Add(item6);
+            #endregion
+
+            return result;
+        }
+        #endregion
+
+        #region Customer
+
+        public List<CustomerVO> GetCustomers(CustomerQueryEntity filter)
+        {
+            List<CustomerVO> result = new List<CustomerVO>();
+
+            #region Mock
+            CustomerVO item1 = new CustomerVO(){
+                CardFlag = 1,
+                CustomerID = 1,
+                MobileNO = "15852659874",
+                Name = "田志良"
+            };
+            CustomerVO item2 = new CustomerVO()
+            {
+                CardFlag = 0,
+                CustomerID = 2,
+                MobileNO = "12687458596",
+                Name = "郭艳艳"
+            };
+            CustomerVO item3 = new CustomerVO()
+            {
+                CardFlag = 1,
+                CustomerID = 3,
+                MobileNO = "16358748965",
+                Name = "程彩琪"
+            };
+            CustomerVO item4 = new CustomerVO()
+            {
+                CardFlag = 0,
+                CustomerID = 4,
+                MobileNO = "15234951965",
+                Name = "任东东"
+            };
+            CustomerVO item5 = new CustomerVO()
+            {
+                CardFlag = 1,
+                CustomerID = 5,
+                MobileNO = "12365847596",
+                Name = "刘勇"
+            };
+            result.Add(item1);
+            result.Add(item2);
+            result.Add(item3);
+            result.Add(item4);
+            result.Add(item5);
+            #endregion
+
+            return result;
+        }
+
+        public CustomerVO GetCustomerByID(int custID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckPhoneNo(string phoneNo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddCustomer(CustomerVO cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditCustomer(CustomerVO cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DelCustomer(int id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
     }
 }

@@ -63,7 +63,7 @@ namespace Zeta.WisdCar.Model.Entity
         /// <summary>
         /// 手机号码
         /// </summary>
-        public string MobileNO
+        public string MobileNo
         {
             set { _mobileno = value; }
             get { return _mobileno; }

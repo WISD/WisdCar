@@ -7,8 +7,13 @@ namespace Zeta.WisdCar.Infrastructure
 {
     public class Constants
     {
-        //更新缓存最大间隔，用于HealthCheck
-        public const int MAX_ROUTE_CACHE_INTERVAL = 1 * 60 * 1000;    //1分钟
+        //Datatables Request Params
+        public const string SORT_IDX = "order[0][column]";
+        public const string SORT_NAME = "columns[{0}][data]";
+        public const string SORT_ORDER = "order[0][dir]";
+        public const string PAGE_START = "start";
+        public const string PAGE_LENGTH = "length";
+        public const string REQ_DRAW = "draw";
 
     }
 }
