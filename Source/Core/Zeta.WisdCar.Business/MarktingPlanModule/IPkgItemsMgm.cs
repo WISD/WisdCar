@@ -14,6 +14,30 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
         /// </summary>
         /// <param name="pkgID"></param>
         /// <returns></returns>
-        List<PkgItemsVO> GetItemsByPkgID(int pkgID);
+        List<PkgItemVO> GetItemsByPkgID(int pkgID);
+
+        /// <summary>
+        /// 删除指定套餐消费项目
+        /// </summary>
+        /// <param name="id"></param>
+        void DelPkgItem(int id);
+
+        /// <summary>
+        /// 新增套餐消费项目
+        /// </summary>
+        /// <param name="pkgItem"></param>
+        void AddPkgItem(PkgItemVO pkgItem);
+
+        /// <summary>
+        /// 批量新增套餐消费项目
+        /// </summary>
+        /// <param name="?"></param>
+        void AddPkgItems(List<PkgItemVO> list);
+
+        /// <summary>
+        /// 修改套餐消费项目
+        /// </summary>
+        /// <param name="pkgItem"></param>
+        void EditPkgItem(PkgItemVO pkgItem);
     }
 }
