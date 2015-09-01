@@ -64,10 +64,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Data.SQLite, Version=1.0.62.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Lib\System.Data.SQLite.DLL</HintPath>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -85,7 +81,6 @@
     <Compile Include="DBUtility\DbHelperOleDb.cs" />
     <Compile Include="DBUtility\DbHelperOra.cs" />
     <Compile Include="DBUtility\DbHelperSQL.cs" />
-    <Compile Include="DBUtility\DbHelperSQLite.cs" />
     <Compile Include="DBUtility\DbHelperSQLP.cs" />
     <Compile Include="DBUtility\DESEncrypt.cs" />
     <Compile Include="DBUtility\OracleHelper.cs" />
