@@ -381,45 +381,45 @@ namespace Zeta.WisdCar.Business
         #endregion
 
         #region PackageItems
-        public List<PkgItemsVO> GetItemsByPkgID(int pkgID)
+        public List<PkgItemVO> GetItemsByPkgID(int pkgID)
         {
-            List<PkgItemsVO> result = new List<PkgItemsVO>();
+            List<PkgItemVO> result = new List<PkgItemVO>();
 
             #region Mock
-            PkgItemsVO item1 = new PkgItemsVO() { 
+            PkgItemVO item1 = new PkgItemVO() { 
                 PackageItemID = 1,
                 ConsumeCount = 12,
                 ItemName = "整车外部彻底清洁"
             };
 
-            PkgItemsVO item2 = new PkgItemsVO() { 
+            PkgItemVO item2 = new PkgItemVO() { 
                 PackageItemID = 2,
                 ConsumeCount = 56,
                 ItemName = "整车的除锈、防锈、防腐蚀处理"
             };
 
-            PkgItemsVO item3 = new PkgItemsVO()
+            PkgItemVO item3 = new PkgItemVO()
             {
                 PackageItemID = 3,
                 ConsumeCount = 89,
                 ItemName = "玻璃彻底保养护理"
             };
 
-            PkgItemsVO item4 = new PkgItemsVO()
+            PkgItemVO item4 = new PkgItemVO()
             {
                 PackageItemID = 4,
                 ConsumeCount = 45,
                 ItemName = "发动机系统的美容护理"
             };
 
-            PkgItemsVO item5 = new PkgItemsVO()
+            PkgItemVO item5 = new PkgItemVO()
             {
                 PackageItemID = 5,
                 ConsumeCount = 23,
                 ItemName = "漆面美容护理"
             };
 
-            PkgItemsVO item6 = new PkgItemsVO()
+            PkgItemVO item6 = new PkgItemVO()
             {
                 PackageItemID = 6,
                 ConsumeCount = 85,
@@ -435,6 +435,27 @@ namespace Zeta.WisdCar.Business
             #endregion
 
             return result;
+        }
+
+
+        public void DelPkgItem(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddPkgItem(PkgItemVO pkgItem)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddPkgItems(List<PkgItemVO> list)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EditPkgItem(PkgItemVO pkgItem)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

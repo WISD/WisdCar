@@ -8,5 +8,14 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 {
     public class ClubCardMgm : IClubCardMgm
     {
+        List<Model.VO.ClubCardVO> IClubCardMgm.GetClubCards(Model.Entity.ClubCardQueryEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        Model.VO.ClubCardVO IClubCardMgm.GetClubCardByID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

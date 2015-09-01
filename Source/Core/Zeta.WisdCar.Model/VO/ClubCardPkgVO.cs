@@ -6,18 +6,22 @@ using System.Threading.Tasks;
 
 namespace Zeta.WisdCar.Model.VO
 {
-    public class PkgItemsVO
+    public class ClubCardPkgVO
     {
+        #region Model
         private string _rowid;
-        private string _operation;
-        private string _itemname;
-        private decimal _itemprice;
+        private int _clubcardpackageid;
         private string _packagename;
-        private decimal _totalprice;
-        private int _packageitemid;
-        private int _consumecount;
+        private decimal _originalamount;
+        private decimal _actualamount;
+        private decimal _discountrate;
+        private string _discountinfo;
+        private int _packagestatus;
+        private string _salesman;
+        private DateTime _salestime;
+        private string _salestore;
         private int _packageid;
-        private int _itemid;
+        private int _clubcardid;
         private int _logicalstatus = 1;
         private string _creatorid;
         private DateTime _createddate;
@@ -26,7 +30,6 @@ namespace Zeta.WisdCar.Model.VO
         private string _reserved1;
         private string _reserved2;
         private string _reserved3;
-
 
         /// <summary>
         /// Datatables Row ID
@@ -37,28 +40,12 @@ namespace Zeta.WisdCar.Model.VO
             get { return _rowid; }
         }
         /// <summary>
-        /// 操作
+        /// 会员卡套餐ID
         /// </summary>
-        public string Operation
+        public int ClubCardPackageID
         {
-            set { _operation = value; }
-            get { return _operation; }
-        }
-        /// <summary>
-        /// 项目名称
-        /// </summary>
-        public string ItemName
-        {
-            set { _itemname = value; }
-            get { return _itemname; }
-        }
-        /// <summary>
-        /// 单价
-        /// </summary>
-        public decimal ItemPrice
-        {
-            set { _itemprice = value; }
-            get { return _itemprice; }
+            set { _clubcardpackageid = value; }
+            get { return _clubcardpackageid; }
         }
         /// <summary>
         /// 套餐名称
@@ -69,28 +56,68 @@ namespace Zeta.WisdCar.Model.VO
             get { return _packagename; }
         }
         /// <summary>
-        /// 套餐总价
+        /// 应收金额
         /// </summary>
-        public decimal TotalPrice
+        public decimal OriginalAmount
         {
-            set { _totalprice = value; }
-            get { return _totalprice; }
+            set { _originalamount = value; }
+            get { return _originalamount; }
         }
         /// <summary>
-        /// 套餐项目表ID
+        /// 实收金额
         /// </summary>
-        public int PackageItemID
+        public decimal ActualAmount
         {
-            set { _packageitemid = value; }
-            get { return _packageitemid; }
+            set { _actualamount = value; }
+            get { return _actualamount; }
         }
         /// <summary>
-        /// 消费次数
+        /// 折扣率
         /// </summary>
-        public int ConsumeCount
+        public decimal DiscountRate
         {
-            set { _consumecount = value; }
-            get { return _consumecount; }
+            set { _discountrate = value; }
+            get { return _discountrate; }
+        }
+        /// <summary>
+        /// 折扣信息
+        /// </summary>
+        public string DiscountInfo
+        {
+            set { _discountinfo = value; }
+            get { return _discountinfo; }
+        }
+        /// <summary>
+        /// 套餐状态
+        /// </summary>
+        public int PackageStatus
+        {
+            set { _packagestatus = value; }
+            get { return _packagestatus; }
+        }
+        /// <summary>
+        /// 销售人员
+        /// </summary>
+        public string Salesman
+        {
+            set { _salesman = value; }
+            get { return _salesman; }
+        }
+        /// <summary>
+        /// 销售时间
+        /// </summary>
+        public DateTime SalesTime
+        {
+            set { _salestime = value; }
+            get { return _salestime; }
+        }
+        /// <summary>
+        /// 销售门店
+        /// </summary>
+        public string SaleStore
+        {
+            set { _salestore = value; }
+            get { return _salestore; }
         }
         /// <summary>
         /// 消费套餐表ID
@@ -101,12 +128,12 @@ namespace Zeta.WisdCar.Model.VO
             get { return _packageid; }
         }
         /// <summary>
-        /// 消费项目ID
+        /// 会员卡表ID
         /// </summary>
-        public int ItemID
+        public int ClubCardID
         {
-            set { _itemid = value; }
-            get { return _itemid; }
+            set { _clubcardid = value; }
+            get { return _clubcardid; }
         }
         /// <summary>
         /// 逻辑状态
@@ -172,6 +199,6 @@ namespace Zeta.WisdCar.Model.VO
             set { _reserved3 = value; }
             get { return _reserved3; }
         }
-
+        #endregion Model
     }
 }

@@ -8,5 +8,9 @@ namespace Zeta.WisdCar.Business.BasicDataModule
 {
     public class StoreMgm : IStoreMgm
     {
+        public List<Model.VO.StoreVO> GetAllStores()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

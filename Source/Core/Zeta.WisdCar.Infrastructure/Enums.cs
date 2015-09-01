@@ -14,4 +14,13 @@ namespace Zeta.WisdCar.Infrastructure
         Http = 1
     }
 
+    public enum ClubCardStatus
+    {
+        OpenCard = 0,    //开卡
+        ReportLoss = 1,    //挂失
+        Froze = 2,    //冻结
+        LogOff = 3,    //注销
+        Expire = 4    //过期
+    }
+
 }

@@ -63,7 +63,7 @@ namespace Zeta.WisdCar.Online.Controllers
 
         public JsonResult GetItemsByPkgId()
         {
-            List<PkgItemsVO> result = new List<PkgItemsVO>();
+            List<PkgItemVO> result = new List<PkgItemVO>();
 
             try
             {

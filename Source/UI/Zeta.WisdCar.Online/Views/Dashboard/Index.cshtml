@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
         <h3 class="page-title">
-            Dashboard <small>Dashboard</small>
+            首页 <small>Dashboard</small>
         </h3>
         <ul class="page-breadcrumb breadcrumb">
             <li>
@@ -31,7 +31,16 @@
 </div>
 <!-- END PAGE CONTENT-->
 
+@section styles{
+    <!-- 首页新增的分页css-->
+    <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css" />
+}
 @section scripts{
+    <!-- 首页新增的图表js-->
+<script type="text/javascript" src="assets/scripts/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="assets/scripts/js/highcharts.js"></script>
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/exporting.js"></script>
+<script type="text/javascript" src="http://cdn.hcharts.cn/highcharts/export-excel.js"></script>
 <script>
     var Dashboard = function () {
         var onPageLoad = function () {

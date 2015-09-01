@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\ClubCardQueryEntity.cs" />
     <Compile Include="Entity\CustomerQueryEntity.cs" />
     <Compile Include="PO\CarPO.cs" />
     <Compile Include="PO\ClubCardPO.cs" />
@@ -57,11 +58,15 @@
     <Compile Include="PO\StorePO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VO\CarVO.cs" />
+    <Compile Include="VO\ClubCardPkgDetailVO.cs" />
+    <Compile Include="VO\ClubCardPkgVO.cs" />
     <Compile Include="VO\ClubCardTypeVO.cs" />
+    <Compile Include="VO\ClubCardVO.cs" />
     <Compile Include="VO\ConsumeItemVO.cs" />
     <Compile Include="VO\CustomerVO.cs" />
     <Compile Include="VO\PackageVO.cs" />
-    <Compile Include="VO\PkgItemsVO.cs" />
+    <Compile Include="VO\PkgItemVO.cs" />
+    <Compile Include="VO\StoreVO.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
