@@ -21,21 +21,22 @@ namespace Zeta.WisdCar.Online
                         "~/assets/plugins/bootstrap-modal/js/bootstrap-modalmanager.js",
                         "~/assets/plugins/bootstrap-modal/js/bootstrap-modal.js"));
 
-            bundles.Add(new StyleBundle("~/global/css").Include(
-                    "~/assets/plugins/bootstrap/css/bootstrap.min.css",
-                    "~/assets/plugins/uniform/css/uniform.default.css",
-                    "~/assets/plugins/artDialog/css/ui-dialog.css",
-                    "~/assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css",
-                    "~/assets/plugins/bootstrap-modal/css/bootstrap-modal.css"
-                ).Include("~/assets/plugins/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
+            bundles.Add(new StyleBundle("~/global/css")
+                .Include("~/assets/plugins/bootstrap/css/bootstrap.min.css", new CssRewriteUrlTransform())
+                .Include("~/assets/plugins/uniform/css/uniform.default.css", new CssRewriteUrlTransform())
+                .Include("~/assets/plugins/artDialog/css/ui-dialog.css", new CssRewriteUrlTransform())
+                .Include("~/assets/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css", new CssRewriteUrlTransform())
+                .Include("~/assets/plugins/bootstrap-modal/css/bootstrap-modal.css", new CssRewriteUrlTransform())
+                .Include("~/assets/plugins/font-awesome/css/font-awesome.min.css", new CssRewriteUrlTransform()));
 
-            bundles.Add(new StyleBundle("~/theme/css").Include(
-                "~/assets/css/style-metronic.css",
-                "~/assets/css/style.css",
-                "~/assets/css/style-responsive.css",
-                "~/assets/css/plugins.css",
-                "~/assets/css/themes/default.css",
-                "~/assets/css/custom.css"));
+            bundles.Add(new StyleBundle("~/theme/css")
+                .Include("~/assets/css/style-metronic.css", new CssRewriteUrlTransform())
+                .Include("~/assets/css/style.css", new CssRewriteUrlTransform())
+                .Include("~/assets/css/style-responsive.css", new CssRewriteUrlTransform())
+                .Include("~/assets/css/plugins.css", new CssRewriteUrlTransform())
+                .Include("~/assets/css/themes/default.css", new CssRewriteUrlTransform())
+                .Include("~/assets/css/custom.css", new CssRewriteUrlTransform()));
+
         }
     }
 }
