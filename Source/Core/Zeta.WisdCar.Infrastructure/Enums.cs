@@ -23,4 +23,30 @@ namespace Zeta.WisdCar.Infrastructure
         Expire = 4    //过期
     }
 
+    public enum CardSPackageStatus
+    { 
+        Available = 0,   //套餐可用
+        Unavailable = 1    //套餐不可用
+    }
+
+    public enum PayType
+    {
+        Cash = 0,       //现金
+        Card = 1,       //银行卡
+        WeiXinPay = 2,  //微信支付
+        Alipay = 3      //支付宝
+    }
+
+    public enum RechargeType
+    {
+        ClubCash = 0,       //会员现金充值
+        ClubPackage = 1    //会员套餐充值
+    }
+
+    public enum ConsumeType
+    {
+        ClubCash = 0,       //会员现金消费
+        ClubPackage = 1,    //会员套餐消费
+        NoCard   = 2        //非会员消费
+    }
 }

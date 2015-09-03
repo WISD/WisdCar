@@ -18,6 +18,8 @@ namespace Zeta.WisdCar.Model.VO
         private string _cardstatusdesc;
         private string _icno;
         private string _birthday;
+        private decimal _packagediscount;
+        private decimal _paydiscount;
 
         private int _clubcardid;
         private string _clubcardtypename;
@@ -88,6 +90,23 @@ namespace Zeta.WisdCar.Model.VO
         {
             set { _birthday = value; }
             get { return _birthday; }
+        }
+        /// <summary>
+        /// 套餐折扣
+        /// </summary>
+        public decimal PackageDiscount
+        {
+            get { return _packagediscount; }
+            set { _packagediscount = value; }
+        }
+
+        /// <summary>
+        /// 充值折扣
+        /// </summary>
+        public decimal PayDiscount
+        {
+            get { return _paydiscount; }
+            set { _paydiscount = value; }
         }
 
         /// <summary>

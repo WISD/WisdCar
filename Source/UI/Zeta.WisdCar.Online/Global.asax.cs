@@ -35,7 +35,7 @@ namespace Zeta.WisdCar.Online
 
         private void RegisterAutoMapper()
         {
-            //AutoMapperConfiguration.Configure();
+            AutoMapperConfiguration.Configure();
         }
     }
 }
