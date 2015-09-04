@@ -67,7 +67,7 @@ namespace Zeta.WisdCar.Online.Controllers
 
             try
             {
-                IPkgItemsMgm mocker = new BizMocker();
+                var mocker = new BizMocker();
                 result = mocker.GetItemsByPkgID(1);
                 foreach (var item in result)
                 {

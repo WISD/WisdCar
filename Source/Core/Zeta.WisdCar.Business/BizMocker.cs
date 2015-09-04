@@ -13,7 +13,7 @@ using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business
 {
-    public class BizMocker : IPermissionMgm, IClubCardTypeMgm, IConsumeItemMgm, IPackageMgm, IPkgItemsMgm, ICustomerMgm
+    public class BizMocker
     {
         #region Log
         public static void MockLog4Net()

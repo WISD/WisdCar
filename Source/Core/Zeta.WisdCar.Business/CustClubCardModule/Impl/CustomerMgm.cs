@@ -31,6 +31,11 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             return customerVOList;
         }
 
+        public List<CustomerVO> GetCustomers(string key)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddCustomer(Model.VO.CustomerVO cust)
         {
             CustomerData customerData = new CustomerData();
@@ -59,10 +64,12 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             return customerVO;
         }
 
-
         public bool CheckPhoneNo(string phoneNo)
         {
             throw new NotImplementedException();
         }
+
+
+
     }
 }
