@@ -20,9 +20,9 @@ namespace Zeta.WisdCar.Business
         {
             new Task(() =>
             {
-                while (true)
+                for (int i = 0; i < 10; i++ )
                 {
-                    LogHandler.Error("我错了。。。");
+                    LogHandler.Error("我错了。。。", new Exception("asdfasdfsadf"));
                     Thread.Sleep(1000);
                 }
             }).Start();
