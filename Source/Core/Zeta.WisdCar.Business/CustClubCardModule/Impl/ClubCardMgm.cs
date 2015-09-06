@@ -16,7 +16,6 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 {
     public class ClubCardMgm : IClubCardMgm
     {
-
         public List<Model.VO.ClubCardVO> GetClubCards(Model.Entity.ClubCardQueryEntity entity)
         {
             ClubCardData clubCardData = new ClubCardData();
@@ -32,7 +31,6 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
             return clubCardVOList;
         }
-
         public Model.VO.ClubCardVO GetClubCardByID(int id)
         {
             ClubCardData clubCardData = new ClubCardData();
@@ -42,6 +40,9 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
             return clubCardVO;
         }
+
+
+
 
         public List<Model.VO.ClubCardVO> GetClubCards(string key)
         {

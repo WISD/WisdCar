@@ -54,7 +54,7 @@ namespace Zeta.WisdCar.Online.Controllers
                     CardFlag = cardFlag
                 };
 
-                ICustomerMgm mocker = new BizMocker();
+                var mocker = new BizMocker();
                 var list = mocker.GetCustomers(filter);
                 int recordsTotal = list.Count;
 
