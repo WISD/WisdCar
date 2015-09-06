@@ -21,6 +21,14 @@ namespace Zeta.WisdCar.Repository
         DataSet GetCustomers(CustomerQueryEntity filter);
 
         /// <summary>
+        /// 根据前端输入关键词（姓名或手机号码）查询客户信息
+        /// 模糊查询
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        DataSet GetCustomers(string key);
+
+        /// <summary>
         /// 根据客户ID获取客户信息
         /// </summary>
         /// <returns></returns>
@@ -43,5 +51,12 @@ namespace Zeta.WisdCar.Repository
         /// </summary>
         /// <param name="id"></param>
         void DelCustomer(int id);
+
+        /// <summary>
+        /// 根据条件查询客户记录数
+        /// </summary>
+        /// <param name="strWhere"></param>
+        /// <returns>int</returns>
+        int GetRecordCount(string strWhere);
     }
 }

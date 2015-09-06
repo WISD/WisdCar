@@ -11,6 +11,7 @@ namespace Zeta.WisdCar.Model.PO
 		{}
 		#region Model
 		private int _consumelogid;
+		private string _consumebatchno;
 		private int _clubcardid;
 		private int _clubcardno;
 		private int _custid;
@@ -19,6 +20,7 @@ namespace Zeta.WisdCar.Model.PO
 		private string _consumestore;
 		private string _originalstore;
 		private int _consumetype;
+		private int _paytype;
 		private int _clubcardpackageid;
 		private int _packagedetailid;
 		private string _itemname;
@@ -40,6 +42,14 @@ namespace Zeta.WisdCar.Model.PO
 		{
 			set{ _consumelogid=value;}
 			get{return _consumelogid;}
+		}
+		/// <summary>
+		/// 消费批次号
+		/// </summary>
+		public string ConsumeBatchNo
+		{
+			set{ _consumebatchno=value;}
+			get{return _consumebatchno;}
 		}
 		/// <summary>
 		/// 会员卡ID
@@ -104,6 +114,14 @@ namespace Zeta.WisdCar.Model.PO
 		{
 			set{ _consumetype=value;}
 			get{return _consumetype;}
+		}
+		/// <summary>
+		/// 支付类型
+		/// </summary>
+		public int PayType
+		{
+			set{ _paytype=value;}
+			get{return _paytype;}
 		}
 		/// <summary>
 		/// 会员卡套餐ID

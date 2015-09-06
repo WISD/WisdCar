@@ -46,20 +46,23 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into RechargeLog(");
-			strSql.Append("ClubCardID,ClubCardNo,CustID,CustName,RechargeDate,RechargeStore,OriginalStore,ActualRechargeAmount,RechargeType,ClubCardPackageID,PlatformRechargeAmount,DiscountRate,DiscountInfo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
+			strSql.Append("RechargeSerialNo,ClubCardID,ClubCardNo,CustID,CustName,RechargeDate,SalesMan,RechargeStore,OriginalStore,ActualRechargeAmount,RechargeType,PayType,ClubCardPackageID,PlatformRechargeAmount,DiscountRate,DiscountInfo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
 			strSql.Append(" values (");
-			strSql.Append("@ClubCardID,@ClubCardNo,@CustID,@CustName,@RechargeDate,@RechargeStore,@OriginalStore,@ActualRechargeAmount,@RechargeType,@ClubCardPackageID,@PlatformRechargeAmount,@DiscountRate,@DiscountInfo,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
+			strSql.Append("@RechargeSerialNo,@ClubCardID,@ClubCardNo,@CustID,@CustName,@RechargeDate,@SalesMan,@RechargeStore,@OriginalStore,@ActualRechargeAmount,@RechargeType,@PayType,@ClubCardPackageID,@PlatformRechargeAmount,@DiscountRate,@DiscountInfo,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
+					new SqlParameter("@RechargeSerialNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ClubCardID", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardNo", SqlDbType.Int,4),
 					new SqlParameter("@CustID", SqlDbType.Int,4),
 					new SqlParameter("@CustName", SqlDbType.NVarChar,50),
 					new SqlParameter("@RechargeDate", SqlDbType.DateTime),
+					new SqlParameter("@SalesMan", SqlDbType.NVarChar,50),
 					new SqlParameter("@RechargeStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@OriginalStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@ActualRechargeAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@RechargeType", SqlDbType.Int,4),
+					new SqlParameter("@PayType", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
 					new SqlParameter("@PlatformRechargeAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@DiscountRate", SqlDbType.Decimal,5),
@@ -72,27 +75,30 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100)};
-			parameters[0].Value = model.ClubCardID;
-			parameters[1].Value = model.ClubCardNo;
-			parameters[2].Value = model.CustID;
-			parameters[3].Value = model.CustName;
-			parameters[4].Value = model.RechargeDate;
-			parameters[5].Value = model.RechargeStore;
-			parameters[6].Value = model.OriginalStore;
-			parameters[7].Value = model.ActualRechargeAmount;
-			parameters[8].Value = model.RechargeType;
-			parameters[9].Value = model.ClubCardPackageID;
-			parameters[10].Value = model.PlatformRechargeAmount;
-			parameters[11].Value = model.DiscountRate;
-			parameters[12].Value = model.DiscountInfo;
-			parameters[13].Value = model.LogicalStatus;
-			parameters[14].Value = model.CreatorID;
-			parameters[15].Value = model.CreatedDate;
-			parameters[16].Value = model.LastModifierID;
-			parameters[17].Value = model.LastModifiedDate;
-			parameters[18].Value = model.Reserved1;
-			parameters[19].Value = model.Reserved2;
-			parameters[20].Value = model.Reserved3;
+			parameters[0].Value = model.RechargeSerialNo;
+			parameters[1].Value = model.ClubCardID;
+			parameters[2].Value = model.ClubCardNo;
+			parameters[3].Value = model.CustID;
+			parameters[4].Value = model.CustName;
+			parameters[5].Value = model.RechargeDate;
+			parameters[6].Value = model.SalesMan;
+			parameters[7].Value = model.RechargeStore;
+			parameters[8].Value = model.OriginalStore;
+			parameters[9].Value = model.ActualRechargeAmount;
+			parameters[10].Value = model.RechargeType;
+			parameters[11].Value = model.PayType;
+			parameters[12].Value = model.ClubCardPackageID;
+			parameters[13].Value = model.PlatformRechargeAmount;
+			parameters[14].Value = model.DiscountRate;
+			parameters[15].Value = model.DiscountInfo;
+			parameters[16].Value = model.LogicalStatus;
+			parameters[17].Value = model.CreatorID;
+			parameters[18].Value = model.CreatedDate;
+			parameters[19].Value = model.LastModifierID;
+			parameters[20].Value = model.LastModifiedDate;
+			parameters[21].Value = model.Reserved1;
+			parameters[22].Value = model.Reserved2;
+			parameters[23].Value = model.Reserved3;
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -111,15 +117,18 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update RechargeLog set ");
+			strSql.Append("RechargeSerialNo=@RechargeSerialNo,");
 			strSql.Append("ClubCardID=@ClubCardID,");
 			strSql.Append("ClubCardNo=@ClubCardNo,");
 			strSql.Append("CustID=@CustID,");
 			strSql.Append("CustName=@CustName,");
 			strSql.Append("RechargeDate=@RechargeDate,");
+			strSql.Append("SalesMan=@SalesMan,");
 			strSql.Append("RechargeStore=@RechargeStore,");
 			strSql.Append("OriginalStore=@OriginalStore,");
 			strSql.Append("ActualRechargeAmount=@ActualRechargeAmount,");
 			strSql.Append("RechargeType=@RechargeType,");
+			strSql.Append("PayType=@PayType,");
 			strSql.Append("ClubCardPackageID=@ClubCardPackageID,");
 			strSql.Append("PlatformRechargeAmount=@PlatformRechargeAmount,");
 			strSql.Append("DiscountRate=@DiscountRate,");
@@ -134,15 +143,18 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append("Reserved3=@Reserved3");
 			strSql.Append(" where RechargeLogID=@RechargeLogID");
 			SqlParameter[] parameters = {
+					new SqlParameter("@RechargeSerialNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ClubCardID", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardNo", SqlDbType.Int,4),
 					new SqlParameter("@CustID", SqlDbType.Int,4),
 					new SqlParameter("@CustName", SqlDbType.NVarChar,50),
 					new SqlParameter("@RechargeDate", SqlDbType.DateTime),
+					new SqlParameter("@SalesMan", SqlDbType.NVarChar,50),
 					new SqlParameter("@RechargeStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@OriginalStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@ActualRechargeAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@RechargeType", SqlDbType.Int,4),
+					new SqlParameter("@PayType", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
 					new SqlParameter("@PlatformRechargeAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@DiscountRate", SqlDbType.Decimal,5),
@@ -156,28 +168,31 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100),
 					new SqlParameter("@RechargeLogID", SqlDbType.Int,4)};
-			parameters[0].Value = model.ClubCardID;
-			parameters[1].Value = model.ClubCardNo;
-			parameters[2].Value = model.CustID;
-			parameters[3].Value = model.CustName;
-			parameters[4].Value = model.RechargeDate;
-			parameters[5].Value = model.RechargeStore;
-			parameters[6].Value = model.OriginalStore;
-			parameters[7].Value = model.ActualRechargeAmount;
-			parameters[8].Value = model.RechargeType;
-			parameters[9].Value = model.ClubCardPackageID;
-			parameters[10].Value = model.PlatformRechargeAmount;
-			parameters[11].Value = model.DiscountRate;
-			parameters[12].Value = model.DiscountInfo;
-			parameters[13].Value = model.LogicalStatus;
-			parameters[14].Value = model.CreatorID;
-			parameters[15].Value = model.CreatedDate;
-			parameters[16].Value = model.LastModifierID;
-			parameters[17].Value = model.LastModifiedDate;
-			parameters[18].Value = model.Reserved1;
-			parameters[19].Value = model.Reserved2;
-			parameters[20].Value = model.Reserved3;
-			parameters[21].Value = model.RechargeLogID;
+			parameters[0].Value = model.RechargeSerialNo;
+			parameters[1].Value = model.ClubCardID;
+			parameters[2].Value = model.ClubCardNo;
+			parameters[3].Value = model.CustID;
+			parameters[4].Value = model.CustName;
+			parameters[5].Value = model.RechargeDate;
+			parameters[6].Value = model.SalesMan;
+			parameters[7].Value = model.RechargeStore;
+			parameters[8].Value = model.OriginalStore;
+			parameters[9].Value = model.ActualRechargeAmount;
+			parameters[10].Value = model.RechargeType;
+			parameters[11].Value = model.PayType;
+			parameters[12].Value = model.ClubCardPackageID;
+			parameters[13].Value = model.PlatformRechargeAmount;
+			parameters[14].Value = model.DiscountRate;
+			parameters[15].Value = model.DiscountInfo;
+			parameters[16].Value = model.LogicalStatus;
+			parameters[17].Value = model.CreatorID;
+			parameters[18].Value = model.CreatedDate;
+			parameters[19].Value = model.LastModifierID;
+			parameters[20].Value = model.LastModifiedDate;
+			parameters[21].Value = model.Reserved1;
+			parameters[22].Value = model.Reserved2;
+			parameters[23].Value = model.Reserved3;
+			parameters[24].Value = model.RechargeLogID;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -241,7 +256,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 RechargeLogID,ClubCardID,ClubCardNo,CustID,CustName,RechargeDate,RechargeStore,OriginalStore,ActualRechargeAmount,RechargeType,ClubCardPackageID,PlatformRechargeAmount,DiscountRate,DiscountInfo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from RechargeLog ");
+			strSql.Append("select  top 1 RechargeLogID,RechargeSerialNo,ClubCardID,ClubCardNo,CustID,CustName,RechargeDate,SalesMan,RechargeStore,OriginalStore,ActualRechargeAmount,RechargeType,PayType,ClubCardPackageID,PlatformRechargeAmount,DiscountRate,DiscountInfo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from RechargeLog ");
 			strSql.Append(" where RechargeLogID=@RechargeLogID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@RechargeLogID", SqlDbType.Int,4)
@@ -273,6 +288,10 @@ namespace Zeta.WisdCar.Repository.CRUD
 				{
 					model.RechargeLogID=int.Parse(row["RechargeLogID"].ToString());
 				}
+				if(row["RechargeSerialNo"]!=null)
+				{
+					model.RechargeSerialNo=row["RechargeSerialNo"].ToString();
+				}
 				if(row["ClubCardID"]!=null && row["ClubCardID"].ToString()!="")
 				{
 					model.ClubCardID=int.Parse(row["ClubCardID"].ToString());
@@ -293,6 +312,10 @@ namespace Zeta.WisdCar.Repository.CRUD
 				{
 					model.RechargeDate=DateTime.Parse(row["RechargeDate"].ToString());
 				}
+				if(row["SalesMan"]!=null)
+				{
+					model.SalesMan=row["SalesMan"].ToString();
+				}
 				if(row["RechargeStore"]!=null)
 				{
 					model.RechargeStore=row["RechargeStore"].ToString();
@@ -308,6 +331,10 @@ namespace Zeta.WisdCar.Repository.CRUD
 				if(row["RechargeType"]!=null && row["RechargeType"].ToString()!="")
 				{
 					model.RechargeType=int.Parse(row["RechargeType"].ToString());
+				}
+				if(row["PayType"]!=null && row["PayType"].ToString()!="")
+				{
+					model.PayType=int.Parse(row["PayType"].ToString());
 				}
 				if(row["ClubCardPackageID"]!=null && row["ClubCardPackageID"].ToString()!="")
 				{
@@ -367,7 +394,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select RechargeLogID,ClubCardID,ClubCardNo,CustID,CustName,RechargeDate,RechargeStore,OriginalStore,ActualRechargeAmount,RechargeType,ClubCardPackageID,PlatformRechargeAmount,DiscountRate,DiscountInfo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+			strSql.Append("select RechargeLogID,RechargeSerialNo,ClubCardID,ClubCardNo,CustID,CustName,RechargeDate,SalesMan,RechargeStore,OriginalStore,ActualRechargeAmount,RechargeType,PayType,ClubCardPackageID,PlatformRechargeAmount,DiscountRate,DiscountInfo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
 			strSql.Append(" FROM RechargeLog ");
 			if(strWhere.Trim()!="")
 			{
@@ -387,7 +414,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" RechargeLogID,ClubCardID,ClubCardNo,CustID,CustName,RechargeDate,RechargeStore,OriginalStore,ActualRechargeAmount,RechargeType,ClubCardPackageID,PlatformRechargeAmount,DiscountRate,DiscountInfo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+			strSql.Append(" RechargeLogID,RechargeSerialNo,ClubCardID,ClubCardNo,CustID,CustName,RechargeDate,SalesMan,RechargeStore,OriginalStore,ActualRechargeAmount,RechargeType,PayType,ClubCardPackageID,PlatformRechargeAmount,DiscountRate,DiscountInfo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
 			strSql.Append(" FROM RechargeLog ");
 			if(strWhere.Trim()!="")
 			{

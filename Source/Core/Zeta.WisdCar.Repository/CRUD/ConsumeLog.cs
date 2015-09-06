@@ -46,11 +46,12 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into ConsumeLog(");
-			strSql.Append("ClubCardID,ClubCardNo,CustID,CustName,ConsumeDate,ConsumeStore,OriginalStore,ConsumeType,ClubCardPackageID,PackageDetailID,ItemName,ConsumeCount,OriginalPrice,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
+			strSql.Append("ConsumeBatchNo,ClubCardID,ClubCardNo,CustID,CustName,ConsumeDate,ConsumeStore,OriginalStore,ConsumeType,PayType,ClubCardPackageID,PackageDetailID,ItemName,ConsumeCount,OriginalPrice,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
 			strSql.Append(" values (");
-			strSql.Append("@ClubCardID,@ClubCardNo,@CustID,@CustName,@ConsumeDate,@ConsumeStore,@OriginalStore,@ConsumeType,@ClubCardPackageID,@PackageDetailID,@ItemName,@ConsumeCount,@OriginalPrice,@ItemID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
+			strSql.Append("@ConsumeBatchNo,@ClubCardID,@ClubCardNo,@CustID,@CustName,@ConsumeDate,@ConsumeStore,@OriginalStore,@ConsumeType,@PayType,@ClubCardPackageID,@PackageDetailID,@ItemName,@ConsumeCount,@OriginalPrice,@ItemID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
+					new SqlParameter("@ConsumeBatchNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ClubCardID", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardNo", SqlDbType.Int,4),
 					new SqlParameter("@CustID", SqlDbType.Int,4),
@@ -59,6 +60,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@ConsumeStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@OriginalStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@ConsumeType", SqlDbType.Int,4),
+					new SqlParameter("@PayType", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
 					new SqlParameter("@PackageDetailID", SqlDbType.Int,4),
 					new SqlParameter("@ItemName", SqlDbType.NVarChar,50),
@@ -73,28 +75,31 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100)};
-			parameters[0].Value = model.ClubCardID;
-			parameters[1].Value = model.ClubCardNo;
-			parameters[2].Value = model.CustID;
-			parameters[3].Value = model.CustName;
-			parameters[4].Value = model.ConsumeDate;
-			parameters[5].Value = model.ConsumeStore;
-			parameters[6].Value = model.OriginalStore;
-			parameters[7].Value = model.ConsumeType;
-			parameters[8].Value = model.ClubCardPackageID;
-			parameters[9].Value = model.PackageDetailID;
-			parameters[10].Value = model.ItemName;
-			parameters[11].Value = model.ConsumeCount;
-			parameters[12].Value = model.OriginalPrice;
-			parameters[13].Value = model.ItemID;
-			parameters[14].Value = model.LogicalStatus;
-			parameters[15].Value = model.CreatorID;
-			parameters[16].Value = model.CreatedDate;
-			parameters[17].Value = model.LastModifierID;
-			parameters[18].Value = model.LastModifiedDate;
-			parameters[19].Value = model.Reserved1;
-			parameters[20].Value = model.Reserved2;
-			parameters[21].Value = model.Reserved3;
+			parameters[0].Value = model.ConsumeBatchNo;
+			parameters[1].Value = model.ClubCardID;
+			parameters[2].Value = model.ClubCardNo;
+			parameters[3].Value = model.CustID;
+			parameters[4].Value = model.CustName;
+			parameters[5].Value = model.ConsumeDate;
+			parameters[6].Value = model.ConsumeStore;
+			parameters[7].Value = model.OriginalStore;
+			parameters[8].Value = model.ConsumeType;
+			parameters[9].Value = model.PayType;
+			parameters[10].Value = model.ClubCardPackageID;
+			parameters[11].Value = model.PackageDetailID;
+			parameters[12].Value = model.ItemName;
+			parameters[13].Value = model.ConsumeCount;
+			parameters[14].Value = model.OriginalPrice;
+			parameters[15].Value = model.ItemID;
+			parameters[16].Value = model.LogicalStatus;
+			parameters[17].Value = model.CreatorID;
+			parameters[18].Value = model.CreatedDate;
+			parameters[19].Value = model.LastModifierID;
+			parameters[20].Value = model.LastModifiedDate;
+			parameters[21].Value = model.Reserved1;
+			parameters[22].Value = model.Reserved2;
+			parameters[23].Value = model.Reserved3;
+
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -113,6 +118,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update ConsumeLog set ");
+			strSql.Append("ConsumeBatchNo=@ConsumeBatchNo,");
 			strSql.Append("ClubCardID=@ClubCardID,");
 			strSql.Append("ClubCardNo=@ClubCardNo,");
 			strSql.Append("CustID=@CustID,");
@@ -121,6 +127,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append("ConsumeStore=@ConsumeStore,");
 			strSql.Append("OriginalStore=@OriginalStore,");
 			strSql.Append("ConsumeType=@ConsumeType,");
+			strSql.Append("PayType=@PayType,");
 			strSql.Append("ClubCardPackageID=@ClubCardPackageID,");
 			strSql.Append("PackageDetailID=@PackageDetailID,");
 			strSql.Append("ItemName=@ItemName,");
@@ -137,6 +144,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append("Reserved3=@Reserved3");
 			strSql.Append(" where ConsumeLogID=@ConsumeLogID");
 			SqlParameter[] parameters = {
+					new SqlParameter("@ConsumeBatchNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ClubCardID", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardNo", SqlDbType.Int,4),
 					new SqlParameter("@CustID", SqlDbType.Int,4),
@@ -145,6 +153,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@ConsumeStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@OriginalStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@ConsumeType", SqlDbType.Int,4),
+					new SqlParameter("@PayType", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
 					new SqlParameter("@PackageDetailID", SqlDbType.Int,4),
 					new SqlParameter("@ItemName", SqlDbType.NVarChar,50),
@@ -160,29 +169,31 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100),
 					new SqlParameter("@ConsumeLogID", SqlDbType.Int,4)};
-			parameters[0].Value = model.ClubCardID;
-			parameters[1].Value = model.ClubCardNo;
-			parameters[2].Value = model.CustID;
-			parameters[3].Value = model.CustName;
-			parameters[4].Value = model.ConsumeDate;
-			parameters[5].Value = model.ConsumeStore;
-			parameters[6].Value = model.OriginalStore;
-			parameters[7].Value = model.ConsumeType;
-			parameters[8].Value = model.ClubCardPackageID;
-			parameters[9].Value = model.PackageDetailID;
-			parameters[10].Value = model.ItemName;
-			parameters[11].Value = model.ConsumeCount;
-			parameters[12].Value = model.OriginalPrice;
-			parameters[13].Value = model.ItemID;
-			parameters[14].Value = model.LogicalStatus;
-			parameters[15].Value = model.CreatorID;
-			parameters[16].Value = model.CreatedDate;
-			parameters[17].Value = model.LastModifierID;
-			parameters[18].Value = model.LastModifiedDate;
-			parameters[19].Value = model.Reserved1;
-			parameters[20].Value = model.Reserved2;
-			parameters[21].Value = model.Reserved3;
-			parameters[22].Value = model.ConsumeLogID;
+			parameters[0].Value = model.ConsumeBatchNo;
+			parameters[1].Value = model.ClubCardID;
+			parameters[2].Value = model.ClubCardNo;
+			parameters[3].Value = model.CustID;
+			parameters[4].Value = model.CustName;
+			parameters[5].Value = model.ConsumeDate;
+			parameters[6].Value = model.ConsumeStore;
+			parameters[7].Value = model.OriginalStore;
+			parameters[8].Value = model.ConsumeType;
+			parameters[9].Value = model.PayType;
+			parameters[10].Value = model.ClubCardPackageID;
+			parameters[11].Value = model.PackageDetailID;
+			parameters[12].Value = model.ItemName;
+			parameters[13].Value = model.ConsumeCount;
+			parameters[14].Value = model.OriginalPrice;
+			parameters[15].Value = model.ItemID;
+			parameters[16].Value = model.LogicalStatus;
+			parameters[17].Value = model.CreatorID;
+			parameters[18].Value = model.CreatedDate;
+			parameters[19].Value = model.LastModifierID;
+			parameters[20].Value = model.LastModifiedDate;
+			parameters[21].Value = model.Reserved1;
+			parameters[22].Value = model.Reserved2;
+			parameters[23].Value = model.Reserved3;
+			parameters[24].Value = model.ConsumeLogID;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -246,7 +257,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 ConsumeLogID,ClubCardID,ClubCardNo,CustID,CustName,ConsumeDate,ConsumeStore,OriginalStore,ConsumeType,ClubCardPackageID,PackageDetailID,ItemName,ConsumeCount,OriginalPrice,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from ConsumeLog ");
+			strSql.Append("select  top 1 ConsumeLogID,ConsumeBatchNo,ClubCardID,ClubCardNo,CustID,CustName,ConsumeDate,ConsumeStore,OriginalStore,ConsumeType,PayType,ClubCardPackageID,PackageDetailID,ItemName,ConsumeCount,OriginalPrice,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from ConsumeLog ");
 			strSql.Append(" where ConsumeLogID=@ConsumeLogID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@ConsumeLogID", SqlDbType.Int,4)
@@ -277,6 +288,10 @@ namespace Zeta.WisdCar.Repository.CRUD
 				if(row["ConsumeLogID"]!=null && row["ConsumeLogID"].ToString()!="")
 				{
 					model.ConsumeLogID=int.Parse(row["ConsumeLogID"].ToString());
+				}
+				if(row["ConsumeBatchNo"]!=null)
+				{
+					model.ConsumeBatchNo=row["ConsumeBatchNo"].ToString();
 				}
 				if(row["ClubCardID"]!=null && row["ClubCardID"].ToString()!="")
 				{
@@ -309,6 +324,10 @@ namespace Zeta.WisdCar.Repository.CRUD
 				if(row["ConsumeType"]!=null && row["ConsumeType"].ToString()!="")
 				{
 					model.ConsumeType=int.Parse(row["ConsumeType"].ToString());
+				}
+				if(row["PayType"]!=null && row["PayType"].ToString()!="")
+				{
+					model.PayType=int.Parse(row["PayType"].ToString());
 				}
 				if(row["ClubCardPackageID"]!=null && row["ClubCardPackageID"].ToString()!="")
 				{
@@ -376,7 +395,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select ConsumeLogID,ClubCardID,ClubCardNo,CustID,CustName,ConsumeDate,ConsumeStore,OriginalStore,ConsumeType,ClubCardPackageID,PackageDetailID,ItemName,ConsumeCount,OriginalPrice,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+			strSql.Append("select ConsumeLogID,ConsumeBatchNo,ClubCardID,ClubCardNo,CustID,CustName,ConsumeDate,ConsumeStore,OriginalStore,ConsumeType,PayType,ClubCardPackageID,PackageDetailID,ItemName,ConsumeCount,OriginalPrice,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
 			strSql.Append(" FROM ConsumeLog ");
 			if(strWhere.Trim()!="")
 			{
@@ -396,7 +415,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" ConsumeLogID,ClubCardID,ClubCardNo,CustID,CustName,ConsumeDate,ConsumeStore,OriginalStore,ConsumeType,ClubCardPackageID,PackageDetailID,ItemName,ConsumeCount,OriginalPrice,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+			strSql.Append(" ConsumeLogID,ConsumeBatchNo,ClubCardID,ClubCardNo,CustID,CustName,ConsumeDate,ConsumeStore,OriginalStore,ConsumeType,PayType,ClubCardPackageID,PackageDetailID,ItemName,ConsumeCount,OriginalPrice,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
 			strSql.Append(" FROM ConsumeLog ");
 			if(strWhere.Trim()!="")
 			{

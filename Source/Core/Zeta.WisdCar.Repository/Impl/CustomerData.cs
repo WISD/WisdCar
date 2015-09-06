@@ -63,5 +63,24 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             _daoCustomer.Delete(id);
         }
+
+
+        public System.Data.DataSet GetCustomers(string key)
+        {
+            StringBuilder strSql = new StringBuilder();
+            string strWhere = "";
+            if (!string.IsNullOrEmpty(key.Trim()))
+            {
+                strSql.AppendFormat(" MobileNO like '%{0}%' ", key);
+            }
+            strWhere = strSql.ToString();
+            return _daoCustomer.GetList(strWhere);
+        }
+
+
+        public int GetRecordCount(string strWhere)
+        {
+            return _daoCustomer.GetRecordCount(strWhere);
+        }
     }
 }

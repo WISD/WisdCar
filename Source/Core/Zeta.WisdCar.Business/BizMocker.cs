@@ -536,5 +536,45 @@ namespace Zeta.WisdCar.Business
         }
         #endregion
 
+
+        UserProfileEntity IPermissionMgm.GetCurUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        List<CustomerVO> ICustomerMgm.GetCustomers(CustomerQueryEntity filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<CustomerVO> ICustomerMgm.GetCustomers(string key)
+        {
+            throw new NotImplementedException();
+        }
+
+        CustomerVO ICustomerMgm.GetCustomerByID(int custID)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICustomerMgm.CheckPhoneNo(string phoneNo)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICustomerMgm.AddCustomer(CustomerVO cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICustomerMgm.EditCustomer(CustomerVO cust)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICustomerMgm.DelCustomer(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

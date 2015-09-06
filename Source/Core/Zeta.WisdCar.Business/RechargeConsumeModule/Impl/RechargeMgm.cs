@@ -8,5 +8,14 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
 {
     public class RechargeMgm : IRechargeMgm
     {
+        public void RechargeCash(Model.VO.RechargeVO entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RechargePkg(Model.VO.RechargeVO entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

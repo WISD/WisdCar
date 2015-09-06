@@ -65,6 +65,38 @@ ALTER TABLE ClubCard
 go
 
 
+CREATE TABLE ClubCardHis
+(
+	ClubCardID           int IDENTITY(1,1) NOT NULL ,
+	ClubCardTypeName     nvarchar(50)  NOT NULL ,
+	CustName             nvarchar(50)  NOT NULL ,
+	ClubCardPwd          nvarchar(50)  NOT NULL ,
+	OpenCardStore        nvarchar(50)  NOT NULL ,
+	SalesMan             nvarchar(50)  NOT NULL ,
+	SalesTime            datetime  NOT NULL ,
+	Balance              numeric(9,2)  NOT NULL ,
+	CustomerID           int  NOT NULL ,
+	ClubCardTypeID       int  NOT NULL ,
+	[ExpireDate]           datetime  NOT NULL ,
+	CardStatus               int  NOT NULL ,
+	ClubCardNo           nvarchar(50)  NOT NULL ,
+	
+	LogicalStatus          int  NOT NULL DEFAULT 1,
+	CreatorID            nvarchar(50)  NOT NULL ,
+	CreatedDate          datetime  NOT NULL ,
+	LastModifierID       nvarchar(50)  NOT NULL ,
+	LastModifiedDate     datetime  NOT NULL ,
+	Reserved1            nvarchar(100)  NULL ,
+	Reserved2            nvarchar(100)  NULL ,
+	Reserved3            nvarchar(100)  NULL 
+)
+go
+
+
+ALTER TABLE ClubCardHis
+	ADD CONSTRAINT XPKClubCardHis PRIMARY KEY  CLUSTERED (ClubCardID ASC)
+go
+
 CREATE TABLE ClubCardPackage
 (
 	ClubCardPackageID    int IDENTITY(1,1) NOT NULL ,
@@ -174,6 +206,7 @@ go
 CREATE TABLE ConsumeLog
 (
 	ConsumeLogID         int IDENTITY(1,1) NOT NULL,
+	ConsumeBatchNo	     nvarchar(50)  NOT NULL ,
 	ClubCardID           int  NOT NULL ,
 	ClubCardNo           int  NOT NULL ,
 	CustID               int  NOT NULL ,
@@ -182,6 +215,7 @@ CREATE TABLE ConsumeLog
 	ConsumeStore         nvarchar(50)  NOT NULL ,
 	OriginalStore        nvarchar(50)  NOT NULL ,
 	ConsumeType          int  NOT NULL ,
+	PayType		     int  NOT NULL ,
 	ClubCardPackageID    int  NOT NULL ,
 	PackageDetailID      int  NOT NULL ,
 	ItemName             nvarchar(50)  NOT NULL ,
@@ -189,7 +223,7 @@ CREATE TABLE ConsumeLog
 	OriginalPrice        numeric(9,2)  NOT NULL ,
 	ItemID               int  NOT NULL ,
 	
-	LogicalStatus          int  NOT NULL DEFAULT 1,
+	LogicalStatus        int  NOT NULL DEFAULT 1,
 	CreatorID            nvarchar(50)  NOT NULL ,
 	CreatedDate          datetime  NOT NULL ,
 	LastModifierID       nvarchar(50)  NOT NULL ,
@@ -359,15 +393,18 @@ go
 CREATE TABLE RechargeLog
 (
 	RechargeLogID        int IDENTITY(1,1) NOT NULL ,
+	RechargeSerialNo     nvarchar(50)  NOT NULL ,
 	ClubCardID           int  NOT NULL ,
 	ClubCardNo           int  NOT NULL ,
 	CustID               int  NOT NULL ,
 	CustName             nvarchar(50)  NOT NULL ,
 	RechargeDate         datetime  NOT NULL ,
+	SalesMan	     nvarchar(50)  NOT NULL ,
 	RechargeStore        nvarchar(50)  NOT NULL ,
 	OriginalStore        nvarchar(50)  NOT NULL ,
 	ActualRechargeAmount numeric(9,2)  NOT NULL ,
 	RechargeType         int  NOT NULL ,
+	PayType		     int  NOT NULL ,
 	ClubCardPackageID    int  NOT NULL ,
 	PlatformRechargeAmount numeric(9,2)  NOT NULL ,
 	DiscountRate         numeric(5,2)  NOT NULL ,
@@ -532,8 +569,6 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡类型名' 
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'客户姓名' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ClubCard', @level2type=N'COLUMN',@level2name=N'CustName'
 GO
-EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡类型' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ClubCard', @level2type=N'COLUMN',@level2name=N'ClubCardType'
-GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡密码' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ClubCard', @level2type=N'COLUMN',@level2name=N'ClubCardPwd'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'开卡门店' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ClubCard', @level2type=N'COLUMN',@level2name=N'OpenCardStore'
@@ -688,6 +723,8 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段3' , @
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'消费项目ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ConsumeLog', @level2type=N'COLUMN',@level2name=N'ConsumeLogID'
 GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'消费批次号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ConsumeLog', @level2type=N'COLUMN',@level2name=N'ConsumeBatchNo'
+GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ConsumeLog', @level2type=N'COLUMN',@level2name=N'ClubCardID'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ConsumeLog', @level2type=N'COLUMN',@level2name=N'ClubCardNo'
@@ -703,6 +740,8 @@ GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'开卡门店' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ConsumeLog', @level2type=N'COLUMN',@level2name=N'OriginalStore'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'消费类型' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ConsumeLog', @level2type=N'COLUMN',@level2name=N'ConsumeType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'支付类型' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ConsumeLog', @level2type=N'COLUMN',@level2name=N'PayType'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡套餐ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'ConsumeLog', @level2type=N'COLUMN',@level2name=N'ClubCardPackageID'
 GO
@@ -892,6 +931,8 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'保留字段3' , @
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'充值记录ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'RechargeLogID'
 GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'充值流水号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'RechargeSerialNo'
+GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'ClubCardID'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡编号' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'ClubCardNo'
@@ -902,6 +943,8 @@ EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'客户名称' , @l
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'充值日期' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'RechargeDate'
 GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'销售人员' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'SalesMan'
+GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'充值门店' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'RechargeStore'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'开户门店' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'OriginalStore'
@@ -909,6 +952,8 @@ GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'实收充值金额' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'ActualRechargeAmount'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'充值类型' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'RechargeType'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'支付类型' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'PayType'
 GO
 EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'会员卡套餐ID' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'RechargeLog', @level2type=N'COLUMN',@level2name=N'ClubCardPackageID'
 GO

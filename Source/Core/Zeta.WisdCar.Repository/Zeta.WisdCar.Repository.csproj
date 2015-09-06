@@ -56,13 +56,19 @@
     <Compile Include="CRUD\Store.cs" />
     <Compile Include="DataMocker.cs" />
     <Compile Include="ICarData.cs" />
+    <Compile Include="IClubCardData.cs" />
     <Compile Include="IClubCardTypeData.cs" />
     <Compile Include="IConsumeItemData.cs" />
     <Compile Include="ICustomerData.cs" />
     <Compile Include="Impl\CarData.cs" />
+    <Compile Include="Impl\ClubCardData.cs" />
     <Compile Include="Impl\ClubCardTypeData.cs" />
     <Compile Include="Impl\ConsumeItemData.cs" />
     <Compile Include="Impl\CustomerData.cs" />
+    <Compile Include="Impl\PackageData.cs" />
+    <Compile Include="Impl\PkgItemsData.cs" />
+    <Compile Include="IPackageData.cs" />
+    <Compile Include="IPkgItemsData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

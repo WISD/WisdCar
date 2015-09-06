@@ -102,6 +102,7 @@
     <Compile Include="Helper\NetworkInfoHelper.cs" />
     <Compile Include="Helper\NullHelper.cs" />
     <Compile Include="Helper\PageValidateHelper.cs" />
+    <Compile Include="Helper\PwdHelper.cs" />
     <Compile Include="Helper\RMBHelper.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Helper\TimeHelper.cs" />

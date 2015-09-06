@@ -11,15 +11,18 @@ namespace Zeta.WisdCar.Model.PO
 		{}
 		#region Model
 		private int _rechargelogid;
+		private string _rechargeserialno;
 		private int _clubcardid;
 		private int _clubcardno;
 		private int _custid;
 		private string _custname;
 		private DateTime _rechargedate;
+		private string _salesman;
 		private string _rechargestore;
 		private string _originalstore;
 		private decimal _actualrechargeamount;
 		private int _rechargetype;
+		private int _paytype;
 		private int _clubcardpackageid;
 		private decimal _platformrechargeamount;
 		private decimal _discountrate;
@@ -39,6 +42,14 @@ namespace Zeta.WisdCar.Model.PO
 		{
 			set{ _rechargelogid=value;}
 			get{return _rechargelogid;}
+		}
+		/// <summary>
+		/// 充值流水号
+		/// </summary>
+		public string RechargeSerialNo
+		{
+			set{ _rechargeserialno=value;}
+			get{return _rechargeserialno;}
 		}
 		/// <summary>
 		/// 会员卡ID
@@ -81,6 +92,14 @@ namespace Zeta.WisdCar.Model.PO
 			get{return _rechargedate;}
 		}
 		/// <summary>
+		/// 销售人员
+		/// </summary>
+		public string SalesMan
+		{
+			set{ _salesman=value;}
+			get{return _salesman;}
+		}
+		/// <summary>
 		/// 充值门店
 		/// </summary>
 		public string RechargeStore
@@ -111,6 +130,14 @@ namespace Zeta.WisdCar.Model.PO
 		{
 			set{ _rechargetype=value;}
 			get{return _rechargetype;}
+		}
+		/// <summary>
+		/// 支付类型
+		/// </summary>
+		public int PayType
+		{
+			set{ _paytype=value;}
+			get{return _paytype;}
 		}
 		/// <summary>
 		/// 会员卡套餐ID
