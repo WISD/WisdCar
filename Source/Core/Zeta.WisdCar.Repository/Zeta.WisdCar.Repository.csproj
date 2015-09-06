@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F702DE4-0387-41F3-8813-342D9B781F98}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zeta.WisdCar.Repository</RootNamespace>
+    <AssemblyName>Zeta.WisdCar.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CRUD\Car.cs" />
+    <Compile Include="CRUD\ClubCard.cs" />
+    <Compile Include="CRUD\ClubCardPackage.cs" />
+    <Compile Include="CRUD\ClubCardPackageDetail.cs" />
+    <Compile Include="CRUD\ClubCardType.cs" />
+    <Compile Include="CRUD\ConsumeItem.cs" />
+    <Compile Include="CRUD\ConsumeLog.cs" />
+    <Compile Include="CRUD\Customer.cs" />
+    <Compile Include="CRUD\Employee.cs" />
+    <Compile Include="CRUD\KVCategory.cs" />
+    <Compile Include="CRUD\KVLookup.cs" />
+    <Compile Include="CRUD\Package.cs" />
+    <Compile Include="CRUD\PackageItemMapping.cs" />
+    <Compile Include="CRUD\RechargeLog.cs" />
+    <Compile Include="CRUD\Store.cs" />
+    <Compile Include="DataMocker.cs" />
+    <Compile Include="ICarData.cs" />
+    <Compile Include="IClubCardTypeData.cs" />
+    <Compile Include="IConsumeItemData.cs" />
+    <Compile Include="ICustomerData.cs" />
+    <Compile Include="Impl\CarData.cs" />
+    <Compile Include="Impl\ClubCardTypeData.cs" />
+    <Compile Include="Impl\ConsumeItemData.cs" />
+    <Compile Include="Impl\CustomerData.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Zeta.WisdCar.Infrastructure\Zeta.WisdCar.Infrastructure.csproj">
+      <Project>{ab1e8ae2-f294-4376-b878-e4c6a9802007}</Project>
+      <Name>Zeta.WisdCar.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zeta.WisdCar.Model\Zeta.WisdCar.Model.csproj">
+      <Project>{6238f7e9-2213-4eb7-8821-ac4d95cec09e}</Project>
+      <Name>Zeta.WisdCar.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

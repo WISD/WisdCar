@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">@ViewBag.PkgName</h4>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet box blue">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-th-large"></i>套餐消费项目列表
+                    </div>
+                    <div class="tools">
+                    </div>
+                    <a href="#" class="btn btn-xs blue" style="float:right; ">
+                        <i class="fa fa-plus"></i> 新增
+                    </a>
+                </div>
+                <div class="portlet-body">
+                    <table id="tblPackageItems" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>消费项目</th>
+                                <th>消费次数</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <!-- END PORTLET-->
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn default" data-dismiss="modal">关闭</button>
+</div>
+
+<script>
+    var PackageItems = function () {
+        var onPageLoad = function () {
+            initPkgItemsTable();
+        };
+
+        var initPkgItemsTable = function () {
+            var pkgItemsTable = $("#tblPackageItems").DataTable({
+                "processing": false,
+                "serverSide": false,
+                "ajax": {
+                    "type": "post",
+                    "url": "@Url.Action("GetItemsByPkgId", "Package")",
+                    "dataSrc": "",
+                    "cache": false
+                },
+                "columns": [
+                    { "data": "ItemName" },
+                    { "data": "ConsumeCount" },
+                    { "data": "Operation" }
+                ],
+                "columnDefs": [
+                    {
+                        "targets": [2],
+                        "orderable": false
+                    }
+                ],
+                "order": [[0, "asc"]],
+                "deferRender": true,
+                "scrollX": true,
+                "paging": true,
+                "ordering": true,
+                "info": true,
+                "retrieve": true,    //重复初始化，索引到同一个Datatables实例
+                //"pagingType": "full_numbers",
+                "pageLength": 10,
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                "language": {
+                    "emptyTable": "没有数据",
+                    "loadingRecords": "加载中...",
+                    "processing": "查询中...",
+                    "search": "查询: ",
+                    "lengthMenu": "显示_MENU_条",
+                    "zeroRecords": "没有数据",
+                    "paginate": {
+                        "previous": "上一页",
+                        "next": "下一页",
+                        "first": "第一页",
+                        "last": "最后一页"
+                    },
+                    "info": "显示_START_-_END_，共_TOTAL_条记录",
+                    "infoEmpty": "0条记录",
+                    "infoFiltered": "(查询前有_MAX_条记录)"
+                }
+            });
+
+            $("#tblPackageItems tbody").on("click", "tr", function () {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+                else {
+                    pkgItemsTable.$('tr.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                }
+            });
+
+            $("#tblPackageItems_filter input").addClass("form-control input-medium input-inline");
+            $("#tblPackageItems_length select").addClass("form-control input-xsmall input-inline");
+        };
+
+        return {
+            Init: function () {
+                onPageLoad();
+            },
+            Del: function (id) {
+                alert("del:" + id);
+            }
+        };
+    }();
+
+    $(function () {
+        PackageItems.Init();
+    });
+</script>
