@@ -67,8 +67,10 @@
     <Compile Include="Impl\CustomerData.cs" />
     <Compile Include="Impl\PackageData.cs" />
     <Compile Include="Impl\PkgItemsData.cs" />
+    <Compile Include="Impl\RechargeLogData.cs" />
     <Compile Include="IPackageData.cs" />
     <Compile Include="IPkgItemsData.cs" />
+    <Compile Include="IRechargeLogData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

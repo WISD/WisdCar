@@ -12,28 +12,35 @@ namespace Zeta.WisdCar.Repository.Impl
         private PackageItemMapping _daoPkgItem = new PackageItemMapping();
         public System.Data.DataSet GetItemsByPkgID(int pkgID)
         {
-            //待实现
-            return _daoPkgItem.GetList("");
+            StringBuilder strSql = new StringBuilder();
+            string strWhere = "";
+            strSql.AppendFormat(" PackageID = %{0}% ", pkgID);
+
+            strWhere = strSql.ToString();
+            return _daoPkgItem.GetList(strWhere);
         }
 
         public void DelPkgItem(int id)
         {
-            throw new NotImplementedException();
+            _daoPkgItem.Delete(id);
         }
 
         public void AddPkgItem(Model.PO.PackageItemMappingPO pkgItem)
         {
-            throw new NotImplementedException();
+            _daoPkgItem.Add(pkgItem);
         }
 
         public void AddPkgItems(List<Model.PO.PackageItemMappingPO> list)
         {
-            throw new NotImplementedException();
+            foreach (var item in list)
+	        {
+                AddPkgItem(item);
+	        }
         }
 
         public void EditPkgItem(Model.PO.PackageItemMappingPO pkgItem)
         {
-            throw new NotImplementedException();
+            _daoPkgItem.Update(pkgItem);
         }
     }
 }
