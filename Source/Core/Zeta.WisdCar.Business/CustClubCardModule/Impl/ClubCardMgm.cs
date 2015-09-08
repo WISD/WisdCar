@@ -67,6 +67,12 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
         }
 
+        public int GetCardStatusByClubCardID(int id)
+        {
+            ClubCardVO clubCardVO = GetClubCardByID(id);
+            return clubCardVO.CardStatus;
+        }
+
         public void AddClubCard(Model.VO.ClubCardVO clubCard)
         {
             ClubCardData clubCardData = new ClubCardData();

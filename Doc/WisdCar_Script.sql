@@ -99,7 +99,7 @@ go
 
 CREATE TABLE ClubCardPackage
 (
-	ClubCardPackageID    int IDENTITY(1,1) NOT NULL ,
+	ClubCardPackageID    int  NOT NULL ,
 	PackageName          nvarchar(50)  NOT NULL ,
 	OriginalAmount       numeric(9,2)  NOT NULL ,
 	ActualAmount         numeric(9,2)  NOT NULL ,

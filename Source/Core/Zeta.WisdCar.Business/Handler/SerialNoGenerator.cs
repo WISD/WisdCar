@@ -37,5 +37,14 @@ namespace Zeta.WisdCar.Business.Handler
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 会员卡套餐ID（生成规则：yymmddHHmmss）
+        /// </summary>
+        /// <returns></returns>
+        public string GenClubCardPkgID()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

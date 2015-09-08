@@ -46,11 +46,11 @@ namespace Zeta.WisdCar.Repository.CRUD
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("insert into ClubCardPackage(");
-            strSql.Append("PackageName,OriginalAmount,ActualAmount,DiscountRate,DiscountInfo,PackageStatus,Salesman,SalesTime,SaleStore,PackageID,ClubCardID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
+            strSql.Append("ClubCardPackageID,PackageName,OriginalAmount,ActualAmount,DiscountRate,DiscountInfo,PackageStatus,Salesman,SalesTime,SaleStore,PackageID,ClubCardID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
             strSql.Append(" values (");
-            strSql.Append("@PackageName,@OriginalAmount,@ActualAmount,@DiscountRate,@DiscountInfo,@PackageStatus,@Salesman,@SalesTime,@SaleStore,@PackageID,@ClubCardID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
-            strSql.Append(";select @@IDENTITY");
+            strSql.Append("@ClubCardPackageID,@PackageName,@OriginalAmount,@ActualAmount,@DiscountRate,@DiscountInfo,@PackageStatus,@Salesman,@SalesTime,@SaleStore,@PackageID,@ClubCardID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
             SqlParameter[] parameters = {
+					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
 					new SqlParameter("@PackageName", SqlDbType.NVarChar,50),
 					new SqlParameter("@OriginalAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@ActualAmount", SqlDbType.Decimal,5),
@@ -70,25 +70,26 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100)};
-            parameters[0].Value = model.PackageName;
-            parameters[1].Value = model.OriginalAmount;
-            parameters[2].Value = model.ActualAmount;
-            parameters[3].Value = model.DiscountRate;
-            parameters[4].Value = model.DiscountInfo;
-            parameters[5].Value = model.PackageStatus;
-            parameters[6].Value = model.Salesman;
-            parameters[7].Value = model.SalesTime;
-            parameters[8].Value = model.SaleStore;
-            parameters[9].Value = model.PackageID;
-            parameters[10].Value = model.ClubCardID;
-            parameters[11].Value = model.LogicalStatus;
-            parameters[12].Value = model.CreatorID;
-            parameters[13].Value = model.CreatedDate;
-            parameters[14].Value = model.LastModifierID;
-            parameters[15].Value = model.LastModifiedDate;
-            parameters[16].Value = model.Reserved1;
-            parameters[17].Value = model.Reserved2;
-            parameters[18].Value = model.Reserved3;
+			parameters[0].Value = model.ClubCardPackageID;
+			parameters[1].Value = model.PackageName;
+			parameters[2].Value = model.OriginalAmount;
+			parameters[3].Value = model.ActualAmount;
+			parameters[4].Value = model.DiscountRate;
+			parameters[5].Value = model.DiscountInfo;
+			parameters[6].Value = model.PackageStatus;
+			parameters[7].Value = model.Salesman;
+			parameters[8].Value = model.SalesTime;
+			parameters[9].Value = model.SaleStore;
+			parameters[10].Value = model.PackageID;
+			parameters[11].Value = model.ClubCardID;
+			parameters[12].Value = model.LogicalStatus;
+			parameters[13].Value = model.CreatorID;
+			parameters[14].Value = model.CreatedDate;
+			parameters[15].Value = model.LastModifierID;
+			parameters[16].Value = model.LastModifiedDate;
+			parameters[17].Value = model.Reserved1;
+			parameters[18].Value = model.Reserved2;
+			parameters[19].Value = model.Reserved3;
 
             object obj = DbHelperSQL.GetSingle(strSql.ToString(), parameters);
             if (obj == null)

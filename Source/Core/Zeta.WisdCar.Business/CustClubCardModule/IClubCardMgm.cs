@@ -41,6 +41,13 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         Decimal GetBalanceByClubCardID(int id);
 
         /// <summary>
+        /// 获取指定会员卡的卡状态
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetCardStatusByClubCardID(int id);
+
+        /// <summary>
         /// 开卡
         /// </summary>
         /// <param name="clubCard"></param>

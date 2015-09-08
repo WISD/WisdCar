@@ -10,7 +10,7 @@ using Zeta.WisdCar.Model.VO;
 using Zeta.WisdCar.Repository.Impl;
 using Zeta.WisdCar.Business.AutoMapper;
 
-namespace Zeta.WisdCar.Business.MarktingPlanModule.Impl
+namespace Zeta.WisdCar.Business.MarktingPlanModule
 {
     public class PkgItemsMgm : IPkgItemsMgm
     {

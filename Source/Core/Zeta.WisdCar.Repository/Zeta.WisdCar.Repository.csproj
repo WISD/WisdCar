@@ -57,11 +57,13 @@
     <Compile Include="DataMocker.cs" />
     <Compile Include="ICarData.cs" />
     <Compile Include="IClubCardData.cs" />
+    <Compile Include="IClubCardPackageData.cs" />
     <Compile Include="IClubCardTypeData.cs" />
     <Compile Include="IConsumeItemData.cs" />
     <Compile Include="ICustomerData.cs" />
     <Compile Include="Impl\CarData.cs" />
     <Compile Include="Impl\ClubCardData.cs" />
+    <Compile Include="Impl\ClubCardPackageData.cs" />
     <Compile Include="Impl\ClubCardTypeData.cs" />
     <Compile Include="Impl\ConsumeItemData.cs" />
     <Compile Include="Impl\CustomerData.cs" />
