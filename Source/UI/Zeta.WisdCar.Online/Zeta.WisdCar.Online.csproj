@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,6 +39,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a">
@@ -50,17 +53,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -105,6 +106,7 @@
       <Private>True</Private>
       <HintPath>..\..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -164,6 +166,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\LoginCheckFilterAttribute.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ClubcardConsumeController.cs" />
@@ -187,6 +190,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CustomerAndCar.cs" />
     <Compile Include="Models\DatatablesResult.cs" />
     <Compile Include="Models\ReturnedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -195,6 +199,27 @@
   <ItemGroup>
     <Content Include="assets\css\animate.css" />
     <Content Include="assets\css\custom.css" />
+    <Content Include="assets\css\pages\about-us.css" />
+    <Content Include="assets\css\pages\blog.css" />
+    <Content Include="assets\css\pages\coming-soon.css" />
+    <Content Include="assets\css\pages\error.css" />
+    <Content Include="assets\css\pages\image-crop.css" />
+    <Content Include="assets\css\pages\inbox.css" />
+    <Content Include="assets\css\pages\invoice.css" />
+    <Content Include="assets\css\pages\lock.css" />
+    <Content Include="assets\css\pages\login-soft.css" />
+    <Content Include="assets\css\pages\login.css" />
+    <Content Include="assets\css\pages\news.css" />
+    <Content Include="assets\css\pages\portfolio.css" />
+    <Content Include="assets\css\pages\pricing-tables.css" />
+    <Content Include="assets\css\pages\profile.css" />
+    <Content Include="assets\css\pages\promo.css" />
+    <Content Include="assets\css\pages\reset.css" />
+    <Content Include="assets\css\pages\search.css" />
+    <Content Include="assets\css\pages\style.css" />
+    <Content Include="assets\css\pages\supersized.css" />
+    <Content Include="assets\css\pages\tasks.css" />
+    <Content Include="assets\css\pages\timeline.css" />
     <Content Include="assets\css\plugins.css" />
     <Content Include="assets\css\print.css" />
     <Content Include="assets\css\style-metronic.css" />
@@ -214,6 +239,10 @@
     <Content Include="assets\img\avatar.png" />
     <Content Include="assets\img\avatar1.jpg" />
     <Content Include="assets\img\avatar1_small.jpg" />
+    <Content Include="assets\img\backgrounds\1.jpg" />
+    <Content Include="assets\img\backgrounds\2.jpg" />
+    <Content Include="assets\img\backgrounds\3.jpg" />
+    <Content Include="assets\img\backgrounds\4.jpg" />
     <Content Include="assets\img\bg-opacity.png" />
     <Content Include="assets\img\bg-white-lock.png" />
     <Content Include="assets\img\bg-white.png" />
@@ -283,7 +312,10 @@
     <Content Include="assets\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
     <Content Include="assets\plugins\bootstrap-datepaginator\bootstrap-datepaginator.min.js" />
     <Content Include="assets\plugins\bootstrap-datepicker\css\datepicker.css" />
+    <Content Include="assets\plugins\bootstrap-datepicker\js\app1.js" />
     <Content Include="assets\plugins\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\js\components-pickers.js" />
     <Content Include="assets\plugins\bootstrap-daterangepicker\daterangepicker-bs3.css" />
     <Content Include="assets\plugins\bootstrap-daterangepicker\daterangepicker.js" />
     <Content Include="assets\plugins\bootstrap-daterangepicker\moment.min.js" />
@@ -365,6 +397,7 @@
     <Content Include="assets\plugins\gmaps\gmaps.min.js" />
     <Content Include="assets\plugins\gritter\css\jquery.gritter.css" />
     <Content Include="assets\plugins\gritter\js\jquery.gritter.js" />
+    <Content Include="assets\plugins\index\js\highcharts.js" />
     <Content Include="assets\plugins\holder.js" />
     <Content Include="assets\plugins\ion.rangeslider\css\ion.rangeSlider.css" />
     <Content Include="assets\plugins\ion.rangeslider\css\ion.rangeSlider.Metronic.css" />
@@ -378,6 +411,7 @@
     <Content Include="assets\plugins\jcrop\js\jquery.color.js" />
     <Content Include="assets\plugins\jcrop\js\jquery.Jcrop.min.js" />
     <Content Include="assets\plugins\jquery-1.10.2.min.js" />
+    <Content Include="assets\plugins\index\js\jquery-1.8.3.min.js" />
     <Content Include="assets\plugins\jquery-bootpag\jquery.bootpag.min.js" />
     <Content Include="assets\plugins\jquery-easy-pie-chart\jquery.easy-pie-chart.css" />
     <Content Include="assets\plugins\jquery-easy-pie-chart\jquery.easy-pie-chart.js" />
@@ -868,6 +902,10 @@
     <Content Include="assets\plugins\jqvmap\jqvmap\maps\jquery.vmap.world.js" />
     <Content Include="assets\plugins\jstree\dist\jstree.min.js" />
     <Content Include="assets\plugins\jstree\dist\themes\default\style.min.css" />
+    <Content Include="assets\plugins\login\js\jquery-1.8.2.min.js" />
+    <Content Include="assets\plugins\login\js\scripts.js" />
+    <Content Include="assets\plugins\login\js\supersized-init.js" />
+    <Content Include="assets\plugins\login\js\supersized.3.2.7.min.js" />
     <Content Include="assets\plugins\moment.min.js" />
     <Content Include="assets\plugins\nouislider\jquery.nouislider.css" />
     <Content Include="assets\plugins\nouislider\jquery.nouislider.js" />
@@ -898,7 +936,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="assets\css\pages\" />
+    <Folder Include="assets\plugins\login\css\" />
     <Folder Include="assets\scripts\custom\" />
   </ItemGroup>
   <ItemGroup>
@@ -1014,7 +1052,14 @@
     <Content Include="Views\Package\DetailItems.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\img\backgrounds\.DS_Store" />
     <None Include="Properties\PublishProfiles\WisdCar.pubxml" />
+    <Content Include="Views\Customer\Cuscardinfo.cshtml" />
+    <Content Include="Views\Customer\CusCarinfo.cshtml" />
+    <Content Include="Views\Customer\CustomerDetails.cshtml" />
+    <Content Include="Views\Customer\AddClubCard.cshtml" />
+    <Content Include="Views\Employee\Login.cshtml" />
+    <Content Include="Views\Employee\ResetPassword.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

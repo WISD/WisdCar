@@ -3,6 +3,8 @@ using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using Zeta.WisdCar.Infrastructure.DBUtility;
+using System.Collections;
+using System.Collections.Generic;
 namespace Zeta.WisdCar.Repository.CRUD
 {
 	/// <summary>
@@ -102,16 +104,16 @@ namespace Zeta.WisdCar.Repository.CRUD
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("update Customer set ");
 			strSql.Append("Name=@Name,");
-			strSql.Append("MobileNO=@MobileNO,");
+            //strSql.Append("MobileNO=@MobileNO,");
 			strSql.Append("Sex=@Sex,");
 			strSql.Append("Birthday=@Birthday,");
 			strSql.Append("ICNo=@ICNo,");
 			strSql.Append("Weixin=@Weixin,");
 			strSql.Append("Company=@Company,");
-			strSql.Append("CardFlag=@CardFlag,");
+            strSql.Append("CardFlag=@CardFlag,");
 			strSql.Append("LogicalStatus=@LogicalStatus,");
-			strSql.Append("CreatorID=@CreatorID,");
-			strSql.Append("CreatedDate=@CreatedDate,");
+            //strSql.Append("CreatorID=@CreatorID,");
+            //strSql.Append("CreatedDate=@CreatedDate,");
 			strSql.Append("LastModifierID=@LastModifierID,");
 			strSql.Append("LastModifiedDate=@LastModifiedDate,");
 			strSql.Append("Reserved1=@Reserved1,");
@@ -128,8 +130,8 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Company", SqlDbType.NVarChar,50),
 					new SqlParameter("@CardFlag", SqlDbType.Int,4),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
-					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
-					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
+                    //new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
+                    //new SqlParameter("@CreatedDate", SqlDbType.DateTime),
 					new SqlParameter("@LastModifierID", SqlDbType.NVarChar,50),
 					new SqlParameter("@LastModifiedDate", SqlDbType.DateTime),
 					new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
@@ -145,14 +147,14 @@ namespace Zeta.WisdCar.Repository.CRUD
 			parameters[6].Value = model.Company;
 			parameters[7].Value = model.CardFlag;
 			parameters[8].Value = model.LogicalStatus;
-			parameters[9].Value = model.CreatorID;
-			parameters[10].Value = model.CreatedDate;
-			parameters[11].Value = model.LastModifierID;
-			parameters[12].Value = model.LastModifiedDate;
-			parameters[13].Value = model.Reserved1;
-			parameters[14].Value = model.Reserved2;
-			parameters[15].Value = model.Reserved3;
-			parameters[16].Value = model.CustomerID;
+            //parameters[9].Value = model.CreatorID;
+            //parameters[10].Value = model.CreatedDate;
+			parameters[9].Value = model.LastModifierID;
+			parameters[10].Value = model.LastModifiedDate;
+			parameters[11].Value = model.Reserved1;
+			parameters[12].Value = model.Reserved2;
+			parameters[13].Value = model.Reserved3;
+			parameters[14].Value = model.CustomerID;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -170,24 +172,35 @@ namespace Zeta.WisdCar.Repository.CRUD
 		/// </summary>
 		public bool Delete(int CustomerID)
 		{
-			
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from Customer ");
-			strSql.Append(" where CustomerID=@CustomerID");
-			SqlParameter[] parameters = {
+            string sqlclubcard = "delete from clubcard where customerid = @customerid";
+            string sqlcar = "delete from car where customerid = @customerid";
+			StringBuilder sqlcustomer=new StringBuilder();
+           
+			sqlcustomer.Append("delete from Customer ");
+			sqlcustomer.Append(" where CustomerID=@CustomerID");
+            SqlParameter[] spcar = {new SqlParameter("@customerid",CustomerID)};
+            SqlParameter[] spclubcard = { new SqlParameter("@customerid", CustomerID) };
+			SqlParameter[] spcustomer = {
 					new SqlParameter("@CustomerID", SqlDbType.Int,4)
 			};
-			parameters[0].Value = CustomerID;
-
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            spcustomer[0].Value = CustomerID;
+            Dictionary<string,object> hs = new Dictionary<string,object>();
+            hs.Add(sqlclubcard, spclubcard);
+            hs.Add(sqlcar, spcar);
+            hs.Add(sqlcustomer.ToString(), spcustomer);
+           
+            
+            
+            try
+            {
+                DbHelperSQL.ExecutesqltranWithIndentity(hs);
+                return true;
+            }
+			catch(Exception ex)
+            {
+                return false;
+            }
+           
 		}
 		/// <summary>
 		/// 批量删除数据
@@ -392,7 +405,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append(")AS Row, T.*  from Customer T ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
-				strSql.Append(" WHERE " + strWhere);
+				strSql.Append(" WHERE 1=1 " + strWhere);
 			}
 			strSql.Append(" ) TT");
 			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
@@ -428,6 +441,23 @@ namespace Zeta.WisdCar.Repository.CRUD
 		#region  ExtensionMethod
 
 		#endregion  ExtensionMethod
-	}
+
+        public int AddAll(Model.PO.CustomerPO cust)
+        {
+            var result = Add(cust);
+            string sql = "select customerid from Customer where ICNo=@icno";
+            SqlParameter sp = new SqlParameter("@icno",cust.ICNo);
+            if (result > 0)
+            {
+                result = Convert.ToInt32(DbHelperSQL.GetSingle(sql, sp));
+            }
+            else
+            {
+                result = 0;
+            }
+
+            return result;
+        }
+    }
 }
 

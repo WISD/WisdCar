@@ -15,6 +15,8 @@ namespace Zeta.WisdCar.Business.AutoMapper
                 cfg.AddProfile<Profiles.CustomerProfile>();
                 cfg.AddProfile<Profiles.ClubCardTypeProfile>();
                 cfg.AddProfile<Profiles.ConsumeItemProfile>();
+                cfg.AddProfile<Profiles.CarProfile>();
+                cfg.AddProfile<Profiles.ClubCardProfile>();
             });
             //Mapper.AssertConfigurationIsValid();
         }

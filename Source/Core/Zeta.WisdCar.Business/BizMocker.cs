@@ -512,7 +512,19 @@ namespace Zeta.WisdCar.Business
 
         public CustomerVO GetCustomerByID(int custID)
         {
-            throw new NotImplementedException();
+            CustomerVO result = new CustomerVO() {
+                CardFlag = 1,
+                CustomerID = 1,
+                MobileNO = "15852659874",
+                Name = "田志良",
+                Sex="男",
+                ICNo="513021198808068456",
+                ClubCardDesc="白金卡",
+                Birthday="2012-02-03",
+                Company = "城管"
+            };
+            return result;
+
         }
 
         public bool CheckPhoneNo(string phoneNo)

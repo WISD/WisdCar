@@ -1,0 +1,210 @@
+﻿@model Zeta.WisdCar.Online.Models.CustomerAndCar
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@Styles.Render("~/global/css")
+@Scripts.Render("~/core/js")
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CustomerDetails</title>
+</head>
+<body style="height:auto;">
+    <h4 class="modal-title" id="divtitle">客户信息</h4>
+    <div>
+        @using (Html.BeginForm("", "", FormMethod.Post, new {@class = "form-horizontal", id = "dilogform", role = "form" }))
+        {
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">姓名:<span class="required">*</span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.HiddenFor(m =>m.Customerid)
+                    @*<input type="text" class="form-control" id="txtcusname" name="cusname" placeholder="">*@
+                </div>
+                <label class="col-md-2 control-label">性别:<span class="required">*</span></label>
+                <div class="col-md-4">
+
+                    <select class="table-group-action-input form-control input-small" name="Sex" id="ddlcussex">
+                        @if (Model.Sex == "男")
+                        {
+                            <option value="男" selected>男</option>
+
+                            <option value="女">女</option>
+                        }
+                        else
+                        {
+                            <option value="男">男</option>
+                            <option value="女" selected>女</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">身份证号:<span class="required">*</span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.ICNo, new { @class = "form-control" })
+                    @*<input type="text" class="form-control" id="txtcuscid" name="cuscid" placeholder="">*@
+                </div>
+
+                <label class="col-md-2 control-label">手机号码:<span class="required">*</span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" })
+                    @*<input type="text" class="form-control" id="txtcuscid" name="cuscid" placeholder="">*@
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label class="col-md-2 control-label">
+                    出生年月:
+                    <span class="required">
+                        *
+                    </span>
+                </label>
+                <div class="col-md-4">
+                    <div class="input-group input-small date-picker input-daterange" data-date="10/11/2012" data-date-format="yyyy/mm/dd">
+
+                        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control" })
+                        @*<input type="text" id="txtbirthday" class="form-control" name="birthday">*@
+
+                    </div>
+                </div>
+
+                <label class="col-md-2 control-label">车牌号:<span class="required">*</span></label>
+                <div class="col-md-4">
+                    @Html.TextBoxFor(m => m.Carno, new { @class = "form-control" })
+                    @Html.HiddenFor(m => m.Carid)
+                    @*<input type="text" class="form-control" name="product[name]" placeholder="">*@
+                </div>
+
+            </div>
+
+
+            @*<div class="form-group">
+                    <label class="col-md-4 control-label">是否开卡:<span class="required">*</span></label>
+                    <div class="col-md-8">
+                        <select class="table-group-action-input form-control input-medium" name="product[tax_class]">
+                            <option value="">是</option>
+                            <option value="1">否</option>
+                        </select>
+                    </div>
+                </div>*@
+
+            <div class="form-body">
+
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label">品牌:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        
+                            @Html.TextBoxFor(m => m.Brand, new { @class = "form-control" })
+
+                       
+                    </div>
+
+                    <label class="col-md-2 control-label">车型:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        <select class="table-group-action-input form-control input-small" id="CarModel" name="Carmodel">
+                            @*//以后修改，现在应急用*@
+                            @if (Model.Carmodel == "两厢")
+                            {
+                                <option value="两厢" selected>两厢</option>
+                                <option value="SUV">SUV</option>
+                                <option value="其他">其他</option>
+                            }
+                            else if (Model.Carmodel == "SUV")
+                            {
+                                <option value="两厢">两厢</option>
+                                <option value="SUV" selected>SUV</option>
+                                <option value="其他">其他</option>
+                            }
+                            else
+                            {
+                                <option value="两厢">两厢</option>
+                                <option value="SUV">SUV</option>
+                                <option value="其他" selected>其他</option>
+                            }
+
+
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">汽车排量:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Capacity, new { @class = "form-control" })
+                        
+                    </div>
+
+                    <label class="col-md-2 control-label">汽车颜色:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Color, new { @class = "form-control" })
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">车架号:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Frameno, new { @class = "form-control" })
+                        @*<input type="text" class="form-control" name="product[name]" placeholder="">*@
+                    </div>
+                    <label class="col-md-2 control-label">发动机号:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Engineno, new { @class = "form-control" })
+                        @*<input type="text" class="form-control" name="product[name]" placeholder="">*@
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">最近保养公里数:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Maintainkm, new { @class = "form-control" })
+                        @*<input type="text" class="form-control" name="product[name]" placeholder="">*@
+                    </div>
+
+                    <label class="col-md-2 control-label">保险时间:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        <div class="input-group input-small date-picker input-daterange" data-date="10/11/2012" data-date-format="yyyy/mm/dd">
+                            @Html.TextBoxFor(m => m.Insuredate, new { @class = "form-control" })
+                            @*<input type="text" class="form-control" name="product[name]" placeholder="">*@
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">车检时间:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        <div class="input-group input-small date-picker input-daterange" data-date="10/11/2012" data-date-format="yyyy/mm/dd" style="text-align:left;">
+                            @Html.TextBoxFor(m => m.Asdate, new { @class = "form-control" })
+                            @*<input type="text" class="form-control" name="product[name]" placeholder="">*@
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            App.init();
+            ComponentsPickers.init();
+        });
+    </script>
+</body>
+</html>

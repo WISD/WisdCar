@@ -217,7 +217,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select  top 1 EmployeeID,EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from Employee ");
-			strSql.Append(" where EmployeeID=@EmployeeID");
+            strSql.Append(" where EmployeeNo=@EmployeeID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@EmployeeID", SqlDbType.Int,4)
 			};
@@ -428,6 +428,16 @@ namespace Zeta.WisdCar.Repository.CRUD
 		#region  ExtensionMethod
 
 		#endregion  ExtensionMethod
-	}
+
+        internal int ChangePassword(int id, string password)
+        {
+            string sql = "update employee set Reserved1=@pwd where EmployeeNo = @empno";
+            SqlParameter[] sp = {
+                new SqlParameter("@pwd",password),
+                new SqlParameter("@empno",id)    
+            };
+            return DbHelperSQL.ExecuteSql(sql, sp);
+        }
+    }
 }
 

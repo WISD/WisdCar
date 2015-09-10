@@ -1,0 +1,137 @@
+﻿@using Zeta.WisdCar.Model.VO
+@model CustomerVO
+@{
+    Layout = null;
+    
+}
+
+<!DOCTYPE html>
+@Styles.Render("~/global/css")
+@Scripts.Render("~/core/js")
+<!-- END CORE PLUGINS -->
+<script src="@Url.Content("~/assets/scripts/core/app.js")"></script>
+<script>
+    jQuery(document).ready(function () {
+        App.init();
+    });
+</script>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <h4 class="modal-title" id="divtitle">会员卡信息</h4>
+    <div>
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @class = "form-horizontal", id = "dilogform", role = "form" }))
+        {
+            <div class="form-group">
+                <label class="col-md-4 control-label">姓名:<span class="required">*</span></label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control"})
+                    @Html.HiddenFor(m => m.CustomerID)
+                    @*<input type="text" class="form-control" id="txtcusname" name="cusname" placeholder="">*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">性别:<span class="required">*</span></label>
+                <div class="col-md-8">
+                  
+                    <select class="table-group-action-input form-control input-medium" name="Sex" id="ddlcussex">
+                        @if (Model.Sex == "男")
+                        {
+                            <option value="男" selected>男</option>
+
+                            <option value="女">女</option>
+                        }
+                        else
+                        {
+                            <option value="男">男</option>
+                            <option value="女" selected>女</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">身份证号:<span class="required">*</span></label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.ICNo, new { @class = "form-control"})
+                    @*<input type="text" class="form-control" id="txtcuscid" name="cuscid" placeholder="">*@
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                <label class="col-md-4 control-label">会员卡类型:<span class="required">*</span></label>
+                <div class="col-md-8">
+                    <select class="table-group-action-input form-control input-medium" name="ClubCardDesc" id="txtcardtype">
+                        @if (Model.ClubCardDesc == "白金卡")
+                        {
+                            <option value="白金卡" selected>白金卡</option>
+                            <option value="金卡">金卡</option>
+                        }
+                        else
+                        {
+                            <option value="白金卡">白金卡</option>
+                            <option value="金卡" selected>金卡</option>
+                        }
+
+                    </select>
+                </div>
+            </div>*@
+
+
+            <div class="form-group">
+
+                <label class="col-md-4 control-label">
+                    出生年月:
+                    <span class="required">
+                        *
+                    </span>
+                </label>
+                <div class="col-md-8">
+                   
+                    <div class="input-group input-small date-picker input-daterange" data-date="10/11/2012" data-date-format="yyyy/mm/dd">
+                        @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control"})
+                        @*<input type="text" id="txtbirthday" class="form-control" name="birthday">*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">工作单位:<span class="required">*</span></label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
+                    @*<input type="text" class="form-control" id="txtcuscompany" name="cuscompany" placeholder="">*@
+                </div>
+            </div>
+
+        }
+    </div>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            App.init();
+            ComponentsPickers.init();
+        });
+    </script>
+</body>
+</html>
+@*section script{
+   <script>
+       $(function () {
+           $.ajax('@Url.Action("GetOneCustomer","Customer")', { id: 1 }, function (data) {
+               if (data) {
+                   $('#txtcusname').val(data.Name);
+                   $('#ddlcussex').val(1);
+                   $('#txtcuscid').val(data.ICNo);
+                   $('#txtcardtype').val(1);
+                   $('#txtbirthday').val(data.Birthday);
+                   $('#txtcuscompany').val(data.Company);
+               }
+
+           });
+       });
+    </script>
+}*@

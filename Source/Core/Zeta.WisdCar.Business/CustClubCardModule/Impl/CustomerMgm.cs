@@ -22,11 +22,14 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
             DataSet ds = customerData.GetCustomers(filter);
             List<CustomerPO> customerPOList = ds.GetEntity<List<CustomerPO>>();
-
-            customerPOList.ForEach(i =>
+            if(customerPOList!=null)
             {
-                customerVOList.Add(Mapper.Map<CustomerPO, CustomerVO>(i));
-            });
+                customerPOList.ForEach(i =>
+                {
+                    customerVOList.Add(Mapper.DynamicMap<CustomerPO, CustomerVO>(i));
+                });
+            }
+            
 
             return customerVOList;
         }
@@ -39,7 +42,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         public void AddCustomer(Model.VO.CustomerVO cust)
         {
             CustomerData customerData = new CustomerData();
-            customerData.AddCustomer(Mapper.Map<CustomerVO, CustomerPO>(cust));
+             customerData.AddCustomer(Mapper.Map<CustomerVO, CustomerPO>(cust));
         }
 
         public void EditCustomer(Model.VO.CustomerVO cust)
@@ -51,7 +54,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         public void DelCustomer(int id)
         {
             CustomerData customerData = new CustomerData();
-            customerData.DelCustomer(id);
+             customerData.DelCustomer(id);
         }
 
         public Model.VO.CustomerVO GetCustomerByID(int custID)
@@ -68,7 +71,16 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         {
             throw new NotImplementedException();
         }
-
+        public int AddAllCustomer(CustomerVO cust)
+        {
+            CustomerData customerData = new CustomerData();
+            var result = customerData.AddAllCustomer(Mapper.Map<CustomerVO, CustomerPO>(cust));
+            if(result<=0)
+            {
+                throw new Exception("添加出现错误");
+            }
+            return result;
+        }
 
 
     }

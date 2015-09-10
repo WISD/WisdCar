@@ -1,8 +1,13 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Model.PO;
+using Zeta.WisdCar.Model.VO;
+using Zeta.WisdCar.Repository;
+using Zeta.WisdCar.Repository.Impl;
 
 namespace Zeta.WisdCar.Business.CustClubCardModule
 {
@@ -31,7 +36,8 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
         public void AddClubCard(Model.VO.ClubCardVO clubCard)
         {
-            throw new NotImplementedException();
+            ClubCardData clubCarddal = new ClubCardData();
+            clubCarddal.AddCard(Mapper.Map<ClubCardVO, ClubCardPO>(clubCard));
         }
 
         public List<Model.VO.ClubCardPkgVO> GetAvailablePkgs(int clubCardID)

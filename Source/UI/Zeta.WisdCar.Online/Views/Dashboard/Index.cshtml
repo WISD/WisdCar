@@ -1,41 +1,348 @@
 ﻿<!-- BEGIN PAGE HEADER-->
-<div class="row">
-    <div class="col-md-12">
-        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-        <h3 class="page-title">
-            首页 <small>Dashboard</small>
-        </h3>
-        <ul class="page-breadcrumb breadcrumb">
-            <li>
-                <i class="fa fa-home"></i>
-                <a href="@Url.Action("Index", "Dashboard")">
-                    首页
-                </a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
-                <a href="#">
-                    Dashboard
-                </a>
-            </li>
-        </ul>
-        <!-- END PAGE TITLE & BREADCRUMB-->
-    </div>
-</div>
-<!-- END PAGE HEADER-->
-<!-- BEGIN PAGE CONTENT-->
-<div class="row">
-    <div class="col-md-12">
-        Page content goes here
-    </div>
-</div>
-<!-- END PAGE CONTENT-->
+<!-- 首页新增的分页css-->
 
 @section styles{
-
+    <link href="@Url.Content("~/assets/css/pages/tasks.css")" rel="stylesheet" />
 }
+
+<!-- 首页新增的图表js-->
+
+
+
+
+
+@*<div class="row">
+    <div class="col-md-12">*@
+
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+
+        @*<div class="page-content-wrapper">
+            <div class="page-content">*@
+                <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+                @*<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title">Modal title</h4>
+                            </div>
+                            <div class="modal-body"> Widget settings form goes here </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn blue">Save changes</button>
+                                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>*@
+
+                <!-- END STYLE CUSTOMIZER -->
+                <!-- BEGIN PAGE HEADER-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                        <h3 class="page-title"> 智慧汽车 <small>Wisdom Car</small> </h3>
+                        <ul class="page-breadcrumb breadcrumb">
+                            <li> <i class="fa fa-home"></i> <a href="@Url.Action("Index", "Dashboard")"> 首页 </a> <i class="fa fa-angle-right"></i> </li>
+                            <li> <a href="#"> 智慧汽车 </a> </li>
+                            <!--<li class="pull-right">
+                          <div id="dashboard-report-range" class="dashboard-date-range tooltips" data-placement="top" data-original-title="Change dashboard date range"> <i class="fa fa-calendar"></i> <span> </span> <i class="fa fa-angle-down"></i> </div> -->
+                            </li>
+                        </ul>
+                        <!-- END PAGE TITLE & BREADCRUMB-->
+                    </div>
+                </div>
+                <!-- END PAGE HEADER-->
+                <!-- 头部四个栏目开始 -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="dashboard-stat blue">
+                            <div class="visual"> <i class="fa fa-comments"></i> </div>
+                            <div class="details">
+                                <div class="number"> 1349 </div>
+                                <div class="desc"> 最新信息 </div>
+                            </div>
+                            <a class="more" href="#"> 查看更多 <i class="m-icon-swapright m-icon-white"></i> </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="dashboard-stat green">
+                            <div class="visual"> <i class="fa fa-shopping-cart"></i> </div>
+                            <div class="details">
+                                <div class="number"> 549 </div>
+                                <div class="desc"> 库存查询 </div>
+                            </div>
+                            <a class="more" href="#"> 查看更多 <i class="m-icon-swapright m-icon-white"></i> </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="dashboard-stat purple">
+                            <div class="visual"> <i class="fa fa-globe"></i> </div>
+                            <div class="details">
+                                <div class="number"> +19% </div>
+                                <div class="desc"> 滞销商品分析 </div>
+                            </div>
+                            <a class="more" href="#"> 查看更多 <i class="m-icon-swapright m-icon-white"></i> </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="dashboard-stat yellow">
+                            <div class="visual"> <i class="fa fa-bar-chart-o"></i> </div>
+                            <div class="details">
+                                <div class="number"> 12,500M$ </div>
+                                <div class="desc"> 总利润 </div>
+                            </div>
+                            <a class="more" href="#"> 查看更多 <i class="m-icon-swapright m-icon-white"></i> </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 头部四个栏目结束 -->
+                <div class="clearfix"> </div>
+
+
+                <div class="row">
+                    <!-- 营业汇总开始 -->
+                    <div class="col-md-6">
+                        <!-- Begin: life time stats -->
+                        <div class="portlet box blue tabbable">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-bar-chart-o"></i>营业汇总
+                                </div>
+                                <div class="tools">
+
+                                    <a href="javascript:;" class="reload">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="portlet-tabs">
+
+                                    <div class="tab-content">
+                                        <div class="portlet-body">
+                                            <div id="container"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- End: life time stats -->
+                    </div>
+                    <!-- 营业汇总结束 -->
+                    <!-- 今日提醒开始 -->
+                    <div class="col-md-6 col-sm-6">
+                        <div class="portlet box green tasks-widget">
+                            <div class="portlet-title">
+                                <div class="caption"> <i class="fa fa-check"></i>今日提醒 </div>
+                                <div class="tools"> <a href="" class="reload"> </a> </div>
+                                <div class="actions">
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="task-content">
+                                    <div class="scroller" style="height: 305px;" data-always-visible="1" data-rail-visible1="1">
+                                        <!-- START TASK LIST -->
+                                        <ul class="task-list">
+                                            <li>
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐 </span>  <span class="task-bell"> <i class="fa fa-bell-o"></i> </span> </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐 </span>  </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐  </span>  <span class="task-bell"> <i class="fa fa-bell-o"></i> </span> </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐  </span>  </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐  </span>  </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐  </span>  </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐  </span>  <span class="task-bell"> <i class="fa fa-bell-o"></i> </span> </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐  </span>  <span class="task-bell"> <i class="fa fa-bell-o"></i> </span> </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="last-line">
+                                                <div class="task-checkbox">
+                                                    <input type="checkbox" class="liChild" value="" />
+                                                </div>
+                                                <div class="task-title"> <span class="task-title-sp"> 今日开卡的人达到135人，其中80%人选择套餐  </span>  </div>
+                                                <div class="task-config">
+                                                    <div class="task-config-btn btn-group" style="z-index:999;">
+                                                        <a class="btn btn-xs default" href="#" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i><i class="fa fa-angle-down"></i> </a>
+                                                        <ul class="dropdown-menu pull-right">
+                                                            <li> <a href="#"> <i class="fa fa-check"></i> 查看 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-pencil"></i> 修改 </a> </li>
+                                                            <li> <a href="#"> <i class="fa fa-trash-o"></i> 删除 </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <!-- END START TASK LIST -->
+                                    </div>
+                                </div>
+                                <div class="task-footer"> <span class="pull-right"> <a href="#"> 产看所有消息 <i class="m-icon-swapright m-icon-gray"></i> </a> &nbsp; </span> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 今日提醒结束 -->
+                </div>
+                <div class="clearfix"> </div>
+
+
+
+
+            @*</div>
+        </div>
+    </div>
+</div>*@
+
+<!-- END PAGE CONTENT-->
+
+
 @section scripts{
+<script src="@Url.Content("~/assets/plugins/index/js/highcharts.js")"></script>
+
 <script>
+    $(document).ready(function () {
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container'
+            },
+
+            xAxis: {
+                categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+            },
+
+            series: [{
+                data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            }]
+        });
+
+        $('#getcsv').click(function () {
+            alert(chart.getCSV());
+        });
+
+        $("#download").click(function () {
+            Highcharts.post('', {
+                csv: chart.getCSV()
+            });
+        })
+    });
     var Dashboard = function () {
         var onPageLoad = function () {
             

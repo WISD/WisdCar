@@ -722,6 +722,50 @@ namespace Zeta.WisdCar.Infrastructure.DBUtility
                 }
             }
         }
+        public static void ExecutesqltranWithIndentity(Dictionary<string,object> SqlStringList)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    try
+                    {
+                        int indentity = 0;
+                        //循环
+                        foreach (KeyValuePair<string,object> myDE in SqlStringList)
+                        {
+                            string cmdText = myDE.Key.ToString();
+                            SqlParameter[] cmdParms = (SqlParameter[])myDE.Value;
+                            foreach (SqlParameter q in cmdParms)
+                            {
+                                if (q.Direction == ParameterDirection.InputOutput)
+                                {
+                                    q.Value = indentity;
+                                }
+                            }
+                            PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
+                            int val = cmd.ExecuteNonQuery();
+                            foreach (SqlParameter q in cmdParms)
+                            {
+                                if (q.Direction == ParameterDirection.Output)
+                                {
+                                    indentity = Convert.ToInt32(q.Value);
+                                }
+                            }
+                            cmd.Parameters.Clear();
+                        }
+                        trans.Commit();
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
         /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>

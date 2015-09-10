@@ -19,7 +19,7 @@ namespace Zeta.WisdCar.Repository.Impl
 
             if (!string.IsNullOrEmpty(filter.Name.Trim()))
             {
-                strSql1.AppendFormat(" Name like '%{0}%' ", filter.Name);
+                strSql1.AppendFormat(" and Name like '%{0}%' ", filter.Name);
             }
             if (!string.IsNullOrEmpty(filter.MobileNo.Trim()))
             {
@@ -29,7 +29,11 @@ namespace Zeta.WisdCar.Repository.Impl
             {
                 strSql1.AppendFormat(" And ICNo like '%{0}%' ", filter.ICNo);
             }
-            strSql1.AppendFormat(" And CardFlag = {0} ", filter.CardFlag);
+            if(filter.CardFlag!=-1)
+            {
+                strSql1.AppendFormat(" And CardFlag = {0} ", filter.CardFlag);
+            }
+            
 
             if (!string.IsNullOrEmpty(filter.SortName.Trim()))
             {
@@ -51,17 +55,23 @@ namespace Zeta.WisdCar.Repository.Impl
 
         public void AddCustomer(CustomerPO cust)
         {
-            _daoCustomer.Add(cust);
+             var result=_daoCustomer.Add(cust);
+             
         }
 
         public void EditCustomer(CustomerPO cust)
         {
-            _daoCustomer.Update(cust);
+             _daoCustomer.Update(cust);
         }
 
         public void DelCustomer(int id)
         {
-            _daoCustomer.Delete(id);
+             _daoCustomer.Delete(id);
+        }
+
+        public int AddAllCustomer(CustomerPO cust)
+        {
+            return  _daoCustomer.AddAll(cust);
         }
     }
 }
