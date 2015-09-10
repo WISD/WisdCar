@@ -384,7 +384,7 @@
             var formdt = $("#dilogform").serializeArray();
             var issub = true;
             formdt.forEach(function (e) {
-                if (e.value)
+                if (e.value || (e.name == 'FrameNo' || e.name == 'EngineNo'))
                 {
                     datamod[e.name] = e.value;
                 }else
