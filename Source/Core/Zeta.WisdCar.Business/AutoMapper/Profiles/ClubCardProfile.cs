@@ -18,10 +18,12 @@ namespace Zeta.WisdCar.Business.AutoMapper.Profiles
             CreateMap<IDataReader, ClubCardPO>();
 
             //PO to VO
-            CreateMap<ClubCardPO, ClubCardVO>();
+            CreateMap<ClubCardPO, ClubCardVO>().IgnoreUnmappedProperties();
 
             //VO to PO
             CreateMap<ClubCardVO, ClubCardPO>();
+
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }

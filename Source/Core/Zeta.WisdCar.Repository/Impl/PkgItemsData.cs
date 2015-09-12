@@ -14,7 +14,7 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             StringBuilder strSql = new StringBuilder();
             string strWhere = "";
-            strSql.AppendFormat(" PackageID = %{0}% ", pkgID);
+            strSql.AppendFormat(" PackageID = {0} ", pkgID);
 
             strWhere = strSql.ToString();
             return _daoPkgItem.GetList(strWhere);

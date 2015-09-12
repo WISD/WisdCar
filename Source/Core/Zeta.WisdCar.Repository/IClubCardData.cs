@@ -64,7 +64,7 @@ namespace Zeta.WisdCar.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        DataSet GetDetailByClubCardPkgID(int id);
+        DataSet GetDetailByClubCardPkgID(string id);
 
         /// <summary>
         /// 根据ID会员卡套餐消费项目
@@ -78,7 +78,7 @@ namespace Zeta.WisdCar.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ClubCardPackagePO GetClubCardPkgByID(int id);
+        ClubCardPackagePO GetClubCardPkgByID(string id);
 
         /// <summary>
         /// 修改会员卡信息

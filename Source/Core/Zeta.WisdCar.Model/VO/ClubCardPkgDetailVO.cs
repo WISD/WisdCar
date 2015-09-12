@@ -17,7 +17,7 @@ namespace Zeta.WisdCar.Model.VO
         private decimal _unitprice;
         private int _originalcount;
         private int _remaincount;
-        private int _clubcardpackageid;
+        private string _clubcardpackageid;
         private int _logicalstatus = 1;
         private string _creatorid;
         private DateTime _createddate;
@@ -87,7 +87,7 @@ namespace Zeta.WisdCar.Model.VO
         /// <summary>
         /// 会员卡套餐ID
         /// </summary>
-        public int ClubCardPackageID
+        public string ClubCardPackageID
         {
             set { _clubcardpackageid = value; }
             get { return _clubcardpackageid; }

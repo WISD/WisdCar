@@ -25,13 +25,13 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 是否存在该记录
         /// </summary>
-        public bool Exists(int ClubCardPackageID)
+        public bool Exists(string ClubCardPackageID)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select count(1) from ClubCardPackage");
             strSql.Append(" where ClubCardPackageID=@ClubCardPackageID");
             SqlParameter[] parameters = {
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4)
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50)
 			};
             parameters[0].Value = ClubCardPackageID;
 
@@ -50,7 +50,7 @@ namespace Zeta.WisdCar.Repository.CRUD
             strSql.Append(" values (");
             strSql.Append("@ClubCardPackageID,@PackageName,@OriginalAmount,@ActualAmount,@DiscountRate,@DiscountInfo,@PackageStatus,@Salesman,@SalesTime,@SaleStore,@PackageID,@ClubCardID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
             SqlParameter[] parameters = {
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50),
 					new SqlParameter("@PackageName", SqlDbType.NVarChar,50),
 					new SqlParameter("@OriginalAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@ActualAmount", SqlDbType.Decimal,5),
@@ -148,7 +148,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100),
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4)};
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50)};
             parameters[0].Value = model.PackageName;
             parameters[1].Value = model.OriginalAmount;
             parameters[2].Value = model.ActualAmount;
@@ -184,14 +184,14 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public bool Delete(int ClubCardPackageID)
+        public bool Delete(string ClubCardPackageID)
         {
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from ClubCardPackage ");
             strSql.Append(" where ClubCardPackageID=@ClubCardPackageID");
             SqlParameter[] parameters = {
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4)
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50)
 			};
             parameters[0].Value = ClubCardPackageID;
 
@@ -228,14 +228,14 @@ namespace Zeta.WisdCar.Repository.CRUD
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
-        public WisdCar.Model.PO.ClubCardPackagePO GetModel(int ClubCardPackageID)
+        public WisdCar.Model.PO.ClubCardPackagePO GetModel(string ClubCardPackageID)
         {
 
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 ClubCardPackageID,PackageName,OriginalAmount,ActualAmount,DiscountRate,DiscountInfo,PackageStatus,Salesman,SalesTime,SaleStore,PackageID,ClubCardID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from ClubCardPackage ");
             strSql.Append(" where ClubCardPackageID=@ClubCardPackageID");
             SqlParameter[] parameters = {
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4)
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50)
 			};
             parameters[0].Value = ClubCardPackageID;
 
@@ -262,7 +262,7 @@ namespace Zeta.WisdCar.Repository.CRUD
             {
                 if (row["ClubCardPackageID"] != null && row["ClubCardPackageID"].ToString() != "")
                 {
-                    model.ClubCardPackageID = int.Parse(row["ClubCardPackageID"].ToString());
+                    model.ClubCardPackageID = row["ClubCardPackageID"].ToString();
                 }
                 if (row["PackageName"] != null)
                 {

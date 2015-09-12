@@ -46,12 +46,11 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into Package(");
-            strSql.Append("ClubCardPackageID,PackageName,TotalPrice,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
+            strSql.Append("PackageName,TotalPrice,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
 			strSql.Append(" values (");
-            strSql.Append("@ClubCardPackageID,@PackageName,@TotalPrice,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
+            strSql.Append("@PackageName,@TotalPrice,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
-                    new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50),
 					new SqlParameter("@PackageName", SqlDbType.NVarChar,50),
 					new SqlParameter("@TotalPrice", SqlDbType.Decimal,5),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),

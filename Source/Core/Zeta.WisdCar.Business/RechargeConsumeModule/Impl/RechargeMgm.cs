@@ -10,6 +10,7 @@ using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Infrastructure.DBUtility;
 using System.Data.SqlClient;
 using Zeta.WisdCar.Infrastructure;
+using Zeta.WisdCar.Business.Handler;
 
 namespace Zeta.WisdCar.Business.RechargeConsumeModule
 {
@@ -70,28 +71,39 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             //PackageData packageData = new PackageData();
             //PkgItemsData pkgItemsData = new PkgItemsData();
 
-            PackageVO packageVO = pkgMgm.GetPackageByID(entity.ClubCardPackageID);
+            PackageVO packageVO = pkgMgm.GetPackageByID(Convert.ToInt32(entity.ClubCardPackageID));//此处ClubCardPackageID即为PackageID
             PackagePO packagePO = Mapper.Map<PackageVO, PackagePO>(packageVO);
-            List<PkgItemVO> pkgItemList = pkgItemsMgm.GetItemsByPkgID(entity.ClubCardPackageID);
+            List<PkgItemVO> pkgItemList = pkgItemsMgm.GetItemsByPkgID(packagePO.PackageID);
 
 
-            clubCardPkgPO.PackageID = 1;
-            clubCardPkgPO.PackageName = "";
+            clubCardPkgPO.PackageID = packagePO.PackageID;
+            clubCardPkgPO.ClubCardID = entity.ClubCardID;
+            clubCardPkgPO.PackageName = packagePO.PackageName;
             clubCardPkgPO.OriginalAmount = entity.PlatformRechargeAmount;
             clubCardPkgPO.ActualAmount = entity.ActualRechargeAmount;
             clubCardPkgPO.DiscountRate = entity.DiscountRate;
             clubCardPkgPO.DiscountInfo = entity.DiscountInfo;
-            clubCardPkgPO.DiscountInfo = Convert.ToString(CardSPackageStatus.Available);
+            clubCardPkgPO.DiscountRate = Convert.ToDecimal(CardSPackageStatus.Available);
             clubCardPkgPO.Salesman = entity.SalesMan;
             clubCardPkgPO.SalesTime = DateTime.Now;
-            clubCardPkgPO.SaleStore = "";//从login信息中获取
+            clubCardPkgPO.SaleStore = "1111";//从login信息中获取
+            clubCardPkgPO.CreatedDate = DateTime.Now;
+            clubCardPkgPO.CreatorID = "001";
+            clubCardPkgPO.LastModifiedDate = DateTime.Now;
+            clubCardPkgPO.LastModifierID = "002";
+            clubCardPkgPO.ClubCardPackageID = SerialNoGenerator.GenClubCardPkgID();
 
             foreach (var item in pkgItemList)
 	        {
 		        ClubCardPackageDetailPO clubCardPkgDetailPO = new ClubCardPackageDetailPO();
-                clubCardPkgDetailPO.ClubCardPackageID = 10000;
+                clubCardPkgDetailPO.ClubCardPackageID = clubCardPkgPO.ClubCardPackageID;
                 clubCardPkgDetailPO.ItemID = item.ItemID;
                 clubCardPkgDetailPO.ItemName = item.ItemName;
+
+                clubCardPkgDetailPO.CreatedDate = DateTime.Now;
+                clubCardPkgDetailPO.CreatorID = "001";
+                clubCardPkgDetailPO.LastModifiedDate = DateTime.Now;
+                clubCardPkgDetailPO.LastModifierID = "002";
                 
                 clubCardPkgDetailPOList.Add(clubCardPkgDetailPO);
 	        }

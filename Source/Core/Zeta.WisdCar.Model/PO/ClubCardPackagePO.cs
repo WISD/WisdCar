@@ -10,7 +10,7 @@ namespace Zeta.WisdCar.Model.PO
         public ClubCardPackagePO()
 		{}
         #region Model
-        private int _clubcardpackageid;
+        private string _clubcardpackageid;
         private string _packagename;
         private decimal _originalamount;
         private decimal _actualamount;
@@ -33,7 +33,7 @@ namespace Zeta.WisdCar.Model.PO
         /// <summary>
         /// 会员卡套餐ID
         /// </summary>
-        public int ClubCardPackageID
+        public string ClubCardPackageID
         {
             set { _clubcardpackageid = value; }
             get { return _clubcardpackageid; }

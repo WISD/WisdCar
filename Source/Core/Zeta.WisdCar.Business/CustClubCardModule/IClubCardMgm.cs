@@ -70,7 +70,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<ClubCardPkgDetailVO> GetDetailByClubCardPkgID(int id);
+        List<ClubCardPkgDetailVO> GetDetailByClubCardPkgID(string id);
 
         /// <summary>
         /// 根据ID会员卡套餐消费项目
@@ -84,7 +84,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ClubCardPkgVO GetClubCardPkgByID(int id);
+        ClubCardPkgVO GetClubCardPkgByID(string id);
 
         /// <summary>
         /// 验证用户密码是否正确

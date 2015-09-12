@@ -113,7 +113,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             return clubCardPkgVOList;
         }
 
-        public List<Model.VO.ClubCardPkgDetailVO> GetDetailByClubCardPkgID(int id)
+        public List<Model.VO.ClubCardPkgDetailVO> GetDetailByClubCardPkgID(string id)
         {
             ClubCardData clubCardData = new ClubCardData();
 
@@ -140,7 +140,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             return clubCardPkgDetailVO;
         }
 
-        public Model.VO.ClubCardPkgVO GetClubCardPkgByID(int id)
+        public Model.VO.ClubCardPkgVO GetClubCardPkgByID(string id)
         {
             ClubCardData clubCardData = new ClubCardData();
             ClubCardPkgVO clubCardPkgVO = new ClubCardPkgVO();

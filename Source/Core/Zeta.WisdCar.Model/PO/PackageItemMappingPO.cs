@@ -14,6 +14,7 @@ namespace Zeta.WisdCar.Model.PO
 		private int _consumecount;
 		private int _packageid;
 		private int _itemid;
+        private string _itemname;
 		private int _logicalstatus=1;
 		private string _creatorid;
 		private DateTime _createddate;
@@ -54,6 +55,15 @@ namespace Zeta.WisdCar.Model.PO
 			set{ _itemid=value;}
 			get{return _itemid;}
 		}
+
+        /// <summary>
+        /// 消费项目名
+        /// </summary>
+        public string ItemName
+        {
+            set { _itemname = value; }
+            get { return _itemname; }
+        }
 		/// <summary>
 		/// 逻辑状态
 		/// </summary>

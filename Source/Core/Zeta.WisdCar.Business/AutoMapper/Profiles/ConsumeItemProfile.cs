@@ -16,7 +16,7 @@ namespace Zeta.WisdCar.Business.AutoMapper.Profiles
             //DB record to PO
             CreateMap<IDataReader, ConsumeItemPO>();
             //PO to VO
-            CreateMap<ConsumeItemPO, ConsumeItemVO>();
+            CreateMap<ConsumeItemPO, ConsumeItemVO>().IgnoreUnmappedProperties();
             //VO to PO
             CreateMap<ConsumeItemVO, ConsumeItemPO>();
 

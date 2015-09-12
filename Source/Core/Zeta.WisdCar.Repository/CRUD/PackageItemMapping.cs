@@ -46,14 +46,15 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into PackageItemMapping(");
-			strSql.Append("ConsumeCount,PackageID,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
+            strSql.Append("ConsumeCount,PackageID,ItemID,ItemName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
 			strSql.Append(" values (");
-			strSql.Append("@ConsumeCount,@PackageID,@ItemID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
+            strSql.Append("@ConsumeCount,@PackageID,@ItemID,@ItemName,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
 					new SqlParameter("@ConsumeCount", SqlDbType.Int,4),
 					new SqlParameter("@PackageID", SqlDbType.Int,4),
-					new SqlParameter("@ItemID", SqlDbType.Int,4),
+                    new SqlParameter("@ItemID", SqlDbType.Int,4),
+                    new SqlParameter("@ItemName", SqlDbType.NVarChar,50),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
 					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
 					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
@@ -65,14 +66,15 @@ namespace Zeta.WisdCar.Repository.CRUD
 			parameters[0].Value = model.ConsumeCount;
 			parameters[1].Value = model.PackageID;
 			parameters[2].Value = model.ItemID;
-			parameters[3].Value = model.LogicalStatus;
-			parameters[4].Value = model.CreatorID;
-			parameters[5].Value = model.CreatedDate;
-			parameters[6].Value = model.LastModifierID;
-			parameters[7].Value = model.LastModifiedDate;
-			parameters[8].Value = model.Reserved1;
-			parameters[9].Value = model.Reserved2;
-			parameters[10].Value = model.Reserved3;
+            parameters[3].Value = model.ItemName;
+			parameters[4].Value = model.LogicalStatus;
+			parameters[5].Value = model.CreatorID;
+			parameters[6].Value = model.CreatedDate;
+			parameters[7].Value = model.LastModifierID;
+			parameters[8].Value = model.LastModifiedDate;
+			parameters[9].Value = model.Reserved1;
+			parameters[10].Value = model.Reserved2;
+			parameters[11].Value = model.Reserved3;
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -94,6 +96,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append("ConsumeCount=@ConsumeCount,");
 			strSql.Append("PackageID=@PackageID,");
 			strSql.Append("ItemID=@ItemID,");
+            strSql.Append("ItemName=@ItemName,");
 			strSql.Append("LogicalStatus=@LogicalStatus,");
 			strSql.Append("CreatorID=@CreatorID,");
 			strSql.Append("CreatedDate=@CreatedDate,");
@@ -107,6 +110,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@ConsumeCount", SqlDbType.Int,4),
 					new SqlParameter("@PackageID", SqlDbType.Int,4),
 					new SqlParameter("@ItemID", SqlDbType.Int,4),
+                    new SqlParameter("@ItemName", SqlDbType.NVarChar,50),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
 					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
 					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
@@ -119,15 +123,16 @@ namespace Zeta.WisdCar.Repository.CRUD
 			parameters[0].Value = model.ConsumeCount;
 			parameters[1].Value = model.PackageID;
 			parameters[2].Value = model.ItemID;
-			parameters[3].Value = model.LogicalStatus;
-			parameters[4].Value = model.CreatorID;
-			parameters[5].Value = model.CreatedDate;
-			parameters[6].Value = model.LastModifierID;
-			parameters[7].Value = model.LastModifiedDate;
-			parameters[8].Value = model.Reserved1;
-			parameters[9].Value = model.Reserved2;
-			parameters[10].Value = model.Reserved3;
-			parameters[11].Value = model.PackageItemID;
+            parameters[3].Value = model.ItemName;
+			parameters[4].Value = model.LogicalStatus;
+			parameters[5].Value = model.CreatorID;
+			parameters[6].Value = model.CreatedDate;
+			parameters[7].Value = model.LastModifierID;
+			parameters[8].Value = model.LastModifiedDate;
+			parameters[9].Value = model.Reserved1;
+			parameters[10].Value = model.Reserved2;
+			parameters[11].Value = model.Reserved3;
+			parameters[12].Value = model.PackageItemID;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -191,7 +196,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 PackageItemID,ConsumeCount,PackageID,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from PackageItemMapping ");
+			strSql.Append("select  top 1 PackageItemID,ConsumeCount,PackageID,ItemID,ItemName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from PackageItemMapping ");
 			strSql.Append(" where PackageItemID=@PackageItemID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@PackageItemID", SqlDbType.Int,4)
@@ -235,6 +240,10 @@ namespace Zeta.WisdCar.Repository.CRUD
 				{
 					model.ItemID=int.Parse(row["ItemID"].ToString());
 				}
+                if (row["ItemName"] != null && row["ItemName"].ToString() != "")
+                {
+                    model.ItemName = row["ItemName"].ToString();
+                }
 				if(row["LogicalStatus"]!=null && row["LogicalStatus"].ToString()!="")
 				{
 					model.LogicalStatus=int.Parse(row["LogicalStatus"].ToString());
@@ -277,7 +286,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select PackageItemID,ConsumeCount,PackageID,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+			strSql.Append("select PackageItemID,ConsumeCount,PackageID,ItemID,ItemName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
 			strSql.Append(" FROM PackageItemMapping ");
 			if(strWhere.Trim()!="")
 			{
@@ -297,7 +306,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" PackageItemID,ConsumeCount,PackageID,ItemID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+			strSql.Append(" PackageItemID,ConsumeCount,PackageID,ItemID,ItemName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
 			strSql.Append(" FROM PackageItemMapping ");
 			if(strWhere.Trim()!="")
 			{

@@ -63,7 +63,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@ActualRechargeAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@RechargeType", SqlDbType.Int,4),
 					new SqlParameter("@PayType", SqlDbType.Int,4),
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50),
 					new SqlParameter("@PlatformRechargeAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@DiscountRate", SqlDbType.Decimal,5),
 					new SqlParameter("@DiscountInfo", SqlDbType.NVarChar,50),
@@ -155,7 +155,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@ActualRechargeAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@RechargeType", SqlDbType.Int,4),
 					new SqlParameter("@PayType", SqlDbType.Int,4),
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50),
 					new SqlParameter("@PlatformRechargeAmount", SqlDbType.Decimal,5),
 					new SqlParameter("@DiscountRate", SqlDbType.Decimal,5),
 					new SqlParameter("@DiscountInfo", SqlDbType.NVarChar,50),
@@ -338,7 +338,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 				}
 				if(row["ClubCardPackageID"]!=null && row["ClubCardPackageID"].ToString()!="")
 				{
-					model.ClubCardPackageID=int.Parse(row["ClubCardPackageID"].ToString());
+					model.ClubCardPackageID=row["ClubCardPackageID"].ToString();
 				}
 				if(row["PlatformRechargeAmount"]!=null && row["PlatformRechargeAmount"].ToString()!="")
 				{

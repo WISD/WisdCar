@@ -22,14 +22,14 @@ namespace Zeta.WisdCar.Repository
         /// </summary>
         /// <param name="custID"></param>
         /// <returns></returns>
-        ClubCardPackagePO GetClubCardPkgByID(int clubCardPkgID);
+        ClubCardPackagePO GetClubCardPkgByID(string clubCardPkgID);
 
         /// <summary>
         /// 根据会员卡套餐ID获取该套餐明细信息
         /// </summary>
         /// <param name="custID"></param>
         /// <returns></returns>
-        DataSet GetClubCardPkgDetailsByID(int clubCardPkgID);
+        DataSet GetClubCardPkgDetailsByID(string clubCardPkgID);
 
         /// <summary>
         /// 新增会员套餐
@@ -71,12 +71,12 @@ namespace Zeta.WisdCar.Repository
         /// 删除会员套餐
         /// </summary>
         /// <param name="id"></param>
-        void DelClubCardPkg(int id);
+        void DelClubCardPkg(string id);
 
         /// <summary>
         /// 根据会员卡套餐ID删除会员套餐明细
         /// </summary>
         /// <param name="clubCardPkgID"></param>
-        void DelClubCardPkgDetail(int clubCardPkgID);
+        void DelClubCardPkgDetail(string clubCardPkgID);
     }
 }

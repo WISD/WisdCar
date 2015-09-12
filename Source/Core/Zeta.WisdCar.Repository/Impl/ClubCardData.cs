@@ -95,13 +95,13 @@ namespace Zeta.WisdCar.Repository.Impl
             return _daoClubCardPkg.GetList(strWhere);
         }
 
-        public System.Data.DataSet GetDetailByClubCardPkgID(int id)
+        public System.Data.DataSet GetDetailByClubCardPkgID(string id)
         {
             ClubCardPackageDetail _daoClubCardPkgDetail = new ClubCardPackageDetail();
             StringBuilder strSql = new StringBuilder();
             string strWhere = "";
 
-            strSql.AppendFormat(" ClubCardPackageID = '%{0}%' ", id);
+            strSql.AppendFormat(" ClubCardPackageID = '{0}' ", id);
             strWhere = strSql.ToString();
 
             return _daoClubCardPkgDetail.GetList(strWhere);
@@ -113,7 +113,7 @@ namespace Zeta.WisdCar.Repository.Impl
             return _daoClubCardPkgDetail.GetModel(id);
         }
 
-        public Model.PO.ClubCardPackagePO GetClubCardPkgByID(int id)
+        public Model.PO.ClubCardPackagePO GetClubCardPkgByID(string id)
         {
             ClubCardPackage _daoClubCardPkg = new ClubCardPackage();
             return _daoClubCardPkg.GetModel(id);

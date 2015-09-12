@@ -23,7 +23,7 @@ namespace Zeta.WisdCar.Model.PO
 		private decimal _actualrechargeamount;
 		private int _rechargetype;
 		private int _paytype;
-		private int _clubcardpackageid;
+        private string _clubcardpackageid;
 		private decimal _platformrechargeamount;
 		private decimal _discountrate;
 		private string _discountinfo;
@@ -142,7 +142,7 @@ namespace Zeta.WisdCar.Model.PO
 		/// <summary>
 		/// 会员卡套餐ID
 		/// </summary>
-		public int ClubCardPackageID
+        public string ClubCardPackageID
 		{
 			set{ _clubcardpackageid=value;}
 			get{return _clubcardpackageid;}

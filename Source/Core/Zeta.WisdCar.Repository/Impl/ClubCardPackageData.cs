@@ -18,23 +18,23 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             StringBuilder strSql = new StringBuilder();
             string strWhere = "";
-            strSql.AppendFormat(" ClubCardID = %{0}% ", clubCardID);
+            strSql.AppendFormat(" ClubCardID = {0} ", clubCardID);
 
             strWhere = strSql.ToString();
             return _daoClubCardPackage.GetList(strWhere);
         }
 
-        public Model.PO.ClubCardPackagePO GetClubCardPkgByID(int clubCardPkgID)
+        public Model.PO.ClubCardPackagePO GetClubCardPkgByID(string clubCardPkgID)
         {
             return _daoClubCardPackage.GetModel(clubCardPkgID);
         }
 
-        public System.Data.DataSet GetClubCardPkgDetailsByID(int clubCardPkgID)
+        public System.Data.DataSet GetClubCardPkgDetailsByID(string clubCardPkgID)
         {
             ClubCardPackageDetail _daoClubCardPkgDetail = new ClubCardPackageDetail();
             StringBuilder strSql = new StringBuilder();
             string strWhere = "";
-            strSql.AppendFormat(" ClubCardPackageID = %{0}% ", clubCardPkgID);
+            strSql.AppendFormat(" ClubCardPackageID = {0} ", clubCardPkgID);
 
             strWhere = strSql.ToString();
             return _daoClubCardPkgDetail.GetList(strWhere);
@@ -78,18 +78,18 @@ namespace Zeta.WisdCar.Repository.Impl
             }
         }
 
-        public void DelClubCardPkg(int id)
+        public void DelClubCardPkg(string id)
         {
             _daoClubCardPackage.Delete(id);
         }
 
-        public void DelClubCardPkgDetail(int clubCardPkgID)
+        public void DelClubCardPkgDetail(string clubCardPkgID)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("delete from ClubCardPackageDetail ");
             strSql.Append(" where ClubCardPackageID=@ClubCardPackageID");
             SqlParameter[] parameters = {
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4)
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50)
 			};
             parameters[0].Value = clubCardPkgID;
 

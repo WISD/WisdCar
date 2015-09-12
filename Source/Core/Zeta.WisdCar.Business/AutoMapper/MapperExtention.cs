@@ -16,5 +16,19 @@ namespace Zeta.WisdCar.Business.AutoMapper
         {
             return Mapper.Map<TSource, TDestination>(model, DaoModel);
         }
+        public static IMappingExpression<TSource, TDestination> IgnoreUnmappedProperties<TSource, TDestination>(this IMappingExpression<TSource, TDestination> expression)
+        {
+            var typeMap = Mapper.FindTypeMapFor<TSource, TDestination>();
+            if (typeMap != null)
+            {
+                foreach (var unmappedPropertyName in typeMap.GetUnmappedPropertyNames())
+                {
+                    expression.ForMember(unmappedPropertyName, opt => opt.Ignore());
+                }
+            }
+
+            return expression;
+        }
+
     }
 }

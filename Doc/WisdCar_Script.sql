@@ -99,7 +99,7 @@ go
 
 CREATE TABLE ClubCardPackage
 (
-	ClubCardPackageID    int  NOT NULL ,
+	ClubCardPackageID    nvarchar(50)  NOT NULL ,
 	PackageName          nvarchar(50)  NOT NULL ,
 	OriginalAmount       numeric(9,2)  NOT NULL ,
 	ActualAmount         numeric(9,2)  NOT NULL ,
@@ -137,7 +137,7 @@ CREATE TABLE ClubCardPackageDetail
 	UnitPrice            numeric(9,2)  NOT NULL ,
 	OriginalCount        int  NOT NULL ,
 	RemainCount          int  NOT NULL ,
-	ClubCardPackageID    int  NOT NULL ,
+	ClubCardPackageID    nvarchar(50)  NOT NULL ,
 	
 	LogicalStatus          int  NOT NULL DEFAULT 1,
 	CreatorID            nvarchar(50)  NOT NULL ,
@@ -372,7 +372,8 @@ CREATE TABLE PackageItemMapping
 	ConsumeCount         int  NOT NULL ,
 	PackageID            int  NOT NULL ,
 	ItemID               int  NOT NULL ,
-	
+	ItemName             nvarchar(50)  NOT NULL ,
+
 	LogicalStatus          int  NOT NULL DEFAULT 1,
 	CreatorID            nvarchar(50)  NOT NULL ,
 	CreatedDate          datetime  NOT NULL ,
@@ -405,7 +406,7 @@ CREATE TABLE RechargeLog
 	ActualRechargeAmount numeric(9,2)  NOT NULL ,
 	RechargeType         int  NOT NULL ,
 	PayType		     int  NOT NULL ,
-	ClubCardPackageID    int  NOT NULL ,
+	ClubCardPackageID    nvarchar(50)  NOT NULL ,
 	PlatformRechargeAmount numeric(9,2)  NOT NULL ,
 	DiscountRate         numeric(5,2)  NOT NULL ,
 	DiscountInfo         nvarchar(50)  NOT NULL ,
