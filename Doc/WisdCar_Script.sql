@@ -272,7 +272,7 @@ go
 CREATE TABLE Employee
 (
 	EmployeeID           int IDENTITY(1,1) NOT NULL ,
-	EmployeeNo           int  NOT NULL ,
+	EmployeeNo           nvarchar(50)  NOT NULL ,
 	Name                 nvarchar(50)  NOT NULL ,
 	Sex                  nvarchar(50)  NULL ,
 	Phone                nvarchar(50)  NOT NULL ,
@@ -280,8 +280,8 @@ CREATE TABLE Employee
 	EmployeeAddr         nvarchar(50)  NULL ,
 	EmployeeResume       nvarchar(50)  NULL ,
 	StoreID              int  NOT NULL ,
-	
-	LogicalStatus          int  NOT NULL DEFAULT 1,
+	StoreName            nvarchar(50)  NULL ,
+	LogicalStatus        int  NOT NULL DEFAULT 1,
 	CreatorID            nvarchar(50)  NOT NULL ,
 	CreatedDate          datetime  NOT NULL ,
 	LastModifierID       nvarchar(50)  NOT NULL ,
@@ -301,8 +301,8 @@ go
 CREATE TABLE KVLookup
 (
 	LookupID             int IDENTITY(1,1) NOT NULL ,
-	LookupKey            nvarchar(50)  NOT NULL ,
-	LookupValue          char(18)  NOT NULL ,
+	LookupKey            nvarchar(100)  NOT NULL ,
+	LookupValue          nvarchar(200)  NOT NULL ,
 	CategoryID           int  NOT NULL ,
 	
 	LogicalStatus          int  NOT NULL DEFAULT 1,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Model.Entity;
 using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business.RechargeConsumeModule
@@ -61,6 +62,14 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
         /// <param name="batchNo"></param>
         /// <returns></returns>
         List<ConsumeVO> GetConsumeInfoByBatchNo(string batchNo);
+
+
+        /// <summary>
+        /// 查询消费记录
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        List<ConsumeQueryVO> GetConsumeLog(ConsumeLogQueryEntity entity);
 
 
     }

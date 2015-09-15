@@ -27,5 +27,10 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
         {
             throw new NotImplementedException();
         }
+
+        public List<Model.VO.ConsumeQueryVO> GetConsumeLog(Model.Entity.ConsumeLogQueryEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

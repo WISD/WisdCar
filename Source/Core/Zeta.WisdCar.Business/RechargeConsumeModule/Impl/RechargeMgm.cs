@@ -128,5 +128,16 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             }
             return 1;
         }
+
+
+        public List<CashRechargeQueryVO> GetRechargeCashLog(Model.Entity.RechargeLogQueryEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<PkgRechargeQueryVO> GetRechargePkgLog(Model.Entity.RechargeLogQueryEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -51,8 +51,8 @@ namespace Zeta.WisdCar.Repository.CRUD
             strSql.Append("@LookupKey,@LookupValue,@CategoryID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
             strSql.Append(";select @@IDENTITY");
             SqlParameter[] parameters = {
-					new SqlParameter("@LookupKey", SqlDbType.NVarChar,50),
-					new SqlParameter("@LookupValue", SqlDbType.Char,18),
+					new SqlParameter("@LookupKey", SqlDbType.NVarChar,100),
+					new SqlParameter("@LookupValue", SqlDbType.NVarChar,200),
 					new SqlParameter("@CategoryID", SqlDbType.Int,4),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
 					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
@@ -104,8 +104,8 @@ namespace Zeta.WisdCar.Repository.CRUD
             strSql.Append("Reserved3=@Reserved3");
             strSql.Append(" where LookupID=@LookupID");
             SqlParameter[] parameters = {
-					new SqlParameter("@LookupKey", SqlDbType.NVarChar,50),
-					new SqlParameter("@LookupValue", SqlDbType.Char,18),
+					new SqlParameter("@LookupKey", SqlDbType.NVarChar,100),
+					new SqlParameter("@LookupValue", SqlDbType.NVarChar,200),
 					new SqlParameter("@CategoryID", SqlDbType.Int,4),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
 					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),

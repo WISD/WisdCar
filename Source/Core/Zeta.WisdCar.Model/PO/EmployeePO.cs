@@ -11,7 +11,7 @@ namespace Zeta.WisdCar.Model.PO
 		{}
 		#region Model
 		private int _employeeid;
-		private int _employeeno;
+		private string _employeeno;
 		private string _name;
 		private string _sex;
 		private string _phone;
@@ -19,6 +19,7 @@ namespace Zeta.WisdCar.Model.PO
 		private string _employeeaddr;
 		private string _employeeresume;
 		private int _storeid;
+        private string _storename;
 		private int _logicalstatus=1;
 		private string _creatorid;
 		private DateTime _createddate;
@@ -38,7 +39,7 @@ namespace Zeta.WisdCar.Model.PO
 		/// <summary>
 		/// 员工编号
 		/// </summary>
-		public int EmployeeNo
+		public string EmployeeNo
 		{
 			set{ _employeeno=value;}
 			get{return _employeeno;}
@@ -99,6 +100,16 @@ namespace Zeta.WisdCar.Model.PO
 			set{ _storeid=value;}
 			get{return _storeid;}
 		}
+
+        /// <summary>
+        /// 所属门店名
+        /// </summary>
+        public string StoreName
+        {
+            set { _storename = value; }
+            get { return _storename; }
+        }
+
 		/// <summary>
 		/// 逻辑状态
 		/// </summary>

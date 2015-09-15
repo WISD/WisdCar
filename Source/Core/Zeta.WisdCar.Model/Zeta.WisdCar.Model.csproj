@@ -40,10 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\ClubCardQueryEntity.cs" />
+    <Compile Include="Entity\ConsumeLogQueryEntity.cs" />
     <Compile Include="Entity\CustomerQueryEntity.cs" />
     <Compile Include="Entity\RechargeLogQueryEntity.cs" />
     <Compile Include="Entity\UserProfileEntity.cs" />
     <Compile Include="PO\CarPO.cs" />
+    <Compile Include="VO\CashRechargeQueryVO.cs" />
     <Compile Include="PO\ClubCardPO.cs" />
     <Compile Include="PO\ClubCardPackagePO.cs" />
     <Compile Include="PO\ClubCardPackageDetailPO.cs" />
@@ -64,11 +66,16 @@
     <Compile Include="VO\ClubCardPkgVO.cs" />
     <Compile Include="VO\ClubCardTypeVO.cs" />
     <Compile Include="VO\ClubCardVO.cs" />
+    <Compile Include="VO\ConsumeQueryVO.cs" />
     <Compile Include="VO\ConsumeVO.cs" />
     <Compile Include="VO\ConsumeItemVO.cs" />
     <Compile Include="VO\CustomerVO.cs" />
+    <Compile Include="VO\EmployeeVO.cs" />
+    <Compile Include="VO\KVCategoryVO.cs" />
+    <Compile Include="VO\KVLookupVO.cs" />
     <Compile Include="VO\PackageVO.cs" />
     <Compile Include="VO\PkgItemVO.cs" />
+    <Compile Include="VO\PkgRechargeQueryVO.cs" />
     <Compile Include="VO\RechargeVO.cs" />
     <Compile Include="VO\StoreVO.cs" />
   </ItemGroup>

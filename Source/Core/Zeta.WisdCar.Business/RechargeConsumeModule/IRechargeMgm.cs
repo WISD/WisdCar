@@ -42,20 +42,20 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
         /// <returns>返回会员卡套餐ID</returns>
         int RechargePkg(RechargeVO entity);
 
-        ///// <summary>
-        ///// 查询消费记录
-        ///// 现金消费记录
-        ///// </summary>
-        ///// <param name="entity"></param>
-        ///// <returns></returns>
-        //List<RechargeVO> GetRechargeCashLog(RechargeLogQueryEntity entity);
+        /// <summary>
+        /// 查询充值记录
+        /// 现金充值记录
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        List<CashRechargeQueryVO> GetRechargeCashLog(RechargeLogQueryEntity entity);
 
-        ///// <summary>
-        ///// 查询消费记录
-        ///// 套餐消费记录
-        ///// </summary>
-        ///// <param name="entity"></param>
-        ///// <returns></returns>
-        //List<RechargeVO> GetRechargePkgLog(RechargeLogQueryEntity entity);
+        /// <summary>
+        /// 查询充值记录
+        /// 套餐充值记录
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        List<PkgRechargeQueryVO> GetRechargePkgLog(RechargeLogQueryEntity entity);
     }
 }

@@ -46,12 +46,12 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("insert into Employee(");
-			strSql.Append("EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
+            strSql.Append("EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,StoreName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3)");
 			strSql.Append(" values (");
-			strSql.Append("@EmployeeNo,@Name,@Sex,@Phone,@JobType,@EmployeeAddr,@EmployeeResume,@StoreID,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
+            strSql.Append("@EmployeeNo,@Name,@Sex,@Phone,@JobType,@EmployeeAddr,@EmployeeResume,@StoreID,@StoreName,@LogicalStatus,@CreatorID,@CreatedDate,@LastModifierID,@LastModifiedDate,@Reserved1,@Reserved2,@Reserved3)");
 			strSql.Append(";select @@IDENTITY");
 			SqlParameter[] parameters = {
-					new SqlParameter("@EmployeeNo", SqlDbType.Int,4),
+					new SqlParameter("@EmployeeNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@Sex", SqlDbType.NVarChar,50),
 					new SqlParameter("@Phone", SqlDbType.NVarChar,50),
@@ -59,6 +59,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@EmployeeAddr", SqlDbType.NVarChar,50),
 					new SqlParameter("@EmployeeResume", SqlDbType.NVarChar,50),
 					new SqlParameter("@StoreID", SqlDbType.Int,4),
+                    new SqlParameter("@StoreName", SqlDbType.NVarChar,50),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
 					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
 					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
@@ -75,14 +76,15 @@ namespace Zeta.WisdCar.Repository.CRUD
 			parameters[5].Value = model.EmployeeAddr;
 			parameters[6].Value = model.EmployeeResume;
 			parameters[7].Value = model.StoreID;
-			parameters[8].Value = model.LogicalStatus;
-			parameters[9].Value = model.CreatorID;
-			parameters[10].Value = model.CreatedDate;
-			parameters[11].Value = model.LastModifierID;
-			parameters[12].Value = model.LastModifiedDate;
-			parameters[13].Value = model.Reserved1;
-			parameters[14].Value = model.Reserved2;
-			parameters[15].Value = model.Reserved3;
+            parameters[8].Value = model.StoreName;
+			parameters[9].Value = model.LogicalStatus;
+			parameters[10].Value = model.CreatorID;
+			parameters[11].Value = model.CreatedDate;
+			parameters[12].Value = model.LastModifierID;
+			parameters[13].Value = model.LastModifiedDate;
+			parameters[14].Value = model.Reserved1;
+			parameters[15].Value = model.Reserved2;
+			parameters[16].Value = model.Reserved3;
 
 			object obj = DbHelperSQL.GetSingle(strSql.ToString(),parameters);
 			if (obj == null)
@@ -109,6 +111,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append("EmployeeAddr=@EmployeeAddr,");
 			strSql.Append("EmployeeResume=@EmployeeResume,");
 			strSql.Append("StoreID=@StoreID,");
+            strSql.Append("StoreName=@StoreName,");
 			strSql.Append("LogicalStatus=@LogicalStatus,");
 			strSql.Append("CreatorID=@CreatorID,");
 			strSql.Append("CreatedDate=@CreatedDate,");
@@ -119,7 +122,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append("Reserved3=@Reserved3");
 			strSql.Append(" where EmployeeID=@EmployeeID");
 			SqlParameter[] parameters = {
-					new SqlParameter("@EmployeeNo", SqlDbType.Int,4),
+					new SqlParameter("@EmployeeNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@Name", SqlDbType.NVarChar,50),
 					new SqlParameter("@Sex", SqlDbType.NVarChar,50),
 					new SqlParameter("@Phone", SqlDbType.NVarChar,50),
@@ -127,6 +130,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@EmployeeAddr", SqlDbType.NVarChar,50),
 					new SqlParameter("@EmployeeResume", SqlDbType.NVarChar,50),
 					new SqlParameter("@StoreID", SqlDbType.Int,4),
+					new SqlParameter("@StoreName", SqlDbType.NVarChar,50),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
 					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
 					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
@@ -144,15 +148,16 @@ namespace Zeta.WisdCar.Repository.CRUD
 			parameters[5].Value = model.EmployeeAddr;
 			parameters[6].Value = model.EmployeeResume;
 			parameters[7].Value = model.StoreID;
-			parameters[8].Value = model.LogicalStatus;
-			parameters[9].Value = model.CreatorID;
-			parameters[10].Value = model.CreatedDate;
-			parameters[11].Value = model.LastModifierID;
-			parameters[12].Value = model.LastModifiedDate;
-			parameters[13].Value = model.Reserved1;
-			parameters[14].Value = model.Reserved2;
-			parameters[15].Value = model.Reserved3;
-			parameters[16].Value = model.EmployeeID;
+            parameters[8].Value = model.StoreName;
+			parameters[9].Value = model.LogicalStatus;
+			parameters[10].Value = model.CreatorID;
+			parameters[11].Value = model.CreatedDate;
+			parameters[12].Value = model.LastModifierID;
+			parameters[13].Value = model.LastModifiedDate;
+			parameters[14].Value = model.Reserved1;
+			parameters[15].Value = model.Reserved2;
+			parameters[16].Value = model.Reserved3;
+			parameters[17].Value = model.EmployeeID;
 
 			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
 			if (rows > 0)
@@ -216,7 +221,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		{
 			
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select  top 1 EmployeeID,EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from Employee ");
+            strSql.Append("select  top 1 EmployeeID,EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,StoreName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from Employee ");
 			strSql.Append(" where EmployeeID=@EmployeeID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@EmployeeID", SqlDbType.Int,4)
@@ -250,7 +255,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 				}
 				if(row["EmployeeNo"]!=null && row["EmployeeNo"].ToString()!="")
 				{
-					model.EmployeeNo=int.Parse(row["EmployeeNo"].ToString());
+					model.EmployeeNo=row["EmployeeNo"].ToString();
 				}
 				if(row["Name"]!=null)
 				{
@@ -280,6 +285,10 @@ namespace Zeta.WisdCar.Repository.CRUD
 				{
 					model.StoreID=int.Parse(row["StoreID"].ToString());
 				}
+                if (row["StoreName"] != null)
+                {
+                    model.StoreName = row["StoreName"].ToString();
+                }
 				if(row["LogicalStatus"]!=null && row["LogicalStatus"].ToString()!="")
 				{
 					model.LogicalStatus=int.Parse(row["LogicalStatus"].ToString());
@@ -322,7 +331,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("select EmployeeID,EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+            strSql.Append("select EmployeeID,EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,StoreName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
 			strSql.Append(" FROM Employee ");
 			if(strWhere.Trim()!="")
 			{
@@ -342,7 +351,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			{
 				strSql.Append(" top "+Top.ToString());
 			}
-			strSql.Append(" EmployeeID,EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+            strSql.Append(" EmployeeID,EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,StoreName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
 			strSql.Append(" FROM Employee ");
 			if(strWhere.Trim()!="")
 			{
