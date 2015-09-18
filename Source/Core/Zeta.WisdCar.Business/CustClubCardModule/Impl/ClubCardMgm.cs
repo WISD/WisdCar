@@ -25,7 +25,10 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
             DataSet ds = clubCardData.GetClubCards(entity);
             List<ClubCardPO> clubCardPOList = ds.GetEntity<List<ClubCardPO>>();
-
+            if(clubCardPOList==null)
+            {
+                clubCardPOList = new List<ClubCardPO>();
+            }
             clubCardPOList.ForEach(i =>
             {
                 clubCardVOList.Add(Mapper.Map<ClubCardPO, ClubCardVO>(i));
@@ -82,6 +85,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         public void AddClubCard(Model.VO.ClubCardVO clubCard)
         {
             ClubCardData clubCardData = new ClubCardData();
+            clubCard.ClubCardPwd = PwdHelper.MD5Encrypt(clubCard.ClubCardPwd);
             clubCardData.AddClubCard(Mapper.Map<ClubCardVO, ClubCardPO>(clubCard));
         }
 
@@ -231,12 +235,13 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             ClubCardData clubCardData = new ClubCardData();
             ClubCardVO clubCardVO = GetClubCardByID(clubCardID);
 
-            if (!string.IsNullOrEmpty(newClubCardNo.Trim()))
+            if (string.IsNullOrEmpty(newClubCardNo.Trim()))
             {
                 throw new Exception("New ClubCardNo cannot empty ");
             }
 
             clubCardVO.ClubCardNo = newClubCardNo;
+            clubCardVO.CardStatus = 0;
             clubCardData.UpdateClubCard(Mapper.Map<ClubCardVO, ClubCardPO>(clubCardVO));
         }
         public void Update(ClubCardVO clubcard)

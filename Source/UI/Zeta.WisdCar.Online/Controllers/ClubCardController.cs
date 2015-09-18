@@ -307,7 +307,7 @@ namespace Zeta.WisdCar.Online.Controllers
             else
             {
                 data.Success = false;
-                data.Message = "密码重置失败";
+                data.Message = result;
             }
             return Json(data, JsonRequestBehavior.AllowGet);
         }

@@ -516,7 +516,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append(")AS Row, T.*  from Customer T ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
-				strSql.Append(" WHERE " + strWhere);
+				strSql.Append(" WHERE 1=1 " + strWhere);
 			}
 			strSql.Append(" ) TT");
 			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);

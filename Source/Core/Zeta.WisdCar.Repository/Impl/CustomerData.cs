@@ -19,7 +19,7 @@ namespace Zeta.WisdCar.Repository.Impl
 
             if (!string.IsNullOrEmpty(filter.Name.Trim()))
             {
-                strSql1.AppendFormat(" Name like '%{0}%' ", filter.Name);
+                strSql1.AppendFormat(" and Name like '%{0}%' ", filter.Name);
             }
             if (!string.IsNullOrEmpty(filter.MobileNo.Trim()))
             {

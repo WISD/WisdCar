@@ -22,7 +22,10 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
             DataSet ds = customerData.GetCustomers(filter);
             List<CustomerPO> customerPOList = ds.GetEntity<List<CustomerPO>>();
-
+            if(customerPOList==null)
+            {
+                customerPOList = new List<CustomerPO>();
+            }
             customerPOList.ForEach(i =>
             {
                 customerVOList.Add(Mapper.Map<CustomerPO, CustomerVO>(i));
