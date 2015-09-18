@@ -1015,6 +1015,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\WisdCar.pubxml" />
+    <Content Include="Views\Customer\AddClubCard.cshtml" />
+    <Content Include="Views\Customer\Cuscardinfo.cshtml" />
+    <Content Include="Views\Customer\CusCarinfo.cshtml" />
+    <Content Include="Views\Customer\CustomerDetails.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
