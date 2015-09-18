@@ -184,7 +184,52 @@ namespace Zeta.WisdCar.Repository.CRUD
                 return false;
             }
         }
+        /// <summary>
+        /// 更新一条数据(部分列)
+        /// </summary>
+        public bool UpdateModel(WisdCar.Model.PO.ClubCardPO model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update ClubCard set ");
+            strSql.Append("ClubCardTypeName=@ClubCardTypeName,");
+            strSql.Append("OpenCardStore=@OpenCardStore,");
+            strSql.Append("SalesMan=@SalesMan,");
+            strSql.Append("ClubCardTypeID=@ClubCardTypeID,");
+            strSql.Append("CardStatus=@CardStatus,");
+            strSql.Append("ClubCardNo=@ClubCardNo,");
+            strSql.Append("LastModifierID=@LastModifierID,");
+            strSql.Append("LastModifiedDate=@LastModifiedDate");
+            strSql.Append(" where ClubCardID=@ClubCardID");
+            SqlParameter[] parameters = {
+					new SqlParameter("@ClubCardTypeName", SqlDbType.NVarChar,50),
+					new SqlParameter("@OpenCardStore", SqlDbType.NVarChar,50),
+					new SqlParameter("@SalesMan", SqlDbType.NVarChar,50),
+					new SqlParameter("@ClubCardTypeID", SqlDbType.Int,4),
+					new SqlParameter("@CardStatus", SqlDbType.Int,4),
+					new SqlParameter("@ClubCardNo", SqlDbType.NVarChar,50),
+					new SqlParameter("@LastModifierID", SqlDbType.NVarChar,50),
+					new SqlParameter("@LastModifiedDate", SqlDbType.DateTime),
+					new SqlParameter("@ClubCardID", SqlDbType.Int,4)};
+            parameters[0].Value = model.ClubCardTypeName;
+            parameters[1].Value = model.OpenCardStore;
+            parameters[2].Value = model.SalesMan;
+            parameters[3].Value = model.ClubCardTypeID;
+            parameters[4].Value = model.CardStatus;
+            parameters[5].Value = model.ClubCardNo;
+            parameters[6].Value = model.LastModifierID;
+            parameters[7].Value = model.LastModifiedDate;
+            parameters[8].Value = model.ClubCardID;
 
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         /// <summary>
         /// 删除一条数据
         /// </summary>
@@ -254,7 +299,40 @@ namespace Zeta.WisdCar.Repository.CRUD
                 return null;
             }
         }
+        /// <summary>
+        /// 得到一个对象实体
+        /// </summary>
+        public WisdCar.Model.PO.ClubCardPO GetModel(int ClubCardID, int type)
+        {
 
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 ClubCardID,ClubCardTypeName,CustName,ClubCardPwd,OpenCardStore,SalesMan,SalesTime,Balance,CustomerID,ClubCardTypeID,ExpireDate,CardStatus,ClubCardNo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from ClubCard ");
+            if (type == 0)
+            {
+                strSql.Append(" where ClubCardID=@ClubCardID");
+            }
+            else
+            {
+                //因为客户可能有多张会员卡所以排序取第一张
+                strSql.Append(" where CustomerID=@ClubCardID order by CreatedDate desc");
+            }
+
+            SqlParameter[] parameters = {
+					new SqlParameter("@ClubCardID", SqlDbType.Int,4)
+			};
+            parameters[0].Value = ClubCardID;
+
+            WisdCar.Model.PO.ClubCardPO model = new WisdCar.Model.PO.ClubCardPO();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         /// <summary>
         /// 得到一个对象实体
@@ -464,6 +542,35 @@ namespace Zeta.WisdCar.Repository.CRUD
 		#region  ExtensionMethod
 
 		#endregion  ExtensionMethod
+        internal void UpdatePwd(int clubCardID, string p)
+        {
+            string sql = "update clubcard set ClubCardPwd=@pwd where ClubCardID=@cardid";
+            SqlParameter[] sp = { 
+                                new SqlParameter("@pwd",p),
+                                new SqlParameter("@cardid",clubCardID)
+                                };
+            DbHelperSQL.ExecuteSql(sql, sp);
+        }
+
+        internal void UpdateClubCardStatus(int clubCardID, int status)
+        {
+            string sql = "update clubcard set CardStatus=@status where ClubCardID=@cardid";
+            SqlParameter[] sp = { 
+                                new SqlParameter("@status",status),
+                                new SqlParameter("@cardid",clubCardID)
+                                };
+            DbHelperSQL.ExecuteSql(sql, sp);
+        }
+
+        internal void UpdateClubCardNo(int clubCardID, string newClubCardNo)
+        {
+            string sql = "update clubcard set ClubCardNo=@cardno,cardstatus=0 where ClubCardID=@cardid";
+            SqlParameter[] sp = { 
+                                new SqlParameter("@cardno",newClubCardNo),
+                                new SqlParameter("@cardid",clubCardID)
+                                };
+            DbHelperSQL.ExecuteSql(sql, sp);
+        }
 	}
 }
 

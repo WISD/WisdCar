@@ -19,8 +19,8 @@ namespace Zeta.WisdCar.Model.PO
 		private string _frameno;
 		private string _engineno;
 		private string _maintainkm;
-		private DateTime _insuredate;
-		private DateTime _asdate;
+        private DateTime? _insuredate;
+        private DateTime? _asdate;
 		private int _customerid;
 		private int _logicalstatus=1;
 		private string _creatorid;
@@ -105,7 +105,7 @@ namespace Zeta.WisdCar.Model.PO
 		/// <summary>
 		/// 保险时间
 		/// </summary>
-		public DateTime InsureDate
+		public DateTime? InsureDate
 		{
 			set{ _insuredate=value;}
 			get{return _insuredate;}
@@ -113,7 +113,7 @@ namespace Zeta.WisdCar.Model.PO
 		/// <summary>
 		/// 年检时间
 		/// </summary>
-		public DateTime ASDate
+		public DateTime? ASDate
 		{
 			set{ _asdate=value;}
 			get{return _asdate;}

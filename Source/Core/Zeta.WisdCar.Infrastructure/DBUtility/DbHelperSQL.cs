@@ -723,6 +723,60 @@ namespace Zeta.WisdCar.Infrastructure.DBUtility
             }
         }
         /// <summary>
+        /// 执行多条SQL语句，实现数据库事务。数据字典版
+        /// </summary>
+        /// <param name="SqlStringList">SQL语句的数据字典（key为sql语句，value是该语句的SqlParameter[]）</param>
+        public static void ExecutesqltranWithIndentity(Dictionary<string, object> SqlStringList)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    SqlCommand cmd = new SqlCommand();
+                    try
+                    {
+                        int indentity = 0;
+                        //循环
+                        int val = 0;
+                        foreach (KeyValuePair<string, object> myDE in SqlStringList)
+                        {
+                            string cmdText = myDE.Key.ToString();
+                            SqlParameter[] cmdParms = (SqlParameter[])myDE.Value;
+                            foreach (SqlParameter q in cmdParms)
+                            {
+                                if (q.Direction == ParameterDirection.InputOutput)
+                                {
+                                    q.Value = indentity;
+                                }
+                                if (q.ParameterName == "@carcuid" && Convert.ToInt32(q.Value) == -1)
+                                {
+                                    q.Value = val;
+                                }
+                            }
+                            PrepareCommand(cmd, conn, trans, cmdText, cmdParms);
+                            //var re = cmd.ExecuteScalar().ToString();
+                            val = Convert.ToInt32(cmd.ExecuteScalar());
+                            foreach (SqlParameter q in cmdParms)
+                            {
+                                if (q.Direction == ParameterDirection.Output)
+                                {
+                                    indentity = Convert.ToInt32(q.Value);
+                                }
+                            }
+                            cmd.Parameters.Clear();
+                        }
+                        trans.Commit();
+                    }
+                    catch
+                    {
+                        trans.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+        /// <summary>
         /// 执行多条SQL语句，实现数据库事务。
         /// </summary>
         /// <param name="SQLStringList">SQL语句的哈希表（key为sql语句，value是该语句的SqlParameter[]）</param>

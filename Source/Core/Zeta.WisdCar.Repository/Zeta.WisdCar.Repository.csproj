@@ -61,18 +61,22 @@
     <Compile Include="IClubCardTypeData.cs" />
     <Compile Include="IConsumeItemData.cs" />
     <Compile Include="ICustomerData.cs" />
+    <Compile Include="IEployeeData.cs" />
     <Compile Include="Impl\CarData.cs" />
     <Compile Include="Impl\ClubCardData.cs" />
     <Compile Include="Impl\ClubCardPackageData.cs" />
     <Compile Include="Impl\ClubCardTypeData.cs" />
     <Compile Include="Impl\ConsumeItemData.cs" />
     <Compile Include="Impl\CustomerData.cs" />
+    <Compile Include="Impl\EmployeeData.cs" />
     <Compile Include="Impl\PackageData.cs" />
     <Compile Include="Impl\PkgItemsData.cs" />
     <Compile Include="Impl\RechargeLogData.cs" />
+    <Compile Include="Impl\StoreData.cs" />
     <Compile Include="IPackageData.cs" />
     <Compile Include="IPkgItemsData.cs" />
     <Compile Include="IRechargeLogData.cs" />
+    <Compile Include="IStoreData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

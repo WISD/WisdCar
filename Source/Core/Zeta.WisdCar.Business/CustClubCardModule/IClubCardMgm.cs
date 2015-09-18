@@ -24,7 +24,12 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// <param name="id"></param>
         /// <returns></returns>
         ClubCardVO GetClubCardByID(int id);
-
+        /// <summary>
+        /// 获取指定会员卡信息按客户编号
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        ClubCardVO GetClubCardByCustID(int id);
         /// <summary>
         /// 根据前端输入关键词（手机号码或会员卡号）查询会员卡信息
         /// 模糊查询
@@ -103,8 +108,9 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// </summary>
         /// <param name="clubCardID"></param>
         /// <param name="newPwd"></param>
+        //void UpdatePwd(int clubCardID, string newPwd);
+        string UpdatePwd(int clubCardID, string oldpwd, string newPwd);
         void UpdatePwd(int clubCardID, string newPwd);
-
         /// <summary>
         /// 修改会员卡状态
         /// OpenCard = 0,    //开卡
@@ -124,7 +130,12 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// <param name="clubCardID"></param>
         /// <param name="newClubCardNo"></param>
         void UpdateClubCardNo(int clubCardID, string newClubCardNo);
+        /// <summary>
+        /// 更新会员卡信息
+        /// </summary>
+        /// <param name="clubcard"></param>
 
+        void Update(ClubCardVO clubcard);
 
     }
 }

@@ -104,31 +104,31 @@ namespace Zeta.WisdCar.Repository.CRUD
 		/// <summary>
 		/// 更新一条数据
 		/// </summary>
-		public bool Update(WisdCar.Model.PO.CarPO model)
-		{
-			StringBuilder strSql=new StringBuilder();
-			strSql.Append("update Car set ");
-			strSql.Append("CarNo=@CarNo,");
-			strSql.Append("Brand=@Brand,");
-			strSql.Append("CarModel=@CarModel,");
-			strSql.Append("Capacity=@Capacity,");
-			strSql.Append("Color=@Color,");
-			strSql.Append("FrameNo=@FrameNo,");
-			strSql.Append("EngineNo=@EngineNo,");
-			strSql.Append("MaintainKM=@MaintainKM,");
-			strSql.Append("InsureDate=@InsureDate,");
-			strSql.Append("ASDate=@ASDate,");
-			strSql.Append("CustomerID=@CustomerID,");
-			strSql.Append("LogicalStatus=@LogicalStatus,");
-			strSql.Append("CreatorID=@CreatorID,");
-			strSql.Append("CreatedDate=@CreatedDate,");
-			strSql.Append("LastModifierID=@LastModifierID,");
-			strSql.Append("LastModifiedDate=@LastModifiedDate,");
-			strSql.Append("Reserved1=@Reserved1,");
-			strSql.Append("Reserved2=@Reserved2,");
-			strSql.Append("Reserved3=@Reserved3");
-			strSql.Append(" where CarID=@CarID");
-			SqlParameter[] parameters = {
+        public bool Update(WisdCar.Model.PO.CarPO model)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("update Car set ");
+            strSql.Append("CarNo=@CarNo,");
+            strSql.Append("Brand=@Brand,");
+            strSql.Append("CarModel=@CarModel,");
+            strSql.Append("Capacity=@Capacity,");
+            strSql.Append("Color=@Color,");
+            strSql.Append("FrameNo=@FrameNo,");
+            strSql.Append("EngineNo=@EngineNo,");
+            strSql.Append("MaintainKM=@MaintainKM,");
+            strSql.Append("InsureDate=@InsureDate,");
+            strSql.Append("ASDate=@ASDate,");
+            strSql.Append("CustomerID=@CustomerID,");
+            strSql.Append("LogicalStatus=@LogicalStatus,");
+            //strSql.Append("CreatorID=@CreatorID,");
+            //strSql.Append("CreatedDate=@CreatedDate,");
+            strSql.Append("LastModifierID=@LastModifierID,");
+            strSql.Append("LastModifiedDate=@LastModifiedDate,");
+            strSql.Append("Reserved1=@Reserved1,");
+            strSql.Append("Reserved2=@Reserved2,");
+            strSql.Append("Reserved3=@Reserved3");
+            strSql.Append(" where CarID=@CarID");
+            SqlParameter[] parameters = {
 					new SqlParameter("@CarNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@Brand", SqlDbType.NVarChar,50),
 					new SqlParameter("@CarModel", SqlDbType.NVarChar,50),
@@ -141,45 +141,45 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@ASDate", SqlDbType.DateTime),
 					new SqlParameter("@CustomerID", SqlDbType.Int,4),
 					new SqlParameter("@LogicalStatus", SqlDbType.Int,4),
-					new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
-					new SqlParameter("@CreatedDate", SqlDbType.DateTime),
+                    //new SqlParameter("@CreatorID", SqlDbType.NVarChar,50),
+                    //new SqlParameter("@CreatedDate", SqlDbType.DateTime),
 					new SqlParameter("@LastModifierID", SqlDbType.NVarChar,50),
 					new SqlParameter("@LastModifiedDate", SqlDbType.DateTime),
 					new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved2", SqlDbType.NVarChar,100),
 					new SqlParameter("@Reserved3", SqlDbType.NVarChar,100),
 					new SqlParameter("@CarID", SqlDbType.Int,4)};
-			parameters[0].Value = model.CarNo;
-			parameters[1].Value = model.Brand;
-			parameters[2].Value = model.CarModel;
-			parameters[3].Value = model.Capacity;
-			parameters[4].Value = model.Color;
-			parameters[5].Value = model.FrameNo;
-			parameters[6].Value = model.EngineNo;
-			parameters[7].Value = model.MaintainKM;
-			parameters[8].Value = model.InsureDate;
-			parameters[9].Value = model.ASDate;
-			parameters[10].Value = model.CustomerID;
-			parameters[11].Value = model.LogicalStatus;
-			parameters[12].Value = model.CreatorID;
-			parameters[13].Value = model.CreatedDate;
-			parameters[14].Value = model.LastModifierID;
-			parameters[15].Value = model.LastModifiedDate;
-			parameters[16].Value = model.Reserved1;
-			parameters[17].Value = model.Reserved2;
-			parameters[18].Value = model.Reserved3;
-			parameters[19].Value = model.CarID;
+            parameters[0].Value = model.CarNo;
+            parameters[1].Value = model.Brand;
+            parameters[2].Value = model.CarModel;
+            parameters[3].Value = model.Capacity;
+            parameters[4].Value = model.Color;
+            parameters[5].Value = model.FrameNo;
+            parameters[6].Value = model.EngineNo;
+            parameters[7].Value = model.MaintainKM;
+            parameters[8].Value = model.InsureDate;
+            parameters[9].Value = model.ASDate;
+            parameters[10].Value = model.CustomerID;
+            parameters[11].Value = model.LogicalStatus;
+            //parameters[12].Value = model.CreatorID;
+            //parameters[13].Value = model.CreatedDate;
+            parameters[12].Value = model.LastModifierID;
+            parameters[13].Value = model.LastModifiedDate;
+            parameters[14].Value = model.Reserved1;
+            parameters[15].Value = model.Reserved2;
+            parameters[16].Value = model.Reserved3;
+            parameters[17].Value = model.CarID;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
 		/// <summary>
 		/// 删除一条数据
@@ -233,7 +233,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("select  top 1 CarID,CarNo,Brand,CarModel,Capacity,Color,FrameNo,EngineNo,MaintainKM,InsureDate,ASDate,CustomerID,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from Car ");
-			strSql.Append(" where CarID=@CarID");
+            strSql.Append(" where customerid=@CarID");
 			SqlParameter[] parameters = {
 					new SqlParameter("@CarID", SqlDbType.Int,4)
 			};
@@ -298,11 +298,11 @@ namespace Zeta.WisdCar.Repository.CRUD
 				}
 				if(row["InsureDate"]!=null && row["InsureDate"].ToString()!="")
 				{
-					model.InsureDate=DateTime.Parse(row["InsureDate"].ToString());
+					model.InsureDate=(DateTime?)DateTime.Parse(row["InsureDate"].ToString());
 				}
 				if(row["ASDate"]!=null && row["ASDate"].ToString()!="")
 				{
-					model.ASDate=DateTime.Parse(row["ASDate"].ToString());
+					model.ASDate=(DateTime?)DateTime.Parse(row["ASDate"].ToString());
 				}
 				if(row["CustomerID"]!=null && row["CustomerID"].ToString()!="")
 				{

@@ -29,7 +29,10 @@ namespace Zeta.WisdCar.Repository.Impl
             {
                 strSql1.AppendFormat(" And ICNo like '%{0}%' ", filter.ICNo);
             }
-            strSql1.AppendFormat(" And CardFlag = {0} ", filter.CardFlag);
+            if (filter.CardFlag != -1)
+            {
+                strSql1.AppendFormat(" And CardFlag = {0} ", filter.CardFlag);
+            }
 
             if (!string.IsNullOrEmpty(filter.SortName.Trim()))
             {
@@ -63,7 +66,15 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             _daoCustomer.Delete(id);
         }
+        public int AddAllCustomer(CustomerPO cust, CarPO car)
+        {
+            return _daoCustomer.AddAll(cust, car);
+        }
 
+        public CustomerPO GetCustomerByMobileNo(string mno)
+        {
+            return _daoCustomer.GetModel(mno);
+        }
 
         public System.Data.DataSet GetCustomers(string key)
         {
@@ -81,6 +92,12 @@ namespace Zeta.WisdCar.Repository.Impl
         public int GetRecordCount(string strWhere)
         {
             return _daoCustomer.GetRecordCount(strWhere);
+        }
+
+
+        public bool EditCustomer(CustomerPO cust, CarPO car)
+        {
+            return _daoCustomer.Update(cust, car);
         }
     }
 }

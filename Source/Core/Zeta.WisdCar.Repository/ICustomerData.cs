@@ -58,5 +58,26 @@ namespace Zeta.WisdCar.Repository
         /// <param name="strWhere"></param>
         /// <returns>int</returns>
         int GetRecordCount(string strWhere);
+        #region fudongdong's function
+         /// <summary>
+        /// 添加客户和汽车
+        /// </summary>
+        /// <param name="cust"></param>
+        /// <param name="car"></param>
+        /// <returns></returns>
+        int AddAllCustomer(CustomerPO cust, CarPO car);
+        /// <summary>
+        /// 修改客户信息带车辆信息。
+        /// </summary>
+        /// <param name="cust"></param>
+        /// <param name="car"></param>
+       bool EditCustomer(CustomerPO cust, CarPO car);
+        /// <summary>
+        /// 根据手机号码查询客户信息
+        /// </summary>
+        /// <param name="mno"></param>
+        /// <returns></returns>
+       CustomerPO GetCustomerByMobileNo(string mno);
+        #endregion
     }
 }

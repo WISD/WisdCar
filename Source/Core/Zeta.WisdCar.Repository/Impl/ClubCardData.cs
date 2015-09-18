@@ -12,48 +12,58 @@ namespace Zeta.WisdCar.Repository.Impl
     {
         private ClubCard _daoClubCard = new ClubCard();
 
-        public System.Data.DataSet GetClubCards(Model.Entity.ClubCardQueryEntity entity)
+        public System.Data.DataSet GetClubCards(Model.Entity.ClubCardQueryEntity filter)
         {
-            StringBuilder strSql1 = new StringBuilder();
-            StringBuilder strSql2 = new StringBuilder();
-
-            if (!string.IsNullOrEmpty(entity.ClubCardNo.Trim()))
+            StringBuilder strsql1 = new StringBuilder();
+            StringBuilder strsql2 = new StringBuilder();
+            if (!string.IsNullOrEmpty(filter.ClubCardNo))
             {
-                strSql1.AppendFormat(" And ClubCardNo like '%{0}%' ", entity.ClubCardNo);
+                strsql1.Append(string.Format(" and clubcardno like '%{0}%'", filter.ClubCardNo));
+            }
+            if (filter.ClubCardTypeID > 0)
+            {
+                strsql1.AppendFormat(" and clubcardtypeid ={0}", filter.ClubCardTypeID);
+            }
+            if (!string.IsNullOrEmpty(filter.MobileNo))
+            {
+                strsql1.AppendFormat(" and mobileno like '%{0}%'", filter.MobileNo);
+            }
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
+                strsql1.AppendFormat(" and custname like '%{0}%'", filter.Name);
+            }
+            if (!string.IsNullOrEmpty(filter.StoreName))
+            {
+                strsql1.AppendFormat(" and opencardstore like '%{0}%'", filter.StoreName);
+            }
+            if (filter.CardStatus >= 0)
+            {
+                strsql1.AppendFormat(" and cardstatus={0}", filter.CardStatus);
             }
 
-            if (!string.IsNullOrEmpty(entity.Name.Trim()))
+            if (!string.IsNullOrEmpty(filter.SortName.Trim()))
             {
-                strSql1.AppendFormat(" And Name like '%{0}%' ", entity.Name);
+                strsql2.Append(filter.SortName);
+                strsql2.Append(" ");
+                strsql2.Append(filter.SortOrder.Trim());
             }
 
-            if (!string.IsNullOrEmpty(entity.MobileNo.Trim()))
-            {
-                strSql1.AppendFormat(" And MobileNO like '%{0}%' ", entity.MobileNo);
-            }
+            string sqlWhere = strsql1.ToString();
+            string orderby = strsql2.ToString();
+            int startindex = filter.Start;
+            int endindex = filter.Start + filter.Length;
 
-            strSql1.AppendFormat(" And ClubCardTypeID like '%{0}%' ", entity.ClubCardTypeID);
-            //strSql1.AppendFormat(" And ICNo like '%{0}%' ", entity.ClubCardType);
-            strSql1.AppendFormat(" And OpenCardStore = {0} ", entity.StoreID);
-
-            if (!string.IsNullOrEmpty(entity.SortName.Trim()))
-            {
-                strSql2.Append(entity.SortName);
-                strSql2.Append(" ");
-                strSql2.Append(entity.SortOrder.Trim());
-            }
-            string strWhere = strSql1.ToString();
-            string orderby = strSql2.ToString();
-            int startIndex = entity.Start;
-            int endIndex = startIndex + entity.Length;
-            return _daoClubCard.GetListByPage(strWhere, orderby, startIndex, endIndex);
+            return _daoClubCard.GetListByPage(sqlWhere, orderby, startindex, endindex);
         }
 
         public Model.PO.ClubCardPO GetClubCardByID(int id)
         {
             return _daoClubCard.GetModel(id);
         }
-
+        public Model.PO.ClubCardPO GetCardByID(int cardid, int type)
+        {
+            return _daoClubCard.GetModel(cardid, type);
+        }
         public System.Data.DataSet GetClubCards(string key)
         {
             StringBuilder strSql = new StringBuilder();
@@ -65,12 +75,30 @@ namespace Zeta.WisdCar.Repository.Impl
             strWhere = strSql.ToString();
             return _daoClubCard.GetList(strWhere);
         }
-
+        public void AddCard(Model.PO.ClubCardPO card)
+        {
+            _daoClubCard.Add(card);
+        }
         public void AddClubCard(Model.PO.ClubCardPO clubCard)
         {
             _daoClubCard.Add(clubCard);
         }
-
+        public void EditCard(Model.PO.ClubCardPO card)
+        {
+            _daoClubCard.UpdateModel(card);
+        }
+        public void UpdatePwd(int clubCardID, string p)
+        {
+            _daoClubCard.UpdatePwd(clubCardID, p);
+        }
+        public void UpdateClubCardStatus(int clubCardID, int status)
+        {
+            _daoClubCard.UpdateClubCardStatus(clubCardID, status);
+        }
+        public void UpdateClubCardNo(int clubCardID, string newClubCardNo)
+        {
+            _daoClubCard.UpdateClubCardNo(clubCardID, newClubCardNo);
+        }
         public System.Data.DataSet GetAvailablePkgs(int clubCardID)
         {
             ClubCardPackage _daoClubCardPkg = new ClubCardPackage();
@@ -122,6 +150,12 @@ namespace Zeta.WisdCar.Repository.Impl
         public void UpdateClubCard(Model.PO.ClubCardPO clubCard)
         {
             _daoClubCard.Update(clubCard);
+        }
+
+
+        public void DelCard(int id)
+        {
+            _daoClubCard.Delete(id);
         }
     }
 }

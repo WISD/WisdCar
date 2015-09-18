@@ -42,7 +42,11 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             CustomerData customerData = new CustomerData();
             customerData.EditCustomer(Mapper.Map<CustomerVO, CustomerPO>(cust));
         }
-
+        public bool EditCustomer(Model.VO.CustomerVO cust, Model.VO.CarVO car)
+        {
+            CustomerData customerData = new CustomerData();
+            return customerData.EditCustomer(Mapper.Map<CustomerVO, CustomerPO>(cust), Mapper.Map<CarVO, CarPO>(car));
+        }
         public void DelCustomer(int id)
         {
             CustomerData customerData = new CustomerData();
@@ -95,6 +99,33 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
                 return true;
             else
                 return false;
+        }
+        public int AddAllCustomer(CustomerVO cust, CarVO car)
+        {
+            CustomerData customerData = new CustomerData();
+            var result = customerData.AddAllCustomer(Mapper.Map<CustomerVO, CustomerPO>(cust), Mapper.Map<CarVO, CarPO>(car));
+            if (result <= 0)
+            {
+                throw new Exception("添加出现错误");
+            }
+            return result;
+        }
+
+
+
+        public CustomerVO GetCustomerByMobileNo(string mno)
+        {
+            CustomerData custdata = new CustomerData();
+            CustomerPO result = custdata.GetCustomerByMobileNo(mno);
+            if (result != null)
+            {
+                return Mapper.Map<CustomerPO, CustomerVO>(result);
+            }
+            else
+            {
+                return new CustomerVO();
+            }
+
         }
     }
 }

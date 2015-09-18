@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business.BasicDataModule
@@ -39,5 +40,7 @@ namespace Zeta.WisdCar.Business.BasicDataModule
         /// </summary>
         /// <param name="id"></param>
         void DelEmployee(int id);
+        string Login(Model.PO.EmployeePO emp, out EmployeePO empdb);
+        string ChangePassword(EmployeePO emp, string oldpwd, string password, out bool boolresult, out string empo);
     }
 }

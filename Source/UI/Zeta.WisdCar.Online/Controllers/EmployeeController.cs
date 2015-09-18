@@ -82,7 +82,7 @@ namespace Zeta.WisdCar.Online.Controllers
                 var emppo = new EmployeePO() 
                 {
                     EmployeeID=emp.UserId,
-                    EmployeeNo=int.Parse(emp.UserName),
+                    EmployeeNo=emp.UserName,
                     Reserved1=emp.UserPassword,
                     StoreID=emp.StoreId,
                     Name=emp.Name

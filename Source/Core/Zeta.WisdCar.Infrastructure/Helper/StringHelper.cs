@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Zeta.WisdCar.Infrastructure.Helper
@@ -224,6 +225,21 @@ namespace Zeta.WisdCar.Infrastructure.Helper
                 }
             }
             return ReturnValue;
+        }
+        #endregion
+        #region md5转换
+        public static string MD5Encrypt(string strEnc)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] res = md5.ComputeHash(Encoding.Default.GetBytes(strEnc), 0, strEnc.Length);
+            string result = "";
+            foreach (byte b in res)
+            {
+                result += b.ToString("X");
+            }
+            return result;
+
+
         }
         #endregion
     }

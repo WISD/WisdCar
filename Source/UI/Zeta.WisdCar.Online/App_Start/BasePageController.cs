@@ -37,7 +37,7 @@ namespace Zeta.WisdCar.Online.App_Start
             emp = new EmployeeViewModel();
             StoreMgm storeMgm = new StoreMgm();
             emp.UserId = empo.EmployeeID;
-            emp.UserName = empo.EmployeeNo.ToString();
+            emp.UserName = empo.EmployeeNo;
             emp.Name = empo.Name;
             emp.StoreId = empo.StoreID;
             emp.StroeName = storeMgm.GetModel(empo.StoreID).StoreName;
