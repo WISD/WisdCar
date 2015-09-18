@@ -39,7 +39,7 @@
             <!-- BEGIN TOP NAVIGATION MENU -->
             <ul class="nav navbar-nav pull-right">
                 <!-- BEGIN NOTIFICATION DROPDOWN -->
-                <li class="dropdown" id="header_notification_bar">
+                @*<li class="dropdown" id="header_notification_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="fa fa-warning"></i>
                         <span class="badge">
@@ -161,10 +161,10 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>*@
                 <!-- END NOTIFICATION DROPDOWN -->
                 <!-- BEGIN INBOX DROPDOWN -->
-                <li class="dropdown" id="header_inbox_bar">
+                @*<li class="dropdown" id="header_inbox_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="fa fa-envelope"></i>
                         <span class="badge">
@@ -277,10 +277,10 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>*@
                 <!-- END INBOX DROPDOWN -->
                 <!-- BEGIN TODO DROPDOWN -->
-                <li class="dropdown" id="header_task_bar">
+                @*<li class="dropdown" id="header_task_bar">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="fa fa-tasks"></i>
                         <span class="badge">
@@ -436,7 +436,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li>*@
                 <!-- END TODO DROPDOWN -->
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <li class="dropdown user">
@@ -448,7 +448,7 @@
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>
+                        @*<li>
                             <a href="extra_profile.html">
                                 <i class="fa fa-user"></i> My Profile
                             </a>
@@ -485,10 +485,15 @@
                             <a href="extra_lock.html">
                                 <i class="fa fa-lock"></i> Lock Screen
                             </a>
+                        </li>*@
+                        <li>
+                            <a href="@Url.Action("SinOut", "Employee")">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-key"></i> 注销
+                            </a>
                         </li>
                         <li>
-                            <a href="login.html">
-                                <i class="fa fa-key"></i> Log Out
+                            <a href="@Url.Action("ResetPassword", "Employee")">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-key"></i> 修改密码
                             </a>
                         </li>
                     </ul>
@@ -686,7 +691,7 @@
         <div class="page-content-wrapper">
             <div class="page-content">
                 <!-- BEGIN STYLE CUSTOMIZER -->
-                <div class="theme-panel hidden-xs hidden-sm">
+                @*<div class="theme-panel hidden-xs hidden-sm">
                     <div class="toggler">
                     </div>
                     <div class="toggler-close">
@@ -757,7 +762,7 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <!-- END STYLE CUSTOMIZER -->
                 @RenderBody()
             </div>
@@ -789,6 +794,7 @@
     <script>
         jQuery(document).ready(function () {
             App.init();
+            
         });
     </script>
     @RenderSection("scripts", required: false)

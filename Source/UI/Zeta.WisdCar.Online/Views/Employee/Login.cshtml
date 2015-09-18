@@ -1,0 +1,94 @@
+﻿@model Zeta.WisdCar.Model.PO.EmployeePO
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+
+<head>
+    @*@Styles.Render("~/global/css")
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    @Styles.Render("~/theme/css")*@
+    <meta charset="utf-8">
+    <title>智慧汽车商家平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- 新增的loginCSS -->
+    <link rel="stylesheet" href="~/assets/css/pages/reset.css">
+    <link rel="stylesheet" href="~/assets/css/pages/supersized.css">
+    <link rel="stylesheet" href="~/assets/css/pages/style.css">
+
+    <!-- 新增的loginJS -->
+    <script src="~/assets/plugins/login/js/jquery-1.8.2.min.js"></script>
+
+    <script src="~/assets/plugins/login/js/supersized.3.2.7.min.js"></script>
+    <script src="~/assets/plugins/login/js/supersized-init.js"></script>
+    <script src="~/assets/plugins/login/js/scripts.js"></script>
+    <script type="text/javascript">
+        function formsubmit() {
+            var uname = $('#username').val();
+            var pwd = $('#pwd').val();
+            if(!uname.trim())
+            {
+                alert("请输入用户名");
+                return;
+            }
+            if(!pwd)
+            {
+                alert("请输入密码");
+                return;
+            }
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("Loginsub", "Employee")",
+                        "dataType": "json",
+                        "data": { EmployeeNo: uname,Reserved1:pwd },
+                        "async":true,
+                        "cache": false,
+                        "success": function (re) {
+                            if (re.Success)
+                            {
+                                window.location = "@Url.Action("Index","Dashboard")";
+                            }
+                            else
+                            {
+                                alert(re.Message);
+                            }
+                        }, 
+                        "error": function () {
+                            alert(re.Error);
+                        }
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="page-container">
+        <h1>智慧汽车商家平台</h1>
+        <form action="" method="post">
+            <input type="text" name="username" id="username" class="username" placeholder="用户名">
+            <input type="password" name="password" id="pwd" class="password" placeholder="密码">
+            <input type="hidden" name="openid" value="">
+            <button type="button" onclick="formsubmit()">登 录</button>
+            <div class="error"><span>+</span></div>
+
+        </form>
+       
+    </div>
+    <div class="copyright" style="font-size:14px; color:#fff; margin-top:10px;">
+        2015 © 智慧汽车商家平台 1.0版本
+    </div>
+   
+
+</body>
+
+</html>

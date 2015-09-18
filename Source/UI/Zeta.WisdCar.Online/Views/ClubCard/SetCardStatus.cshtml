@@ -1,0 +1,141 @@
+﻿@model Zeta.WisdCar.Model.VO.ClubCardVO
+
+<!-- BEGIN PAGE HEADER-->
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            挂失/冻结 <small>Loss  freezing</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index", "Dashboard")">
+                    首页
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    会员管理
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    挂失/冻结
+                </a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<!-- 需要用的 开始-->
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i>挂失/冻结
+        </div>
+    </div>
+
+
+    <div class="portlet-body">
+        <!--页头 开始 -->
+        <div class="portlet box" style="border-bottom:1px solid #bde9f1;">
+            <div class="portlet-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtQyName">客户姓名:</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(m => m.CustName, new { @class = "form-control", @readonley = true })
+
+                        </div>
+                        <label class="col-md-2 control-label" for="txtQyCardNo">会员卡号:</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(m => m.ClubCardNo, new { @class = "form-control", @readonley = true })
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--页头 开始 -->
+        <!--修改密码 开始 -->
+
+        <div class="portlet box" style="margin-bottom:10px; border:1px solid #bde9f1;">
+            <div class="portlet-body">
+                <form action="#" id="form_sample_1" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">会员卡状态: <span class="required"> * </span></label>
+                        <div class="col-md-4">
+                            <select id="cardstatus" class="form-control input-md">
+                                <option value="-1">--请选择--</option>
+                                <option value="0">恢复</option>
+                                <option value="1">挂失</option>
+                                <option value="2">冻结</option>
+                                @*<option value="3">注销</option>*@
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-4">
+                            <a id="btnQy" href="javacript:void(0);" onclick="subForm(); return false;" class="btn btn-md blue"> 确定 </a>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!--修改密码 结束 -->
+
+    </div>
+
+</div>
+<!--需要用的结束 -->
+<!-- END PAGE CONTENT-->
+@section scripts{
+    <script>
+        function subForm() {
+            var status = $('#cardstatus').val();
+            if (status == -1)
+            {
+                alert('请选择状态');
+                return;
+            }
+            var id = getQueryString("id");
+            $.ajax({
+                    "type": "post",
+                    "url": "@Url.Action("SetgCardStatusSub", "ClubCard")",
+                    "data": { id: id, status:status},
+                    "dataType": "json",
+                    "ansyc": true,
+                    "cache": false,
+                    "success": function (re) {
+                        if (re.Success)
+                        {
+                            alert(re.Message);
+                        } else {
+                            alert(re.Message);
+                        }
+                    },
+                    "error": function () {
+                        alert(re.error);
+                    }
+                });
+        }
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        $(function () {
+            
+
+        });
+    </script>
+}
