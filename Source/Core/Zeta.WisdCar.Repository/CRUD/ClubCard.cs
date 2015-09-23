@@ -333,7 +333,30 @@ namespace Zeta.WisdCar.Repository.CRUD
                 return null;
             }
         }
+        public WisdCar.Model.PO.ClubCardPO GetCardByCardNo(string cardNo)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 ClubCardID,ClubCardTypeName,CustName,ClubCardPwd,OpenCardStore,SalesMan,SalesTime,Balance,CustomerID,ClubCardTypeID,ExpireDate,CardStatus,ClubCardNo,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from ClubCard ");
+           
+            strSql.Append(" where clubcardno=@clubcardno");
+          
 
+            SqlParameter[] parameters = {
+					new SqlParameter("@clubcardno", SqlDbType.NVarChar)
+			};
+            parameters[0].Value = cardNo;
+
+            WisdCar.Model.PO.ClubCardPO model = new WisdCar.Model.PO.ClubCardPO();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
         /// <summary>
         /// 得到一个对象实体
         /// </summary>

@@ -29,7 +29,7 @@ namespace Zeta.WisdCar.Business.Test
             RechargeVO entity = new RechargeVO();
             entity.ActualRechargeAmount = 200;
             entity.ClubCardID = 4;
-            entity.ClubCardNo = 00001;
+            entity.ClubCardNo = "00001";
             entity.ClubCardPackageID = "1";
 
             entity.CreatedDate = DateTime.Now;
@@ -48,11 +48,11 @@ namespace Zeta.WisdCar.Business.Test
             entity.RechargeStore = "xuhui";
             entity.RechargeType = 0;
             entity.SalesMan = "songge";
-            entity.SerialNo = "11101010101";
+            entity.RechargeSerialNo = "11101010101";
 
 
             //VO to PO
-            Mapper.CreateMap<RechargeVO, RechargeLogPO>().ForMember(dest => dest.RechargeSerialNo, opt => opt.MapFrom(src => src.SerialNo)); 
+            Mapper.CreateMap<RechargeVO, RechargeLogPO>().ForMember(dest => dest.RechargeSerialNo, opt => opt.MapFrom(src => src.RechargeSerialNo)); 
 
             Mapper.CreateMap<ClubCardPO, ClubCardVO>().IgnoreUnmappedProperties();
             Mapper.CreateMap<PackageVO, PackagePO>();

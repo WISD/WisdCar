@@ -28,7 +28,8 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             RechargeLogData rechargeLogData = new RechargeLogData();
             ClubCardData clubCardData = new ClubCardData();
             ClubCardPO clubCardPO = clubCardData.GetClubCardByID(entity.ClubCardID);
-            clubCardPO.Balance = entity.PlatformRechargeAmount;
+            //余额呢？
+            clubCardPO.Balance = entity.PlatformRechargeAmount; 
 
             SqlConnection conn = new SqlConnection(PubConstant.ConnectionString);
             conn.Open();
@@ -65,7 +66,7 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             ClubCardPackageData clubCardPkgData = new ClubCardPackageData();
 
 
-            MarktingPlanModule.PackageMgm pkgMgm = new MarktingPlanModule.PackageMgm();
+            MarktingPlanModule.PackageMgm pkgMgm = new MarktingPlanModule.PackageMgm(); 
             MarktingPlanModule.IPkgItemsMgm pkgItemsMgm = new MarktingPlanModule.PkgItemsMgm();
 
             //PackageData packageData = new PackageData();

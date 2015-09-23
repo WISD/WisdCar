@@ -51,7 +51,11 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             IClubCardData cardData = new ClubCardData();
             return Mapper.Map<ClubCardPO, ClubCardVO>(cardData.GetCardByID(id, 1));
         }
-
+        public Model.VO.ClubCardVO GetClubCardByCardNo(string cardNo)
+        {
+            IClubCardData cardData = new ClubCardData();
+            return Mapper.Map<ClubCardPO, ClubCardVO>(cardData.GetCardByCardNo(cardNo));
+        }
 
         public List<Model.VO.ClubCardVO> GetClubCards(string key)
         {

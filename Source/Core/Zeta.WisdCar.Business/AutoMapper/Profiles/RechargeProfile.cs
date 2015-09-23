@@ -10,20 +10,16 @@ using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business.AutoMapper.Profiles
 {
-    public class ClubCardProfile : Profile
+    public class RechargeProfile:Profile
     {
         protected override void Configure()
         {
             //DB record to PO
-            CreateMap<IDataReader, ClubCardPO>();
-
+            CreateMap<IDataReader, RechargeLogPO>();
             //PO to VO
-            CreateMap<ClubCardPO, ClubCardVO>().IgnoreUnmappedProperties();
-
+            CreateMap<RechargeLogPO, RechargeVO>().IgnoreUnmappedProperties();
             //VO to PO
-            CreateMap<ClubCardVO, ClubCardPO>();
-
-            //Mapper.AssertConfigurationIsValid();
+            CreateMap<RechargeVO, RechargeLogPO>();
         }
     }
 }

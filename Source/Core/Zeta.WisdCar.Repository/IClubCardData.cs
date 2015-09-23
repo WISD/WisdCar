@@ -115,5 +115,7 @@ namespace Zeta.WisdCar.Repository
 
         void UpdateClubCardNo(int clubCardID, string newClubCardNo);
         #endregion
+
+        ClubCardPO GetCardByCardNo(string cardNo);
     }
 }

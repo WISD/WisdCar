@@ -20,5 +20,7 @@ namespace Zeta.WisdCar.Online.Models
         public DateTime SaleTime { get; set; }
         public string OpenCardStore{get;set;}
         public DateTime ExpireDate { get; set; }
+        public string CardTypeName { get; set; }
+        public string CardStatuName { get; set; }
     }
 }

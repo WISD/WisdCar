@@ -13,18 +13,26 @@ namespace Zeta.WisdCar.Business.Handler
         /// 充值流水号(生成规则：1（充值） +  门店ID  +  yymmddHHmmss)
         /// </summary>
         /// <returns></returns>
-        public static string GenRechargeSerialNo()
+        public static string GenRechargeSerialNo(int storeid)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("1");
+            sb.Append(storeid);
+            sb.Append(DateTime.Now.ToString("yymmddHHmmss"));
+            return sb.ToString();
         }
 
         /// <summary>
         /// 消费批次编号(生成规则：2（消费） +  门店ID  +  yymmddHHmmss)
         /// </summary>
         /// <returns></returns>
-        public static string GenConsumeBatchNo()
+        public static string GenConsumeBatchNo(int storeid)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            sb.Append("2");
+            sb.Append(storeid);
+            sb.Append(DateTime.Now.ToString("yymmddHHmmss"));
+            return sb.ToString();
         }
 
 

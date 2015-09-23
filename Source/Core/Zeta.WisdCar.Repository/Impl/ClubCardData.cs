@@ -64,6 +64,10 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             return _daoClubCard.GetModel(cardid, type);
         }
+        public Model.PO.ClubCardPO GetCardByCardNo(string cardNo)
+        {
+            return _daoClubCard.GetCardByCardNo(cardNo);
+        }
         public System.Data.DataSet GetClubCards(string key)
         {
             StringBuilder strSql = new StringBuilder();

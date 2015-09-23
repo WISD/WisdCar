@@ -1065,6 +1065,8 @@
     <Content Include="Views\ClubCard\ClubcardDetails.cshtml" />
     <Content Include="Views\ClubCard\ResetPassword.cshtml" />
     <Content Include="Views\ClubCard\SetCardStatus.cshtml" />
+    <Content Include="Views\Recharge\RechargeCash.cshtml" />
+    <Content Include="Views\Recharge\RechargeSuccess.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
