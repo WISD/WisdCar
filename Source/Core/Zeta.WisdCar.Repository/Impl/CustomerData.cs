@@ -19,19 +19,25 @@ namespace Zeta.WisdCar.Repository.Impl
 
             if (!string.IsNullOrEmpty(filter.Name.Trim()))
             {
-                strSql1.AppendFormat(" and Name like '%{0}%' ", filter.Name);
+                strSql1.AppendFormat(" Name like '%{0}%' ", filter.Name);
             }
             if (!string.IsNullOrEmpty(filter.MobileNo.Trim()))
             {
-                strSql1.AppendFormat(" And MobileNO like '%{0}%' ", filter.MobileNo);
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" MobileNO like '%{0}%' ", filter.MobileNo);
             }
             if (!string.IsNullOrEmpty(filter.ICNo.Trim()))
             {
-                strSql1.AppendFormat(" And ICNo like '%{0}%' ", filter.ICNo);
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" ICNo like '%{0}%' ", filter.ICNo);
             }
             if (filter.CardFlag != -1)
             {
-                strSql1.AppendFormat(" And CardFlag = {0} ", filter.CardFlag);
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" CardFlag = {0} ", filter.CardFlag);
             }
 
             if (!string.IsNullOrEmpty(filter.SortName.Trim()))
