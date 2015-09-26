@@ -40,6 +40,9 @@
                 </div>
                 <div class="tools">
                 </div>
+                <a href="javascript:;" class="btn btn-xs blue" onclick="addCardType(); return false;" style="float:right; ">
+                    <i class="fa fa-plus"></i> 新增
+                </a>
             </div>
             <div class="portlet-body">
                 <table id="tblClubCardType" class="display" cellspacing="0" width="100%">
@@ -53,10 +56,51 @@
                     </thead>
                 </table>
             </div>
+            <div id="ajax-modal" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="setTextValue()" aria-hidden="true"></button>
+                    <h4 class="modal-title">会员卡类型</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body">
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="PackageAmount">会员卡类型名:</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="txtCtype" name="txtCtype" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="txtQyName">充值折扣:</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="txtDiscount" name="txtDiscount" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="txtQyCardNo">套餐折扣:</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="txtPkgdiscount" name="txtPkgdiscount" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" onclick="setTextValue()"  class="btn">关闭</button>
+                    <button type="button" data-dismiss="modal" onclick="subForm()" class="btn blue">保存</button>
+                    <input type="hidden" id="hidctid" value="0" />
+                </div>
+            </div>
         </div>
         <!-- END PORTLET-->
     </div>
 </div>
+
 <!-- END PAGE CONTENT-->
 @section styles{
     <link href="@Url.Content("~/assets/plugins/datatables/css/jquery.dataTables.min.css")" rel="stylesheet" />
@@ -146,16 +190,106 @@
                     }, 1000);
                 },
                 Edit: function (id) {
-                    alert("edit:" + id);
+                    var data = { id: id };
+                    var url = '@Url.Action("GetClubCardTypeModel", "ClubcardType")';
+                    setValue(url, data, 1);
+                    $('#hidctid').val(id);
+                    handleAjaxModal();
                 },
                 Del: function (id) {
-                    alert("del" + id);
+                    var data = { id: id };
+                    var url = '@Url.Action("DeleteClubCardTypeModel","ClubcardType")';
+                    setValue(url,data,0);
                 }
             };
         }();
 
+        function addCardType() {
+            handleAjaxModal();
+        }
+        var handleAjaxModal = function () {
+            var $modal = $('#ajax-modal');               
+                $('body').modalmanager('loading');
+                setTimeout(function () {
+                        $modal.modal();
+                }, 1000);
+        };
+        function subForm() {
+            var ctid = $('#hidctid').val();
+            var cdiscount = $('#txtDiscount').val();
+            var pkgdiscount = $('#txtPkgdiscount').val();
+            var ctype = $('#txtCtype').val();
+            if (!ctype) {
+                alert("请输入会员卡类型");
+                return;
+            } else if (!cdiscount) {
+                alert("请输入充值折扣");
+                return
+            } else if (!pkgdiscount) {
+                alert("请输入套餐充值折扣");
+                return;
+            } else if (!Number(cdiscount)||Number(cdiscount) <= 0||Number(cdiscount)>=1) {
+                alert("充值折扣输入不正确");
+                return;
+            } else if (!Number(pkgdiscount)||Number(pkgdiscount) <= 0||Number(pkgdiscount)>=1) {
+                alert("套餐折扣输入不正确");
+                return
+            }
+            if (ctid>0) {
+                var data = { id: ctid,ctype:ctype,cdiscount:cdiscount,pkgdiscount:pkgdiscount };
+                var url = "@Url.Action("EditeClubCardTypeModel","ClubcardType")";
+                setTextValue();
+                setValue(url,data,0);
+            } else {
+                var data = { ctype: ctype, cdiscount: cdiscount, pkgdiscount: pkgdiscount };
+                var url = "@Url.Action("AddClubCardTypeModel","ClubcardType")";
+                setTextValue();
+                setValue(url,data, 0);
+            }
+        }
+        function closedilog() {
+            window.location = "@Url.Action("Index","ClubcardType")";
+        }
+        function setTextValue()
+        {
+            $('#hidctid').val('0');
+            $('#txtDiscount').val('');
+            $('#txtPkgdiscount').val('');
+            $('#txtCtype').val('');
+        }
+        function setValue(url,data,type) {
+            $.ajax({
+                "type": "post",
+                "url": url,
+                "dataType": "json",
+                "data": data,
+                "async": true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        if (type == 1)
+                        {
+                            $('#txtCtype').val(re.Data.CardTypeName);
+                            $('#txtDiscount').val(re.Data.PayDiscount);
+                            $('#txtPkgdiscount').val(re.Data.PackageDiscount);
+                        }
+                        else {
+                            alert(re.Message);
+                            closedilog();
+                        } 
+                    }
+                    else {
+                        alert(re.Message);
+                    }
+                },
+                "error": function () {
+                    
+                }
+            });
+        }
+        
         $(function () {
-            ClubCardType.Init();
+            ClubCardType.Init(); 
         });
     </script>
 }

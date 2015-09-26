@@ -21,6 +21,7 @@ namespace Zeta.WisdCar.Online.Controllers
         // GET: /ClubCard/ 
         public ActionResult Index()
         {
+            ViewData["ClubcardType"] = GetddlList(DDLlist.CardType, true, null, null);
             return View();
         }
         public JsonResult GetCludCardList()
@@ -110,6 +111,8 @@ namespace Zeta.WisdCar.Online.Controllers
             CustomerAndCard cusAndCard = new CustomerAndCard();
             CustomerMgm custMgm = new CustomerMgm();
             ClubCardMgm cardMgm = new ClubCardMgm();
+            var ddllist =GetddlList(DDLlist.CardType, false, null, null);
+            ViewData["CardType"] =ddllist;
             if(type=="cust")
             {
                 
@@ -158,16 +161,19 @@ namespace Zeta.WisdCar.Online.Controllers
             
             
         }
-        public JsonResult SearchCustomer(string mobilno)
+        public JsonResult SearchCustomer(string carno)
         {
             ICustomerMgm custMgm = new CustomerMgm();
-            CustomerVO cust = custMgm.GetCustomerByMobileNo(mobilno);
+            //改为车牌号查询
+            //CustomerVO cust = custMgm.GetCustomerByMobileNo(mobilno);
+            //ClubCardVO card = new ClubCardMgm().GetClubCardByCustID(cust.CustomerID);
+            var cust = custMgm.GetCustomerByCarNo(carno);
             ClubCardVO card = new ClubCardMgm().GetClubCardByCustID(cust.CustomerID);
             ReturnedData data = new ReturnedData();
             if(cust.CustomerID==0)
             {
                 data.Success = false;
-                data.Message = "该手机号没有客户";
+                data.Message = "该车牌号没有客户";
             }
             else
             {

@@ -42,10 +42,10 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
             cardTypeData.AddCardType(Mapper.Map<ClubCardTypeVO, ClubCardTypePO>(cardType));
         }
 
-        public void EditCardType(Model.VO.ClubCardTypeVO cardType)
+        public bool EditCardType(Model.VO.ClubCardTypeVO cardType)
         {
             ClubCardTypeData cardTypeData = new ClubCardTypeData();
-            cardTypeData.EditCardType(Mapper.Map<ClubCardTypeVO, ClubCardTypePO>(cardType));
+            return cardTypeData.EditCardType(Mapper.Map<ClubCardTypeVO, ClubCardTypePO>(cardType));
         }
 
         public void DelCardType(int id)

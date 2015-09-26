@@ -22,9 +22,9 @@ namespace Zeta.WisdCar.Repository.Impl
             _daoCardType.Add(cardTypePO);
         }
 
-        public void EditCardType(ClubCardTypePO cardTypePO)
+        public bool EditCardType(ClubCardTypePO cardTypePO)
         {
-            _daoCardType.Update(cardTypePO);
+            return _daoCardType.Update(cardTypePO);
         }
 
         public void DelCardType(int id)

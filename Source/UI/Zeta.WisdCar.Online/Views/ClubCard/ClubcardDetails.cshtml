@@ -59,7 +59,7 @@
                             <div class="dropdown-menu dropdown-content input-large hold-on-click" role="menu">
                                 <form action="#">
                                     <div class="input-group">
-                                        <input type="text" id="txtmno" class="form-control" placeholder="输入手机号进行查询">
+                                        <input type="text" id="txtmno" class="form-control" placeholder="请输入车牌号进行查询">
                                         <span class="input-group-btn">
                                             <button class="btn blue" type="button" onclick="SearchModel()">Go!</button>
                                         </span>
@@ -131,10 +131,11 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="ddlCardType">会员卡类型:</label>
                                 <div class="col-md-4">
-                                    <select id="CardType" name="CardType" class="form-control input-md">                                     
+                                    @Html.DropDownList("CardType", null, new { @class = "form-control input-md" })
+                                    @*<select id="CardType" name="CardType" class="form-control input-md">                                     
                                             <option value="2">白金卡</option>
                                             <option value="1">金卡</option>
-                                    </select>
+                                    </select>*@
                                 </div>
                             </div>
 
@@ -214,7 +215,7 @@
                 "type": "post",
                 "url": "@Url.Action("SearchCustomer", "ClubCard")",
                        "dataType": "json",
-                       "data":{mobilno:mno},
+                       "data":{carno:mno},
                         "async":true,
                         "cache": false,
                         "success": function (re) {
@@ -309,16 +310,20 @@
         }
         function InitPage() {
             var id = getQueryString("id");
-            
+            var cardtype = "@Model.CardType";
             if(id!=-1)
             {
                 $('#btnserach').attr("disabled", "");
-               
+                
             }
             var statu = "@Model.CardStatu";
-            var cardtype = "@Model.CardType";
+            
             $('#CardStatu').val(statu);
-            $('#CardType').val(cardtype);
+            if (cardtype > 0)
+            {
+                $('#CardType').val(cardtype);
+            }
+           
             
             var dates = $('#SaleTime').val();
             var datee = $('#ExpireDate').val();

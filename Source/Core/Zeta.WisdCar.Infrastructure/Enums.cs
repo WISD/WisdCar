@@ -49,4 +49,8 @@ namespace Zeta.WisdCar.Infrastructure
         ClubPackage = 1,    //会员套餐消费
         NoCard   = 2        //非会员消费
     }
+    public enum DDLlist
+    {
+        CardType = 0//会员卡类型
+    }
 }

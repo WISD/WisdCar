@@ -37,11 +37,11 @@
 
 
 
-                <div class="form-group">
+                @*<div class="form-group">
                     <label class="col-md-4 control-label">车型:<span class="required"></span></label>
                     <div class="col-md-8">
                         <select class="table-group-action-input form-control input-medium" id="CarModel" name="CarModel">
-                            @*//以后修改，现在应急用*@
+                           
                             @if (Model.CarModel == "两厢")
                             {
                                 <option value="两厢" selected>两厢</option>
@@ -65,7 +65,7 @@
 
                         </select>
                     </div>
-                </div>
+                </div>*@
 
                 <div class="form-group">
                     <label class="col-md-4 control-label">汽车排量:<span class="required"></span></label>
@@ -107,6 +107,7 @@
                         @Html.TextBoxFor(m => m.MaintainKM, new { @class = "form-control" })
                         @*<input type="text" class="form-control" name="product[name]" placeholder="">*@
                     </div>
+                    
                 </div>
                 @*<div class="col-md-4">
                     <div class="input-group input-large date-picker input-daterange" data-date="10/11/2012" data-date-format="mm/dd/yyyy">

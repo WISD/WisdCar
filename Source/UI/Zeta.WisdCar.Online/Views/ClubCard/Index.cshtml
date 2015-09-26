@@ -57,11 +57,13 @@
                         </div>
                         <label class="col-md-2 control-label" for="ddlCardType">会员卡类型</label>
                         <div class="col-md-2">
-                            <select id="ddlCardType" name="ClubcardType" class="form-control input-md">
+                            @*<%=Html.DropDownList("list")%>*@
+                            @Html.DropDownList("ClubcardType", null, new { @class = "form-control input-md" })
+                            @*<select id="ddlCardType" name="ClubcardType" class="form-control input-md">
                                 <option value="-1">-请选择-</option>
                                 <option value="2">白金卡</option>
                                 <option value="1">金卡</option>
-                            </select>
+                            </select>*@
                         </div>
                     </div>
 

@@ -32,7 +32,7 @@ namespace Zeta.WisdCar.Repository
         /// 修改会员卡类型
         /// </summary>
         /// <param name="cardType"></param>
-        void EditCardType(ClubCardTypePO cardType);
+        bool EditCardType(ClubCardTypePO cardType);
 
         /// <summary>
         /// 删除会员卡类型

@@ -169,7 +169,7 @@ namespace Zeta.WisdCar.Business
             throw new NotImplementedException();
         }
 
-        public void EditCardType(Model.VO.ClubCardTypeVO cardType)
+        public bool EditCardType(Model.VO.ClubCardTypeVO cardType)
         {
             throw new NotImplementedException();
         }
@@ -589,6 +589,12 @@ namespace Zeta.WisdCar.Business
         }
 
         public CustomerVO GetCustomerByMobileNo(string mno)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public CustomerVO GetCustomerByCarNo(string carno)
         {
             throw new NotImplementedException();
         }

@@ -31,7 +31,7 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
         /// 修改会员卡类型
         /// </summary>
         /// <param name="cardType"></param>
-        void EditCardType(ClubCardTypeVO cardType);
+        bool EditCardType(ClubCardTypeVO cardType);
 
         /// <summary>
         /// 删除会员卡类型

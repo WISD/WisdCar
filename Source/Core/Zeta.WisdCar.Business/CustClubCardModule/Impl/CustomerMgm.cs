@@ -130,5 +130,18 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             }
 
         }
+        public CustomerVO GetCustomerByCarNo(string carno)
+        {
+            CustomerData custdata = new CustomerData();
+            CustomerPO result = custdata.GetCustomerByCarNo(carno);
+            if (result != null)
+            {
+                return Mapper.Map<CustomerPO, CustomerVO>(result);
+            }
+            else
+            {
+                return new CustomerVO();
+            }
+        }
     }
 }

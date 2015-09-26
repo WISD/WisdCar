@@ -365,7 +365,19 @@ namespace Zeta.WisdCar.Online.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         } 
         #endregion
-       
-       
-	}
+        #region 导入客户
+        public ActionResult ImportCust()
+        {
+            return View();
+        }
+        public void ReceveFiles()
+        {
+            ReturnedData data = new ReturnedData();
+            var file = Request.Files["file"].FileName;
+            data.Success = true;
+            data.Message = file;
+        }
+        #endregion
+
+    }
 }

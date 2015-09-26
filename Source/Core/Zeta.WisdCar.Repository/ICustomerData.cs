@@ -78,6 +78,12 @@ namespace Zeta.WisdCar.Repository
         /// <param name="mno"></param>
         /// <returns></returns>
        CustomerPO GetCustomerByMobileNo(string mno);
+        /// <summary>
+        /// 根据车牌号查询客户信息
+        /// </summary>
+        /// <param name="carno"></param>
+        /// <returns></returns>
+       CustomerPO GetCustomerByCarNo(string carno);
         #endregion
     }
 }

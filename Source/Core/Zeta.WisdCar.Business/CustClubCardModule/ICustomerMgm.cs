@@ -76,5 +76,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// <param name="mno"></param>
         /// <returns></returns>
         CustomerVO GetCustomerByMobileNo(string mno);
+
+        CustomerVO GetCustomerByCarNo(string carno);
     }
 }

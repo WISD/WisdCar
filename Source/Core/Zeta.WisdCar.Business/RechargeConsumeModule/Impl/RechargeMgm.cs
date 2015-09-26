@@ -29,7 +29,7 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             ClubCardData clubCardData = new ClubCardData();
             ClubCardPO clubCardPO = clubCardData.GetClubCardByID(entity.ClubCardID);
             //余额呢？
-            clubCardPO.Balance = entity.PlatformRechargeAmount; 
+            clubCardPO.Balance = entity.PlatformRechargeAmount+clubCardPO.Balance; 
 
             SqlConnection conn = new SqlConnection(PubConstant.ConnectionString);
             conn.Open();
@@ -87,11 +87,11 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             clubCardPkgPO.DiscountRate = Convert.ToDecimal(CardSPackageStatus.Available);
             clubCardPkgPO.Salesman = entity.SalesMan;
             clubCardPkgPO.SalesTime = DateTime.Now;
-            clubCardPkgPO.SaleStore = "1111";//从login信息中获取
+            clubCardPkgPO.SaleStore = entity.RechargeStore;//从login信息中获取
             clubCardPkgPO.CreatedDate = DateTime.Now;
-            clubCardPkgPO.CreatorID = "001";
+            clubCardPkgPO.CreatorID = entity.CreatorID;
             clubCardPkgPO.LastModifiedDate = DateTime.Now;
-            clubCardPkgPO.LastModifierID = "002";
+            clubCardPkgPO.LastModifierID = entity.LastModifierID;
             clubCardPkgPO.ClubCardPackageID = SerialNoGenerator.GenClubCardPkgID();
 
             foreach (var item in pkgItemList)
@@ -102,9 +102,9 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
                 clubCardPkgDetailPO.ItemName = item.ItemName;
 
                 clubCardPkgDetailPO.CreatedDate = DateTime.Now;
-                clubCardPkgDetailPO.CreatorID = "001";
+                clubCardPkgDetailPO.CreatorID = entity.CreatorID;
                 clubCardPkgDetailPO.LastModifiedDate = DateTime.Now;
-                clubCardPkgDetailPO.LastModifierID = "002";
+                clubCardPkgDetailPO.LastModifierID = entity.LastModifierID;
                 
                 clubCardPkgDetailPOList.Add(clubCardPkgDetailPO);
 	        }

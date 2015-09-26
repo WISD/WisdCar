@@ -3,6 +3,7 @@ using System.Data;
 using System.Text;
 using System.Data.SqlClient;
 using Zeta.WisdCar.Infrastructure.DBUtility;
+using System.Collections;
 namespace Zeta.WisdCar.Repository.CRUD
 {
 	/// <summary>
@@ -129,15 +130,24 @@ namespace Zeta.WisdCar.Repository.CRUD
             parameters[10].Value = model.Reserved3;
             parameters[11].Value = model.ClubCardTypeID;
 
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
-            if (rows > 0)
+            string cardsql = "update clubcard set clubcardtypename = @cardtypename where clubcardtypeid = @typeid";
+            SqlParameter[] cardsps ={
+                                        new SqlParameter("@cardtypename",model.CardTypeName),new SqlParameter("@typeid",model.ClubCardTypeID)
+                                    };
+            //int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            try
             {
+                Hashtable hs = new Hashtable();
+                hs.Add(strSql,parameters);
+                hs.Add(cardsql,cardsps);
+                DbHelperSQL.ExecuteSqlTranWithIndentity(hs);
                 return true;
             }
-            else
+            catch
             {
                 return false;
             }
+           
         }
 
         /// <summary>

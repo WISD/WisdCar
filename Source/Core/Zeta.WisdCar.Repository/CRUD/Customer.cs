@@ -649,11 +649,11 @@ namespace Zeta.WisdCar.Repository.CRUD
             return result;
         }
 
-        public Model.PO.CustomerPO GetModel(string mno)
+        public Model.PO.CustomerPO GetModel(string mno,string where)
         {
             StringBuilder strSql = new StringBuilder();
             strSql.Append("select  top 1 CustomerID,Name,MobileNO,Sex,Birthday,ICNo,Weixin,Company,CardFlag,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from Customer ");
-            strSql.Append(" where mobileno=@mno");
+            strSql.Append(where);
             SqlParameter[] parameters = {
 					new SqlParameter("@mno", SqlDbType.NVarChar)
 			};

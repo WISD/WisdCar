@@ -73,7 +73,7 @@ namespace Zeta.WisdCar.Repository.Impl
 
         public CustomerPO GetCustomerByMobileNo(string mno)
         {
-            return _daoCustomer.GetModel(mno);
+            return _daoCustomer.GetModel(mno," where mobileno like '%'+@mno+'%'");
         }
 
         public System.Data.DataSet GetCustomers(string key)
@@ -98,6 +98,11 @@ namespace Zeta.WisdCar.Repository.Impl
         public bool EditCustomer(CustomerPO cust, CarPO car)
         {
             return _daoCustomer.Update(cust, car);
+        }
+
+        public CustomerPO GetCustomerByCarNo(string carno)
+        {
+            return _daoCustomer.GetModel(carno," where customerid in (select customerid from car where carno like '%'+@mno+'%')");
         }
     }
 }

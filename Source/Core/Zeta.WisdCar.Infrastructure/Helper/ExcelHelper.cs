@@ -255,6 +255,10 @@ namespace Zeta.WisdCar.Infrastructure.Helper
             }
         }
         #endregion
+        public DataSet GetDataFromExcel()
+        {
+            return null;
+        }
 
     }
 }

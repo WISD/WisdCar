@@ -43,6 +43,9 @@
                 <a href="javascript:;" class="btn btn-xs blue" onclick="addCustomer(); return false;" style="float:right; ">
                     <i class="fa fa-plus"></i> 新增
                 </a>
+                <a href="javascript:;" class="btn btn-xs blue" onclick="importCust(); return false;" style="float:right; ">
+                    <i class="fa fa-plus"></i> 导入
+                </a>
             </div>
             <div class="portlet-body">
                 <div class="portlet box" style="margin-bottom:10px; border:1px solid #bde9f1;">
@@ -296,6 +299,11 @@
             handleAjaxModal(url);
             
         }
+        function importCust() {
+            var url = "@Url.Action("ImportCust","Customer")";
+            type = 6;
+            handleAjaxModal(url);
+        }
         //模态窗口
         var handleAjaxModal = function (url) {
             var $modal = $('#ajax-modal');
@@ -413,6 +421,10 @@
             } else if (type == 5) {
                 url = "@Url.Action("AddCustomerSub", "Customer").ToString()";
                 formSubmit(url);
+            }
+            else if(type==6)
+            {
+                alert('hehe');
             }
 
         }
