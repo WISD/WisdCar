@@ -21,7 +21,9 @@ namespace Zeta.WisdCar.Business.BasicDataModule
         /// <param name="storeID"></param>
         /// <returns></returns>
         StoreVO GetStoreByID(int storeID);
-        StoreVO GetModel(int id);//临时方法后面优化
+        
+        //StoreVO GetModel(int id);//临时方法后面优化
+
         /// <summary>
         /// 新增门店
         /// </summary>

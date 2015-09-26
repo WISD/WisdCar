@@ -41,9 +41,9 @@ namespace Zeta.WisdCar.Repository.Impl
                 strSql1.AppendFormat(" And ");
             strSql1.AppendFormat(" ClubCardTypeID like %{0}% ", entity.ClubCardTypeID);
 
-            if (strSql1.Length > 0)
-                strSql1.AppendFormat(" And ");
-            strSql1.AppendFormat(" OpenCardStore = {0} ", entity.StoreID);
+            //if (strSql1.Length > 0)
+            //    strSql1.AppendFormat(" And ");
+            //strSql1.AppendFormat(" OpenCardStore = {0} ", entity.StoreID);
 
             if (!string.IsNullOrEmpty(entity.SortName.Trim()))
             {

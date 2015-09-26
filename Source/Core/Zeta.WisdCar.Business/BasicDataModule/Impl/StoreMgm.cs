@@ -14,13 +14,13 @@ namespace Zeta.WisdCar.Business.BasicDataModule
 {
     public class StoreMgm : IStoreMgm
     {
-        public StoreVO GetModel(int id)
-        {
-            StoreData storedata = new StoreData();
+        //public StoreVO GetModel(int id)
+        //{
+        //    StoreData storedata = new StoreData();
 
-            //StoreData
-            return Mapper.Map<StorePO, StoreVO>(storedata.GetModel(id));
-        }
+        //    //StoreData
+        //    return Mapper.Map<StorePO, StoreVO>(storedata.GetModel(id));
+        //}
         public List<Model.VO.StoreVO> GetAllStores()
         {
             StoreData storeData = new StoreData();

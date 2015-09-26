@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,37 +8,37 @@ using Zeta.WisdCar.Model.PO;
 
 namespace Zeta.WisdCar.Repository
 {
-    interface IStoreData
+    public interface IKVCategoryData
     {
         /// <summary>
-        /// è·å–æ‰€æœ‰é—¨åº—åˆ—è¡¨
+        /// »ñÈ¡ËùÓĞÀà±ğÁĞ±í
         /// </summary>
         /// <returns></returns>
-        DataSet GetAllStores();
+        DataSet GetAllCategorys();
 
         /// <summary>
-        /// æ ¹æ®é—¨åº—IDè·å–é—¨åº—
+        /// ¸ù¾İID»ñÈ¡Àà±ğ
         /// </summary>
-        /// <param name="storeID"></param>
+        /// <param name="categoryID"></param>
         /// <returns></returns>
-        StorePO GetStoreByID(int storeID);
+        KVCategoryPO GetCategoryByID(int categoryID);
 
         /// <summary>
-        /// æ–°å¢é—¨åº—
+        /// ĞÂÔöÀà±ğ
         /// </summary>
-        /// <param name="store"></param>
-        void AddStore(StorePO store);
+        /// <param name="category"></param>
+        void AddCategory(KVCategoryPO category);
 
         /// <summary>
-        /// ä¿®æ”¹é—¨åº—
+        /// ĞŞ¸ÄÀà±ğ
         /// </summary>
-        /// <param name="store"></param>
-        void EditStore(StorePO store);
+        /// <param name="category"></param>
+        void EditCategory(KVCategoryPO category);
 
         /// <summary>
-        /// åˆ é™¤é—¨åº—
+        /// É¾³ıÀà±ğ
         /// </summary>
         /// <param name="id"></param>
-        void DelStore(int id);
+        void DelCategory(int id);
     }
 }
