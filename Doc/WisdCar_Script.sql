@@ -1,4 +1,4 @@
-USE WisdCarDB
+USE WisdCarDB1
 
 CREATE TABLE Car
 (

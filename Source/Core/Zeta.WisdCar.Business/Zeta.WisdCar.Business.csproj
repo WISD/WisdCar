@@ -48,6 +48,12 @@
     <Compile Include="AutoMapper\AutoMapperHelper.cs" />
     <Compile Include="AutoMapper\Profiles\CarProfile.cs" />
     <Compile Include="AutoMapper\Profiles\ClubCardProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\ConsumeProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\EmployeeProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\KVCategoryProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\KVLookupProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\PackageProfile.cs" />
+    <Compile Include="AutoMapper\Profiles\PkgItemProfile.cs" />
     <Compile Include="AutoMapper\Profiles\RechargeProfile.cs" />
     <Compile Include="AutoMapper\Profiles\StoreProfile.cs" />
     <Compile Include="BasicDataModule\IEmployeeMgm.cs" />

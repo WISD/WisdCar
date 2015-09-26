@@ -5,23 +5,23 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zeta.WisdCar.Model.Entity;
 using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business.AutoMapper.Profiles
 {
-    public class RechargeProfile:Profile
+    public class EmployeeProfile : Profile
     {
         protected override void Configure()
         {
             //DB record to PO
-            CreateMap<IDataReader, RechargeLogPO>();
+            CreateMap<IDataReader, EmployeePO>();
+
             //PO to VO
-            CreateMap<RechargeLogPO, RechargeVO>().IgnoreUnmappedProperties();
-            CreateMap<RechargeLogPO, RechargeLogQueryEntity>().IgnoreUnmappedProperties();
+            CreateMap<EmployeePO, EmployeeVO>().IgnoreUnmappedProperties();
+
             //VO to PO
-            CreateMap<RechargeVO, RechargeLogPO>();
+            CreateMap<EmployeeVO, EmployeePO>();
         }
     }
 }

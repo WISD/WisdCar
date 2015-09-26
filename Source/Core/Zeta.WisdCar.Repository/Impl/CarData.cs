@@ -11,9 +11,15 @@ namespace Zeta.WisdCar.Repository.Impl
     public class CarData : ICarData
     {
         private Car _daoCar = new Car();
-        public CarPO GetCarsByCustID(int custID)
+        public System.Data.DataSet GetCarsByCustID(int custID)
         {
-            return _daoCar.GetModel(custID);
+            StringBuilder strSql = new StringBuilder();
+            string strWhere = "";
+            
+            strSql.AppendFormat(" CustomerID = {0} ", custID);
+
+            strWhere = strSql.ToString();
+            return _daoCar.GetList(strWhere);
         }
 
         public void AddCar(Model.PO.CarPO car)

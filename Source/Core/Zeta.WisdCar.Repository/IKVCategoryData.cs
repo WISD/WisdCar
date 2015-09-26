@@ -1,41 +1,42 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zeta.WisdCar.Model.VO;
+using Zeta.WisdCar.Model.PO;
 
-namespace Zeta.WisdCar.Business.BasicDataModule
+namespace Zeta.WisdCar.Repository
 {
-    public interface IKVCategoryMgm
+    public interface IKVCategoryData
     {
         /// <summary>
-        /// è·å–æ‰€æœ‰ç±»åˆ«åˆ—è¡¨
+        /// »ñÈ¡ËùÓĞÀà±ğÁĞ±í
         /// </summary>
         /// <returns></returns>
-        List<KVCategoryVO> GetAllCategorys();
+        DataSet GetAllCategorys();
 
         /// <summary>
-        /// æ ¹æ®IDè·å–ç±»åˆ«
+        /// ¸ù¾İID»ñÈ¡Àà±ğ
         /// </summary>
         /// <param name="categoryID"></param>
         /// <returns></returns>
-        KVCategoryVO GetCategoryByID(int categoryID);
+        KVCategoryPO GetCategoryByID(int categoryID);
 
         /// <summary>
-        /// æ–°å¢ç±»åˆ«
+        /// ĞÂÔöÀà±ğ
         /// </summary>
         /// <param name="category"></param>
-        void AddCategory(KVCategoryVO category);
+        void AddCategory(KVCategoryPO category);
 
         /// <summary>
-        /// ä¿®æ”¹ç±»åˆ«
+        /// ĞŞ¸ÄÀà±ğ
         /// </summary>
         /// <param name="category"></param>
-        void EditCategory(KVCategoryVO category);
+        void EditCategory(KVCategoryPO category);
 
         /// <summary>
-        /// åˆ é™¤ç±»åˆ«
+        /// É¾³ıÀà±ğ
         /// </summary>
         /// <param name="id"></param>
         void DelCategory(int id);

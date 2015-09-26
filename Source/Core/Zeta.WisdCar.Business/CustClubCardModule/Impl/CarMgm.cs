@@ -1,25 +1,34 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Model.VO;
 using Zeta.WisdCar.Repository.Impl;
+using Zeta.WisdCar.Business.AutoMapper;
 
 namespace Zeta.WisdCar.Business.CustClubCardModule.Impl
 {
     public class CarMgm : ICarMgm
     {
-        public Model.VO.CarVO GetCarsByCustID(int custID)
+        public List<CarVO> GetCarsByCustID(int custID)
         {
             CarData carData = new CarData();
-            CarVO carVO = new CarVO();
-            CarPO carPO = carData.GetCarsByCustID(custID);
-            carVO = Mapper.Map<CarPO, CarVO>(carPO);
 
-            return carVO;
+            List<CarVO> carVOList = new List<CarVO>();
+
+            DataSet ds = carData.GetCarsByCustID(custID);
+            List<CarPO> carPOList = ds.GetEntity<List<CarPO>>();
+
+            carPOList.ForEach(i =>
+            {
+                carVOList.Add(Mapper.Map<CarPO, CarVO>(i));
+            });
+
+            return carVOList;
         }
 
         public void AddCar(Model.VO.CarVO car)

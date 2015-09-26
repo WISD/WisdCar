@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Business.SysMgmModule;
+using Zeta.WisdCar.Infrastructure;
 
 namespace Zeta.WisdCar.Business.Handler
 {
@@ -13,26 +15,26 @@ namespace Zeta.WisdCar.Business.Handler
         /// 充值流水号(生成规则：1（充值） +  门店ID  +  yymmddHHmmss)
         /// </summary>
         /// <returns></returns>
-        public static string GenRechargeSerialNo(int storeid)
+        public static string GenRechargeSerialNo()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("1");
-            sb.Append(storeid);
-            sb.Append(DateTime.Now.ToString("yymmddHHmmss"));
-            return sb.ToString();
+            StringBuilder strTemp = new StringBuilder();
+            string strSerialNo = "";
+            strTemp.AppendFormat("{0}{1}{2}", 1, PermissionMgm.GetCurUser1(), DateTime.Now.ToString("yymmddHHmmss"));
+            strSerialNo = strTemp.ToString();
+            return strSerialNo;
         }
 
         /// <summary>
         /// 消费批次编号(生成规则：2（消费） +  门店ID  +  yymmddHHmmss)
         /// </summary>
         /// <returns></returns>
-        public static string GenConsumeBatchNo(int storeid)
+        public static string GenConsumeBatchNo()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("2");
-            sb.Append(storeid);
-            sb.Append(DateTime.Now.ToString("yymmddHHmmss"));
-            return sb.ToString();
+            StringBuilder strTemp = new StringBuilder();
+            string strBatchNo = "";
+            strTemp.AppendFormat("{0}{1}{2}", 2,PermissionMgm.GetCurUser1(), DateTime.Now.ToString("yymmddHHmmss"));
+            strBatchNo = strTemp.ToString();
+            return strBatchNo;
         }
 
 
@@ -42,7 +44,13 @@ namespace Zeta.WisdCar.Business.Handler
         /// <returns></returns>
         public static string GenClubCardNo()
         {
-            throw new NotImplementedException();
+            StringBuilder strTemp = new StringBuilder();
+            string strClubCardNo = "";
+            string strMobileNo = "";
+            strMobileNo = PermissionMgm.GetCurUser1().MobileNO;
+            strTemp.AppendFormat("{0}{1}{2}", AppSettings.CorpUniqueNo, DateTime.Now.ToString("yymmdd"), strMobileNo.Substring(strMobileNo.Length - 4, 4));
+            strClubCardNo = strTemp.ToString();
+            return strClubCardNo;
         }
 
         /// <summary>

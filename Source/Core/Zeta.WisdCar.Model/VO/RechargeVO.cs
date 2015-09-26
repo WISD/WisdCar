@@ -68,7 +68,7 @@ namespace Zeta.WisdCar.Model.VO
         /// <summary>
         /// 充值流水号
         /// </summary>
-        public string RechargeSerialNo
+        public string SerialNo
         {
             get { return _serialno; }
             set { _serialno = value; }

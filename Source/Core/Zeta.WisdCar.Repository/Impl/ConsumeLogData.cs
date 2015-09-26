@@ -7,16 +7,26 @@ using Zeta.WisdCar.Repository.CRUD;
 
 namespace Zeta.WisdCar.Repository.Impl
 {
-    public class RechargeLogData : IRechargeLogData
+    public class ConsumeLogData : IConsumeLogData
     {
-        private RechargeLog _daoRechargeLog = new RechargeLog();
-        public void AddRechargeLog(Model.PO.RechargeLogPO entity)
+        private ConsumeLog _daoConsumeLog = new ConsumeLog();
+        public void AddConsumeLog(Model.PO.ConsumeLogPO entity)
         {
-            _daoRechargeLog.Add(entity);
+            _daoConsumeLog.Add(entity);
         }
 
+        public System.Data.DataSet GetConsumeInfoByBatchNo(string batchNo)
+        {
+            StringBuilder strSql = new StringBuilder();
+            string strWhere = "";
 
-        public System.Data.DataSet GetRechargeLogs(Model.Entity.RechargeLogQueryEntity entity)
+            strSql.AppendFormat(" ConsumeBatchNo = '{0}' ", batchNo);
+
+            strWhere = strSql.ToString();
+            return _daoConsumeLog.GetList(strWhere);
+        }
+
+        public System.Data.DataSet GetConsumeLogs(Model.Entity.ConsumeLogQueryEntity entity)
         {
             StringBuilder strSql1 = new StringBuilder();
 
@@ -57,12 +67,12 @@ namespace Zeta.WisdCar.Repository.Impl
             {
                 if (strSql1.Length > 0)
                     strSql1.AppendFormat(" And ");
-                strSql1.AppendFormat(" CreatedDate between {0} and {1} ", entity.StartDate,entity.EndDate);
+                strSql1.AppendFormat(" CreatedDate between {0} and {1} ", entity.StartDate, entity.EndDate);
             }
 
             string strWhere = strSql1.ToString();
 
-            return _daoRechargeLog.GetList(strWhere);
+            return _daoConsumeLog.GetList(strWhere);
         }
     }
 }

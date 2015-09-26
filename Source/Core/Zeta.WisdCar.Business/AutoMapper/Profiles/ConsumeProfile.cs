@@ -11,17 +11,19 @@ using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business.AutoMapper.Profiles
 {
-    public class RechargeProfile:Profile
+    public class ConsumeProfile : Profile
     {
         protected override void Configure()
         {
             //DB record to PO
-            CreateMap<IDataReader, RechargeLogPO>();
+            CreateMap<IDataReader, ConsumeLogPO>();
+
             //PO to VO
-            CreateMap<RechargeLogPO, RechargeVO>().IgnoreUnmappedProperties();
-            CreateMap<RechargeLogPO, RechargeLogQueryEntity>().IgnoreUnmappedProperties();
+            CreateMap<ConsumeLogPO, ConsumeVO>().IgnoreUnmappedProperties();
+            CreateMap<ConsumeLogPO, ConsumeLogQueryEntity>().IgnoreUnmappedProperties();
+
             //VO to PO
-            CreateMap<RechargeVO, RechargeLogPO>();
+            CreateMap<ConsumeVO, ConsumeLogPO>();
         }
     }
 }

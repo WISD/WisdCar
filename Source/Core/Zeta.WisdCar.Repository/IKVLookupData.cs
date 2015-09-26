@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -8,37 +8,38 @@ using Zeta.WisdCar.Model.PO;
 
 namespace Zeta.WisdCar.Repository
 {
-    interface IStoreData
+    public interface IKVLookupData
     {
         /// <summary>
-        /// è·å–æ‰€æœ‰é—¨åº—åˆ—è¡¨
-        /// </summary>
-        /// <returns></returns>
-        DataSet GetAllStores();
-
-        /// <summary>
-        /// æ ¹æ®é—¨åº—IDè·å–é—¨åº—
-        /// </summary>
-        /// <param name="storeID"></param>
-        /// <returns></returns>
-        StorePO GetStoreByID(int storeID);
-
-        /// <summary>
-        /// æ–°å¢é—¨åº—
-        /// </summary>
-        /// <param name="store"></param>
-        void AddStore(StorePO store);
-
-        /// <summary>
-        /// ä¿®æ”¹é—¨åº—
-        /// </summary>
-        /// <param name="store"></param>
-        void EditStore(StorePO store);
-
-        /// <summary>
-        /// åˆ é™¤é—¨åº—
+        /// »ñÈ¡ËùÓĞKVLookupÁĞ±í
         /// </summary>
         /// <param name="id"></param>
-        void DelStore(int id);
+        /// <returns></returns>
+        DataSet GetKVByCategoryID(int id);
+
+        /// <summary>
+        /// ¸ù¾İID»ñÈ¡KVLookup
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        KVLookupPO GetKVByID(int id);
+
+        /// <summary>
+        /// ĞÂÔöKVLookup
+        /// </summary>
+        /// <param name="KV"></param>
+        void AddKV(KVLookupPO kv);
+
+        /// <summary>
+        /// ĞŞ¸ÄKVLookup
+        /// </summary>
+        /// <param name="kv"></param>
+        void EditKV(KVLookupPO kv);
+
+        /// <summary>
+        /// É¾³ıKVLookup
+        /// </summary>
+        /// <param name="id"></param>
+        void DelKV(int id);
     }
 }

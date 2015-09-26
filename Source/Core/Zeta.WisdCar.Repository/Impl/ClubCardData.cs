@@ -12,48 +12,50 @@ namespace Zeta.WisdCar.Repository.Impl
     {
         private ClubCard _daoClubCard = new ClubCard();
 
-        public System.Data.DataSet GetClubCards(Model.Entity.ClubCardQueryEntity filter)
+        public System.Data.DataSet GetClubCards(Model.Entity.ClubCardQueryEntity entity)
         {
-            StringBuilder strsql1 = new StringBuilder();
-            StringBuilder strsql2 = new StringBuilder();
-            if (!string.IsNullOrEmpty(filter.ClubCardNo))
+            StringBuilder strSql1 = new StringBuilder();
+            StringBuilder strSql2 = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(entity.ClubCardNo.Trim()))
             {
-                strsql1.Append(string.Format(" and clubcardno like '%{0}%'", filter.ClubCardNo));
-            }
-            if (filter.ClubCardTypeID > 0)
-            {
-                strsql1.AppendFormat(" and clubcardtypeid ={0}", filter.ClubCardTypeID);
-            }
-            if (!string.IsNullOrEmpty(filter.MobileNo))
-            {
-                strsql1.AppendFormat(" and mobileno like '%{0}%'", filter.MobileNo);
-            }
-            if (!string.IsNullOrEmpty(filter.Name))
-            {
-                strsql1.AppendFormat(" and custname like '%{0}%'", filter.Name);
-            }
-            if (!string.IsNullOrEmpty(filter.StoreName))
-            {
-                strsql1.AppendFormat(" and opencardstore like '%{0}%'", filter.StoreName);
-            }
-            if (filter.CardStatus >= 0)
-            {
-                strsql1.AppendFormat(" and cardstatus={0}", filter.CardStatus);
+                strSql1.AppendFormat(" ClubCardNo like '%{0}%' ", entity.ClubCardNo);
             }
 
-            if (!string.IsNullOrEmpty(filter.SortName.Trim()))
+            if (!string.IsNullOrEmpty(entity.Name.Trim()))
             {
-                strsql2.Append(filter.SortName);
-                strsql2.Append(" ");
-                strsql2.Append(filter.SortOrder.Trim());
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" Name like '%{0}%' ", entity.Name);
             }
 
-            string sqlWhere = strsql1.ToString();
-            string orderby = strsql2.ToString();
-            int startindex = filter.Start;
-            int endindex = filter.Start + filter.Length;
+            if (!string.IsNullOrEmpty(entity.MobileNo.Trim()))
+            {
 
-            return _daoClubCard.GetListByPage(sqlWhere, orderby, startindex, endindex);
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" MobileNO like '%{0}%' ", entity.MobileNo);
+            }
+
+            if (strSql1.Length > 0)
+                strSql1.AppendFormat(" And ");
+            strSql1.AppendFormat(" ClubCardTypeID like %{0}% ", entity.ClubCardTypeID);
+
+            //if (strSql1.Length > 0)
+            //    strSql1.AppendFormat(" And ");
+            //strSql1.AppendFormat(" OpenCardStore = {0} ", entity.StoreID);
+
+            if (!string.IsNullOrEmpty(entity.SortName.Trim()))
+            {
+                strSql2.Append(entity.SortName);
+                strSql2.Append(" ");
+                strSql2.Append(entity.SortOrder.Trim());
+            }
+            string strWhere = strSql1.ToString();
+            string orderby = strSql2.ToString();
+            int startIndex = entity.Start;
+            int endIndex = startIndex + entity.Length;
+            return _daoClubCard.GetListByPage(strWhere, orderby, startIndex, endIndex);
         }
 
         public Model.PO.ClubCardPO GetClubCardByID(int id)
