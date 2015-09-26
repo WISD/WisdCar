@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zeta.WisdCar.Business.SysMgmModule;
+using Zeta.WisdCar.Infrastructure;
 
 namespace Zeta.WisdCar.Business.Handler
 {
@@ -15,7 +17,11 @@ namespace Zeta.WisdCar.Business.Handler
         /// <returns></returns>
         public static string GenRechargeSerialNo()
         {
-            throw new NotImplementedException();
+            StringBuilder strTemp = new StringBuilder();
+            string strSerialNo = "";
+            strTemp.AppendFormat("{0}{1}{2}", 1, PermissionMgm.GetCurUser1(), DateTime.Now.ToString("yymmddHHmmss"));
+            strSerialNo = strTemp.ToString();
+            return strSerialNo;
         }
 
         /// <summary>
@@ -24,7 +30,11 @@ namespace Zeta.WisdCar.Business.Handler
         /// <returns></returns>
         public static string GenConsumeBatchNo()
         {
-            throw new NotImplementedException();
+            StringBuilder strTemp = new StringBuilder();
+            string strBatchNo = "";
+            strTemp.AppendFormat("{0}{1}{2}", 2,PermissionMgm.GetCurUser1(), DateTime.Now.ToString("yymmddHHmmss"));
+            strBatchNo = strTemp.ToString();
+            return strBatchNo;
         }
 
 
@@ -34,7 +44,13 @@ namespace Zeta.WisdCar.Business.Handler
         /// <returns></returns>
         public static string GenClubCardNo()
         {
-            throw new NotImplementedException();
+            StringBuilder strTemp = new StringBuilder();
+            string strClubCardNo = "";
+            string strMobileNo = "";
+            strMobileNo = PermissionMgm.GetCurUser1().MobileNO;
+            strTemp.AppendFormat("{0}{1}{2}", AppSettings.CorpUniqueNo, DateTime.Now.ToString("yymmdd"), strMobileNo.Substring(strMobileNo.Length - 4, 4));
+            strClubCardNo = strTemp.ToString();
+            return strClubCardNo;
         }
 
         /// <summary>

@@ -19,22 +19,30 @@ namespace Zeta.WisdCar.Repository.Impl
 
             if (!string.IsNullOrEmpty(entity.ClubCardNo.Trim()))
             {
-                strSql1.AppendFormat(" And ClubCardNo like '%{0}%' ", entity.ClubCardNo);
+                strSql1.AppendFormat(" ClubCardNo like '%{0}%' ", entity.ClubCardNo);
             }
 
             if (!string.IsNullOrEmpty(entity.Name.Trim()))
             {
-                strSql1.AppendFormat(" And Name like '%{0}%' ", entity.Name);
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" Name like '%{0}%' ", entity.Name);
             }
 
             if (!string.IsNullOrEmpty(entity.MobileNo.Trim()))
             {
-                strSql1.AppendFormat(" And MobileNO like '%{0}%' ", entity.MobileNo);
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" MobileNO like '%{0}%' ", entity.MobileNo);
             }
 
-            strSql1.AppendFormat(" And ClubCardTypeID like '%{0}%' ", entity.ClubCardTypeID);
-            //strSql1.AppendFormat(" And ICNo like '%{0}%' ", entity.ClubCardType);
-            strSql1.AppendFormat(" And OpenCardStore = {0} ", entity.StoreID);
+            if (strSql1.Length > 0)
+                strSql1.AppendFormat(" And ");
+            strSql1.AppendFormat(" ClubCardTypeID like %{0}% ", entity.ClubCardTypeID);
+
+            if (strSql1.Length > 0)
+                strSql1.AppendFormat(" And ");
+            strSql1.AppendFormat(" OpenCardStore = {0} ", entity.StoreID);
 
             if (!string.IsNullOrEmpty(entity.SortName.Trim()))
             {

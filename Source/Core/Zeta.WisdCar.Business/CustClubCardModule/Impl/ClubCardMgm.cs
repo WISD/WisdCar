@@ -11,6 +11,7 @@ using Zeta.WisdCar.Repository.Impl;
 using Zeta.WisdCar.Business.AutoMapper;
 using Zeta.WisdCar.Infrastructure.Helper;
 using Zeta.WisdCar.Infrastructure;
+using Zeta.WisdCar.Business.Handler;
 
 namespace Zeta.WisdCar.Business.CustClubCardModule
 {
@@ -76,6 +77,8 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         public void AddClubCard(Model.VO.ClubCardVO clubCard)
         {
             ClubCardData clubCardData = new ClubCardData();
+            clubCard.ClubCardNo = SerialNoGenerator.GenClubCardNo();
+            clubCard.ClubCardPwd = PwdHelper.MD5Encrypt(clubCard.ClubCardPwd);
             clubCardData.AddClubCard(Mapper.Map<ClubCardVO, ClubCardPO>(clubCard));
         }
 

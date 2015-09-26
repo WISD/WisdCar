@@ -11,6 +11,8 @@ using Zeta.WisdCar.Infrastructure.DBUtility;
 using System.Data.SqlClient;
 using Zeta.WisdCar.Infrastructure;
 using Zeta.WisdCar.Business.Handler;
+using System.Data;
+using Zeta.WisdCar.Business.AutoMapper;
 
 namespace Zeta.WisdCar.Business.RechargeConsumeModule
 {
@@ -36,6 +38,7 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
 
             try
             {
+                entity.SerialNo = SerialNoGenerator.GenRechargeSerialNo();
                 rechargeLogData.AddRechargeLog(Mapper.Map<RechargeVO, RechargeLogPO>(entity));
                 clubCardData.UpdateClubCard(clubCardPO);
                 tx.Commit();
@@ -49,10 +52,9 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
 
         public int RechargePkg(Model.VO.RechargeVO entity)
         {
-            //尚未完成
             CustClubCardModule.ClubCardMgm clubCardMgm = new CustClubCardModule.ClubCardMgm();
-            int clubCardID = clubCardMgm.GetCardStatusByClubCardID(entity.ClubCardID);
-            if (clubCardID != Convert.ToInt32(ClubCardStatus.OpenCard))
+            int clubCardState = clubCardMgm.GetCardStatusByClubCardID(entity.ClubCardID);
+            if (clubCardState != Convert.ToInt32(ClubCardStatus.OpenCard))
             {
                 throw new Exception("非有效会员卡，请联系后台管理员");
             }
@@ -108,6 +110,12 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
                 clubCardPkgDetailPOList.Add(clubCardPkgDetailPO);
 	        }
 
+            ClubCardData clubCardData = new ClubCardData();
+            ClubCardPO clubCardPO = clubCardData.GetClubCardByID(entity.ClubCardID);
+            clubCardPO.Balance = clubCardPO.Balance + entity.PlatformRechargeAmount;
+            clubCardPO.LastModifiedDate = DateTime.Now;
+            clubCardPO.LastModifierID = "TianXX";
+
 
             SqlConnection conn = new SqlConnection(PubConstant.ConnectionString);
             conn.Open();
@@ -117,8 +125,10 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             {
                 clubCardPkgData.AddClubCardPkg(clubCardPkgPO);
                 clubCardPkgData.AddClubCardPkgDetailList(clubCardPkgDetailPOList);
+
+                entity.SerialNo = SerialNoGenerator.GenRechargeSerialNo();
                 rechargeLogData.AddRechargeLog(Mapper.Map<RechargeVO, RechargeLogPO>(entity));
-                //clubCardData.UpdateClubCard(clubCardPO);
+                clubCardData.UpdateClubCard(clubCardPO);
                 tx.Commit();
             }
             catch
@@ -132,7 +142,19 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
 
         public List<CashRechargeQueryVO> GetRechargeCashLog(Model.Entity.RechargeLogQueryEntity entity)
         {
-            throw new NotImplementedException();
+            RechargeLogData rechargeLogData = new RechargeLogData();
+
+            List<CashRechargeQueryVO> cashRechargeQueryVOList = new List<CashRechargeQueryVO>();
+
+            DataSet ds = rechargeLogData.GetRechargeLogs(entity);
+            List<RechargeLogPO> rechargeLogPOList = ds.GetEntity<List<RechargeLogPO>>();
+
+            rechargeLogPOList.ForEach(i =>
+            {
+                cashRechargeQueryVOList.Add(Mapper.Map<RechargeLogPO, CashRechargeQueryVO>(i));
+            });
+
+            return cashRechargeQueryVOList;
         }
 
         public List<PkgRechargeQueryVO> GetRechargePkgLog(Model.Entity.RechargeLogQueryEntity entity)

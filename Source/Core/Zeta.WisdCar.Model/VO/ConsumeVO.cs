@@ -10,6 +10,7 @@ namespace Zeta.WisdCar.Model.VO
     {
         #region Model
         private int _consumelogid;
+        private string _consumebatchno;
         private int _clubcardid;
         private int _clubcardno;
         private int _custid;
@@ -40,6 +41,16 @@ namespace Zeta.WisdCar.Model.VO
             set { _consumelogid = value; }
             get { return _consumelogid; }
         }
+
+        /// <summary>
+        /// 消费批次号
+        /// </summary>
+        public string ConsumeBatchNo
+        {
+            set { _consumebatchno = value; }
+            get { return _consumebatchno; }
+        }
+
         /// <summary>
         /// 会员卡ID
         /// </summary>

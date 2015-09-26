@@ -18,9 +18,9 @@ namespace Zeta.WisdCar.Business.BasicDataModule
         /// <summary>
         /// 根据ID获取类别
         /// </summary>
-        /// <param name="CategoryID"></param>
+        /// <param name="categoryID"></param>
         /// <returns></returns>
-        KVCategoryVO GetCategoryByID(int CategoryID);
+        KVCategoryVO GetCategoryByID(int categoryID);
 
         /// <summary>
         /// 新增类别

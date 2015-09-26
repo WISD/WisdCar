@@ -15,7 +15,7 @@ namespace Zeta.WisdCar.Repository
         /// </summary>
         /// <param name="custID"></param>
         /// <returns></returns>
-        CarPO GetCarsByCustID(int custID);
+        DataSet GetCarsByCustID(int custID);
 
         /// <summary>
         /// 新增汽车

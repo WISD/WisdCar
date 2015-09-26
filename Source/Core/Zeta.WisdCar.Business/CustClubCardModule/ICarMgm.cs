@@ -14,7 +14,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// </summary>
         /// <param name="custID"></param>
         /// <returns></returns>
-        CarVO GetCarsByCustID(int custID);
+        List<CarVO> GetCarsByCustID(int custID);
 
         /// <summary>
         /// 新增汽车

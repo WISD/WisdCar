@@ -12,5 +12,6 @@ namespace Zeta.WisdCar.Model.Entity
         public string UserName { get; set; }
         public string StoreID { get; set; }
         public string StoreName { get; set; }
+        public string MobileNO { get; set; }
     }
 }
