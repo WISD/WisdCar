@@ -31,6 +31,7 @@ namespace Zeta.WisdCar.Repository.Impl
 
             if (!string.IsNullOrEmpty(entity.MobileNo.Trim()))
             {
+
                 if (strSql1.Length > 0)
                     strSql1.AppendFormat(" And ");
                 strSql1.AppendFormat(" MobileNO like '%{0}%' ", entity.MobileNo);
@@ -61,7 +62,14 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             return _daoClubCard.GetModel(id);
         }
-
+        public Model.PO.ClubCardPO GetCardByID(int cardid, int type)
+        {
+            return _daoClubCard.GetModel(cardid, type);
+        }
+        public Model.PO.ClubCardPO GetCardByCardNo(string cardNo)
+        {
+            return _daoClubCard.GetCardByCardNo(cardNo);
+        }
         public System.Data.DataSet GetClubCards(string key)
         {
             StringBuilder strSql = new StringBuilder();
@@ -73,12 +81,30 @@ namespace Zeta.WisdCar.Repository.Impl
             strWhere = strSql.ToString();
             return _daoClubCard.GetList(strWhere);
         }
-
+        public void AddCard(Model.PO.ClubCardPO card)
+        {
+            _daoClubCard.Add(card);
+        }
         public void AddClubCard(Model.PO.ClubCardPO clubCard)
         {
             _daoClubCard.Add(clubCard);
         }
-
+        public void EditCard(Model.PO.ClubCardPO card)
+        {
+            _daoClubCard.UpdateModel(card);
+        }
+        public void UpdatePwd(int clubCardID, string p)
+        {
+            _daoClubCard.UpdatePwd(clubCardID, p);
+        }
+        public void UpdateClubCardStatus(int clubCardID, int status)
+        {
+            _daoClubCard.UpdateClubCardStatus(clubCardID, status);
+        }
+        public void UpdateClubCardNo(int clubCardID, string newClubCardNo)
+        {
+            _daoClubCard.UpdateClubCardNo(clubCardID, newClubCardNo);
+        }
         public System.Data.DataSet GetAvailablePkgs(int clubCardID)
         {
             ClubCardPackage _daoClubCardPkg = new ClubCardPackage();
@@ -130,6 +156,12 @@ namespace Zeta.WisdCar.Repository.Impl
         public void UpdateClubCard(Model.PO.ClubCardPO clubCard)
         {
             _daoClubCard.Update(clubCard);
+        }
+
+
+        public void DelCard(int id)
+        {
+            _daoClubCard.Delete(id);
         }
     }
 }

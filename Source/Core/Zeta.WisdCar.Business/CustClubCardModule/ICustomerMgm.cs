@@ -52,11 +52,29 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         /// </summary>
         /// <param name="cust"></param>
         void EditCustomer(CustomerVO cust);
-
+        /// <summary>
+        /// 修改客户事务版
+        /// </summary>
+        /// <param name="cust"></param>
+        bool EditCustomer(CustomerVO cust, CarVO car);
         /// <summary>
         /// 删除客户
         /// </summary>
         /// <param name="id"></param>
         void DelCustomer(int id);
+        
+        /// <summary>
+        /// 添加客户和汽车
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <param name="car"></param>
+        /// <returns></returns>
+        int AddAllCustomer(CustomerVO customer, CarVO car);
+        /// <summary>
+        /// 手机号查询客户
+        /// </summary>
+        /// <param name="mno"></param>
+        /// <returns></returns>
+        CustomerVO GetCustomerByMobileNo(string mno);
     }
 }

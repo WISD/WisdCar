@@ -1,0 +1,278 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            会员充值 <small>Member Recharge</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="index.html">
+                    首页
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    充值消费
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    充值
+                </a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i>充值管理
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">充值现金</h3>
+            </div>
+            <div class="panel-body">
+                <div class="portlet box" style="margin-bottom:10px; border:1px solid #bde9f1;">
+                    <div class="portlet-body">
+                        <form class="form-horizontal">
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="PackageAmount">充值金额:</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="PackageAmount" name="Amount" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="CashDiscount">现金折扣:</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="Discount" name="Discount" readonly="readonly" value="@ViewData["discount"]" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="CreditedAmount">入账金额:</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="CreditedAmount" name="Amount" readonly="readonly" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="PaymentType">支付方式:</label>
+                                <div class="col-md-4">
+                                    <div>
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active"><a href="#home" onclick="payType('cash')" aria-controls="home" role="tab" data-toggle="tab">现金</a></li>
+                                            <li role="presentation"><a href="#profile" aria-controls="profile" onclick="payType('bankcard')" role="tab" data-toggle="tab">银行卡</a></li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="home">
+                                               支付现金，进行充值
+                                                
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-1" id="ajax-demo" data-toggle="modal">
+                                    <a id="btnQy" href="javacript:void(0);" class="btn btn-md blue"> 确认支付 </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- ajax -->
+                    <div id="ajax-modal" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title">确认信息</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <form class="form-horizontal" role="form">
+                                <div class="form-body">
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="PackageAmount">充值金额:</label>
+                                        <div class="col-md-4">
+                                            <label class="control-label" id="lblReacc"></label>
+                                            @*<input type="text" id="PackageAmount" name="Amount" class="form-control" placeholder="">*@
+                                            <label></label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="txtQyName">客户姓名:</label>
+                                        <div class="col-md-4">
+                                            <label class="control-label" id="lblCuName">@ViewData["name"]</label>
+                                            @*<input type="text" id="txtQyName" name="Name" class="form-control" placeholder="">*@
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="txtQyCardNo">会员卡号:</label>
+                                        <div class="col-md-4">
+                                            <label class="control-label" id="lblCno">@ViewData["cno"]</label>
+                                            @*<input type="text" id="txtQyCardNo" name="CardNo" class="form-control" placeholder="">*@
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="ddlCardType">会员卡类型:</label>
+                                        <div class="col-md-4">
+                                            <label class="control-label" id="lblCtype">@ViewData["ctype"]</label>
+                                            @*<select id="ddlCardType" name="CardType" class="form-control input-md">
+                                                <option>白金卡</option>
+                                                <option>金卡</option>
+                                            </select>*@
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="CashDiscount">现金折扣:</label>
+                                        <div class="col-md-4">
+                                            <label class="control-label" id="lblDiscount">@ViewData["discount"]</label>
+                                            @*<input type="text" id="CashDiscount" name="Discount" class="form-control" placeholder="">*@
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="CreditedAmount">入账金额:</label>
+                                        <div class="col-md-4">
+                                            <label class="control-label" id="lblInacc"></label>
+                                            @*<input type="text" id="CreditedAmount" name="Amount" class="form-control" placeholder="">*@
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="PaymentType">支付类型:</label>
+                                        <div class="col-md-4">
+                                            <label class="control-label" id="lblPaytype">现金</label>
+                                            <input type="hidden" id="hidPaytype" value="cash" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer" style="text-align:center;">
+
+                            <a id="btnQy" href="javacript:void(0);" onclick="payForm()" data-dismiss="modal" class="btn btn-md blue"> 确认支付 </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+@section scripts{
+<script>
+        $(function () {
+            UIModalExt.Init();
+        });
+        function payType(t) {
+            if (t == 'cash') {
+                $('#lblPaytype').html('现金');
+                $('#hidPaytype').val(t);
+            } else if (t == 'bankcard') {
+                $('#lblPaytype').html('银行卡');
+                $('#hidPaytype').val(t);
+            }
+        }
+        function payForm() {
+            //提交充值信息
+            var cno = $('#lblCno').text();
+            var rechargeAcc = $('#lblReacc').text();
+            var discount = $('#lblDiscount').text();
+            var paytype = $('#hidPaytype').val();
+
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("RechargeCashSub", "Recharge")",
+                "dataType": "json",
+                "data": { cno: cno, rechargeAcc:rechargeAcc,discount:discount,paytype:paytype},
+                "async": true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        window.location.href = "@Url.Action("RechargeSuccess","Recharge")"
+                    } else {
+                        alert(re.Message);
+                    }
+                },
+                "error": function () {
+                    alert(re.Error);
+                }
+            })
+        }
+        var UIModalExt = function () {
+            var onPageLoad = function () {
+                handleAjaxModal();
+            };
+
+            var handleAjaxModal = function () {
+                var $modal = $('#ajax-modal');
+                $('#ajax-demo').on('click', function () {
+                    var rec =$('#PackageAmount').val();
+                    if (!rec) {
+                        alert('请输入充值金额');
+                        return;
+                    }
+                    else if (rec * 1 != rec) {
+                        alert('充值金额输入不正确');
+                        return;
+                    }
+                    $('body').modalmanager('loading');
+                    setTimeout(function () {
+                        $modal.modal();
+                    }, 1000);
+                });
+            };
+
+            return {
+                Init: function () {
+                  
+                    onPageLoad();
+                    $('#PackageAmount').change(function () {
+                        var amou = $('#PackageAmount').val();
+                        var reg = /^[1-9]\d*(\d*|\.\d*)|0\.\d*[1-9]\d*$/;
+
+                        if (!reg.test(amou) || Number(amou) <= 0) {
+                            alert('充值金额输入错误');
+                            $('#PackageAmount').val("");
+                            $('#PackageAmount').focus();
+                        }
+                        else {
+                            var discount = $('#Discount').val();
+                           
+                            if (discount) {
+
+                                var rechargeAcc = amou * discount + (amou * 1);
+                                $('#CreditedAmount').val(rechargeAcc);
+                                $('#lblInacc').html(rechargeAcc);
+                                $('#lblReacc').html(amou);
+                            }
+                        }
+                    });
+                }
+            };
+        }();
+</script>
+}
+

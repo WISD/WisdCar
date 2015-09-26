@@ -437,6 +437,37 @@ namespace Zeta.WisdCar.Repository.CRUD
 		#region  ExtensionMethod
 
 		#endregion  ExtensionMethod
-	}
+        internal int ChangePassword(string id, string password)
+        {
+            string sql = "update employee set Reserved1=@pwd where EmployeeNo = @empno";
+            SqlParameter[] sp = {
+                new SqlParameter("@pwd",password),
+                new SqlParameter("@empno",id)    
+            };
+            return DbHelperSQL.ExecuteSql(sql, sp);
+        }
+
+        internal Model.PO.EmployeePO GetModelByEmployeeNo(string emoployeeNo)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select  top 1 EmployeeID,EmployeeNo,Name,Sex,Phone,JobType,EmployeeAddr,EmployeeResume,StoreID,StoreName,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 from Employee ");
+            strSql.Append(" where EmployeeNo=@emoployeeNo");
+            SqlParameter[] parameters = {
+					new SqlParameter("@emoployeeNo", SqlDbType.NVarChar)
+			};
+            parameters[0].Value = emoployeeNo;
+
+            WisdCar.Model.PO.EmployeePO model = new WisdCar.Model.PO.EmployeePO();
+            DataSet ds = DbHelperSQL.Query(strSql.ToString(), parameters);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                return DataRowToModel(ds.Tables[0].Rows[0]);
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
 }
 

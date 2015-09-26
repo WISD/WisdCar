@@ -17,8 +17,13 @@ namespace Zeta.WisdCar.Infrastructure.Helper
         public static string MD5Encrypt(string strText)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(strText));
-            return System.Text.Encoding.Default.GetString(result);
+            byte[] res = md5.ComputeHash(Encoding.Default.GetBytes(strText), 0, strText.Length);
+            string result = "";
+            foreach (byte b in res)
+            {
+                result += b.ToString("X");
+            }
+            return result;
         } 
     }
 }

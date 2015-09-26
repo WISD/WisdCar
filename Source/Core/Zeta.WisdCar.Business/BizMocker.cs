@@ -576,5 +576,21 @@ namespace Zeta.WisdCar.Business
         {
             throw new NotImplementedException();
         }
+
+
+        public bool EditCustomer(CustomerVO cust, CarVO car)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int AddAllCustomer(CustomerVO customer, CarVO car)
+        {
+            throw new NotImplementedException();
+        }
+
+        public CustomerVO GetCustomerByMobileNo(string mno)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

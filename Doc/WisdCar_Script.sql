@@ -4,7 +4,7 @@ CREATE TABLE Car
 (
 	CarID                int IDENTITY(1,1) NOT NULL ,
 	CarNo                nvarchar(50)  NOT NULL ,
-	Brand                nvarchar(50)  NOT NULL ,
+	Brand                nvarchar(50)  null,
 	CarModel             nvarchar(50)  NULL ,
 	Capacity             nvarchar(50)  NULL ,
 	Color                nvarchar(50)  NULL ,

@@ -14,6 +14,13 @@ namespace Zeta.WisdCar.Business.BasicDataModule
 {
     public class StoreMgm : IStoreMgm
     {
+        public StoreVO GetModel(int id)
+        {
+            StoreData storedata = new StoreData();
+
+            //StoreData
+            return Mapper.Map<StorePO, StoreVO>(storedata.GetModel(id));
+        }
         public List<Model.VO.StoreVO> GetAllStores()
         {
             StoreData storeData = new StoreData();
@@ -33,6 +40,7 @@ namespace Zeta.WisdCar.Business.BasicDataModule
 
         public Model.VO.StoreVO GetStoreByID(int storeID)
         {
+
             StoreData storeData = new StoreData();
             StoreVO storeVO = new StoreVO();
             StorePO storePO = storeData.GetStoreByID(storeID);
@@ -43,6 +51,7 @@ namespace Zeta.WisdCar.Business.BasicDataModule
 
         public void AddStore(Model.VO.StoreVO store)
         {
+
             StoreData storeData = new StoreData();
             storeData.AddStore(Mapper.Map<StoreVO, StorePO>(store));
         }

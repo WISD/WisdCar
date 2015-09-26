@@ -53,7 +53,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			SqlParameter[] parameters = {
 					new SqlParameter("@RechargeSerialNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ClubCardID", SqlDbType.Int,4),
-					new SqlParameter("@ClubCardNo", SqlDbType.Int,4),
+					new SqlParameter("@ClubCardNo", SqlDbType.NVarChar),
 					new SqlParameter("@CustID", SqlDbType.Int,4),
 					new SqlParameter("@CustName", SqlDbType.NVarChar,50),
 					new SqlParameter("@RechargeDate", SqlDbType.DateTime),
@@ -145,7 +145,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 			SqlParameter[] parameters = {
 					new SqlParameter("@RechargeSerialNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@ClubCardID", SqlDbType.Int,4),
-					new SqlParameter("@ClubCardNo", SqlDbType.Int,4),
+					new SqlParameter("@ClubCardNo", SqlDbType.NVarChar),
 					new SqlParameter("@CustID", SqlDbType.Int,4),
 					new SqlParameter("@CustName", SqlDbType.NVarChar,50),
 					new SqlParameter("@RechargeDate", SqlDbType.DateTime),
@@ -298,7 +298,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 				}
 				if(row["ClubCardNo"]!=null && row["ClubCardNo"].ToString()!="")
 				{
-					model.ClubCardNo=int.Parse(row["ClubCardNo"].ToString());
+					model.ClubCardNo=row["ClubCardNo"].ToString();
 				}
 				if(row["CustID"]!=null && row["CustID"].ToString()!="")
 				{

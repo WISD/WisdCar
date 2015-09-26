@@ -12,8 +12,8 @@ using Zeta.WisdCar.Business.AutoMapper;
 using Zeta.WisdCar.Infrastructure.Helper;
 using Zeta.WisdCar.Infrastructure;
 using Zeta.WisdCar.Business.Handler;
-
-namespace Zeta.WisdCar.Business.CustClubCardModule
+using Zeta.WisdCar.Repository;
+using Zeta.WisdCar.Infrastructure.Log;namespace Zeta.WisdCar.Business.CustClubCardModule
 {
     public class ClubCardMgm : IClubCardMgm
     {
@@ -24,7 +24,10 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
             DataSet ds = clubCardData.GetClubCards(entity);
             List<ClubCardPO> clubCardPOList = ds.GetEntity<List<ClubCardPO>>();
-
+            if(clubCardPOList==null)
+            {
+                clubCardPOList = new List<ClubCardPO>();
+            }
             clubCardPOList.ForEach(i =>
             {
                 clubCardVOList.Add(Mapper.Map<ClubCardPO, ClubCardVO>(i));
@@ -42,8 +45,16 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             return clubCardVO;
         }
 
-
-
+        public Model.VO.ClubCardVO GetClubCardByCustID(int id)
+        {
+            IClubCardData cardData = new ClubCardData();
+            return Mapper.Map<ClubCardPO, ClubCardVO>(cardData.GetCardByID(id, 1));
+        }
+        public Model.VO.ClubCardVO GetClubCardByCardNo(string cardNo)
+        {
+            IClubCardData cardData = new ClubCardData();
+            return Mapper.Map<ClubCardPO, ClubCardVO>(cardData.GetCardByCardNo(cardNo));
+        }
 
         public List<Model.VO.ClubCardVO> GetClubCards(string key)
         {
@@ -175,6 +186,39 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
             clubCardData.UpdateClubCard(Mapper.Map<ClubCardVO, ClubCardPO>(clubCardVO));
         }
+        public string UpdatePwd(int clubCardID, string oldpwd, string newPwd)
+        {
+            IClubCardData carddal = new ClubCardData();
+            string restr;
+            var result = Mapper.Map<ClubCardPO, ClubCardVO>(carddal.GetCardByID(clubCardID, 0));
+            if (result == null)
+            {
+                restr = "当前会员卡不存在";
+            }
+            else
+            {
+                if (result.ClubCardPwd == StringHelper.MD5Encrypt(oldpwd))
+                {
+                    try
+                    {
+                        result.ClubCardPwd = StringHelper.MD5Encrypt(newPwd);
+                        carddal.UpdateClubCard(Mapper.Map<ClubCardVO, ClubCardPO>(result));
+                        restr = null;
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHandler.Error(ex.ToString());
+                        restr = "出现错误，密码重置失败";
+                    }
+                }
+                else
+                {
+                    restr = "原始密码不正确";
+                }
+            }
+            return restr;
+
+        }
 
         public void UpdateClubCardStatus(int clubCardID, int status)
         {
@@ -195,13 +239,20 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             ClubCardData clubCardData = new ClubCardData();
             ClubCardVO clubCardVO = GetClubCardByID(clubCardID);
 
-            if (!string.IsNullOrEmpty(newClubCardNo.Trim()))
+
+            if (string.IsNullOrEmpty(newClubCardNo.Trim()))
             {
                 throw new Exception("New ClubCardNo cannot empty ");
             }
 
             clubCardVO.ClubCardNo = newClubCardNo;
+            clubCardVO.CardStatus = 0;
             clubCardData.UpdateClubCard(Mapper.Map<ClubCardVO, ClubCardPO>(clubCardVO));
+        }
+        public void Update(ClubCardVO clubcard)
+        {
+            ClubCardData clubCarddal = new ClubCardData();
+            clubCarddal.EditCard(Mapper.Map<ClubCardVO, ClubCardPO>(clubcard));
         }
     }
 }

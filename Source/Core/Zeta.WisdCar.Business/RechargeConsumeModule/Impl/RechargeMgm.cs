@@ -30,7 +30,8 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             RechargeLogData rechargeLogData = new RechargeLogData();
             ClubCardData clubCardData = new ClubCardData();
             ClubCardPO clubCardPO = clubCardData.GetClubCardByID(entity.ClubCardID);
-            clubCardPO.Balance = entity.PlatformRechargeAmount;
+            clubCardPO.Balance += entity.PlatformRechargeAmount;
+
 
             SqlConnection conn = new SqlConnection(PubConstant.ConnectionString);
             conn.Open();
@@ -52,7 +53,9 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
 
         public int RechargePkg(Model.VO.RechargeVO entity)
         {
+            //尚需完善
             CustClubCardModule.ClubCardMgm clubCardMgm = new CustClubCardModule.ClubCardMgm();
+
             int clubCardState = clubCardMgm.GetCardStatusByClubCardID(entity.ClubCardID);
             if (clubCardState != Convert.ToInt32(ClubCardStatus.OpenCard))
             {
@@ -67,7 +70,7 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             ClubCardPackageData clubCardPkgData = new ClubCardPackageData();
 
 
-            MarktingPlanModule.PackageMgm pkgMgm = new MarktingPlanModule.PackageMgm();
+            MarktingPlanModule.PackageMgm pkgMgm = new MarktingPlanModule.PackageMgm(); 
             MarktingPlanModule.IPkgItemsMgm pkgItemsMgm = new MarktingPlanModule.PkgItemsMgm();
 
             //PackageData packageData = new PackageData();
@@ -128,7 +131,6 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
 
                 entity.SerialNo = SerialNoGenerator.GenRechargeSerialNo();
                 rechargeLogData.AddRechargeLog(Mapper.Map<RechargeVO, RechargeLogPO>(entity));
-                clubCardData.UpdateClubCard(clubCardPO);
                 tx.Commit();
             }
             catch

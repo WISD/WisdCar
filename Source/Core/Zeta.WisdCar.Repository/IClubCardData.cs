@@ -18,7 +18,7 @@ namespace Zeta.WisdCar.Repository
         /// <param name="entity"></param>
         /// <returns></returns>
         DataSet GetClubCards(ClubCardQueryEntity entity);
-
+        
         /// <summary>
         /// 获取指定会员卡信息
         /// </summary>
@@ -85,5 +85,37 @@ namespace Zeta.WisdCar.Repository
         /// </summary>
         /// <param name="clubCard"></param>
         void UpdateClubCard(ClubCardPO clubCard);
+        #region fudongdong's function
+        /// <summary>
+        /// 根据会员卡类型ID获取会员卡类型数据type索引类型，0为会员卡编号，1为客户编号
+        /// </summary>
+        /// <returns></returns>
+        ClubCardPO GetCardByID(int cardid, int type);
+        /// <summary>
+        /// 新增会员卡类型
+        /// </summary>
+        /// <param name="cardType"></param>
+        void AddCard(ClubCardPO card);
+
+        /// <summary>
+        /// 修改会员卡类型
+        /// </summary>
+        /// <param name="cardType"></param>
+        void EditCard(ClubCardPO card);
+
+        /// <summary>
+        /// 删除会员卡类型
+        /// </summary>
+        /// <param name="id"></param>
+        void DelCard(int id);
+
+        void UpdatePwd(int clubCardID, string p);
+
+        void UpdateClubCardStatus(int clubCardID, int status);
+
+        void UpdateClubCardNo(int clubCardID, string newClubCardNo);
+        #endregion
+
+        ClubCardPO GetCardByCardNo(string cardNo);
     }
 }

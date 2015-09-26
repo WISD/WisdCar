@@ -1,0 +1,343 @@
+﻿<!-- BEGIN PAGE HEADER-->
+@model Zeta.WisdCar.Online.Models.CustomerAndCard
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            会员卡基本信息 <small>Membership card basic information</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="@Url.Action("Index", "Dashboard")">
+                    首页
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    会员管理
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    会员卡基本信息
+                </a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<!-- BEGIN main-->
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i>基本信息
+        </div>
+    </div>
+
+
+
+
+    <div class="portlet-body">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">客户信息</h3>
+            </div>
+            <div class="panel-body">
+                <div class="panel panel-default" id="divsearch">
+                    <div class="panel-body">
+                        <div class="btn-group">
+                            <button class="btn green dropdown-toggle" id="btnserach" type="button" data-toggle="dropdown">
+                                查找 <i class="fa fa-angle-down"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-content input-large hold-on-click" role="menu">
+                                <form action="#">
+                                    <div class="input-group">
+                                        <input type="text" id="txtmno" class="form-control" placeholder="输入手机号进行查询">
+                                        <span class="input-group-btn">
+                                            <button class="btn blue" type="button" onclick="SearchModel()">Go!</button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portlet box" style="margin-bottom:10px; border:1px solid #bde9f1;">
+                    <div class="portlet-body">
+                        <form class="form-horizontal">
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyName">姓名:</label>
+                                <div class="col-md-4">
+                                    @*<input type="text" id="txtQyName" name="Name" readonly="readonly" class="form-control" placeholder="">*@
+                                    @Html.TextBoxFor(m => m.CustName, new { @class = "form-control", @readonly = true })
+                                    @Html.HiddenFor(m=>m.CustID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyICNo">身份证号:</label>
+                                <div class="col-md-4">
+                                    @*<input type="text" id="txtQyICNo" name="ICNo" readonly="readonly" class="form-control" placeholder="">*@
+                                    @Html.TextBoxFor(m => m.ICNo, new { @class = "form-control", @readonly = true })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyMobileNo">手机号:</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @readonly = true })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyBirthday">生日:</label>
+                                <div class="col-md-4">
+                                   @Html.TextBoxFor(m => m.Birthday, new { @class = "form-control", @readonly = true })
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">会员卡信息</h3>
+            </div>
+            <div class="panel-body">
+                <div class="portlet box" style="margin-bottom:10px; border:1px solid #bde9f1;">
+                    <div class="portlet-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyCardNo">会员卡号:</label>
+                                <div class="col-md-4">
+                                    @*<input type="text" id="txtQyCardNo" name="CardNo" class="form-control" placeholder="">*@
+                                    @Html.TextBoxFor(m => m.CardNo, new { @class = "form-control"})
+                                    @Html.HiddenFor(m => m.CardID)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="ddlCardType">会员卡类型:</label>
+                                <div class="col-md-4">
+                                    <select id="CardType" name="CardType" class="form-control input-md">                                     
+                                            <option value="2">白金卡</option>
+                                            <option value="1">金卡</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="ddlCardState">会员卡状态:</label>
+                                <div class="col-md-4">
+                                   
+
+                                    <select id="CardStatu" name="CardStatu" class="form-control input-md">
+                                        <option value="0">开卡</option>
+                                        <option value="1">挂失</option>
+                                        <option value="2">冻结</option>
+                                        <option value="3">注销</option>
+                                        <option value="4">过期</option>
+                                    </select>
+                                 </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="TxtQySale">销售人员:</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.SaleMan, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group divdate">
+                                <label class="col-md-2 control-label" for="txtQyCardTime">售卡时间:</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.SaleTime, new { @class = "form-control", @readonly = true })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyCardDoor">开卡门店:</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(m => m.OpenCardStore, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group divdate">
+                                <label class="col-md-2 control-label" for="txtQydate">截至日期:</label>
+                                <div class="col-md-4">
+                                   @Html.TextBoxFor(m => m.ExpireDate, new { @class = "form-control",@readonly=true })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-2">
+                                    <span class="input-group-btn">
+                                        <button class="btn blue" type="button" onclick="SubForm()">保存</button>
+                                    </span>
+                                    <span class="input-group-btn">
+                                        <button class="btn blue" type="button" onclick="ReturnPage()">返回</button>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--end main -->
+<!-- END PAGE CONTENT-->
+@section scripts{
+    <script>
+        function ReturnPage() {
+            window.history.go(-1);
+        }
+        function SearchModel() {
+            var mno = $('#txtmno').val();
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("SearchCustomer", "ClubCard")",
+                       "dataType": "json",
+                       "data":{mobilno:mno},
+                        "async":true,
+                        "cache": false,
+                        "success": function (re) {
+                            if(re.Success)
+                            {
+                                $('#CustName').val(re.Data.CustName);
+                                $('#CustID').val(re.Data.CustID);
+                                $('#ICNo').val(re.Data.ICNo);
+                                $('#MobileNo').val(re.Data.MobileNo);
+                                $('#Birthday').val(re.Data.Birthday);
+                                $('#CardNo').val(re.Data.CardNo);
+                                $('#CardID').val(re.Data.CardID);
+                                $('#SaleMan').val(re.Data.SaleMan);
+                                $('#SaleTime').val(formatDate(re.Data.SaleTime));
+                                $('#OpenCardStore').val(re.Data.OpenCardStore);
+                                $('#ExpireDate').val(formatDate(re.Data.ExpireDate));
+                                $('#CardType').val(re.Data.CardType);
+                                $('#CardStatu').val(re.Data.CardStatu);
+                            } else {
+                                alert(re.Message);
+                            }
+                        },
+                        "error": function () {
+                            alert(re.Error);
+                        }
+        });
+        }
+        function formatDate(dt) {
+            if (dt)
+            {
+                var now = dt.replace("/Date(", "").replace(")/", "");
+                now = now * 1;
+                var d = new Date(now);
+                var year = d.getFullYear();
+                var month = d.getMonth() + 1;
+                var date = d.getDate();
+                var hour = d.getHours();
+                var minute = d.getMinutes();
+                var second = d.getSeconds();
+               
+                return year + "/" + (month < 10 ? '0' + month : month) + "/" + (date < 10 ? '0' + date : date) + " " + (hour < 10 ? '0' + hour : hour) + ":" + (minute < 10 ? '0' + minute : minute) + ":" + (second < 10 ? '0' + second : second);
+            } else {
+                return null
+            }
+           
+            
+        }
+        function SubForm() {
+            var custname = $('#CustName').val();
+            var custid = $('#CustID').val();
+            var cno= $('#CardNo').val();
+            var cid= $('#CardID').val();
+            var sman = $('#SaleMan').val();  
+            var store = $('#OpenCardStore').val();
+            var cardtype = $('#CardType').val();
+            var cardstatu = $('#CardStatu').val();
+
+            if (!cno) {
+                alert('请输入会员卡');
+                return;
+            }
+            else if (!sman) {
+                alert('请输入销售人员姓名')
+                return;
+            }
+            else if (!store) {
+                alert('请输入销售门店')
+                return;
+            }
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("ClubCardDetailSub", "ClubCard")",
+                       "dataType": "json",
+                       "data": { CustID: custid,CustName:custname, CardNo: cno, CardID: cid, SaleMan: sman, OpenCardStore: store, CardType: cardtype, CardStatu: cardstatu},
+                        "async":true,
+                        "cache": false,
+                        "success": function (re) {
+                            if (re.Success)
+                            {
+                                alert(re.Message);                     
+                            }
+                            else
+                            {
+                                alert(re.Message);
+                                
+                            }
+                        },
+                        "error": function () {
+                            alert(re.Error);
+                        }
+            });
+        }
+        function InitPage() {
+            var id = getQueryString("id");
+            
+            if(id!=-1)
+            {
+                $('#btnserach').attr("disabled", "");
+               
+            }
+            var statu = "@Model.CardStatu";
+            var cardtype = "@Model.CardType";
+            $('#CardStatu').val(statu);
+            $('#CardType').val(cardtype);
+            
+            var dates = $('#SaleTime').val();
+            var datee = $('#ExpireDate').val();
+            if(dates=='0001/1/1 0:00:00')
+            {
+                $('.divdate').hide();
+
+            }
+        }
+       
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        } 
+
+        $(function () {
+            InitPage();
+            
+        });
+    </script>
+}
