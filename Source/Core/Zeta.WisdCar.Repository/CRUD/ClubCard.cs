@@ -526,10 +526,10 @@ namespace Zeta.WisdCar.Repository.CRUD
             {
                 strSql.Append("order by T.ClubCardID desc");
             }
-            strSql.Append(")AS Row, T.*  from ClubCard T ");
+            strSql.Append(")AS Row, T.*,c.mobileno as MobileNo  from ClubCard T join customer c on t.customerid = c.customerid ");
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
-                strSql.Append(" WHERE 1=1 " + strWhere);
+                strSql.Append(" where "+ strWhere);
             }
             strSql.Append(" ) TT");
             strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);

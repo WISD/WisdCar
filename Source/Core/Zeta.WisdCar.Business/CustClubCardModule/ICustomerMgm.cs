@@ -78,5 +78,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
         CustomerVO GetCustomerByMobileNo(string mno);
 
         CustomerVO GetCustomerByCarNo(string carno);
+
+        int GetRecordCount(CustomerQueryEntity filter);
     }
 }

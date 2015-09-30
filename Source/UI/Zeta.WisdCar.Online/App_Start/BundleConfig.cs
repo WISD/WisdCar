@@ -25,7 +25,9 @@ namespace Zeta.WisdCar.Online
                         "~/assets/plugins/bootstrap-datepicker/js/components-pickers.js",
                         "~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js",
                         "~/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js",
-                        "~/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"
+                        "~/assets/plugins/bootstrap-daterangepicker/daterangepicker.js",
+                        "~/assets/plugins/ajxfileupload/ajaxfileupload.js",
+                        "~/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.js"
                         ));
 
             bundles.Add(new StyleBundle("~/global/css")
@@ -38,7 +40,10 @@ namespace Zeta.WisdCar.Online
                 .Include("~//assets/plugins/bootstrap-datarangepicker/daterangepicker-bs3.css",new CssRewriteUrlTransform())
                 .Include("~//assets/plugins/bootstrap-datepicker/css/datepicker.css", new CssRewriteUrlTransform())
                 .Include("~//assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css", new CssRewriteUrlTransform())
-                .Include("~//assets/plugins/bootstrap-datetimepicker/css/datetimepicker.css", new CssRewriteUrlTransform()));
+                .Include("~//assets/plugins/bootstrap-datetimepicker/css/datetimepicker.css", new CssRewriteUrlTransform())
+                .Include("~/assets/plugins/bootstrap-fileinput/bootstrap-fileinput.css", new CssRewriteUrlTransform())
+                
+                );
 
             bundles.Add(new StyleBundle("~/theme/css")
                 .Include("~/assets/css/style-metronic.css", new CssRewriteUrlTransform())

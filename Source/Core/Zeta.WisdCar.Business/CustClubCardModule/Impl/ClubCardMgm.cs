@@ -254,5 +254,12 @@ using Zeta.WisdCar.Infrastructure.Log;namespace Zeta.WisdCar.Business.CustClubCa
             ClubCardData clubCarddal = new ClubCardData();
             clubCarddal.EditCard(Mapper.Map<ClubCardVO, ClubCardPO>(clubcard));
         }
+
+
+        public int GetClubCardRecordCount(Model.Entity.ClubCardQueryEntity filter)
+        {
+            ClubCardData clubCarddal = new ClubCardData();
+            return clubCarddal.GetClubCardRecordCount(filter);
+        }
     }
 }

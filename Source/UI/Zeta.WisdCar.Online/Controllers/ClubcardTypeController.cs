@@ -59,7 +59,11 @@ namespace Zeta.WisdCar.Online.Controllers
         /// <returns></returns>
         private string ConvertDiscount(decimal d)
         {
-            return (d * 100).ToString().TrimEnd('0').TrimEnd('.').TrimEnd('0') + " 折";
+            //if(d==0)
+            //{
+            //    return "0.00折";
+            //}
+            return (d * 10).ToString() + " 折";
         }
         public JsonResult GetClubCardTypeModel(int id)
         {
@@ -158,17 +162,17 @@ namespace Zeta.WisdCar.Online.Controllers
         public ReturnedData GetValidata(ClubCardTypeVO ctype)
         {
             ReturnedData data = new ReturnedData();
-            if(!string.IsNullOrEmpty(ctype.CardTypeName))
+            if(string.IsNullOrEmpty(ctype.CardTypeName))
             {
                 data.Success = false;
                 data.Message = "请输入会员卡类型";
             }
-            if(ctype.PayDiscount<=0||ctype.PayDiscount>=1)
+            else if(ctype.PayDiscount<0||ctype.PayDiscount>=1)
             {
                 data.Success = false;
                 data.Message = "充值折扣输入错误";
             }
-            if(ctype.PackageDiscount<=0||ctype.PackageDiscount>=1)
+            else if(ctype.PackageDiscount<0||ctype.PackageDiscount>=1)
             {
                 data.Success = false;
                 data.Message = "套餐折扣输入错误";

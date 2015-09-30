@@ -167,6 +167,7 @@
                     "ordering": true,
                     "info": true,
                     "retrieve": true,    //重复初始化，索引到同一个Datatables实例
+                    'sidePagination': 'server',
                     //"pagingType": "full_numbers",
                     "pageLength": 10,
                     "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
@@ -207,8 +208,8 @@
             
             return {
                 Init: function (a) {
-                    $("#sidebar_menu_ui_feature").addClass("active");
-                    $("#sidebar_menu_ui_modal_ext").addClass("active");
+                    $("#sidebar_menu_cust_card").addClass("active");
+                    $("#sidebar_menu_cust").addClass("active");
                     App.blockUI({ boxed: true });
                     if (!a)
                     {
@@ -306,6 +307,11 @@
         }
         //模态窗口
         var handleAjaxModal = function (url) {
+            if (url.indexOf('?') > 0) {
+                url = url + '&t=' + Math.random(1000);
+            } else {
+                url = url + '?t=' + Math.random(1000)
+            }
             var $modal = $('#ajax-modal');
             $('body').modalmanager('loading');
             setTimeout(function () {        
@@ -424,7 +430,7 @@
             }
             else if(type==6)
             {
-                alert('hehe');
+                closedilog();
             }
 
         }

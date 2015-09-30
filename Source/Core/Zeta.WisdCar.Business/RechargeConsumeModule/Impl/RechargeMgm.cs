@@ -39,7 +39,7 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
 
             try
             {
-                entity.SerialNo = SerialNoGenerator.GenRechargeSerialNo();
+                //entity.RechargeSerialNo = SerialNoGenerator.GenRechargeSerialNo(entity.RechargeStore);
                 rechargeLogData.AddRechargeLog(Mapper.Map<RechargeVO, RechargeLogPO>(entity));
                 clubCardData.UpdateClubCard(clubCardPO);
                 tx.Commit();
@@ -129,7 +129,7 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
                 clubCardPkgData.AddClubCardPkg(clubCardPkgPO);
                 clubCardPkgData.AddClubCardPkgDetailList(clubCardPkgDetailPOList);
 
-                entity.SerialNo = SerialNoGenerator.GenRechargeSerialNo();
+               // entity.RechargeSerialNo = SerialNoGenerator.GenRechargeSerialNo(entity.RechargeStore);
                 rechargeLogData.AddRechargeLog(Mapper.Map<RechargeVO, RechargeLogPO>(entity));
                 tx.Commit();
             }

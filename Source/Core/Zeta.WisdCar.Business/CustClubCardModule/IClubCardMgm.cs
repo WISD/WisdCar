@@ -139,5 +139,7 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
 
 
         ClubCardVO GetClubCardByCardNo(string cardNo);
+
+        int GetClubCardRecordCount(ClubCardQueryEntity filter);
     }
 }

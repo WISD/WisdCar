@@ -13,7 +13,16 @@ namespace Zeta.WisdCar.Infrastructure
         Tcp = 0,
         Http = 1
     }
-
+    /// <summary>
+    /// excel版本
+    /// </summary>
+    public enum ExcelEdition
+    {
+        Excel97,
+        Excel2000,
+        Excel2003,
+        Excel2007
+    }
     public enum ClubCardStatus
     {
         OpenCard = 0,    //开卡

@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Excel;
+using NPOI.HSSF.UserModel;
+using System.IO;
+using NPOI.SS.UserModel;
 
 namespace Zeta.WisdCar.Infrastructure.Helper
 {
@@ -255,10 +258,50 @@ namespace Zeta.WisdCar.Infrastructure.Helper
             }
         }
         #endregion
-        public DataSet GetDataFromExcel()
+        public System.Data.DataTable GetDataFromExcel(Stream file)
         {
-            return null;
+            System.Data.DataTable dt = new System.Data.DataTable();
+            //读取上传的excel文件
+          
+            if(file!=null)
+            {
+                IWorkbook workbook = WorkbookFactory.Create(file);
+                
+                var sheet = workbook.GetSheetAt(0);
+                
+                IRow row = sheet.GetRow(0);
+                for (int j = 0; j < (sheet.GetRow(0).LastCellNum); j++)
+                {
+                    //dt.Columns.Add(Convert.ToChar(((int)'A') + j).ToString());  
+                    //将第一列作为列表头  
+                    dt.Columns.Add(row.GetCell(j).ToString());
+                }
+                for (int k = 1; k < sheet.PhysicalNumberOfRows; k++)
+                {
+                    row = sheet.GetRow(k);
+                    DataRow dr = dt.NewRow();
+                    for (int i = 0; i < sheet.GetRow(0).LastCellNum; i++)
+                    {
+                        var cell = row.GetCell(i);
+                        if (cell == null || string.IsNullOrEmpty(cell.ToString()))
+                        {
+                            dr[i] = null;
+                        }
+                        else if (i >= sheet.GetRow(0).LastCellNum - 2 || i == 3)
+                        {
+                            dr[i] = cell.DateCellValue;
+                        }
+                        else
+                        {
+                            dr[i] = cell.ToString();
+                        }
+                    }
+                    dt.Rows.Add(dr);
+                }  
+            }
+            return dt;
         }
 
+      
     }
 }

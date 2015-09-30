@@ -61,7 +61,7 @@ namespace Zeta.WisdCar.Online.Controllers
 
                 var list = clubcardMgm.GetClubCards(filter);
 
-                int recordsTotal = list.Count;
+                int recordsTotal = clubcardMgm.GetClubCardRecordCount(filter);
                 list.ForEach(i => i.MobileNo = new CustomerMgm().GetCustomerByID(i.CustomerID).MobileNO);
                 foreach (var item in list)
                 {

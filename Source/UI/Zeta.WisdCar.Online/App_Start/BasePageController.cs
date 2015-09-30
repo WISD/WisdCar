@@ -43,7 +43,7 @@ namespace Zeta.WisdCar.Online.App_Start
             emp.UserName = empo.EmployeeNo;
             emp.Name = empo.Name;
             emp.StoreId = empo.StoreID;
-            emp.StroeName = storeMgm.GetModel(empo.StoreID).StoreName;
+            emp.StroeName = storeMgm.GetStoreByID(empo.StoreID).StoreName;
             emp.UserPassword = empo.Reserved1;
 
             Session.Add("loginUser", emp);

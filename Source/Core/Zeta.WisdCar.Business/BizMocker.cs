@@ -598,5 +598,11 @@ namespace Zeta.WisdCar.Business
         {
             throw new NotImplementedException();
         }
+
+
+        public int GetRecordCount(CustomerQueryEntity filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

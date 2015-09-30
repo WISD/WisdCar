@@ -15,11 +15,11 @@ namespace Zeta.WisdCar.Business.Handler
         /// 充值流水号(生成规则：1（充值） +  门店ID  +  yymmddHHmmss)
         /// </summary>
         /// <returns></returns>
-        public static string GenRechargeSerialNo()
+        public static string GenRechargeSerialNo(int storeid)
         {
             StringBuilder strTemp = new StringBuilder();
             string strSerialNo = "";
-            strTemp.AppendFormat("{0}{1}{2}", 1, PermissionMgm.GetCurUser1(), DateTime.Now.ToString("yymmddHHmmss"));
+            strTemp.AppendFormat("{0}{1}{2}", 1, storeid, DateTime.Now.ToString("yymmddHHmmss"));
             strSerialNo = strTemp.ToString();
             return strSerialNo;
         }

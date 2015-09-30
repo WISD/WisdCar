@@ -36,11 +36,14 @@ namespace Zeta.WisdCar.Online.Controllers
                 int start = NullHelper.Convert<int>(Request[Constants.PAGE_START], 0);
                 int length = NullHelper.Convert<int>(Request[Constants.PAGE_LENGTH], 10);
                 int draw = NullHelper.Convert<int>(Request[Constants.REQ_DRAW], 1);
-                string sortOrder = NullHelper.Convert<string>(Request[Constants.SORT_ORDER], "asc");
+                string sortOrder = NullHelper.Convert<string>(Request[Constants.SORT_ORDER], "desc");
                 int sortIdx = NullHelper.Convert<int>(Request[Constants.SORT_IDX], 0);
                 string columnKey = string.Format(Constants.SORT_NAME, sortIdx);
-                string sortName = NullHelper.Convert<string>(Request[columnKey], "Name");
-
+                string sortName = NullHelper.Convert<string>(Request[columnKey], "CustomerID");
+                if(sortName=="CardFlagDesc"||sortName=="ClubCardDesc"||sortName=="CarDesc"||sortName=="Operation")
+                {
+                    sortName = "CustomerID";
+                }
                 string name = NullHelper.Convert<string>(Request["Name"], "");
                 string icNo = NullHelper.Convert<string>(Request["ICNo"], "");
                 string mobileNo = NullHelper.Convert<string>(Request["MobileNo"], "");
@@ -62,8 +65,8 @@ namespace Zeta.WisdCar.Online.Controllers
                 {
                     list = new List<CustomerVO>();
                 }
-               
-                int recordsTotal = list.Count;
+
+                int recordsTotal = coustomer.GetRecordCount(filter);
 
                 foreach (var item in list)
                 {
@@ -141,11 +144,11 @@ namespace Zeta.WisdCar.Online.Controllers
                 ICustomerMgm couMgm = new CustomerMgm();
                 ICarMgm carMgm = new CarMgm();
                 CustomerVO customer = couMgm.GetCustomerByID(id);
-                CarVO car = new CarVO();
+                List<CarVO> car = new List<CarVO>();
                 if (customer != null)
                 {
                     car = carMgm.GetCarsByCustID(customer.CustomerID);
-                    result = GetcusAndcarObj(customer, car);
+                    result = GetcusAndcarObj(customer, car.FirstOrDefault());
                 }
 
             }
@@ -326,12 +329,13 @@ namespace Zeta.WisdCar.Online.Controllers
             ////CarVO car = new CarVO();
             ICarMgm carmgm = new CarMgm();
             var result = carmgm.GetCarsByCustID(id);
-            if (result == null)
+            var car = new CarVO();
+            if (result.Count>0)
             {
-                result = new CarVO();
+                car = result.FirstOrDefault();
             }
-            result.CustomerID = id;
-            return View(result);
+            car.CustomerID = id;
+            return View(car);
         }
 
         /// <summary>
@@ -370,12 +374,25 @@ namespace Zeta.WisdCar.Online.Controllers
         {
             return View();
         }
-        public void ReceveFiles()
+        public JsonResult ReceveFiles()
         {
             ReturnedData data = new ReturnedData();
-            var file = Request.Files["file"].FileName;
-            data.Success = true;
-            data.Message = file;
+            var cusMgm = new CustomerMgm();
+            //excel.
+            try
+            {
+                cusMgm.ImprotDataTosql(Request.Files["file"].InputStream, Emp.UserName);
+                data.Success = true;
+                data.Message = "客户数据导入成功";
+            }
+            catch(Exception ex)
+            {
+                data.Success = false;
+                data.Message = ex.ToString();
+            }
+            
+            
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

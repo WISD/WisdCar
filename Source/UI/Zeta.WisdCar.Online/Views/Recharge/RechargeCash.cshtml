@@ -260,14 +260,15 @@
                         }
                         else {
                             var discount = $('#Discount').val();
-                           
-                            if (discount) {
-
-                                var rechargeAcc = amou * discount + (amou * 1);
-                                $('#CreditedAmount').val(rechargeAcc);
-                                $('#lblInacc').html(rechargeAcc);
-                                $('#lblReacc').html(amou);
+                            amou = amou * 1;
+                            var rechargeAcc = amou;
+                            
+                            if (discount&&discount!="0.00") {
+                                rechargeAcc = amou / discount; 
                             }
+                            $('#CreditedAmount').val(rechargeAcc.toFixed(2));
+                            $('#lblInacc').html(rechargeAcc.toFixed(2));
+                            $('#lblReacc').html(amou.toFixed(2));
                         }
                     });
                 }

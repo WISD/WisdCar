@@ -298,20 +298,41 @@ namespace Zeta.WisdCar.Repository.CRUD
 			StringBuilder strSql=new StringBuilder();
 			strSql.Append("delete from Customer ");
 			strSql.Append(" where CustomerID=@CustomerID");
+            StringBuilder strcardSql = new StringBuilder();
+            strcardSql.Append("delete from clubcard where customerid = @customerid");
+            StringBuilder strCarSql = new StringBuilder();
+            strCarSql.Append("delete from car where customerid=@customerid");
+
 			SqlParameter[] parameters = {
 					new SqlParameter("@CustomerID", SqlDbType.Int,4)
 			};
 			parameters[0].Value = CustomerID;
 
-			int rows=DbHelperSQL.ExecuteSql(strSql.ToString(),parameters);
-			if (rows > 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            SqlParameter[] cardParas = {
+					new SqlParameter("@customerid", SqlDbType.Int,4)
+			};
+            parameters[0].Value = CustomerID;
+
+            SqlParameter[] carParas = {
+					new SqlParameter("@customerid", SqlDbType.Int,4)
+			};
+            parameters[0].Value = CustomerID;
+
+            Dictionary<string, object> dic = new Dictionary<string, object>();
+            dic.Add(strcardSql.ToString(), cardParas);
+            dic.Add(strCarSql.ToString(), carParas);
+            dic.Add(strSql.ToString(), parameters);
+            try
+            {
+                DbHelperSQL.ExecutesqltranWithIndentity(dic);
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            
+			
 		}
 		/// <summary>
 		/// 批量删除数据
@@ -516,10 +537,14 @@ namespace Zeta.WisdCar.Repository.CRUD
 			strSql.Append(")AS Row, T.*  from Customer T ");
 			if (!string.IsNullOrEmpty(strWhere.Trim()))
 			{
-				strSql.Append(" WHERE 1=1 " + strWhere);
+				strSql.Append(" WHERE " + strWhere);
 			}
 			strSql.Append(" ) TT");
-			strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex, endIndex);
+            if(endIndex!=-1)
+            {
+                strSql.AppendFormat(" WHERE TT.Row between {0} and {1}", startIndex+1, endIndex);
+            }
+			
 			return DbHelperSQL.Query(strSql.ToString());
 		}
 

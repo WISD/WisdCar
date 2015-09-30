@@ -149,14 +149,16 @@ namespace Zeta.WisdCar.Online.Controllers
         [HttpPost]
         public JsonResult RechargeCashSub()
         {
-            string cardno = NullHelper.Convert<string>(Request["cno"], "");
-            decimal rechargeAmount = NullHelper.Convert<decimal>(Request["rechargeAcc"], 0M);
-            decimal rechargeDiscount = NullHelper.Convert<decimal>(Request["discount"], 0M);
-            IClubCardMgm cardMgm = new ClubCardMgm();
             ReturnedData data = new ReturnedData();
 
             try
             {
+                string cardno = NullHelper.Convert<string>(Request["cno"], "");
+                decimal rechargeAmount = NullHelper.Convert<decimal>(Request["rechargeAcc"], 0M);
+                decimal rechargeDiscount = NullHelper.Convert<decimal>(Request["discount"], 0M);
+                IClubCardMgm cardMgm = new ClubCardMgm();
+             
+
                 var card = cardMgm.GetClubCardByCardNo(cardno);
                 RechargeVO recharge = new RechargeVO();
                 recharge.ClubCardID = card.ClubCardID;
@@ -165,7 +167,11 @@ namespace Zeta.WisdCar.Online.Controllers
                 recharge.CustID = card.CustomerID;
                 recharge.CustName = card.CustName;
                 recharge.DiscountRate = rechargeDiscount;
-                recharge.PlatformRechargeAmount = rechargeAmount * rechargeDiscount + rechargeAmount;
+                if (rechargeDiscount == 0)
+                {
+                    rechargeDiscount = 1;
+                }
+                recharge.PlatformRechargeAmount =Math.Round(rechargeAmount/ rechargeDiscount,2);
                 recharge.RechargeDate = DateTime.Now;
                 recharge.RechargeStore = Emp.StroeName;
                 recharge.OriginalStore = card.OpenCardStore;
@@ -174,7 +180,7 @@ namespace Zeta.WisdCar.Online.Controllers
                 recharge.LastModifiedDate = DateTime.Now;
                 recharge.CreatedDate = DateTime.Now;
                 recharge.CreatorID = Emp.UserName;
-                recharge.DiscountInfo = "会员折扣";
+                recharge.DiscountInfo = "会员现金折扣";
                 recharge.ClubCardPackageID = "";
                 recharge.RechargeType = (int)RechargeType.ClubCash;
                 recharge.RechargeSerialNo = SerialNoGenerator.GenRechargeSerialNo(Emp.StoreId);

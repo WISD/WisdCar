@@ -110,5 +110,36 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             return _daoCustomer.GetModel(carno," where customerid in (select customerid from car where carno like '%'+@mno+'%')");
         }
+
+        public int GetRecordCount(CustomerQueryEntity filter)
+        {
+            StringBuilder strSql1 = new StringBuilder();
+
+            if (!string.IsNullOrEmpty(filter.Name.Trim()))
+            {
+                strSql1.AppendFormat(" Name like '%{0}%' ", filter.Name);
+            }
+            if (!string.IsNullOrEmpty(filter.MobileNo.Trim()))
+            {
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" MobileNO like '%{0}%' ", filter.MobileNo);
+            }
+            if (!string.IsNullOrEmpty(filter.ICNo.Trim()))
+            {
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" ICNo like '%{0}%' ", filter.ICNo);
+            }
+            if (filter.CardFlag != -1)
+            {
+                if (strSql1.Length > 0)
+                    strSql1.AppendFormat(" And ");
+                strSql1.AppendFormat(" CardFlag = {0} ", filter.CardFlag);
+            }
+
+            string strWhere = strSql1.ToString();
+            return _daoCustomer.GetRecordCount(strWhere);
+        }
     }
 }

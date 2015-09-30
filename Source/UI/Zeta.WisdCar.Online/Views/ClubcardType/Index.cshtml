@@ -219,6 +219,7 @@
             var cdiscount = $('#txtDiscount').val();
             var pkgdiscount = $('#txtPkgdiscount').val();
             var ctype = $('#txtCtype').val();
+           
             if (!ctype) {
                 alert("请输入会员卡类型");
                 return;
@@ -228,10 +229,10 @@
             } else if (!pkgdiscount) {
                 alert("请输入套餐充值折扣");
                 return;
-            } else if (!Number(cdiscount)||Number(cdiscount) <= 0||Number(cdiscount)>=1) {
+            } else if (isNaN(Number(cdiscount))||Number(cdiscount) < 0 || Number(cdiscount) >= 1) {
                 alert("充值折扣输入不正确");
                 return;
-            } else if (!Number(pkgdiscount)||Number(pkgdiscount) <= 0||Number(pkgdiscount)>=1) {
+            } else if (isNaN(Number(cdiscount))|| Number(pkgdiscount) < 0 || Number(pkgdiscount) >= 1) {
                 alert("套餐折扣输入不正确");
                 return
             }

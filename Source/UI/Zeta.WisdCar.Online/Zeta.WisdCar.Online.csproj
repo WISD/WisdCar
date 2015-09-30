@@ -302,6 +302,7 @@
     <Content Include="assets\img\sidebar-toggler.png" />
     <Content Include="assets\img\syncfusion-icons-white.png" />
     <Content Include="assets\img\syncfusion-icons.png" />
+    <Content Include="assets\plugins\ajxfileupload\ajaxfileupload.js" />
     <Content Include="assets\plugins\artDialog\css\ui-dialog.css" />
     <Content Include="assets\plugins\artDialog\dist\dialog-min.js" />
     <Content Include="assets\plugins\artDialog\dist\dialog-plus-min.js" />
@@ -1100,6 +1101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\img\backgrounds\.DS_Store" />
+    <None Include="Properties\PublishProfiles\ff.pubxml" />
     <None Include="Properties\PublishProfiles\WisdCar.pubxml" />
     <Content Include="Views\Customer\AddClubCard.cshtml" />
     <Content Include="Views\Customer\Cuscardinfo.cshtml" />
@@ -1115,6 +1117,7 @@
     <Content Include="Views\Recharge\RechargeSuccess.cshtml" />
     <Content Include="template\applyTmp.doc" />
     <Content Include="Views\Customer\ImportCust.cshtml" />
+    <Content Include="template\客户导入模版.xls" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
