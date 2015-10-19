@@ -1,0 +1,208 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            套餐购买成功 <small>Purchase success</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="index.html">
+                    首页
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    充值消费
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    套餐购买成功
+                </a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i>套餐购买成功
+        </div>
+        <!-- <div class="tools">
+        </div>
+        <a href="#" class="btn btn-xs blue" style="float:right; ">
+            <i class="fa fa-plus"></i> 新增
+        </a> -->
+    </div>
+
+
+    <div class="portlet-body">
+
+        <div class="portlet box" style=" border:1px solid #bde9f1;">
+            <div class="portlet-body">
+                <div class="panel-heading">
+                    <h3 class="panel-title">基本信息</h3>
+                </div>
+
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtQyName">客户姓名：</label>
+                        <div class="col-md-4">
+                            <label class="control-label" for="txtQyName">@ViewBag.Rechbag.CustName</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtQyCardNo">会员卡号：</label>
+                        <div class="col-md-4">
+                            <label class="control-label" for="txtQyCardNo">@ViewBag.Rechbag.ClubCardNo</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="ddlCardType">会员卡类型：</label>
+                        <div class="col-md-4">
+                            <label class="control-label" for="ddlCardType">@ViewBag.Rechbag.Reserved1</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="ddlCardType">套餐名称：</label>
+                        <div class="col-md-4">
+                            <label class="control-label" for="ddlCardType">@ViewBag.PkgName</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="TotalPackage">套餐总价：</label>
+                        <div class="col-md-4">
+                            <label class="control-label" for="TotalPackage">@ViewBag.Rechbag.PlatformRechargeAmount</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="DiscountPackages">套餐折扣：</label>
+                        <div class="col-md-4">
+                            <label class="control-label" for="DiscountPackages">@ViewBag.Rechbag.DiscountRate</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="RealincomeAmount">实收金额：</label>
+                        <div class="col-md-4">
+                            <label class="control-label" for="RealincomeAmount">@ViewBag.Rechbag.ActualRechargeAmount</label>
+                            <input type="hidden" id="pkgId" value="@ViewBag.Rechbag.ClubCardPackageID" />
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="portlet-body">
+        <div class="margin-bottom-10 clearfix">
+            <table id="tblPkgItem" class="table table-bordered table-striped"></table>
+        </div>
+
+    </div>
+
+    <div class="portlet-body">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-4">
+                    <input type="button" onclick="printRelog()" class="btn btn-md blue" value="打印" />
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </form>
+    </div>
+@section scripts{
+<script>
+    var RechargePkgSucc = function () {
+        var getPkgItems = function () {
+            var id = "@ViewBag.Rechbag.ClubCardPackageID";
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("GetPkgItems", "Recharge")",
+                "dataType": "json",
+                "data": { id: id },
+                "async": true,
+                "cache": false,
+                "success": function (re) {
+                    if (re) {
+                        var reobj = re.Data;
+                        var tbl = "<tr><td>消费项目名称</td><td>消费次数</td><td>剩余次数</td></tr>";
+                        $.each(reobj, function (n, v) {
+                            //alert(v.ItemName);
+                            //alert(v.ConsumeCount);
+                            tbl = tbl + "<tr><td>" + v.ItemName + "</td><td>" + v.ConsumeCount + "</td><td>" + v.ConsumeCount + "</td></tr>";
+                            $("#tblPkgItem").html(tbl);
+                        })
+                    } else {
+                        alert(re.Message);
+                    }
+                },
+                "error": function () {
+
+                }
+            });
+        }
+
+        return {
+            Init: function (a) {
+                $("#sidebar_menu_recharge_consume").addClass("active");
+                $("#sidebar_menu_clubcard_recharge").addClass("active");
+                App.blockUI({ boxed: true });
+                getPkgItems();
+                window.setTimeout(function () {
+                    App.unblockUI();
+                }, 1000);
+            }
+        }
+    }();
+    $(function () {
+        RechargePkgSucc.Init();
+    });
+    function printRelog() {
+        //window.print();
+        var wdapp;
+        var url = window.location.toString();
+        var pos = url.indexOf('Recharge');
+        url = url.substring(0, pos);
+        try {
+            wdapp = new ActiveXObject("Word.Application");
+        } catch (e) {
+            alert(e.toString());
+            wdapp = null;
+            return;
+        }
+        wdapp.Documents.Open(url + "template/applyTmp.doc");
+        var wddoc = wdapp.ActiveDocument;
+        var strtitle = "@ViewBag.Rechbag.RechargeStore" + '充值回单';
+
+
+        var str = "充值订单号：" + "@ViewBag.Rechbag.RechargeSerialNo" + "\r\n" + "客户姓名：" + "@ViewBag.Rechbag.CustName" + "\r\n" + "会员卡号：" + "@ViewBag.Rechbag.ClubCardNo" + "\r\n" + "套餐名称：" + "@ViewBag.PkgName" + "\r\n" + "套餐折扣：" + "@ViewBag.Rechbag.DiscountRate" + "\r\n" + "充值金额：" + "@ViewBag.Rechbag.ActualRechargeAmount" + "\r\n" + "套餐总价：" + "@ViewBag.Rechbag.PlatformRechargeAmount" + "\r\n" + "充值门店：" + "@ViewBag.Rechbag.RechargeStore" + "\r\n" + "收 款 人：" + "@ViewBag.Rechbag.CreatorID" + "\r\n" + "充值时间：" + "@ViewBag.Rechbag.CreatedDate";
+        wddoc.Bookmarks("Title").Range.Text = strtitle;
+        wddoc.Bookmarks("content").Range.Text = str;
+        wdapp.visible = false;
+        wddoc.saveAs("d:\\apply_temp.doc");
+        wdapp.Application.Printout();
+
+        wdapp.quit();
+        wdapp = null;
+    }
+</script>
+}

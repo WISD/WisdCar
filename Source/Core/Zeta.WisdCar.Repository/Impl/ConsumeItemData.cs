@@ -38,5 +38,10 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             return _daoConsumeItem.GetModel(consumeItemID);
         }
+
+        public DataSet GetAllConsumeItem(int id)
+        {
+            return _daoConsumeItem.GetList("",id);
+        }
     }
 }

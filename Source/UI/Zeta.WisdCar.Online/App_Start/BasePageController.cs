@@ -56,7 +56,7 @@ namespace Zeta.WisdCar.Online.App_Start
         /// <param name="key">默认选项显示内容</param>
         /// <param name="value">默认选项值</param>
         /// <returns></returns>
-        public List<SelectListItem> GetddlList(DDLlist type, bool nullopt, string key, string value)
+        public List<SelectListItem> GetddlList(DDLlist type, bool nullopt, string key, string value,params object[]where)
         {
             List<SelectListItem> ddllist = new List<SelectListItem>();
             if (nullopt)
@@ -68,27 +68,75 @@ namespace Zeta.WisdCar.Online.App_Start
                 }
                 ddllist.Add(new SelectListItem() { Text=key,Value=value,Selected=true});
             }
-            if(DDLlist.CardType==type)
+            switch(type)
             {
-                IClubCardTypeMgm ctmgm = new ClubCardTypeMgm();
-                List<ClubCardTypeVO> list = ctmgm.GetAllCardType();
-                if(list!=null)
+                case DDLlist.CardType: ddllist = GetClubCardType(ddllist, where);
+                    break;
+                case DDLlist.PkgItem: ddllist = GetConsumeItems(ddllist, where);
+                    break;
+                case DDLlist.Pkg: GetPackage(ddllist, where);
+                    break;
+            }
+           
+            return ddllist;
+        }
+        private List<SelectListItem> GetClubCardType(List<SelectListItem>ddllist,params object[]where)
+        {
+            IClubCardTypeMgm ctmgm = new ClubCardTypeMgm();
+            List<ClubCardTypeVO> list = ctmgm.GetAllCardType();
+            if (list.Count>0)
+            {
+
+                list.ForEach(ct =>
                 {
-
-                    list.ForEach(ct => { 
-                        if(ddllist.Count==0)
-                        {
-                            ddllist.Add(new SelectListItem() { Text = ct.CardTypeName, Value = ct.ClubCardTypeID.ToString(),Selected=true });
-                        }
-                        else
-                        {
-                            ddllist.Add(new SelectListItem() { Text = ct.CardTypeName, Value = ct.ClubCardTypeID.ToString() });
-                        }
+                    if (ddllist.Count == 0)
+                    {
+                        ddllist.Add(new SelectListItem() { Text = ct.CardTypeName, Value = ct.ClubCardTypeID.ToString(), Selected = true });
+                    }
+                    else
+                    {
+                        ddllist.Add(new SelectListItem() { Text = ct.CardTypeName, Value = ct.ClubCardTypeID.ToString() });
+                    }
+                });
+            }
+            return ddllist;
+        }
+        private List<SelectListItem> GetConsumeItems(List<SelectListItem>ddllist,params object[]where)
+        {
+            ConsumeItemMgm conMgm = new ConsumeItemMgm();
+            List<ConsumeItemVO> list = null;
+            if (where != null)
+            {
+                list = conMgm.GetAllConsumeItems((int)where[0]);
+            }
+            else
+            {
+                list = conMgm.GetAllConsumeItems();
+            }
+            if (list.Count > 0)
+            {
+                if (ddllist.Count == 0)
+                {
+                    list.ForEach(ct =>
+                    {
+                        ddllist.Add(new SelectListItem() { Text = ct.ItemName, Value = ct.ItemID.ToString(), Selected = true });
                     });
-
-                    
                 }
-               
+
+            }
+            else
+            {
+                ddllist.Add(new SelectListItem() { Text = "无可添加消费项目", Value = "-1", Selected = true });
+            }
+            return ddllist;
+        }
+        private List<SelectListItem> GetPackage(List<SelectListItem>ddllist,params object[]where)
+        {
+            PackageMgm pkgMgm = new PackageMgm();
+            List<PackageVO> list = pkgMgm.GetAllPackages();
+            if(list.Count>0)
+            {
+                list.ForEach(ct => { ddllist.Add(new SelectListItem() { Text = ct.PackageName, Value = ct.PackageID.ToString() }); });
             }
             return ddllist;
         }

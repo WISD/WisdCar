@@ -9,6 +9,7 @@ using Zeta.WisdCar.Business.MarktingPlanModule;
 using Zeta.WisdCar.Business.RechargeConsumeModule;
 using Zeta.WisdCar.Infrastructure;
 using Zeta.WisdCar.Infrastructure.Helper;
+using Zeta.WisdCar.Infrastructure.Log;
 using Zeta.WisdCar.Model.VO;
 using Zeta.WisdCar.Online.App_Start;
 using Zeta.WisdCar.Online.Models;
@@ -214,8 +215,112 @@ namespace Zeta.WisdCar.Online.Controllers
         }
         public ActionResult RechargePkg()
         {
+            
+            int cardid = NullHelper.Convert<int>(Request["id"], 0);
+            ClubCardMgm cardMgm = new ClubCardMgm();
+            var card = cardMgm.GetClubCardByID(cardid);
+            ViewData["PkgBag"] = GetddlList(DDLlist.Pkg, false, null, null);
+            ViewBag.Data = card;
             return View();
         }
+        public JsonResult GetPkgItems()
+        {
+            ReturnedData data = new ReturnedData();
+            try
+            {
+                int pkgId = NullHelper.Convert<int>(Request["id"], -1);
+                PkgItemsMgm pkgMgm = new PkgItemsMgm();
+                PackageMgm pkMgm = new PackageMgm();
 
+                var pkg = pkMgm.GetPackageByID(pkgId);
+                var pkgitem = pkgMgm.GetItemsByPkgID(pkgId);
+                data.Success = true;
+                data.Message = pkg.TotalPrice.ToString();
+                data.Data = pkgitem;
+            }
+            catch (Exception ex)
+            {
+                data.Success = false;
+                data.Message = "系统错误，请联系维护人员";
+                data.Error = ex.ToString();
+                LogHandler.Error(ex.Message.ToString());
+            }
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult RechargePkgSub()
+        {
+            ReturnedData data = new ReturnedData();
+            try
+            {
+                string cardNo = NullHelper.Convert<string>(Request["cardNo"], null);
+                int pkgId = NullHelper.Convert<int>(Request["pkgId"], -1);
+                decimal disCount = NullHelper.Convert<decimal>(Request["disCount"], 0M);
+                decimal rechAmount = NullHelper.Convert<decimal>(Request["rechAmount"], 0M);
+                decimal pkgPrice = NullHelper.Convert<decimal>(Request["pkgPrice"], 0M);
+                IClubCardMgm cardMgm = new ClubCardMgm();
+                RechargeMgm rechMgm = new RechargeMgm();
+
+                var card = cardMgm.GetClubCardByCardNo(cardNo);
+                RechargeVO recharge = new RechargeVO();
+                recharge.ClubCardID = card.ClubCardID;
+                recharge.ClubCardNo = card.ClubCardNo;
+                recharge.ActualRechargeAmount = rechAmount;
+                recharge.CustID = card.CustomerID;
+                recharge.CustName = card.CustName;
+                recharge.DiscountRate = disCount;
+                recharge.Reserved1 = card.ClubCardTypeName;
+
+                recharge.PlatformRechargeAmount = pkgPrice;
+                recharge.RechargeDate = DateTime.Now;
+                recharge.RechargeStore = Emp.StroeName;
+                recharge.OriginalStore = card.OpenCardStore;
+                recharge.PayType = (int)PayType.Cash;
+                recharge.LastModifierID = Emp.UserName;
+                recharge.LastModifiedDate = DateTime.Now;
+                recharge.CreatedDate = DateTime.Now;
+                recharge.CreatorID = Emp.UserName;
+                recharge.DiscountInfo = "会员套餐折扣";
+                recharge.ClubCardPackageID =pkgId.ToString();
+                recharge.RechargeType = (int)RechargeType.ClubPackage;
+                recharge.RechargeSerialNo = SerialNoGenerator.GenRechargeSerialNo(Emp.StoreId);
+                recharge.SalesMan = card.SalesMan;
+
+                var reMes= rechMgm.RechargePkg(recharge);
+                if (reMes == 1)
+                {
+                    Session.Add("rehPkg", recharge);
+                    data.Success = true;
+                    data.Message = "套餐购买成功";
+                }
+                else
+                {
+                    data.Success = false;
+                    data.Message = "套餐购买失败";
+                }
+
+            }
+            catch(Exception ex)
+            {
+                data.Success = false;
+                data.Message = "系统错误，请联系维护人员";
+                data.Error = ex.ToString();
+                LogHandler.Error(ex.Message.ToString());
+            }
+            return Json(data,JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult RechargePkgSuccess()
+        {
+            RechargeVO recharge = new RechargeVO();
+            string pkgName = null;
+            if (Session["rehPkg"] != null)
+            {
+                recharge = Session["rehPkg"] as RechargeVO;
+                pkgName = new PackageMgm().GetPackageByID(int.Parse(recharge.ClubCardPackageID)).PackageName;
+                Session.Remove("rehPkg");
+            }
+            ViewBag.PkgName = pkgName;
+            ViewBag.Rechbag = recharge;
+            return View();
+        }
 	}
 }

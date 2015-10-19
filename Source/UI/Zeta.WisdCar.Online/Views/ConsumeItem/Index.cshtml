@@ -40,7 +40,7 @@
                 </div>
                 <div class="tools">
                 </div>
-                <a href="#" class="btn btn-xs blue" style="float:right; ">
+                <a href="javascript:void();return false;" onclick="addConsumeitem()" class="btn btn-xs blue" style="float:right; ">
                     <i class="fa fa-plus"></i> 新增
                 </a>
             </div>
@@ -54,6 +54,39 @@
                         </tr>
                     </thead>
                 </table>
+            </div>
+            <div id="ajax-modal" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="setTextValue()" aria-hidden="true"></button>
+                    <h4 class="modal-title">消费项目详细</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" role="form">
+                        <div class="form-body">
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="PackageAmount">项目名称:<span class="required">*</span></label>
+                                <div class="col-md-4">
+                                    <input type="text" id="txtItemname" name="txtItemname" class="form-control" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="txtQyName">项目价格:<span class="required">*</span></label>
+                                <div class="col-md-4">
+                                    <input type="text" id="txtItemprice" name="txtItemprice" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" onclick="setTextValue()" class="btn">关闭</button>
+                    <button type="button" onclick="subForm()" class="btn blue">保存</button>
+                    <input type="hidden" id="hidCid" value="0" />
+                </div>
             </div>
         </div>
         <!-- END PORTLET-->
@@ -147,14 +180,101 @@
                     }, 1000);
                 },
                 Edit: function (id) {
-                    alert("edit" + id);
+                    var data = { id: id };
+                    var url = '@Url.Action("GetConsumeitemModel", "ConsumeItem")';
+                    setValue(url, data, 1);
+                    $('#hidCid').val(id);
+                    handleAjaxModal();
                 },
                 Del: function (id) {
-                    alert("del" + id);
+                    var data = { id: id };
+                    var url = '@Url.Action("DeleteConsumeItem", "ConsumeItem")';
+                    setValue(url, data, 0);
                 }
             };
         }();
+        function addConsumeitem() {
+            handleAjaxModal();
+        }
+        function subForm() {
+            var itemName= $('#txtItemname').val();
+            var itemPrice = $('#txtItemprice').val();
 
+            var ctid = $('#hidCid').val();
+            //var cdiscount = $('#txtDiscount').val();
+            //var pkgdiscount = $('#txtPkgdiscount').val();
+            //var ctype = $('#txtCtype').val();
+           
+            if (!itemName) {
+                alert("请输入消费项目名称");
+                return;
+            } else if (!itemPrice) {
+                alert("请输入消费项目价格");
+                return;
+            } else if (isNaN(Number(itemPrice))) {
+                alert("消费价格输入不正确");
+                return;
+            }
+            else if (Number(itemPrice) <= 0)
+            {
+                alert("消费价格必须大于0");
+                return;
+            }
+            if (ctid>0) {
+                var data = { id: ctid,citemName: itemName, citemPrice: itemPrice };
+                var url = "@Url.Action("EditConsumeItem", "ConsumeItem")";
+                setTextValue();
+                setValue(url,data,0);
+            } else {
+                var data = { citemName: itemName, citemPrice: itemPrice };
+                var url = "@Url.Action("AddConsumeItem","ConsumeItem")";
+                setTextValue();
+                setValue(url,data, 0);
+            }
+        }
+        function closedilog() {
+            window.location = "@Url.Action("Index","ConsumeItem")";
+        }
+        function setTextValue() {
+            $('#hidCid').val('0');
+            $('#txtItemname').val('');
+            $('#txtItemprice').val('');
+        }
+        function setValue(url, data, type) {
+            $.ajax({
+                "type": "post",
+                "url": url,
+                "dataType": "json",
+                "data": data,
+                "async": true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        if (type == 1) {
+                            $('#txtItemname').val(re.Data.ItemName);
+                            $('#txtItemprice').val(re.Data.ItemPrice);
+                        }
+                        else {
+                            alert(re.Message);
+                            closedilog();
+                        }
+                    }
+                    else {
+                        alert(re.Message);
+                    }
+                },
+                "error": function () {
+
+                }
+            });
+        }
+        var handleAjaxModal = function () {
+            var $modal = $('#ajax-modal');
+            $('body').modalmanager('loading');
+            setTimeout(function () {
+                $modal.modal();
+            }, 1000);
+        };
         $(function () {
             ConsumeItem.Init();
         });

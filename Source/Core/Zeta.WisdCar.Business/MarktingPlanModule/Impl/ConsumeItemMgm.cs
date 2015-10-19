@@ -58,5 +58,24 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
 
             return consumeItemVO;
         }
+
+        public List<ConsumeItemVO> GetAllConsumeItems(int id)
+        {
+            ConsumeItemData consumeItemData = new ConsumeItemData();
+            List<ConsumeItemVO> consumeItemVOList = new List<ConsumeItemVO>();
+
+            DataSet ds = consumeItemData.GetAllConsumeItem(id);
+            List<ConsumeItemPO> consumeItemPOList = ds.GetEntity<List<ConsumeItemPO>>();
+            if(consumeItemPOList!=null)
+            {
+                consumeItemPOList.ForEach(i =>
+                {
+                    consumeItemVOList.Add(Mapper.Map<ConsumeItemPO, ConsumeItemVO>(i));
+                });
+            }
+           
+
+            return consumeItemVOList;
+        }
     }
 }

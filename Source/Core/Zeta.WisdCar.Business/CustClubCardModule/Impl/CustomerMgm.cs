@@ -225,7 +225,15 @@ namespace Zeta.WisdCar.Business.CustClubCardModule
             cusrow["Name"] = item[0].ToString();
             cusrow["MobileNO"] = item[1] == null ? null : item[1].ToString();
             cusrow["Sex"] = item[2] == null ? null : item[2].ToString();
-            cusrow["Birthday"] = item[3] == null ? null : Convert.ToDateTime(item[3]).ToString("yyyy/mm/dd");
+            if (item[13] == null || string.IsNullOrEmpty(item[3].ToString()))
+            {
+                cusrow["Birthday"] = DBNull.Value;
+            }
+            else
+            {
+                cusrow["Birthday"] = Convert.ToDateTime(item[3].ToString());
+            }
+            //cusrow["Birthday"] = item[3] == null ? null : Convert.ToDateTime(item[3]).ToString("yyyy/mm/dd");
             cusrow["ICNo"] = item[4] == null ? null : item[4].ToString();
             cusrow["Weixin"] = null;
             cusrow["Company"] = null;

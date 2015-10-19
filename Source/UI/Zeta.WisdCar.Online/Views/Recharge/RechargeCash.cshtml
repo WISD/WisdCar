@@ -183,7 +183,8 @@
     </div>
 @section scripts{
 <script>
-        $(function () {
+    $(function () {
+        ClubcardRecharge.Init();
             UIModalExt.Init();
         });
         function payType(t) {
@@ -221,6 +222,23 @@
                 }
             })
         }
+    var ClubcardRecharge = function () {
+        var onPageLoad = function () {
+
+        };
+
+        return {
+            Init: function () {
+                $("#sidebar_menu_recharge_consume").addClass("active");
+                $("#sidebar_menu_clubcard_recharge").addClass("active");
+                App.blockUI({ boxed: true });
+                onPageLoad();
+                window.setTimeout(function () {
+                    App.unblockUI();
+                }, 1000);
+            }
+        };
+    }();
         var UIModalExt = function () {
             var onPageLoad = function () {
                 handleAjaxModal();

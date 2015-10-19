@@ -359,7 +359,7 @@ namespace Zeta.WisdCar.Business
             return package;
         }
 
-        public void AddPackage(PackageVO package)
+        public int AddPackage(PackageVO package)
         {
             throw new NotImplementedException();
         }
@@ -601,6 +601,12 @@ namespace Zeta.WisdCar.Business
 
 
         public int GetRecordCount(CustomerQueryEntity filter)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public List<ConsumeItemVO> GetAllConsumeItems(int id)
         {
             throw new NotImplementedException();
         }

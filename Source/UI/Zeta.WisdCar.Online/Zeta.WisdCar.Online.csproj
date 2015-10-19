@@ -189,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ComsumeItemViewModel.cs" />
     <Compile Include="Models\CustomerAndCar.cs" />
     <Compile Include="Models\CustomerAndCard.cs" />
     <Compile Include="Models\DatatablesResult.cs" />
@@ -1118,6 +1119,10 @@
     <Content Include="template\applyTmp.doc" />
     <Content Include="Views\Customer\ImportCust.cshtml" />
     <Content Include="template\客户导入模版.xls" />
+    <Content Include="Views\Package\DetailPkg.cshtml" />
+    <Content Include="Views\Package\PkgItemDetail.cshtml" />
+    <Content Include="Views\Recharge\RechargePkg.cshtml" />
+    <Content Include="Views\Recharge\RechargePkgSuccess.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

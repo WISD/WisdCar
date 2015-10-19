@@ -22,7 +22,7 @@ namespace Zeta.WisdCar.Online
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            RegisterMetric();
+            //RegisterMetric();
             RegisterAutoMapper();
         }
 

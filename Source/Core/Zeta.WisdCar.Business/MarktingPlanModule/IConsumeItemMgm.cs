@@ -38,5 +38,7 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
         /// </summary>
         /// <param name="id"></param>
         void DelConsumeItem(int id);
+
+        List<ConsumeItemVO> GetAllConsumeItems(int id);
     }
 }

@@ -20,9 +20,10 @@ namespace Zeta.WisdCar.Repository.Impl
             return _daoPackage.GetModel(id);
         }
 
-        public void AddPackage(Model.PO.PackagePO package)
+        public int AddPackage(Model.PO.PackagePO package)
         {
-            _daoPackage.Add(package);
+            return _daoPackage.Add(package);
+            
         }
 
         public int GetRecordCount(string strWhere)

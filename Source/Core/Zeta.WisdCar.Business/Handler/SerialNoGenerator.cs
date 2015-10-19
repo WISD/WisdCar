@@ -28,11 +28,11 @@ namespace Zeta.WisdCar.Business.Handler
         /// 消费批次编号(生成规则：2（消费） +  门店ID  +  yymmddHHmmss)
         /// </summary>
         /// <returns></returns>
-        public static string GenConsumeBatchNo()
+        public static string GenConsumeBatchNo(int storeId)
         {
             StringBuilder strTemp = new StringBuilder();
             string strBatchNo = "";
-            strTemp.AppendFormat("{0}{1}{2}", 2,PermissionMgm.GetCurUser1(), DateTime.Now.ToString("yymmddHHmmss"));
+            strTemp.AppendFormat("{0}{1}{2}", 2,storeId, DateTime.Now.ToString("yymmddHHmmss"));
             strBatchNo = strTemp.ToString();
             return strBatchNo;
         }

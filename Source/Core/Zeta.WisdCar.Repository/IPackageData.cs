@@ -26,7 +26,7 @@ namespace Zeta.WisdCar.Repository
         /// 新增套餐
         /// </summary>
         /// <param name="package"></param>
-        void AddPackage(PackagePO package);
+        int AddPackage(PackagePO package);
 
         /// <summary>
         /// 根据条件查询套餐记录数

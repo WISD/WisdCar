@@ -39,5 +39,6 @@ namespace Zeta.WisdCar.Repository
         /// </summary>
         /// <param name="id"></param>
         void DelConsumeItem(int id);
+        DataSet GetAllConsumeItem(int id);
     }
 }

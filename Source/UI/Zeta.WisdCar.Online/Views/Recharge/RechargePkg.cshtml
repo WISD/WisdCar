@@ -1,0 +1,273 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+            购买套餐 <small>Purchase packages</small>
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+
+            <li>
+                <i class="fa fa-home"></i>
+                <a href="index.html">
+                    首页
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    充值消费
+                </a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
+                <a href="#">
+                    购买套餐
+                </a>
+            </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+    </div>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN PAGE CONTENT-->
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i>购买套餐
+        </div>
+        <!-- <div class="tools">
+        </div>
+        <a href="#" class="btn btn-xs blue" style="float:right; ">
+            <i class="fa fa-plus"></i> 新增
+        </a> -->
+    </div>
+
+
+    <div class="portlet-body">
+
+        <div class="portlet box" style=" border:1px solid #bde9f1;">
+            <div class="portlet-body">
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="PackageName">套餐名称</label>
+                        <div class="col-md-2">
+                            @Html.DropDownList("PkgBag", null, new { @class = "form-control input-md" })
+                        </div>
+
+                        <div class="col-md-2">
+
+                        </div>
+                        @*<div class="col-md-2">
+                            <a id="btnQy" href="javacript:void(0);" class="btn btn-md blue">
+                                <i class="fa fa-search"></i> 查询
+                            </a>
+                        </div>*@
+                    </div>
+
+                </form>
+
+                <div class="margin-top-10 margin-bottom-10 clearfix">
+                    <table id="tblPkgItem" class="table table-bordered table-striped">
+                        <tr>
+                            <td>
+                                消费项目名称
+                            </td>
+                            <td>
+                                消费次数
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <form class="form-horizontal">
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="txtQyName">客户姓名：</label>
+                <div class="col-md-4">
+                    <label class="control-label">@ViewBag.Data.CustName</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="txtQyCardNo">会员卡号：</label>
+                <div class="col-md-4">
+                    <label id="lblCno" class="control-label">@ViewBag.Data.ClubCardNo</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="ddlCardType">会员卡类型：</label>
+                <div class="col-md-4">
+                    <label class="control-label">@ViewBag.Data.ClubCardTypeName</label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="TotalPackage">套餐总价：</label>
+                <div class="col-md-4">
+                    <label id="lblPkgPrice" class="control-label">0.00</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="DiscountPackages">套餐折扣：</label>
+                <div class="col-md-4">
+                    <label id="lblDisCount" class="control-label">@ViewBag.Data.PackageDiscount</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="RealincomeAmount">实收金额：</label>
+                <div class="col-md-4">
+                    <label class="control-label" id="lblPkgRecAmount">0.00</label>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="PaymentType">支付方式:</label>
+                <div class="col-md-4">
+                    <div>
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#home" onclick="payType('cash')" aria-controls="home" role="tab" data-toggle="tab">现金</a></li>
+                            <li role="presentation"><a href="#profile" aria-controls="profile" onclick="payType('bankcard')" role="tab" data-toggle="tab">其他</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="home">
+                                支付现金，进行充值。点击确认支付直接交易，请仔细查看消费信息。
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile">...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-1" id="ajax-demo" data-toggle="modal">
+                    <a id="btnQy" href="javacript:void(0);" onclick="payForm()" class="btn btn-md blue"> 确认支付 </a>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+@section styles{
+    <link href="@Url.Content("~/assets/plugins/datatables/css/jquery.dataTables.min.css")" rel="stylesheet" />
+}
+@section scripts{
+    <script src="@Url.Content("~/assets/plugins/datatables/js/jquery.dataTables.min.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        
+        //function payType(t) {
+        //    if (t == 'cash') {
+        //        $('#lblPaytype').html('现金');
+        //        $('#hidPaytype').val(t);
+        //    } else if (t == 'bankcard') {
+        //        $('#lblPaytype').html('银行卡');
+        //        $('#hidPaytype').val(t);
+        //    }
+        //}
+        function payForm() {
+            //提交充值信息
+            var cno = $('#lblCno').text();
+            var pkgId =$("#PkgBag").val();
+            var discount = $('#lblDisCount').text();
+            var rechamount =$("#lblPkgRecAmount").text();
+            var pkgPrice = $("#lblPkgPrice").text();
+            var paytype = $('#hidPaytype').val();
+
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("RechargePkgSub", "Recharge")",
+                "dataType": "json",
+                "data": { cardNo: cno, pkgId: pkgId, disCount: discount, rechAmount: rechamount, pkgPrice: pkgPrice },
+                "async": true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        window.location.href = "@Url.Action("RechargePkgSuccess","Recharge")"
+                    } else {
+                        alert(re.Message);
+                    }
+                },
+                "error": function () {
+                    alert(re.Error);
+                }
+            })
+        }
+        var RechargePkg = function () {
+            var ddlSelect = function () {
+                $("#PkgBag").change(function () {
+                    var selectVal = $("#PkgBag").val();
+                    if(selectVal>0){
+                        getPkgItems(selectVal);
+                    }
+               })
+            }
+            var getPkgItems = function (id) {
+                $.ajax({
+                    "type": "post",
+                    "url": "@Url.Action("GetPkgItems", "Recharge")",
+                    "dataType": "json",
+                    "data": { id:id },
+                    "async":true,
+                    "cache": false,
+                    "success": function (re) {
+                        if (re) {
+                            var reobj = re.Data;
+                            var tbl = "<tr><td>消费项目名称</td><td>消费次数</td></tr>";
+                            $.each(reobj, function (n,v) {
+                                //alert(v.ItemName);
+                                //alert(v.ConsumeCount);
+                                tbl = tbl + "<tr><td>" + v.ItemName + "</td><td>" + v.ConsumeCount + "</td></tr>";
+
+                            })
+                            $("#lblPkgPrice").text(re.Message);
+                            var reciveAmount=0.00;
+                            var discount = $("#lblDisCount").text();
+                            if (Number(discount) > 0) {
+                                reciveAmount = Number(re.Message) * Number(discount);
+                            } else {
+                                reciveAmount = re.Message;
+                            }
+                                
+                            $("#lblPkgRecAmount").text(reciveAmount);
+                            $("#tblPkgItem").html(tbl);
+                        } else {
+                            alert(re.Message);
+                        }
+                    },
+                    "error":function(){
+
+                    }
+                });
+            }
+            return {
+                Init: function (a) {
+                    $("#sidebar_menu_recharge_consume").addClass("active");
+                    $("#sidebar_menu_clubcard_recharge").addClass("active");
+                    App.blockUI({ boxed: true });
+                    ddlSelect();
+                    getPkgItems($("#PkgBag").val());
+                    window.setTimeout(function () {
+                        App.unblockUI();
+                    }, 1000);
+                }
+            }
+        }();
+        $(function () {
+            RechargePkg.Init();
+        })
+    </script>
+}
+

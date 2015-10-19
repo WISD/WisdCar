@@ -35,11 +35,12 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             SqlConnection conn = new SqlConnection(PubConstant.ConnectionString);
             conn.Open();
             SqlTransaction tx = conn.BeginTransaction();
-
+            int storeId = Convert.ToInt32(list.FirstOrDefault().Reserved1);
+            list.ForEach(itm => itm.Reserved1 = null);
             try
             {
                 decimal dConsumeAmount = 0.0M;
-                strBatchNo = SerialNoGenerator.GenConsumeBatchNo();
+                strBatchNo = SerialNoGenerator.GenConsumeBatchNo(storeId);
                 foreach (var item in list)
                 {
                     dConsumeAmount += item.OriginalPrice;
@@ -82,10 +83,11 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             SqlConnection conn = new SqlConnection(PubConstant.ConnectionString);
             conn.Open();
             SqlTransaction tx = conn.BeginTransaction();
-
+            int storeId = Convert.ToInt32(list.FirstOrDefault().Reserved1);
+            list.ForEach(itm => itm.Reserved1 = null);
             try
             {
-                strBatchNo = SerialNoGenerator.GenConsumeBatchNo();
+                strBatchNo = SerialNoGenerator.GenConsumeBatchNo(storeId);
                 foreach (var item in list)
                 {
                     ClubCardPackageDetailPO tmpPkgDetail = null;
@@ -141,11 +143,12 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
             SqlConnection conn = new SqlConnection(PubConstant.ConnectionString);
             conn.Open();
             SqlTransaction tx = conn.BeginTransaction();
-
+            int storeId = Convert.ToInt32(list.FirstOrDefault().Reserved1);
+            list.ForEach(itm => itm.Reserved1 = null);
             try
             {
                 decimal dConsumeAmount = 0.0M;
-                strBatchNo = SerialNoGenerator.GenConsumeBatchNo();
+                strBatchNo = SerialNoGenerator.GenConsumeBatchNo(storeId);
                 foreach (var item in list)
                 {
                     dConsumeAmount += item.OriginalPrice;//为后面的记录总账

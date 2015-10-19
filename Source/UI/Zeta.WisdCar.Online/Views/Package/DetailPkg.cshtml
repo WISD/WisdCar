@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title">套餐信息</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN PORTLET-->
+            <form class="form-horizontal" role="form" width="100%">
+                <div class="form-body">
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="PackageAmount">套餐名称:<span class="required">*</span></label>
+                        <div class="col-md-4">
+                            <input type="text" id="txtPkgName" name="txtPkgName" value="@ViewBag.pkgName" class="form-control" placeholder="">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="txtQyName">套餐价格:<span class="required">*</span></label>
+                        <div class="col-md-4">
+                            <input type="text" id="txtPkgPrice" name="txtPkgPrice" value="@ViewBag.pkgPrice" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- END PORTLET-->
+        </div>
+    </div>
+<div class="modal-footer">
+    <button type="button" onclick="subForm()" class="btn blue">保存</button>
+    <button type="button" class="btn default" data-dismiss="modal">关闭</button>
+    <input hidden id="hidId" value="@ViewBag.pkgId" />
+</div>
+<script type="text/javascript">
+    function subForm() {
+        var pkgName = $('#txtPkgName').val();
+        var pkgPrice = $('#txtPkgPrice').val();
+        var id = $('#hidId').val();
+        if (!pkgName) {
+            alert("套餐名称不能为空");
+            return;
+        } else if (!pkgPrice) {
+            alert("套餐价格不能为空");
+            return;
+        } else if (isNaN(Number(pkgPrice))) {
+            alert("套餐价格必须输入数字");
+            return;
+        } else if (Number(pkgPrice) <= 0) {
+            alert("套餐价格必须大于0");
+            return;
+        }
+
+        $.ajax({
+            "type": "post",
+            "url": '@Url.Action("SubPkg", "Package")',
+            "dataType": "json",
+            "data": {id:id,pkgName:pkgName,pkgPrice:pkgPrice},
+            "async": true,
+            "cache": false,
+            "success": function (re) {
+                if (re.Success) {
+                    if (id == -1) {
+                        alert(re.Message);
+                        openDetailModal(re.Data, pkgName);
+                    }
+                    else {
+                        alert(re.Message);
+                        closedilog();
+                    }
+                }
+                else {
+                    alert(re.Message);
+                }
+            },
+            "error": function () {
+
+            }
+        });
+
+
+        //openDetailModal(1, '内部美容套餐');
+    }
+    var openDetailModal = function (id, pkgName) {
+        var $modal = $("#divPackageItems");
+        //$("body").modalmanager("loading");
+        var url = "@Url.Action("DetailItems", "Package")?id=" + id + "&pkgName=" + pkgName;
+           
+        $modal.load(url, '', function () {
+            $modal.modal();
+        });
+    };
+</script>

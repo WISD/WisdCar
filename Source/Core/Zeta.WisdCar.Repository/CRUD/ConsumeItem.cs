@@ -374,6 +374,24 @@ namespace Zeta.WisdCar.Repository.CRUD
 		#region  ExtensionMethod
 
 		#endregion  ExtensionMethod
-	}
+
+        internal DataSet GetList(string strWhere, int id)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ItemID,ItemName,ItemPrice,LogicalStatus,CreatorID,CreatedDate,LastModifierID,LastModifiedDate,Reserved1,Reserved2,Reserved3 ");
+            strSql.Append(" FROM ConsumeItem ");
+           
+            if(id>0)
+            {
+                strSql.Append(" where itemid not in (select itemid from packageitemmapping where packageid=@id)");
+            }
+            //if (strWhere.Trim() != "")
+            //{
+            //    strSql.Append(" where " + strWhere);
+            //}
+            SqlParameter sp = new SqlParameter("@id", id);
+            return DbHelperSQL.Query(strSql.ToString(),sp);
+        }
+    }
 }
 

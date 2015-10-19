@@ -41,10 +41,10 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
             return packageVO;
         }
 
-        public void AddPackage(Model.VO.PackageVO package)
+        public int AddPackage(Model.VO.PackageVO package)
         {
             PackageData packageData = new PackageData();
-            packageData.AddPackage(Mapper.Map<PackageVO, PackagePO>(package));
+            return packageData.AddPackage(Mapper.Map<PackageVO, PackagePO>(package));  
         }
 
         public bool IsPackageExist(string packageName)

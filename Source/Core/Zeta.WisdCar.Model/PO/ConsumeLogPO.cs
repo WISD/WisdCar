@@ -13,7 +13,7 @@ namespace Zeta.WisdCar.Model.PO
 		private int _consumelogid;
 		private string _consumebatchno;
 		private int _clubcardid;
-		private int _clubcardno;
+		private string _clubcardno;
 		private int _custid;
 		private string _custname;
 		private DateTime _consumedate;
@@ -62,7 +62,7 @@ namespace Zeta.WisdCar.Model.PO
 		/// <summary>
 		/// 会员卡编号
 		/// </summary>
-		public int ClubCardNo
+		public string ClubCardNo
 		{
 			set{ _clubcardno=value;}
 			get{return _clubcardno;}

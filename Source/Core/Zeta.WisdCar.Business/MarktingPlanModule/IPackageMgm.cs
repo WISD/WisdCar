@@ -25,7 +25,7 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
         /// 新增套餐
         /// </summary>
         /// <param name="package"></param>
-        void AddPackage(PackageVO package);
+        int AddPackage(PackageVO package);
 
         /// <summary>
         /// 检查是否存在相同的套餐名称

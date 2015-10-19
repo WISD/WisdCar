@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">套餐消费项目信息</h4>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN PORTLET-->
+        <form class="form-horizontal" role="form" width="100%">
+            <div class="form-body">
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="PackageAmount">消费项目名称:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        @Html.DropDownList("ConItem", null, new { @class = "form-control input-md" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="txtQyName">项目消费次数:<span class="required">*</span></label>
+                    <div class="col-md-4">
+                        <input type="text" id="txtConNum" name="txtConNum" value="" class="form-control" placeholder="">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- END PORTLET-->
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" onclick="subForm()" data-dismiss="modal" class="btn blue">保存</button>
+    <button type="button" class="btn default" data-dismiss="modal">关闭</button>
+    <input hidden id="hidId" value="-1" />
+</div>
+<script type="text/javascript">
+    function subForm() {
+        var pkItemId = $('#ConItem').val();
+        var conNum = $('#txtConNum').val();
+        var id = $('#hidId').val();
+        var itemName = $("#ConItem").find("option:selected").text();
+        if (!pkItemId) {
+            alert("无效消费项目");
+            return;
+        }
+        if (!conNum) {
+            alert("消费次数不能为空");
+            return;
+        } else if (isNaN(Number(conNum))) {
+            alert("消费次数必须输入数字");
+            return;
+        } else if (Number(conNum) <= 0) {
+            alert("消费次数必须大于0");
+            return;
+        }
+        
+        $.ajax({
+            "type": "post",
+            "url": '@Url.Action("AddPkgItem", "Package")',
+            "dataType": "json",
+            "data": { pkItemId: pkItemId, pkgId: '@ViewBag.PkgID', conNum: conNum, pkgName: '@ViewBag.PkgName', itemName: itemName, },
+            "async": true,
+            "cache": false,
+            "success": function (re) {
+                if (re.Success) {           
+                    alert(re.Message);
+                    PackageItems.Init();
+                }
+                else {
+                    alert(re.Message);
+                }
+            },
+            "error": function () {
+
+            }
+        });
+
+
+        //openDetailModal(1, '内部美容套餐');
+    }
+    @*var openDetailModal = function (id, pkgName) {
+        var $modal = $("#divPackageItems");
+        //$("body").modalmanager("loading");
+        var url = "@Url.Action("DetailItems", "Package")?id=" + id + "&pkgName=" + pkgName;
+
+        $modal.load(url, '', function () {
+            $modal.modal();
+        });
+    };*@
+</script>

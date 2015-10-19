@@ -22,7 +22,7 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
             DataSet ds = pkgItemsData.GetItemsByPkgID(pkgID);
 
             List<PackageItemMappingPO> pkgItemMappingPOList = ds.GetEntity<List<PackageItemMappingPO>>();
-
+            if(pkgItemMappingPOList!=null)
             pkgItemMappingPOList.ForEach(i =>
             {
                 pkgItemVOList.Add(Mapper.Map<PackageItemMappingPO, PkgItemVO>(i));

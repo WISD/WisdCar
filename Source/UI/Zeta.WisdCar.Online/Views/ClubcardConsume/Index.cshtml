@@ -1,4 +1,5 @@
-﻿<!-- BEGIN PAGE HEADER-->
+﻿@model Zeta.WisdCar.Online.Models.CustomerAndCard
+<!-- BEGIN PAGE HEADER-->
 <div class="row">
     <div class="col-md-12">
         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
@@ -14,7 +15,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="#">
+                <a href="#"> 
                     充值消费
                 </a>
                 <i class="fa fa-angle-right"></i>
@@ -30,17 +31,757 @@
 </div>
 <!-- END PAGE HEADER-->
 <!-- BEGIN PAGE CONTENT-->
-<div class="row">
-    <div class="col-md-12">
-        Page content goes here
+<!-- BEGIN EXAMPLE TABLE PORTLET-->
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-globe"></i>会员消费
+        </div>
+        <!-- <div class="tools">
+        </div>
+        <a href="#" class="btn btn-xs blue" style="float:right; ">
+            <i class="fa fa-plus"></i> 新增
+        </a> -->
+    </div>
+
+
+    <div class="portlet-body">
+
+        <div class="portlet box" style=" border:1px solid #bde9f1;">
+            <div class="portlet-body">
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="txtQyCardNo">会员卡号</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(m => m.CardNo, new { @class = "form-control" })
+                            @*<input type="text" id="txtQyCardNo" name="CardNo" class="form-control" placeholder="">*@
+                        </div>
+                        <label class="col-md-2 control-label" for="txtQyMobileNo">手机号码</label>
+                        <div class="col-md-2">
+                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control" })
+                            @*<input type="text" id="txtQyMobileNo" name="MobileNo" class="form-control" placeholder="">*@
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                        <div class="col-md-2">
+                            <a id="btnQy" href="javacript:void(0);" onclick="searchModel(); return false;" class="btn btn-md blue">
+                                <i class="fa fa-search"></i> 查询
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">明细信息</h3>
+            </div>
+            <div class="panel-body">
+                <div class="portlet box" style="margin-bottom:10px; border:1px solid #bde9f1;">
+                    <div class="portlet-body">
+                        <form class="form-horizontal">
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyName">姓名：</label>
+                                <div class="col-md-4">
+
+                                    <label class="control-label" id="lblName">@Model.CustName</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">手机号码：</label>
+                                <div class="col-md-4">
+
+                                    <label class="control-label" id="lblMno">@Model.MobileNo</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyICNo">身份证号：</label>
+                                <div class="col-md-4">
+
+                                    <label class="control-label" id="lblIcno">@Model.ICNo</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQyCardNo">会员卡号：</label>
+                                <div class="col-md-4">
+
+                                    <label class="control-label" id="lblCardno">@Model.CardNo</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="ddlCardType">会员卡类型：</label>
+                                <div class="col-md-4">
+
+                                    <label class="control-label" id="lblCardtname">@Model.CardTypeName</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="ddlCardState">会员卡状态：</label>
+                                <div class="col-md-4">
+                                    <label class="control-label" id="lblCardstatu">@Model.CardStatuName</label>
+                                </div>
+                            </div>
+                            @Html.HiddenFor(m => m.CardID)
+                            @Html.HiddenFor(m => m.CardStatu)
+
+                            @*<div class="form-group">
+                                <label class="col-md-2 control-label" for="txtQydate">截至日期:</label>
+                                <div class="col-md-4">
+                                    <input type="text" id="txtQydate" name="date" class="form-control" placeholder="">
+                                </div>
+                            </div>*@
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-1" id="ajax-demo" data-toggle="modal">
+                                    <a id="btnQy" href="javacript:void(0);" onclick="cashConsume()" class="btn btn-md blue" > 现金消费 </a>
+                                </div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-1" data-toggle="modal"> <a id="btnQy" href="javacript:void(0);" onclick="cashConsume()" class="btn btn-md blue"> 套餐消费 </a></div>
+                                <div class="col-md-1"></div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ajax -->
+        <div id="ajax-modal" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal(1)" aria-hidden="true"></button>
+                <h4 class="modal-title">现金消费</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="TxtPassword">输入密码:<span class="required">*</span></label>
+                            <div class="col-md-4">
+                                <input type="password" id="TxtPassword" name="Password" class="form-control" placeholder="">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer" style="text-align:center;">
+                <a id="btnQy" class="btn btn-md blue"  data-toggle="modal" onclick="CheckPassword()"> 确定 </a>
+                <a id="btnQy" data-dismiss="modal" onclick="reSetVal(1)" class="btn btn-md blue"> 取消 </a>
+            </div>
+        </div>
+
+        <!-- static1 -->
+        @*<div id="static1" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">套餐消费</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form">
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="TxtPassword">输入密码:<span class="required">*</span></label>
+                            <div class="col-md-4">
+                                <input type="password" id="TxtpkgPassword" name="Password" class="form-control" placeholder="">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer" style="text-align:center;">
+                <a id="btnQy" class="btn btn-md blue" data-target="#static3" data-toggle="modal"> 确定 </a>
+                <a id="btnQy" data-dismiss="modal" class="btn btn-md blue"> 取消 </a>
+            </div>
+        </div>*@
+
+
+        <!-- static -->
+        <div id="static" onclick="reMovetxt()" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal(2)" aria-hidden="true"></button>
+                <h4 class="modal-title">现金消费</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="ConsumptionName">消费项目</label>
+                        <div class="col-md-3">
+
+                            @Html.DropDownList("ConItem", null, new { @class = "form-control input-md" })
+                            @*<option>美容</option>
+                            <option>洗车</option>
+                            <option>打蜡</option>*@
+
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <a id="btnQy" href="javascript:void(0);" onclick="AddConsumeItem()" class="btn btn-md blue">
+                                <i class="fa fa-plus"></i> 新增
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="portlet-body">
+                    <div class="margin-bottom-10 clearfix">
+                        <table class="table table-bordered table-striped" id="tbConItems">
+                            <tr>
+                                <td style="display:none">项目编号</td>
+                                <td>消费项目名称</td>
+                                <td>单价</td>
+                                <td>消费次数</td>
+                                <td>合计</td>
+                                <td>操作</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="CashAmount">总价:</label>
+                    <div class="col-md-4">
+                        <input type="text" id="CashAmount" name="Amount" readonly="readonly" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer" style="text-align:center;">
+                <a id="btnQy" class="btn btn-md blue" onclick="subConsumeInfo()" data-toggle="modal"> 扣款 </a>
+                <a id="btnQy" data-dismiss="modal" onclick="reSetVal(2)" class="btn btn-md blue"> 取消 </a>
+            </div>
+        </div>
+
+        <!-- static2 -->
+        <div id="static2" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal(3)" aria-hidden="true"></button>
+                <h4 class="modal-title">现金消费</h4>
+            </div>
+
+            <div class="modal-body">
+
+
+                <div class="portlet-body">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">消费项目列表</h3>
+                    </div>
+
+                    <div class="margin-bottom-10 clearfix">
+                        <table id="tblConReport" class="table table-bordered table-striped">
+                            <tr>
+                                <td>消费项目名称</td>
+                                <td>单价</td>
+                                <td>消费次数</td>
+                                <td>合计</td>
+                            </tr>
+                            
+                        </table>
+                    </div>
+                </div>
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="ConsumptionPrice">消费总价:</label>
+                        <div class="col-md-4">
+                            <input type="text" id="ConsumptionPrice" name="Price" class="form-control" readonly="readonly" placeholder="">
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="ResidualAmount">剩余金额:</label>
+                        <div class="col-md-4">
+                            <input type="text" id="ResidualAmount" name="Amount" class="form-control" readonly="readonly" placeholder="">
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="modal-footer" style="text-align:center;">
+                <input type="hidden" id="hidSerNo" value=""/>
+                <input type="button" onclick="printConNote()" class="btn btn-md blue" value="打印" />
+            </div>
+        </div>
+
+        <!-- static3 -->
+        <div id="static3" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">套餐消费</h4>
+            </div>
+
+            <div class="modal-body">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="PackageName">可用套餐</label>
+                        <div class="col-md-3">
+                            <select id="PackageName" name="Name" class="form-control input-md">
+                                <option>美容套餐</option>
+                                <option>洗车套餐</option>
+                                <option>打蜡套餐</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="ConsumptionName">消费项目</label>
+                        <div class="col-md-3">
+                            <select id="ConsumptionName" name="Name" class="form-control input-md">
+                                <option>美容（5次）</option>
+                                <option>洗车（3次）</option>
+                                <option>打蜡（4次）</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <a id="btnQy" href="javacript:void(0);" class="btn btn-md blue">
+                                <i class="fa fa-plus"></i> 新增
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="portlet-body">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">本次消费列表</h3>
+                    </div>
+
+                    <div class="margin-bottom-10 clearfix">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td>消费项目名称</td>
+                                <td>原始次数</td>
+                                <td>剩余次数</td>
+                                <td>本次消费次数</td>
+                                <td>操作</td>
+                            </tr>
+                            <tr>
+                                <td>洗车</td>
+                                <td>10</td>
+                                <td>8</td>
+                                <td>2</td>
+                                <td><a href=""><i class="fa fa-times"></i> 删除</a></td>
+                            </tr>
+                            <tr>
+                                <td>打蜡</td>
+                                <td>10</td>
+                                <td>8</td>
+                                <td>2</td>
+                                <td><a href=""><i class="fa fa-times"></i> 删除</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer" style="text-align:center;">
+                <a id="btnQy" class="btn btn-md blue" data-target="#static4" data-toggle="modal"> 确定 </a>
+                <a id="btnQy" data-dismiss="modal" class="btn btn-md blue"> 取消 </a>
+            </div>
+        </div>
+
+        <!-- static4 -->
+        <div id="static4" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">套餐消费</h4>
+            </div>
+
+            <div class="modal-body">
+
+
+                <div class="portlet-body">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">本次消费项目列表</h3>
+                    </div>
+
+                    <div class="margin-bottom-10 clearfix">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td>消费项目</td>
+                                <td>消费次数</td>
+                            </tr>
+                            <tr>
+                                <td>洗车</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>打蜡</td>
+                                <td>2</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">套餐剩余使用消费项目列表</h3>
+                    </div>
+
+                    <div class="margin-bottom-10 clearfix">
+                        <table class="table table-bordered table-striped">
+                            <tr>
+                                <td>消费项目名称</td>
+                                <td>原始次数</td>
+                                <td>剩余次数</td>
+                            </tr>
+                            <tr>
+                                <td>洗车</td>
+                                <td>10</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>打蜡</td>
+                                <td>10</td>
+                                <td>8</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer" style="text-align:center;">
+                <a id="btnQy" class="btn btn-md blue"> 打印 </a>
+            </div>
+        </div>
+
     </div>
 </div>
 <!-- END PAGE CONTENT-->
 @section scripts{
     <script>
+        var searchModel= function()
+        {
+            var mno = $('#MobileNo').val();
+            var cardno = $('#CardNo').val();
+            if (!mno && !cardno)
+            {
+                alert("请输入会员卡号或客户手机号以便查询");
+                return;
+            }
+            //SearchCustomerAndCard
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("SearchCustomerAndCard", "Recharge")",
+                        "dataType": "json",
+                        "data": { MobileNo: mno,CardNo:cardno },
+                        "async":true,
+                        "cache": false,
+                        "success": function (re) {
+                            if (re.Success)
+                            {
+                                $('#lblName').html(re.Data.CustName);
+                                $('#lblMno').html(re.Data.MobileNo);
+                                $('#lblIcno').html(re.Data.ICNo);
+                                $('#lblCardno').html(re.Data.CardNo);
+                                $('#lblCardtname').html(re.Data.CardTypeName);
+                                $('#lblCardstatu').html(re.Data.CardStatuName);
+                                $('#CardID').val(re.Data.CardID);
+                                $('#CardStatu').val(re.Data.CardStatu);
+                            }
+                            else
+                            {
+                                alert(re.Message);
+                            }
+                        }, 
+                        "error": function () {
+                            alert(re.Error);
+                        }
+        });
+        }
+        var printConNote = function () {
+            var wdapp;
+            var url = window.location.toString();
+            var pos = url.indexOf('Recharge');
+            url = url.substring(0, pos);
+            try {
+                wdapp = new ActiveXObject("Word.Application");
+            } catch (e) {
+                alert(e.toString());
+                wdapp = null;
+                return;
+            }
+            wdapp.Documents.Open(url + "template/applyTmp.doc");
+            var wddoc = wdapp.ActiveDocument;
+            var strtitle = "@ViewBag.StoreName" + '会员现金消费小票';
+
+            var conItem = "消费项目\t次数\t单价\t合计\r\n";
+            var items = ("#ConsumptionPrice tr");
+            var serNo = $("#hidSerNo").val().split('|')[0];
+            var cardNo = $("#lblCardno").text();
+            var recivor = "@ViewBag.Recivor";
+            var sumPrice = $("#ConsumptionPrice").val();
+            var cardBlan = $("#ResidualAmount").val();
+            var date = $("#hidSerNo").val().split('|')[1];
+            items.each(function () {
+                conItem = conItem + this.cells[0].innerText + "\t" + this.cells[1].innerText + "\t" + this.cells[2].innerText + "\t" + this.cells[3].innerText+"\r\n";
+            })
+            var str = "消费流水号：" + serNo + "\t" + "消费时间：" + "" + "\r\n" + + "收银员：" + recivor + "\r\n-------------------------------\r\n" + conItem + "\r\n-------------------------------\r\n" + "总价：" + sumPrice + "\r\n" + "会员卡：" + cardNo + "\r\n" + "会员卡余额：" + cardBlan;
+            wddoc.Bookmarks("Title").Range.Text = strtitle;
+            wddoc.Bookmarks("content").Range.Text = str;
+            wdapp.visible = false;
+            wddoc.saveAs("d:\\apply_temp.doc");
+            wdapp.Application.Printout();
+
+            wdapp.quit();
+            wdapp = null;
+            $("#static2").modal("hide");
+            reSetVal(3);
+        }
+        var getSumPrice = function () {
+            var row = $("#tbConItems tr");
+            var sumPrice = 0;
+            row.each(function () {
+                if (this.rowIndex > 0) {
+                    sumPrice = sumPrice + parseInt(this.cells[4].innerText);
+                }
+                
+            });
+            $("#CashAmount").val(sumPrice);
+            $("#ConsumptionPrice").val(sumPrice);
+        }
+        var setItemSumPrice = function () {
+            var row = $("#tbConItems tr");
+            row.each(function () {
+                var num = parseInt(this.cells[3].innerText);
+                if (num > 1) {
+                    this.cells[4].innerText = Number(this.cells[2].innerText) * num;
+                }
+            });
+            getSumPrice();
+        }
+        var handleAjaxModal = function (model) {
+            var $modal = $('#'+model);
+           
+                $modal.modal();
+            
+        };
+        var setItemNum = function (e) {
+            e = e ? e : window.event;
+            var obj = e.srcElement ? e.srcElement : e.target;
+            var itmNum = obj.innerText;
+            event.stopPropagation();
+            if (!parseInt(itmNum)) {
+                $('#txtNum').focus();
+                return;
+            } else {
+                var jobj = $(obj);
+                var txtbox = $('#txtNum');
+                if (txtbox.length == 1) {
+                    var t = txtbox.parent();
+                    var num = txtbox.val();
+                    txtbox.remove();
+                    t[0].innerHTML = num;
+                }
+            }
+            
+            jobj.html("<input type='text' onBlur='setValue(event)' id='txtNum' value='" + itmNum + "'/>");
+        }
+        var reMovetxt = function () {
+            var txtbox = $('#txtNum');
+            if (txtbox.length == 1) {
+                var t = txtbox.parent();
+                var num = txtbox.val();
+                txtbox.remove();
+                t[0].innerHTML = num;
+            }
+        }
+        var setValue = function (e) {
+            e = e ? e : window.event;
+            var obj = $(e.srcElement ? e.srcElement : e.target);
+            e.stopPropagation();
+            //alert(obj.val());
+            var reg = /^[1-9]\d*$/;
+            var num = obj.val();
+            if (!reg.test(num)) {
+                alert("请输入正确消费次数");
+                obj.val('');
+                obj.focus();
+            } else {             
+                var t = obj.parent();
+                obj.remove();
+                t[0].innerHTML = num;
+                setItemSumPrice();
+            }
+            
+        }
+        var subConsumeInfo=function(){
+            var cardNo = $("#lblCardno").text();
+            var itemData = new Array();
+            var rows = $("#tbConItems tr");
+            rows.each(function () {
+                if (this.rowIndex > 0) {
+                    var obj = new Object();
+                    obj["Itemid"] = this.cells[0].innerText;
+                    obj["ItemName"] = this.cells[1].innerText;
+                    obj["ItemConNum"] = this.cells[3].innerText;
+                    obj["ItemTotalPrice"] = this.cells[4].innerText;
+                    itemData[this.rowIndex - 1] = obj;
+                    var items = "<tr><td>" + this.cells[1].innerText + "</td><td>" + this.cells[2].innerText + "</td><td>" + this.cells[3].innerText + "</td><td>" + this.cells[4].innerText + "</td></tr>";
+                    $("#tblConReport").append(items);
+                }
+            });
+            if (itemData.length <= 0) {
+                alert("请选择消费项目");
+                return;
+            }
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("SumCardCarshConsumeItems", "ClubcardConsume")",
+                "dataType": "json",
+                "data": { cardNo: cardNo, itemData: JSON.stringify(itemData) },
+                "async":true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        handleAjaxModal('static2');
+                        $("#static").modal("hide");
+                        reSetVal(2);
+                        $("#hidSerNo").val(re.Message);
+                        $("#ResidualAmount").val(re.Data);
+                    } else {
+                        alert(re.Message);
+                    }
+                },
+                    "error": function () {
+                        alert("网络错误，请稍后重试");
+                    }
+            });
+        }
+        var AddConsumeItem = function () {
+            var selectItemid = $("#ConItem").val();
+            var row = $("#tbConItems tr");
+            var b = false;
+            row.each(function () {
+                if (selectItemid == this.cells[0].innerText) {
+                    var num = this.cells[3].innerText;
+                    num = parseInt(num) + 1;
+                    this.cells[3].innerText = num;
+                    b = true;
+                    setItemSumPrice();
+                }
+            });
+            if (b) {
+                return;
+            }
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("GetConsumeItem", "ConsumeItem")",
+                "dataType": "json",
+                "data": { itemId: selectItemid },
+                "async":true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        var items = "<tr><td style='display:none'>" + re.Data.ItemID + "</td><td>" + re.Data.ItemName + "</td><td>" + re.Data.ItemPrice + "</td><td onclick='setItemNum(event)'>1</td><td>" + re.Data.ItemPrice + "</td><td><a href='javascript:void(0);'onclick='deleteRow(" + re.Data.ItemID + ")'><i class='fa fa-times'></i>删除</a></td></tr>";
+                    $("#tbConItems").append(items);
+                        //ItemID
+                    getSumPrice();
+                } else {
+                    alert(re.Message);
+                }
+            },
+                "error": function () {
+                    alert("网络错误，请稍后重试");
+                }
+        });
+        }
+        var deleteRow=function(id){
+            var row = $("#tbConItems tr");
+            row.each(function () {
+                if (id == this.cells[0].innerText)
+                {
+                    $('#tbConItems tr:eq(' + this.rowIndex + ')').remove();
+                    getSumPrice();
+                }
+            });
+        }
+        var CheckPassword = function () {
+
+            var pwd = $("#TxtPassword").val();
+            var cardNo = $("#lblCardno").text();
+            if (!pwd) {
+                alert("请输入会员卡密码");
+                return;
+            }
+            reSetVal(1)
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("CheckCardPassword", "ClubcardConsume")",
+                "dataType": "json",
+                "data": { cardNo: cardNo,pwd:pwd },
+                "async":true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        handleAjaxModal('static');
+                        $("#ajax-modal").modal("hide");
+                    } else {
+                        alert(re.Message);
+                    }
+                },
+                "error": function () { }
+            });
+        }
+        var reSetVal = function (type) {
+            if (type == 1) {
+                $("#TxtPassword").val("");
+            } else if (type == 2) {  
+                $("#CashAmount").val("");
+                $("#tbConItems tr:gt(0)").remove();
+            } else if (type == 3) {
+                $("#ConsumptionPrice").val("");
+                $("#ResidualAmount").val("");
+                $("#tblConReport tr:gt(0)").remove();
+            }
+        }
         var ClubcardConsume = function () {
             var onPageLoad = function () {
-
+               
             };
 
             return {
@@ -55,7 +796,14 @@
                 }
             };
         }();
-
+        var cashConsume = function () {
+            if ($("#lblCardno").text()){
+                handleAjaxModal('ajax-modal');
+            } else {
+                alert("没有对应会员信息不能进行消费");
+            }
+            
+        }
         $(function () {
             ClubcardConsume.Init();
         });

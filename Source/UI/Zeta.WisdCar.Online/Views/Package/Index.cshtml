@@ -40,7 +40,7 @@
                 </div>
                 <div class="tools">
                 </div>
-                <a href="#" class="btn btn-xs blue" style="float:right; ">
+                <a href="javascript:void(0);" onclick="Package.PackgModal()" class="btn btn-xs blue" style="float:right; ">
                     <i class="fa fa-plus"></i> 新增
                 </a>
             </div>
@@ -148,10 +148,18 @@
                 $("#tblPackage_length select").addClass("form-control input-xsmall input-inline");
             };
 
-            var openDetailModal = function (id, pkgName) {
+            var openDetailModal = function (id, pkgName,type) {
                 var $modal = $("#divPackageItems");
                 $("body").modalmanager("loading");
-                $modal.load("@Url.Action("DetailItems", "Package")?id=" + id + "&pkgName=" + pkgName, '', function () {
+                var url;
+                if (type == 1) {
+                    url = "@Url.Action("DetailItems", "Package")?id=" + id + "&pkgName=" + pkgName + "&" + Math.random();
+                    url = encodeURI(url);
+                } else {
+                    url = "@Url.Action("DetailPkg","Package")?id=" + id + "&" + Math.random();
+                }
+                
+                $modal.load(url, '', function () {
                     $modal.modal();
                 });
             };
@@ -159,7 +167,7 @@
             return {
                 Init: function () {
                     $("#sidebar_menu_sell_setting").addClass("active");
-                    $("#sidebar_menu_package").addClass("active");
+                    $("#sidebar_menu_package").addClass("active"); 
                     App.blockUI({ boxed: true });
                     onPageLoad();
                     window.setTimeout(function () {
@@ -167,17 +175,41 @@
                     }, 1000);
                 },
                 Edit: function (id) {
-                    alert("edit" + id);
+                    openDetailModal(id, '', 0);
                 },
                 Del: function (id) {
-                    alert("del" + id);
+                    $.ajax({
+                        "type": "post",
+                        "url": '@Url.Action("DeletePackage", "Package")',
+                        "dataType": "json",
+                        "data": { id: id},
+                        "async": true,
+                        "cache": false,
+                        "success": function (re) {
+                            if (re.Success) {
+                                alert(re.Message);
+                                closedilog();
+                            }
+                            else {
+                                alert(re.Message);
+                            }
+                        },
+                        "error": function () {
+
+                        }
+                    });
                 },
                 Detail: function (id, pkgName) {
-                    openDetailModal(id, pkgName);
+                    openDetailModal(id, pkgName,1);
+                },
+                PackgModal: function () {
+                    openDetailModal(-1, '', 0);
                 }
             };
         }();
-
+        function closedilog() {
+            window.location = "@Url.Action("Index","Package")";
+        }
         $(function () {
             Package.Init();
         });

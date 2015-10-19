@@ -60,6 +60,8 @@ namespace Zeta.WisdCar.Infrastructure
     }
     public enum DDLlist
     {
-        CardType = 0//会员卡类型
+        CardType = 0,//会员卡类型
+        PkgItem = 1,//套餐消费项目
+        Pkg=3,
     }
 }

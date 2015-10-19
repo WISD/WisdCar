@@ -198,8 +198,10 @@ namespace Zeta.WisdCar.Repository.CRUD
             strSql.Append("CardStatus=@CardStatus,");
             strSql.Append("ClubCardNo=@ClubCardNo,");
             strSql.Append("LastModifierID=@LastModifierID,");
+            strSql.Append("Reserved1=@Reserved1,");
             strSql.Append("LastModifiedDate=@LastModifiedDate");
             strSql.Append(" where ClubCardID=@ClubCardID");
+            
             SqlParameter[] parameters = {
 					new SqlParameter("@ClubCardTypeName", SqlDbType.NVarChar,50),
 					new SqlParameter("@OpenCardStore", SqlDbType.NVarChar,50),
@@ -208,8 +210,11 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@CardStatus", SqlDbType.Int,4),
 					new SqlParameter("@ClubCardNo", SqlDbType.NVarChar,50),
 					new SqlParameter("@LastModifierID", SqlDbType.NVarChar,50),
+                    new SqlParameter("@Reserved1", SqlDbType.NVarChar,100),
 					new SqlParameter("@LastModifiedDate", SqlDbType.DateTime),
-					new SqlParameter("@ClubCardID", SqlDbType.Int,4)};
+					new SqlParameter("@ClubCardID", SqlDbType.Int,4)
+                    
+                                        };
             parameters[0].Value = model.ClubCardTypeName;
             parameters[1].Value = model.OpenCardStore;
             parameters[2].Value = model.SalesMan;
@@ -217,8 +222,10 @@ namespace Zeta.WisdCar.Repository.CRUD
             parameters[4].Value = model.CardStatus;
             parameters[5].Value = model.ClubCardNo;
             parameters[6].Value = model.LastModifierID;
-            parameters[7].Value = model.LastModifiedDate;
-            parameters[8].Value = model.ClubCardID;
+            parameters[7].Value = model.Reserved1;
+            parameters[8].Value = model.LastModifiedDate;
+            parameters[9].Value = model.ClubCardID;
+            
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
             if (rows > 0)

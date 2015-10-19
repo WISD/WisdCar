@@ -177,13 +177,13 @@
                 alert("当前会员卡状态不允许充值");
                 return;
             }
-            if (type) {
+            if (type==0) {
                 url = "@Url.Action("RechargeCash","Recharge")"+'?id='+cardid;
             } else {
-                url = '#';
+                url = "@Url.Action("RechargePkg","Recharge")"+'?id='+cardid;
             }
             if (url) {
-                window.location.href = "@Url.Action("RechargeCash","Recharge")"+'?id='+cardid;;
+                window.location.href = url;
             }
         }
         function searchModel()
@@ -225,6 +225,26 @@
                         }
             });
         }
-       
+        var ClubcardRecharge = function () {
+            var onPageLoad = function () {
+
+            };
+
+            return {
+                Init: function () {
+                    $("#sidebar_menu_recharge_consume").addClass("active");
+                    $("#sidebar_menu_clubcard_recharge").addClass("active");
+                    App.blockUI({ boxed: true });
+                    onPageLoad();
+                    window.setTimeout(function () {
+                        App.unblockUI();
+                    }, 1000);
+                }
+            };
+        }();
+
+        $(function () {
+            ClubcardRecharge.Init();
+        });
     </script>
 }

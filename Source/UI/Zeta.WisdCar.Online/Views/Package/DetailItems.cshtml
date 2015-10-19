@@ -1,10 +1,9 @@
 ﻿@{
     Layout = null;
 }
-
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title">@ViewBag.PkgName</h4>
+    <h4 class="modal-title" id="hpkgname">@ViewBag.PkgName</h4>
 </div>
 <div class="modal-body">
     <div class="row">
@@ -17,7 +16,7 @@
                     </div>
                     <div class="tools">
                     </div>
-                    <a href="#" class="btn btn-xs blue" style="float:right; ">
+                    <a href="javascript:void(0);" class="btn btn-xs blue" onclick="PackageItems.Showdetail()" style="float:right; ">
                         <i class="fa fa-plus"></i> 新增
                     </a>
                 </div>
@@ -39,20 +38,31 @@
 </div>
 <div class="modal-footer">
     <button type="button" class="btn default" data-dismiss="modal">关闭</button>
+    <input type="hidden" id="hidPkgId" value="@ViewBag.PkgID" />
 </div>
-
+<div id="divPkgItemsDetail" class="modal fade" tabindex="-1" data-width="500" data-backdrop="static" data-keyboard="false">
+</div>
 <script>
+    
     var PackageItems = function () {
         var onPageLoad = function () {
+           
+            
             initPkgItemsTable();
         };
-
+        var pkgItemsTable = null;
         var initPkgItemsTable = function () {
-            var pkgItemsTable = $("#tblPackageItems").DataTable({
+            //if (pkgItemsTable){
+            //    $("#tblPackageItems").DataTable().fnDestroy();
+            //    $("#tblPackageItems").DataTable().fnDraw();
+            //    return;
+            //}
+            pkgItemsTable = $("#tblPackageItems").DataTable({
                 "processing": false,
                 "serverSide": false,
                 "ajax": {
                     "type": "post",
+                    "data": { id: "@ViewBag.PkgID" },
                     "url": "@Url.Action("GetItemsByPkgId", "Package")",
                     "dataSrc": "",
                     "cache": false
@@ -69,12 +79,13 @@
                     }
                 ],
                 "order": [[0, "asc"]],
+                "bDestroy":true,
                 "deferRender": true,
                 "scrollX": true,
                 "paging": true,
                 "ordering": true,
                 "info": true,
-                "retrieve": true,    //重复初始化，索引到同一个Datatables实例
+                //"retrieve": true,    //重复初始化，索引到同一个Datatables实例
                 //"pagingType": "full_numbers",
                 "pageLength": 10,
                 "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
@@ -110,18 +121,53 @@
             $("#tblPackageItems_filter input").addClass("form-control input-medium input-inline");
             $("#tblPackageItems_length select").addClass("form-control input-xsmall input-inline");
         };
-
+        var openDetailModal = function (id) {
+            var $modal = $("#divPkgItemsDetail");
+            $("body").modalmanager("loading");
+            var url = "@Url.Action("PkgItemDetail","Package")?id="+id+"&"+Math.random();  
+            $modal.load(url, '', function () {
+                $modal.modal();
+            });
+        };
         return {
             Init: function () {
                 onPageLoad();
             },
-            Del: function (id) {
-                alert("del:" + id);
+            Del: function (id, itemName) {
+
+                $.ajax({
+                    "type": "post",
+                    "url": '@Url.Action("DeletePkgItem", "Package")',
+                    "dataType": "json",
+                    "data": { id: id,pkgName: '@ViewBag.PkgName', itemName: itemName, },
+                    "async": true,
+                    "cache": false,
+                    "success": function (re) {
+                        if (re.Success) {
+                            alert(re.Message);
+                            
+                            initPkgItemsTable();
+
+                        }
+                        else {
+                            alert(re.Message);
+                        }
+                    },
+                    "error": function () {
+
+                    }
+                });
+            },
+            Showdetail: function () {
+                var id = $('#hidPkgId').val();
+                openDetailModal(id);
             }
         };
     }();
 
     $(function () {
         PackageItems.Init();
+
+        
     });
 </script>
