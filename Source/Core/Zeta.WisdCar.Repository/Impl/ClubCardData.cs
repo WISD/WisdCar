@@ -129,7 +129,7 @@ namespace Zeta.WisdCar.Repository.Impl
             StringBuilder strSql = new StringBuilder();
             string strWhere = "";
 
-            strSql.AppendFormat(" ClubCardID = '%{0}%' AND  PackageStatus = %{1}% ", clubCardID, CardSPackageStatus.Available);
+            strSql.AppendFormat(" ClubCardID = '{0}' AND  PackageStatus = {1} ", clubCardID, (int)CardSPackageStatus.Available);
             strWhere = strSql.ToString();
 
             return _daoClubCardPkg.GetList(strWhere);
@@ -141,7 +141,7 @@ namespace Zeta.WisdCar.Repository.Impl
             StringBuilder strSql = new StringBuilder();
             string strWhere = "";
 
-            strSql.AppendFormat(" ClubCardID = '%{0}%' AND  PackageStatus = %{1}% ", clubCardID, CardSPackageStatus.Unavailable);
+            strSql.AppendFormat(" ClubCardID = '{0}' AND  PackageStatus = {1} ", clubCardID, CardSPackageStatus.Unavailable);
             strWhere = strSql.ToString();
 
             return _daoClubCardPkg.GetList(strWhere);

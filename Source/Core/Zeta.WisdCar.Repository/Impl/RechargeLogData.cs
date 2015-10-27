@@ -20,10 +20,10 @@ namespace Zeta.WisdCar.Repository.Impl
         {
             StringBuilder strSql1 = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(entity.MobileNo.Trim()))
-            {
-                strSql1.AppendFormat(" MobileNo like '%{0}%' ", entity.MobileNo);
-            }
+            //if (!string.IsNullOrEmpty(entity.MobileNo.Trim()))
+            //{
+            //    strSql1.AppendFormat(" MobileNo like '%{0}%' ", entity.MobileNo);
+            //}
 
             if (!string.IsNullOrEmpty(entity.CustName.Trim()))
             {
@@ -32,11 +32,11 @@ namespace Zeta.WisdCar.Repository.Impl
                 strSql1.AppendFormat(" CustName like '%{0}%' ", entity.CustName);
             }
 
-            if (!string.IsNullOrEmpty(entity.ICNo.Trim()))
+            if (!string.IsNullOrEmpty(entity.Creator.Trim()))
             {
                 if (strSql1.Length > 0)
                     strSql1.AppendFormat(" And ");
-                strSql1.AppendFormat(" ICNo like '%{0}%' ", entity.ICNo);
+                strSql1.AppendFormat(" creatorid like '%{0}%' ", entity.Creator);
             }
 
             if (!string.IsNullOrEmpty(entity.ClubCardNO.Trim()))
@@ -50,14 +50,14 @@ namespace Zeta.WisdCar.Repository.Impl
             {
                 if (strSql1.Length > 0)
                     strSql1.AppendFormat(" And ");
-                strSql1.AppendFormat(" StoreID = {0} ", entity.StoreID);
+                strSql1.AppendFormat(" RechargeStore like '%{0}%' ", entity.StoreID);
             }
 
-            if ((!string.IsNullOrEmpty(entity.StartDate.ToString())) && (!string.IsNullOrEmpty(entity.EndDate.ToString())))
+            if ((entity.StartDate != null) && (entity.EndDate != null))
             {
                 if (strSql1.Length > 0)
                     strSql1.AppendFormat(" And ");
-                strSql1.AppendFormat(" CreatedDate between {0} and {1} ", entity.StartDate,entity.EndDate);
+                strSql1.AppendFormat(" CreatedDate between '{0}' and '{1}' ", entity.StartDate.ToString(),entity.EndDate.ToString());
             }
 
             string strWhere = strSql1.ToString();

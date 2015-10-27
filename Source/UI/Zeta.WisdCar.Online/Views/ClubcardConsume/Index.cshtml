@@ -140,14 +140,14 @@
                                     <input type="text" id="txtQydate" name="date" class="form-control" placeholder="">
                                 </div>
                             </div>*@
-
+                            <input type="hidden" id="hidConType" value="0"/>
                             <div class="form-group">
                                 <label class="col-md-2 control-label"></label>
                                 <div class="col-md-1" id="ajax-demo" data-toggle="modal">
-                                    <a id="btnQy" href="javacript:void(0);" onclick="cashConsume()" class="btn btn-md blue" > 现金消费 </a>
+                                    <a id="btnQy" href="javacript:void(0);" onclick="cashConsume(1)" class="btn btn-md blue" > 现金消费 </a>
                                 </div>
                                 <div class="col-md-1"></div>
-                                <div class="col-md-1" data-toggle="modal"> <a id="btnQy" href="javacript:void(0);" onclick="cashConsume()" class="btn btn-md blue"> 套餐消费 </a></div>
+                                <div class="col-md-1" data-toggle="modal"> <a id="btnQy" href="javacript:void(0);" onclick="cashConsume(2)" class="btn btn-md blue"> 套餐消费 </a></div>
                                 <div class="col-md-1"></div>
                                 <div class="col-md-2"></div>
                                 <div class="col-md-2"></div>
@@ -163,7 +163,7 @@
         <!-- ajax -->
         <div id="ajax-modal" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal(1)" aria-hidden="true"></button>
+                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal()" aria-hidden="true"></button>
                 <h4 class="modal-title">现金消费</h4>
             </div>
             <div class="modal-body">
@@ -184,7 +184,7 @@
 
             <div class="modal-footer" style="text-align:center;">
                 <a id="btnQy" class="btn btn-md blue"  data-toggle="modal" onclick="CheckPassword()"> 确定 </a>
-                <a id="btnQy" data-dismiss="modal" onclick="reSetVal(1)" class="btn btn-md blue"> 取消 </a>
+                <a id="btnQy" data-dismiss="modal" onclick="reSetVal()" class="btn btn-md blue"> 取消 </a>
             </div>
         </div>
 
@@ -221,7 +221,7 @@
         <!-- static -->
         <div id="static" onclick="reMovetxt()" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal(2)" aria-hidden="true"></button>
+                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal()" aria-hidden="true"></button>
                 <h4 class="modal-title">现金消费</h4>
             </div>
 
@@ -277,14 +277,14 @@
 
             <div class="modal-footer" style="text-align:center;">
                 <a id="btnQy" class="btn btn-md blue" onclick="subConsumeInfo()" data-toggle="modal"> 扣款 </a>
-                <a id="btnQy" data-dismiss="modal" onclick="reSetVal(2)" class="btn btn-md blue"> 取消 </a>
+                <a id="btnQy" data-dismiss="modal" onclick="reSetVal()" class="btn btn-md blue"> 取消 </a>
             </div>
         </div>
 
         <!-- static2 -->
         <div id="static2" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal(3)" aria-hidden="true"></button>
+                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal()" aria-hidden="true"></button>
                 <h4 class="modal-title">现金消费</h4>
             </div>
 
@@ -300,7 +300,8 @@
                     <div class="margin-bottom-10 clearfix">
                         <table id="tblConReport" class="table table-bordered table-striped">
                             <tr>
-                                <td>消费项目名称</td>
+                                <td style="display:none">项目编号</td>
+                                <td>消费项目</td>
                                 <td>单价</td>
                                 <td>消费次数</td>
                                 <td>合计</td>
@@ -334,14 +335,14 @@
 
             <div class="modal-footer" style="text-align:center;">
                 <input type="hidden" id="hidSerNo" value=""/>
-                <input type="button" onclick="printConNote()" class="btn btn-md blue" value="打印" />
+                <input type="button" onclick="printConNote('cash')" class="btn btn-md blue" value="打印" />
             </div>
         </div>
 
         <!-- static3 -->
-        <div id="static3" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
+        <div id="static3" onclick="reMovetxt()" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal()" aria-hidden="true"></button>
                 <h4 class="modal-title">套餐消费</h4>
             </div>
 
@@ -353,9 +354,9 @@
                         <label class="col-md-2 control-label" for="PackageName">可用套餐</label>
                         <div class="col-md-3">
                             <select id="PackageName" name="Name" class="form-control input-md">
-                                <option>美容套餐</option>
+                                @*<option>美容套餐</option>
                                 <option>洗车套餐</option>
-                                <option>打蜡套餐</option>
+                                <option>打蜡套餐</option>*@
                             </select>
                         </div>
                     </div>
@@ -364,15 +365,15 @@
                         <label class="col-md-2 control-label" for="ConsumptionName">消费项目</label>
                         <div class="col-md-3">
                             <select id="ConsumptionName" name="Name" class="form-control input-md">
-                                <option>美容（5次）</option>
+                                @*<option>美容（5次）</option>
                                 <option>洗车（3次）</option>
-                                <option>打蜡（4次）</option>
+                                <option>打蜡（4次）</option>*@
                             </select>
                         </div>
 
 
                         <div class="col-md-2">
-                            <a id="btnQy" href="javacript:void(0);" class="btn btn-md blue">
+                            <a id="btnQy" href="javacript:void(0);" class="btn btn-md blue" onclick="addPkgItms()">
                                 <i class="fa fa-plus"></i> 新增
                             </a>
                         </div>
@@ -387,28 +388,16 @@
                     </div>
 
                     <div class="margin-bottom-10 clearfix">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="tblPkgItem">
                             <tr>
-                                <td>消费项目名称</td>
+                                <td style="display:none">项目编号</td>
+                                <td>消费项目</td>
                                 <td>原始次数</td>
                                 <td>剩余次数</td>
-                                <td>本次消费次数</td>
+                                <td>消费次数</td>
                                 <td>操作</td>
                             </tr>
-                            <tr>
-                                <td>洗车</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>2</td>
-                                <td><a href=""><i class="fa fa-times"></i> 删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>打蜡</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>2</td>
-                                <td><a href=""><i class="fa fa-times"></i> 删除</a></td>
-                            </tr>
+
                         </table>
                     </div>
                 </div>
@@ -416,15 +405,15 @@
             </div>
 
             <div class="modal-footer" style="text-align:center;">
-                <a id="btnQy" class="btn btn-md blue" data-target="#static4" data-toggle="modal"> 确定 </a>
-                <a id="btnQy" data-dismiss="modal" class="btn btn-md blue"> 取消 </a>
+                <a id="btnQy" class="btn btn-md blue" data-toggle="modal" onclick="subPkgConsume()"> 确定 </a>
+                <a id="btnQy" data-dismiss="modal" onclick="reSetVal()" class="btn btn-md blue"> 取消 </a>
             </div>
         </div>
 
         <!-- static4 -->
         <div id="static4" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="close" data-dismiss="modal" onclick="reSetVal()" aria-hidden="true"></button>
                 <h4 class="modal-title">套餐消费</h4>
             </div>
 
@@ -438,19 +427,13 @@
                     </div>
 
                     <div class="margin-bottom-10 clearfix">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="tblPkgConRpot">
                             <tr>
+                                <td style="display:none">项目编号</td>
                                 <td>消费项目</td>
                                 <td>消费次数</td>
                             </tr>
-                            <tr>
-                                <td>洗车</td>
-                                <td>4</td>
-                            </tr>
-                            <tr>
-                                <td>打蜡</td>
-                                <td>2</td>
-                            </tr>
+                           
                         </table>
                     </div>
                 </div>
@@ -462,22 +445,14 @@
                     </div>
 
                     <div class="margin-bottom-10 clearfix">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="tblPkgReport">
                             <tr>
+                                <td style="display:none">项目编号</td>
                                 <td>消费项目名称</td>
                                 <td>原始次数</td>
                                 <td>剩余次数</td>
                             </tr>
-                            <tr>
-                                <td>洗车</td>
-                                <td>10</td>
-                                <td>6</td>
-                            </tr>
-                            <tr>
-                                <td>打蜡</td>
-                                <td>10</td>
-                                <td>8</td>
-                            </tr>
+                           
                         </table>
                     </div>
                 </div>
@@ -485,7 +460,7 @@
             </div>
 
             <div class="modal-footer" style="text-align:center;">
-                <a id="btnQy" class="btn btn-md blue"> 打印 </a>
+                <input type="button" onclick="printConNote('pkg')" class="btn btn-md blue" value="打印" />
             </div>
         </div>
 
@@ -507,36 +482,36 @@
             $.ajax({
                 "type": "post",
                 "url": "@Url.Action("SearchCustomerAndCard", "Recharge")",
-                        "dataType": "json",
-                        "data": { MobileNo: mno,CardNo:cardno },
-                        "async":true,
-                        "cache": false,
-                        "success": function (re) {
-                            if (re.Success)
-                            {
-                                $('#lblName').html(re.Data.CustName);
-                                $('#lblMno').html(re.Data.MobileNo);
-                                $('#lblIcno').html(re.Data.ICNo);
-                                $('#lblCardno').html(re.Data.CardNo);
-                                $('#lblCardtname').html(re.Data.CardTypeName);
-                                $('#lblCardstatu').html(re.Data.CardStatuName);
-                                $('#CardID').val(re.Data.CardID);
-                                $('#CardStatu').val(re.Data.CardStatu);
-                            }
-                            else
-                            {
-                                alert(re.Message);
-                            }
-                        }, 
-                        "error": function () {
-                            alert(re.Error);
-                        }
-        });
+                "dataType": "json",
+                "data": { MobileNo: mno,CardNo:cardno },
+                "async":true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success)
+                    {
+                        $('#lblName').html(re.Data.CustName);
+                        $('#lblMno').html(re.Data.MobileNo);
+                        $('#lblIcno').html(re.Data.ICNo);
+                        $('#lblCardno').html(re.Data.CardNo);
+                        $('#lblCardtname').html(re.Data.CardTypeName);
+                        $('#lblCardstatu').html(re.Data.CardStatuName);
+                        $('#CardID').val(re.Data.CardID);
+                        $('#CardStatu').val(re.Data.CardStatu);
+                    }
+                    else
+                    {
+                        alert(re.Message);
+                    }
+                }, 
+                "error": function () {
+                    alert(re.Error);
+                }
+            });
         }
-        var printConNote = function () {
+        var printConNote = function (type) {
             var wdapp;
             var url = window.location.toString();
-            var pos = url.indexOf('Recharge');
+            var pos = url.indexOf('ClubcardConsume');
             url = url.substring(0, pos);
             try {
                 wdapp = new ActiveXObject("Word.Application");
@@ -547,20 +522,37 @@
             }
             wdapp.Documents.Open(url + "template/applyTmp.doc");
             var wddoc = wdapp.ActiveDocument;
-            var strtitle = "@ViewBag.StoreName" + '会员现金消费小票';
+            var titlename;
+            var conitem;
 
-            var conItem = "消费项目\t次数\t单价\t合计\r\n";
-            var items = ("#ConsumptionPrice tr");
+            var strtitle = "@ViewBag.StoreName" + '\r\n'+titlename;
             var serNo = $("#hidSerNo").val().split('|')[0];
             var cardNo = $("#lblCardno").text();
             var recivor = "@ViewBag.Recivor";
             var sumPrice = $("#ConsumptionPrice").val();
             var cardBlan = $("#ResidualAmount").val();
             var date = $("#hidSerNo").val().split('|')[1];
-            items.each(function () {
-                conItem = conItem + this.cells[0].innerText + "\t" + this.cells[1].innerText + "\t" + this.cells[2].innerText + "\t" + this.cells[3].innerText+"\r\n";
-            })
-            var str = "消费流水号：" + serNo + "\t" + "消费时间：" + "" + "\r\n" + + "收银员：" + recivor + "\r\n-------------------------------\r\n" + conItem + "\r\n-------------------------------\r\n" + "总价：" + sumPrice + "\r\n" + "会员卡：" + cardNo + "\r\n" + "会员卡余额：" + cardBlan;
+            var str;
+            if(type=='cash'){
+                titlename='会员现金消费小票';
+                var items = $("#tblConReport tr");
+                conItem="项目编号\t单价\t消费次数\t合计\r\n";
+                items.each(function () {
+                    if(this.rowIndex>0)
+                        conItem = conItem + this.cells[1].innerText + "\r\n" + this.cells[0].innerText + "\t\t" + this.cells[2].innerText + "\t" + this.cells[3].innerText + "\t\t" + this.cells[4].innerText + "\r\n";
+                })
+                str = "消费流水号：" + serNo + "\r\n" + "消费时间：" + date + "\r\n" + "收银员：" + recivor + "\r\n-------------------------------------------\r\n" + conItem + "-------------------------------------------\r\n" + "总价(元)：" + sumPrice + "\r\n" + "会员卡：" + cardNo + "\r\n" + "会员卡余额(元)：" + cardBlan;
+            }else{
+                titlename = '会员套餐消费小票';
+                var items = $("#tblConReport tr");
+                conItem="项目编号\t消费次数\r\n";
+                items.each(function () {
+                    if(this.rowIndex>0)
+                        conItem = conItem + this.cells[1].innerText + "\r\n" + this.cells[0].innerText + "\t\t" + this.cells[2].innerText + "\r\n";
+                })
+                str = "消费流水号：" + serNo + "\r\n" + "消费时间：" + date + "\r\n" + "收银员：" + recivor + "\r\n-------------------------------------------\r\n" + conItem + "-------------------------------------------\r\n"+ "会员卡：" + cardNo;
+            }
+            
             wddoc.Bookmarks("Title").Range.Text = strtitle;
             wddoc.Bookmarks("content").Range.Text = str;
             wdapp.visible = false;
@@ -570,8 +562,9 @@
             wdapp.quit();
             wdapp = null;
             $("#static2").modal("hide");
-            reSetVal(3);
+            reSetVal();
         }
+        //设置消费项目总价
         var getSumPrice = function () {
             var row = $("#tbConItems tr");
             var sumPrice = 0;
@@ -584,27 +577,30 @@
             $("#CashAmount").val(sumPrice);
             $("#ConsumptionPrice").val(sumPrice);
         }
+        //设置当前消费项目总价
         var setItemSumPrice = function () {
             var row = $("#tbConItems tr");
             row.each(function () {
                 var num = parseInt(this.cells[3].innerText);
-                if (num > 1) {
+                if (num >= 1) {
                     this.cells[4].innerText = Number(this.cells[2].innerText) * num;
                 }
             });
             getSumPrice();
         }
+        //控制弹出模态窗口
         var handleAjaxModal = function (model) {
             var $modal = $('#'+model);
            
                 $modal.modal();
             
         };
+        //设置消费项目次数
         var setItemNum = function (e) {
             e = e ? e : window.event;
             var obj = e.srcElement ? e.srcElement : e.target;
             var itmNum = obj.innerText;
-            event.stopPropagation();
+            e.stopPropagation();
             if (!parseInt(itmNum)) {
                 $('#txtNum').focus();
                 return;
@@ -617,10 +613,10 @@
                     txtbox.remove();
                     t[0].innerHTML = num;
                 }
-            }
-            
-            jobj.html("<input type='text' onBlur='setValue(event)' id='txtNum' value='" + itmNum + "'/>");
+                jobj.html("<input type='text' onBlur='setValue(event)' id='txtNum' value='" + itmNum + "'/>");
+            }       
         }
+        //输入次数
         var reMovetxt = function () {
             var txtbox = $('#txtNum');
             if (txtbox.length == 1) {
@@ -630,6 +626,7 @@
                 t[0].innerHTML = num;
             }
         }
+        //手动输入消费次数
         var setValue = function (e) {
             e = e ? e : window.event;
             var obj = $(e.srcElement ? e.srcElement : e.target);
@@ -641,14 +638,26 @@
                 alert("请输入正确消费次数");
                 obj.val('');
                 obj.focus();
-            } else {             
+            } else {
+                
                 var t = obj.parent();
+                var tbid = t[0].parentNode.parentNode.parentNode.id;
+                if (tbid == "tblPkgItem") {
+                    var suNum = t[0].previousElementSibling.innerText;
+                    if (parseInt(suNum) < parseInt(num)) {
+                        alert("消费次数不能大于剩余次数");
+                        obj.val('');
+                        obj.focus();
+                        return;
+                    }
+                }
                 obj.remove();
                 t[0].innerHTML = num;
                 setItemSumPrice();
             }
             
         }
+        //提交现金消费项目并扣款
         var subConsumeInfo=function(){
             var cardNo = $("#lblCardno").text();
             var itemData = new Array();
@@ -661,7 +670,7 @@
                     obj["ItemConNum"] = this.cells[3].innerText;
                     obj["ItemTotalPrice"] = this.cells[4].innerText;
                     itemData[this.rowIndex - 1] = obj;
-                    var items = "<tr><td>" + this.cells[1].innerText + "</td><td>" + this.cells[2].innerText + "</td><td>" + this.cells[3].innerText + "</td><td>" + this.cells[4].innerText + "</td></tr>";
+                    var items = "<tr><td style='display:none'>"+this.cells[0].innerText+"</td><td>" + this.cells[1].innerText + "</td><td>" + this.cells[2].innerText + "</td><td>" + this.cells[3].innerText + "</td><td>" + this.cells[4].innerText + "</td></tr>";
                     $("#tblConReport").append(items);
                 }
             });
@@ -680,7 +689,7 @@
                     if (re.Success) {
                         handleAjaxModal('static2');
                         $("#static").modal("hide");
-                        reSetVal(2);
+                        reSetVal();
                         $("#hidSerNo").val(re.Message);
                         $("#ResidualAmount").val(re.Data);
                     } else {
@@ -692,6 +701,7 @@
                     }
             });
         }
+        //添加现金消费项目
         var AddConsumeItem = function () {
             var selectItemid = $("#ConItem").val();
             var row = $("#tbConItems tr");
@@ -717,7 +727,7 @@
                 "cache": false,
                 "success": function (re) {
                     if (re.Success) {
-                        var items = "<tr><td style='display:none'>" + re.Data.ItemID + "</td><td>" + re.Data.ItemName + "</td><td>" + re.Data.ItemPrice + "</td><td onclick='setItemNum(event)'>1</td><td>" + re.Data.ItemPrice + "</td><td><a href='javascript:void(0);'onclick='deleteRow(" + re.Data.ItemID + ")'><i class='fa fa-times'></i>删除</a></td></tr>";
+                        var items = "<tr><td style='display:none'>" + re.Data.ItemID + "</td><td>" + re.Data.ItemName + "</td><td>" + re.Data.ItemPrice + "</td><td onclick='setItemNum(event)'>1</td><td>" + re.Data.ItemPrice + "</td><td><a href='javascript:void(0);'onclick='deleteRow(" + re.Data.ItemID + ",\"tbConItems\")'><i class='fa fa-times'></i>删除</a></td></tr>";
                     $("#tbConItems").append(items);
                         //ItemID
                     getSumPrice();
@@ -730,25 +740,31 @@
                 }
         });
         }
-        var deleteRow=function(id){
-            var row = $("#tbConItems tr");
+        //删除消费项目
+        var deleteRow = function (id, tid) {
+            var row = $("#"+tid+" tr");
             row.each(function () {
                 if (id == this.cells[0].innerText)
                 {
-                    $('#tbConItems tr:eq(' + this.rowIndex + ')').remove();
-                    getSumPrice();
+                    $('#' + tid + ' tr:eq(' + this.rowIndex + ')').remove();
+                    if (tid == 'tbConItems') {
+                        getSumPrice();
+                    }
+                    
                 }
             });
         }
+        //验证会员卡密码
         var CheckPassword = function () {
-
+            getCardPkgs();
             var pwd = $("#TxtPassword").val();
             var cardNo = $("#lblCardno").text();
+            var contype= $('#hidConType').val();
             if (!pwd) {
                 alert("请输入会员卡密码");
                 return;
             }
-            reSetVal(1)
+            reSetVal()
             $.ajax({
                 "type": "post",
                 "url": "@Url.Action("CheckCardPassword", "ClubcardConsume")",
@@ -758,30 +774,196 @@
                 "cache": false,
                 "success": function (re) {
                     if (re.Success) {
-                        handleAjaxModal('static');
+                        if (contype == 1) {
+                            handleAjaxModal('static');
+                        } else if (contype == 2) {
+                            handleAjaxModal('static3');
+                        }
+                        
                         $("#ajax-modal").modal("hide");
                     } else {
                         alert(re.Message);
                     }
                 },
-                "error": function () { }
+                "error": function () {
+                    alert("网络错误，请稍后重试");
+                }
             });
         }
-        var reSetVal = function (type) {
-            if (type == 1) {
+        //获取消费套餐
+        var getCardPkgs = function () {
+            var cardId = $("#CardID").val();
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("GetCardPkgList", "ClubcardConsume")",
+                "dataType": "json",
+                "data": { cardId: cardId },
+                "async":true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        //PackageName
+                        addItems(re.Data, 'PackageName');
+                        var pkg = $('#PackageName').val();
+                        if (pkg) {
+                            getConPkgItems(pkg);
+                        }
+                        //getConPkgItems()
+                    } else {
+                        alert(re.Message);
+                    }
+                },
+                "error": function () {
+                    alert("网络错误，请稍后重试");
+                }
+            });
+        }
+        //根据信息加载套餐或套餐消费项目
+        var addItems = function (items, id) {
+            var select = $('#' + id);
+            select.empty();
+            $.each(items, function () {
+                select.append($('<option></option>').val(this.Value).html(this.Text));
+            })
+        }
+        //清空模态窗口数据
+        var reSetVal = function () {
+   
                 $("#TxtPassword").val("");
-            } else if (type == 2) {  
+        
                 $("#CashAmount").val("");
                 $("#tbConItems tr:gt(0)").remove();
-            } else if (type == 3) {
+       
                 $("#ConsumptionPrice").val("");
                 $("#ResidualAmount").val("");
                 $("#tblConReport tr:gt(0)").remove();
+                $("#tblPkgReport tr:gt(0)").remove();
+                $("#tblPkgItem tr:gt(0)").remove();
+                $("#tblPkgConRpot tr:gt(0)").remove();
             }
+
+        //根据所选套餐加载套餐消费项目
+        var getConPkgItems=function(pkgId){
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("GetCardPkgItemList", "ClubcardConsume")",
+                "dataType": "json",
+                "data": { cardPkgId: pkgId },
+                "async":true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        //PackageName
+                        addItems(re.Data, 'ConsumptionName');
+                    } else {
+                        alert(re.Message);
+                    }
+                },
+                "error": function () {
+                    alert("网络错误，请稍后重试");
+                }
+        });
         }
+        //添加
+        var addPkgItms = function () {
+            var itemId = $('#ConsumptionName').val();
+            if (itemId < 0) {
+                alert("所选消费项目不可用");
+                return;
+            }
+            var rows = $('#tblPkgItem tr');
+            var b = false;
+            rows.each(function () {
+                if (itemId == this.cells[0].innerText) {
+                    var num = this.cells[4].innerText;
+                    if (parseInt(num) < parseInt(this.cells[3].innerText)) {
+                        num = parseInt(num) + 1;
+                    }  
+                    this.cells[4].innerText = num;
+                    b = true;
+                }
+            });
+            if (b) {
+                return;
+            }
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("GetCardPkgItemDetail", "ClubcardConsume")",
+               "dataType": "json",
+               "data": { itemId: itemId },
+               "async":true,
+               "cache": false,
+               "success": function (re) {
+                if (re.Success) {
+                    var items = "<tr><td style='display:none'>" + re.Data.PackageDetailID + "</td><td>" + re.Data.ItemName + "</td><td>" + re.Data.OriginalCount + "</td><td>" + re.Data.RemainCount + "</td><td onclick='setItemNum(event)'>1</td><td><a href='javascript:void(0);'onclick='deleteRow(" + re.Data.PackageDetailID + ",\"tblPkgItem\")'><i class='fa fa-times'></i>删除</a></td></tr>";
+                    $("#tblPkgItem").append(items);
+                    //ItemID
+
+                    } else {
+                        alert(re.Message);
+                    }
+                },
+                    "error": function () {
+                    alert("网络错误，请稍后重试");
+                }
+            });
+        }
+        var subPkgConsume = function () {
+            var cardNo = $("#lblCardno").text();
+            var itemData = new Array();
+            var rows = $("#tblPkgItem tr");
+            rows.each(function () {
+                if (this.rowIndex > 0) {
+                    var obj = new Object();
+                    obj["pkgId"] = $("#PackageName").val();
+                    obj["Itemid"] = this.cells[0].innerText;
+                    obj["ItemName"] = this.cells[1].innerText;
+                   // obj["ItemConNum"] = this.cells[3].innerText;
+                    obj["conNum"] = this.cells[4].innerText;
+                    itemData[this.rowIndex - 1] = obj;
+                    var items = "<tr><td style='display:none'>"+this.cells[0].innerText+"</td><td>" + this.cells[1].innerText + "</td><td>" + this.cells[4].innerText + "</td></tr>";
+                    $("#tblPkgConRpot").append(items);
+                }
+            });
+            if (itemData.length <= 0) {
+                alert("请选择套餐项目");
+                return;
+            }
+            $.ajax({
+                "type": "post",
+                "url": "@Url.Action("SumCardPkgConsumeItems", "ClubcardConsume")",
+                "dataType": "json",
+                "data": { cardNo: cardNo, itemData: JSON.stringify(itemData) },
+                "async":true,
+                "cache": false,
+                "success": function (re) {
+                    if (re.Success) {
+                        handleAjaxModal('static4');
+                        $("#static3").modal("hide");
+                        //reSetVal();
+                        $("#hidSerNo").val(re.Message);
+                        $.each(re.Data, function () {
+                            var rows = "<tr><td style='display:none'>" + this.PackageDetailID + "</td><td>" + this.ItemName + "</td><td>" + this.OriginalCount + "</td><td>" + this.RemainCount + "</td></tr>";
+                            $("#tblPkgReport").append(rows);
+                        });
+                       
+                    } else {
+                        reSetVal();
+                        alert(re.Message);
+                    }
+                },
+                    "error": function () {
+                        alert("网络错误，请稍后重试");
+                    }
+        });
+        }
+        //页面初始化
         var ClubcardConsume = function () {
             var onPageLoad = function () {
-               
+                $('#PackageName').change(function () {
+                    //alert(this.value);
+                    getConPkgItems(this.value);
+                })
             };
 
             return {
@@ -796,11 +978,16 @@
                 }
             };
         }();
-        var cashConsume = function () {
-            if ($("#lblCardno").text()){
+        //判断是否有会员进行消费
+        var cashConsume = function (type) {
+            if ($("#lblCardno").text()) {
+                $('#hidConType').val(type);
                 handleAjaxModal('ajax-modal');
             } else {
                 alert("没有对应会员信息不能进行消费");
+            }
+            if (type == 2) {
+                getCardPkgs();
             }
             
         }

@@ -668,6 +668,7 @@ namespace Zeta.WisdCar.Repository.CRUD
             }
             catch (Exception ex)
             {
+                throw ex;
                 result = 0;
             }
 

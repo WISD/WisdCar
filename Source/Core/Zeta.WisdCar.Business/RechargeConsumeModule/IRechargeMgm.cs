@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zeta.WisdCar.Model.Entity;
+using Zeta.WisdCar.Model.PO;
 using Zeta.WisdCar.Model.VO;
 
 namespace Zeta.WisdCar.Business.RechargeConsumeModule
@@ -48,7 +49,7 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        List<CashRechargeQueryVO> GetRechargeCashLog(RechargeLogQueryEntity entity);
+        List<RechargeLogPO> GetRechargeCashLog(RechargeLogQueryEntity entity);
 
         /// <summary>
         /// 查询充值记录

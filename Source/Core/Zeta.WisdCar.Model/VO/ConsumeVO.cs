@@ -19,7 +19,7 @@ namespace Zeta.WisdCar.Model.VO
         private string _consumestore;
         private string _originalstore;
         private int _consumetype;
-        private int _clubcardpackageid;
+        private string _clubcardpackageid;
         private int _packagedetailid;
         private string _itemname;
         private int _consumecount;
@@ -118,7 +118,7 @@ namespace Zeta.WisdCar.Model.VO
         /// <summary>
         /// 会员卡套餐ID
         /// </summary>
-        public int ClubCardPackageID
+        public string ClubCardPackageID
         {
             set { _clubcardpackageid = value; }
             get { return _clubcardpackageid; }

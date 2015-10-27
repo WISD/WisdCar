@@ -143,21 +143,21 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
         }
 
 
-        public List<CashRechargeQueryVO> GetRechargeCashLog(Model.Entity.RechargeLogQueryEntity entity)
+        public List<RechargeLogPO> GetRechargeCashLog(Model.Entity.RechargeLogQueryEntity entity)
         {
             RechargeLogData rechargeLogData = new RechargeLogData();
 
-            List<CashRechargeQueryVO> cashRechargeQueryVOList = new List<CashRechargeQueryVO>();
+            //List<CashRechargeQueryVO> cashRechargeQueryVOList = new List<CashRechargeQueryVO>();
 
             DataSet ds = rechargeLogData.GetRechargeLogs(entity);
             List<RechargeLogPO> rechargeLogPOList = ds.GetEntity<List<RechargeLogPO>>();
 
-            rechargeLogPOList.ForEach(i =>
-            {
-                cashRechargeQueryVOList.Add(Mapper.Map<RechargeLogPO, CashRechargeQueryVO>(i));
-            });
+            //rechargeLogPOList.ForEach(i =>
+            //{
+            //    cashRechargeQueryVOList.Add(Mapper.Map<RechargeLogPO, CashRechargeQueryVO>(i));
+            //});
 
-            return cashRechargeQueryVOList;
+            return rechargeLogPOList;
         }
 
         public List<PkgRechargeQueryVO> GetRechargePkgLog(Model.Entity.RechargeLogQueryEntity entity)

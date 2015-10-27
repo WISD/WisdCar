@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Zeta.WisdCar.Business.BasicDataModule;
+using Zeta.WisdCar.Business.CustClubCardModule;
 using Zeta.WisdCar.Business.MarktingPlanModule;
 using Zeta.WisdCar.Infrastructure;
 using Zeta.WisdCar.Model.PO;
@@ -74,11 +75,42 @@ namespace Zeta.WisdCar.Online.App_Start
                     break;
                 case DDLlist.PkgItem: ddllist = GetConsumeItems(ddllist, where);
                     break;
-                case DDLlist.Pkg: GetPackage(ddllist, where);
+                case DDLlist.Pkg: ddllist=GetPackage(ddllist, where);
+                    break;
+                case DDLlist.CardPkg: ddllist=GetCardPkg(ddllist, where);
                     break;
             }
            
             return ddllist;
+        }
+
+        private List<SelectListItem> GetCardPkg(List<SelectListItem> ddllist, object[] where)
+        {
+            ClubCardMgm cardMgm = new ClubCardMgm();
+            if(where!=null&&where.Length>0)
+            {
+                var pkgList = cardMgm.GetAvailablePkgs((int)where[0]);
+                if (pkgList.Count > 0)
+                {
+                    pkgList.ForEach(item =>
+                    {
+                        if (ddllist.Count <= 0) 
+                        ddllist.Add(new SelectListItem() { Text = item.PackageName, Value = item.ClubCardPackageID,Selected=true });
+                        else
+                            ddllist.Add(new SelectListItem() { Text = item.PackageName, Value = item.ClubCardPackageID});
+                    });
+                }
+                else
+                {
+                    ddllist.Add(new SelectListItem() { Text = "该会员无可用套餐", Value = "-1",Selected=true});
+                }
+            }
+            else
+            {
+                ddllist.Add(new SelectListItem() { Text = "会员id为空", Value = "-1", Selected = true });
+            }
+            return ddllist;
+            
         }
         private List<SelectListItem> GetClubCardType(List<SelectListItem>ddllist,params object[]where)
         {
@@ -119,7 +151,10 @@ namespace Zeta.WisdCar.Online.App_Start
                 {
                     list.ForEach(ct =>
                     {
+                        if(ddllist.Count<=0)
                         ddllist.Add(new SelectListItem() { Text = ct.ItemName, Value = ct.ItemID.ToString(), Selected = true });
+                        else
+                            ddllist.Add(new SelectListItem() { Text = ct.ItemName, Value = ct.ItemID.ToString() });
                     });
                 }
 
@@ -137,6 +172,13 @@ namespace Zeta.WisdCar.Online.App_Start
             if(list.Count>0)
             {
                 list.ForEach(ct => { ddllist.Add(new SelectListItem() { Text = ct.PackageName, Value = ct.PackageID.ToString() }); });
+            }
+            else
+            {
+                if(ddllist.Count<=0)
+                {
+                    ddllist.Add(new SelectListItem() { Text = "--无可用套餐选择--", Value = "-1" });
+                }
             }
             return ddllist;
         }

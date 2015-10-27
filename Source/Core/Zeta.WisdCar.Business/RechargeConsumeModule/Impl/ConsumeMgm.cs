@@ -97,6 +97,7 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
                         {
                             item1.RemainCount -= item.ConsumeCount;
                             tmpPkgDetail = item1;
+                            item.ItemID = item1.ItemID;
                             break;
                         }
                     }
@@ -112,6 +113,13 @@ namespace Zeta.WisdCar.Business.RechargeConsumeModule
                     item.ConsumeBatchNo = strBatchNo;
                     consumeLogData.AddConsumeLog(Mapper.Map<ConsumeVO, ConsumeLogPO>(item));
                     
+                }
+                if (clubCardPkgDetailPOList.Any(i=>i.RemainCount==0))
+                {
+                    var cardPkg= new ClubCardPackageData();
+                    var cardPkgData = cardPkg.GetClubCardPkgByID(list[0].ClubCardPackageID);
+                    cardPkgData.PackageStatus = (int)CardSPackageStatus.Unavailable;
+                    cardPkg.EditClubCardPkg(cardPkgData);
                 }
                 tx.Commit();
             }

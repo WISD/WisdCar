@@ -22,11 +22,14 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
             DataSet ds = packageData.GetAllPackages();
 
             List<PackagePO> packagePOList = ds.GetEntity<List<PackagePO>>();
-
-            packagePOList.ForEach(i =>
+            if(packagePOList!=null&&packagePOList.Count>0)
             {
-                packageVOList.Add(Mapper.Map<PackagePO, PackageVO>(i));
-            });
+                packagePOList.ForEach(i =>
+                {
+                    packageVOList.Add(Mapper.Map<PackagePO, PackageVO>(i));
+                });
+            }
+            
 
             return packageVOList;
         }

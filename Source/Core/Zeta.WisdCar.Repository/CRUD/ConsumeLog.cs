@@ -61,7 +61,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@OriginalStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@ConsumeType", SqlDbType.Int,4),
 					new SqlParameter("@PayType", SqlDbType.Int,4),
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
+					new SqlParameter("@ClubCardPackageID", SqlDbType.NVarChar,50),
 					new SqlParameter("@PackageDetailID", SqlDbType.Int,4),
 					new SqlParameter("@ItemName", SqlDbType.NVarChar,50),
 					new SqlParameter("@ConsumeCount", SqlDbType.Int,4),
@@ -154,7 +154,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 					new SqlParameter("@OriginalStore", SqlDbType.NVarChar,50),
 					new SqlParameter("@ConsumeType", SqlDbType.Int,4),
 					new SqlParameter("@PayType", SqlDbType.Int,4),
-					new SqlParameter("@ClubCardPackageID", SqlDbType.Int,4),
+					new SqlParameter("@ClubCardPackageID",SqlDbType.NVarChar,50),
 					new SqlParameter("@PackageDetailID", SqlDbType.Int,4),
 					new SqlParameter("@ItemName", SqlDbType.NVarChar,50),
 					new SqlParameter("@ConsumeCount", SqlDbType.Int,4),
@@ -331,7 +331,7 @@ namespace Zeta.WisdCar.Repository.CRUD
 				}
 				if(row["ClubCardPackageID"]!=null && row["ClubCardPackageID"].ToString()!="")
 				{
-					model.ClubCardPackageID=int.Parse(row["ClubCardPackageID"].ToString());
+					model.ClubCardPackageID=row["ClubCardPackageID"].ToString();
 				}
 				if(row["PackageDetailID"]!=null && row["PackageDetailID"].ToString()!="")
 				{

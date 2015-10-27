@@ -27,12 +27,13 @@ namespace Zeta.WisdCar.Business.MarktingPlanModule
             //{
             //    cardTypeVOList.Add(Mapper.Map<ClubCardTypePO, ClubCardTypeVO>(i));
             //}
-
-            cardTypePOList.ForEach(i =>
+            if (cardTypePOList != null && cardTypePOList.Count > 0)
             {
-                cardTypeVOList.Add(Mapper.Map<ClubCardTypePO, ClubCardTypeVO>(i));
-            });
-
+                cardTypePOList.ForEach(i =>
+                {
+                    cardTypeVOList.Add(Mapper.Map<ClubCardTypePO, ClubCardTypeVO>(i));
+                });
+            }
             return cardTypeVOList;
         }
 

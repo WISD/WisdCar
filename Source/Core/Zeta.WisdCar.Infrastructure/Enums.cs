@@ -31,7 +31,11 @@ namespace Zeta.WisdCar.Infrastructure
         LogOff = 3,    //注销
         Expire = 4    //过期
     }
-
+    public enum CardFlag
+    {
+        UnOpenCard=0,
+        OpenCard=1
+    }
     public enum CardSPackageStatus
     { 
         Available = 0,   //套餐可用
@@ -63,5 +67,6 @@ namespace Zeta.WisdCar.Infrastructure
         CardType = 0,//会员卡类型
         PkgItem = 1,//套餐消费项目
         Pkg=3,
+        CardPkg=4
     }
 }

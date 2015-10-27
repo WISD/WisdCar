@@ -101,11 +101,14 @@ using Zeta.WisdCar.Infrastructure.Log;namespace Zeta.WisdCar.Business.CustClubCa
 
             DataSet ds = clubCardData.GetAvailablePkgs(clubCardID);
             List<ClubCardPackagePO> clubCardPkgPOList = ds.GetEntity<List<ClubCardPackagePO>>();
-
-            clubCardPkgPOList.ForEach(i =>
+            if(clubCardPkgPOList!=null&&clubCardPkgPOList.Count>0)
             {
-                clubCardPkgVOList.Add(Mapper.Map<ClubCardPackagePO, ClubCardPkgVO>(i));
-            });
+                clubCardPkgPOList.ForEach(i =>
+                {
+                    clubCardPkgVOList.Add(Mapper.Map<ClubCardPackagePO, ClubCardPkgVO>(i));
+                });
+            }
+            
 
             return clubCardPkgVOList;
         }
@@ -135,12 +138,13 @@ using Zeta.WisdCar.Infrastructure.Log;namespace Zeta.WisdCar.Business.CustClubCa
 
             DataSet ds = clubCardData.GetDetailByClubCardPkgID(id);
             List<ClubCardPackageDetailPO> clubCardPkgDetailPOList = ds.GetEntity<List<ClubCardPackageDetailPO>>();
-
-            clubCardPkgDetailPOList.ForEach(i =>
+            if (clubCardPkgDetailPOList != null && clubCardPkgDetailPOList.Count > 0)
             {
-                clubCardPkgDetailVOList.Add(Mapper.Map<ClubCardPackageDetailPO, ClubCardPkgDetailVO>(i));
-            });
-
+                clubCardPkgDetailPOList.ForEach(i =>
+                {
+                    clubCardPkgDetailVOList.Add(Mapper.Map<ClubCardPackageDetailPO, ClubCardPkgDetailVO>(i));
+                });
+            }
             return clubCardPkgDetailVOList;
         }
 

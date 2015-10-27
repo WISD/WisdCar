@@ -190,6 +190,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ComsumeItemViewModel.cs" />
+    <Compile Include="Models\ConsumePkgViewModel.cs" />
     <Compile Include="Models\CustomerAndCar.cs" />
     <Compile Include="Models\CustomerAndCard.cs" />
     <Compile Include="Models\DatatablesResult.cs" />
