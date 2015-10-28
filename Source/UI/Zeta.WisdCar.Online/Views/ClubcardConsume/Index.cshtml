@@ -525,7 +525,7 @@
             var titlename;
             var conitem;
 
-            var strtitle = "@ViewBag.StoreName" + '\r\n'+titlename;
+            
             var serNo = $("#hidSerNo").val().split('|')[0];
             var cardNo = $("#lblCardno").text();
             var recivor = "@ViewBag.Recivor";
@@ -552,7 +552,7 @@
                 })
                 str = "消费流水号：" + serNo + "\r\n" + "消费时间：" + date + "\r\n" + "收银员：" + recivor + "\r\n-------------------------------------------\r\n" + conItem + "-------------------------------------------\r\n"+ "会员卡：" + cardNo;
             }
-            
+            var strtitle = "@ViewBag.StoreName" + '\r\n' + titlename;
             wddoc.Bookmarks("Title").Range.Text = strtitle;
             wddoc.Bookmarks("content").Range.Text = str;
             wdapp.visible = false;

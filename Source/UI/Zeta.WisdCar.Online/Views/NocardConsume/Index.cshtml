@@ -102,7 +102,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-2" id="ajax-demo" data-toggle="modal">
-                                    <a id="btnQy" href="javacript:void(0);" onclick="handleAjaxModal('ajax-modal')" class="btn btn-md blue"> 消费 </a>
+                                    <a id="btnQy" href="javacript:void(0);" onclick="openDilog()" class="btn btn-md blue"> 消费 </a>
                                 </div>
                                 <input type="hidden" id="hidCustId" value="" />
                             </div>
@@ -116,7 +116,7 @@
         <!-- ajax -->
         <div id="ajax-modal" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="close" onclick="reSetVal()" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">非会员消费</h4>
             </div>
 
@@ -191,14 +191,14 @@
 
             <div class="modal-footer" style="text-align:center;">
                 <a id="btnQy" class="btn btn-md blue" onclick="subConsume()" data-toggle="modal"> 确定 </a>
-                <a id="btnQy" data-dismiss="modal" class="btn btn-md blue"> 取消 </a>
+                <a id="btnQy" data-dismiss="modal" onclick="reSetVal()" class="btn btn-md blue"> 取消 </a>
             </div>
         </div>
 
         <!-- static2 -->
         <div id="static2" class="modal fade" tabindex="-1" data-width="760" data-backdrop="static" data-keyboard="false">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="close" onclick="reSetVal()" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">非会员消费</h4>
             </div>
 
@@ -212,18 +212,13 @@
                     </div>
 
                     <div class="margin-bottom-10 clearfix">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="tblConReport">
                             <tr>
+                                <td style="display:none">项目编号</td>
                                 <td>消费项目名称</td>
                                 <td>单价</td>
-                            </tr>
-                            <tr>
-                                <td>洗车</td>
-                                <td>100</td>
-                            </tr>
-                            <tr>
-                                <td>打蜡</td>
-                                <td>200</td>
+                                <td>消费次数</td>
+                                <td>合计</td>
                             </tr>
                         </table>
                     </div>
@@ -233,7 +228,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label" for="ConsumptionPrice">消费总价:</label>
                         <div class="col-md-4">
-                            <input type="text" id="ConsumptionPrice" name="Price" class="form-control" placeholder="">
+                            <input type="text" id="ConsumptionPrice" value="0" name="Price" class="form-control" placeholder="">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-4"></div>
@@ -244,8 +239,10 @@
             </div>
 
             <div class="modal-footer" style="text-align:center;">
-                <a id="btnQy" class="btn btn-md blue"> 打印 </a>
+                <input type="hidden" id="hidSerNo" value="" />
+                <input type="button" onclick="printConNote()" class="btn btn-md blue" value="打印" />
             </div>
+
         </div>
 
     </div>
@@ -282,13 +279,75 @@
                 }
             });
         }
+        var openDilog = function () {
+            var id = $('#hidCustId').val();
+            if (id > 0) {
+                handleAjaxModal('ajax-modal');
+            } else {
+                alert("没有客户信息不能进行消费");
+            }
+        }
+        //打印小票
+        var printConNote = function () {
+            var wdapp;
+            var url = window.location.toString();
+            var pos = url.indexOf('NocardConsume');
+            url = url.substring(0, pos);
+            try {
+                wdapp = new ActiveXObject("Word.Application");
+            } catch (e) {
+                alert(e.toString());
+                wdapp = null;
+                return;
+            }
+            wdapp.Documents.Open(url + "template/applyTmp.doc");
+            var wddoc = wdapp.ActiveDocument;
+            var titlename;
+            var conitem;
+
+            
+            var serNo = $("#hidSerNo").val().split('|')[0];
+            var custName = $("#txtQyName").val();
+            var recivor = "@ViewBag.Recivor";
+            var sumPrice = $("#ConsumptionPrice").val();
+            var date = $("#hidSerNo").val().split('|')[1];
+            var str;
+      
+            titlename = '会员现金消费小票';
+            var items = $("#tblConReport tr");
+            conItem = "项目编号\t单价\t消费次数\t合计\r\n";
+            items.each(function () {
+                if (this.rowIndex > 0)
+                    conItem = conItem + this.cells[1].innerText + "\r\n" + this.cells[0].innerText + "\t\t" + this.cells[2].innerText + "\t" + this.cells[3].innerText + "\t\t" + this.cells[4].innerText + "\r\n";
+            });
+            str = "消费流水号：" + serNo + "\r\n" + "消费时间：" + date + "\r\n" + "收银员：" + recivor + "\r\n-------------------------------------------\r\n" + conItem + "-------------------------------------------\r\n" + "总价(元)：" + sumPrice + "\r\n" + "客 户：" + cardNo;
+            var strtitle = "@ViewBag.StoreName" + '\r\n' + titlename;
+            wddoc.Bookmarks("Title").Range.Text = strtitle;
+            wddoc.Bookmarks("content").Range.Text = str;
+            wdapp.visible = false;
+            wddoc.saveAs("d:\\apply_temp.doc");
+            wdapp.Application.Printout();
+
+            wdapp.quit();
+            wdapp = null;
+            $("#static2").modal("hide");
+            reSetVal();
+        }
+        //清空模态窗口数据
+        var reSetVal = function () {
+            $("#CashAmount").val("0");
+            $("#tbConItems tr:gt(0)").remove();
+            $("#ConsumptionPrice").val("0");
+            $("#tblConReport tr:gt(0)").remove();
+        }
         //提交消费信息
         var subConsume = function () {
             var payType = $('#PaymentType').val();
-            var itemData = new Object();
+            var itemData = new Array();
             var rows = $("#tbConItems tr");
             var custID = $("#hidCustId").val();
-            row.each(function () {
+            rows.each(function () {
+                var obj = new Object();
                 obj["Itemid"] = this.cells[0].innerText;
                 obj["ItemName"] = this.cells[1].innerText;
                 obj["ItemConNum"] = this.cells[3].innerText;
@@ -301,6 +360,21 @@
                 alert("请选择消费项目");
                 return;
             }
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("SubNocardConsume", "NocardConsume")',
+                dataType: 'json',
+                data: { custID: custID, payType: payType, data: JSON.stringify(itemData)},
+                async: true,
+                cache: false,
+                success: function (re) {
+                    $('#hidSerNo').val(re.Message);
+                    handleAjaxModal('static2');
+                },
+                error: function () {
+                    alert("网络错误，请稍后重试");
+                }
+            });
         }
         //设置消费项目总价
         var getSumPrice = function () {
